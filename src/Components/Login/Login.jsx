@@ -50,21 +50,42 @@ export default function Login() {
           <h1> Fornitu-Ecommerce</h1>
       </div>
       <div class='inputs px-lg-5r py-lg-4 p-4'>
+      <div className='conteiner-login'>
       <h2>Login</h2>
         <form>
           <div class='mb-3'>
             <label htmlFor='exampleInputEmail1'>Email address</label>
-            <input type="email" className="form-control" placeholder="Ingresa tu correo" name='email'/>
+            <input type="email" className="form-control" placeholder="Ingresa tu correo" name='email'
+            value={login.email }/>
+            {/* 
+            error && error.email && (
+                <span >{error.email}</span>
+              )
+             */}
             
+            <div className='form-group'>
+                <label htmlFor='exampleInputPassword1'>Password</label>
+                <input type="password" className="form-control" placeholder="Ingresa tu contraseña" name='password' value={login.password}/>
+                {/*
+                error && error.password && (
+                  <span >{error.password}</span>
+                )
+                */}
+            </div>
+                <button type="submit" class="btn btn-primary" disabled={!login.email || !login.password}  >Submit</button>
+          </div>
+          <br/>
+
+          <div className='text-center'>
+            <span>¿No tienes cuenta?</span>
+            <Link to='/register'>Registrate</Link>
             
           </div>
 
-
         </form>
         
+       </div>
       </div>
-
-
 
       </div>
 
