@@ -1,5 +1,6 @@
 const initialState = {
-    detailProduct : []
+    detailProduct : [],
+    products: []
 }
 
 export default function productsReducer(state = initialState, action) {
@@ -12,6 +13,16 @@ export default function productsReducer(state = initialState, action) {
                 ...state,
                 detailProduct: payload
                 
+            }
+            case "GET_ALL_PRODUCTS":
+                return{
+                    ...state,
+                    products: payload
+                }
+            case 'CLEAN_UP': 
+            return {
+                ...state,
+                products:[]
             }
             default: 
                 return {...state}
