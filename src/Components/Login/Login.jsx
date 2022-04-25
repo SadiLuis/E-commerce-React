@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
+import { login, register } from "../../Actions/Auth";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from '../../Actions/Auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { ValidateForm } from '../../Helpers/ValidateForm';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { validateEmail } from "../../Helpers/ValidateForm";
+import Swal from 'sweetalert2';
 import uno from '../../Assets/1.jpg'
 import dos from '../../Assets/2.jpg'
 import tres from '../../Assets/3.jpg'
@@ -17,33 +19,30 @@ const validateForm = (form) => {
   const { email, contrasena } = form;
   const errors = {};
 
-  if (!email()) {
+  if (!email) {
     errors.email = "El email es requerido";
-  } else if (!validateForm(email)) {
+  } else if (!validateEmail(email)) {
     errors.email = "Email no válido";
   }
 
-  if (!contrasena()) {
+  if (!contrasena) {
     errors.contrasena = "La contraseña es requerida";
   }
 
   return errors;
 };
 
-export default function Login() {
-  //const isAuthenticated = useSelector((state) => state.loginRegistroReducer.isAuth);
-  const dispatch = useDispatch();
+const Login = ({ login, isAuth, user, register }) => {
   const navigate = useNavigate();
-  //const user = useSelector((state) => state.loginRegistroReducer.userDetail);
-  const [login, setLogin] = useState(initialLogin)
-  const [error, setError] = useState({})
+  const [form, setForm] = useState(initialLogin);
+  const [error, setError] = useState({});
 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     const newLogin = { ...login, [name]: value }
 
-    setLogin(newLogin)
+    setForm(newLogin)
     setError(validateForm(newLogin))
   }
 
@@ -54,10 +53,15 @@ export default function Login() {
     setError(errors)
 
     if (Object.keys(errors).length === 0) {
-      const { email, password } = login;
-      const data = { email, password }
-      dispatch(login(data))
-    }
+      return Swal.fire({
+        title: 'Espere por favor',
+        text: 'Estamos validando sus datos',
+        icon: 'info',
+        allowOutsideClick: false
+      })      
+    } 
+    login(login)
+    
   }
 
   // useEffect(() => {
@@ -144,11 +148,19 @@ export default function Login() {
 
       </div>
 
-    </div>
-
-    
-      
-    
+    </div>    
 
   )      
 }
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ login, register }, dispatch);
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.loginReducer.isAuth,
+    user: state.loginReducer.userDetail,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
