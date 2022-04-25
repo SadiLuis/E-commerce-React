@@ -4,28 +4,33 @@ import { Link, useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { validateEmail } from "../../Helpers/ValidateForm";
-import Swal from 'sweetalert2';
-import uno from '../../Assets/1.jpg'
-import dos from '../../Assets/2.jpg'
-import tres from '../../Assets/3.jpg'
-import './Login.module.css'
+import { Col, Form, Row, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
+import { auth, provider } from "../../Helpers/Firebase";
+import { signInWithPopup } from "firebase/auth";
+import styles from "./Login.module.css";
+//import {postCart} from '../../actions/cart'
+import uno from "../../Assets/1.jpg";
+import dos from "../../Assets/2.jpg";
+import tres from "../../Assets/3.jpg";
 
-const initialLogin = {
-  email: '',
-  password: '',
-}
-//VALIDACIONES////
+
+const initialForm = {
+  contrasena: "",
+  email: "",
+};
+
 const validateForm = (form) => {
   const { email, contrasena } = form;
   const errors = {};
 
-  if (!email) {
+  if (!email.trim()) {
     errors.email = "El email es requerido";
   } else if (!validateEmail(email)) {
     errors.email = "Email no válido";
   }
 
-  if (!contrasena) {
+  if (!contrasena.trim()) {
     errors.contrasena = "La contraseña es requerida";
   }
 
@@ -34,49 +39,67 @@ const validateForm = (form) => {
 
 const Login = ({ login, isAuth, user, register }) => {
   const navigate = useNavigate();
-  const [form, setForm] = useState(initialLogin);
+  const [form, setForm] = useState(initialForm);
   const [error, setError] = useState({});
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const newLogin = { ...login, [name]: value }
 
-    setForm(newLogin)
-    setError(validateForm(newLogin))
-  }
+    const newForm = { ...form, [name]: value };
 
+    setForm(newForm);
+    setError(validateForm(newForm));
+  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const errors = validateForm(login)
-    setError(errors)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = validateForm(form);
+    setError(errors);
 
-    if (Object.keys(errors).length === 0) {
-      return Swal.fire({
-        title: 'Espere por favor',
-        text: 'Estamos validando sus datos',
-        icon: 'info',
-        allowOutsideClick: false
-      })      
-    } 
-    login(login)
-    
-  }
+    if (Object.keys(errors).length) {
+      return window.alert("El formulario contiene errrores");
+    }
+    login(form);
+  };
 
-  // useEffect(() => {
-  //   if(isAuthenticated && user){
-  //     const { rol } = user;
-  //     setLogin(initialLogin)
-  //     // async function DB (){
-  //     //   await postCart()
-  //     // }
-  //     isAuthenticated()
-  //     rol === '2' ? navigate('/dashboard/admin') : navigate('/home')
-  //   }
-  // }, [isAuthenticated, user, navigate])
+  useEffect(() => {
+    // Si ya está logueado que lo redireccione al dashboard
+    if (isAuth && user) {
+      const { rol } = user;
+      setForm(initialForm);
+      async function db() {
+       // await postCart();
+      }
+      isAuth && db();
+      rol === "2" ? navigate("/dashboard/admin") : navigate("/home");
+    }
+  }, [isAuth, navigate, user]);
+
+  const handleSesionGoogle = async (e) => {
+    e.preventDefault();
+    const userG = await signInWithPopup(auth, provider);
+    try {
+      const userGoogle = {
+        contrasena: userG._tokenResponse.localId,
+        email: userG._tokenResponse.email,
+      };
+      console.log(userGoogle);
+      login(userGoogle);
+    } catch (e) {
+      if (
+        e.message.split("/")[1] === "account-exists-with-different-credential)."
+      ) {
+        Swal.fire({
+          title: "Ya tiene una cuenta con el mismo email",
+          text: "No puede iniciar sesión en una cuenta no registrada en la base de datos que tenga el mismo email. Use la cuenta con la que se haya registrado",
+          icon: "error",
+        });
+      }
+    }
+  };
 
   return (
+
     <div class="row g-0 pt-3">
       <div class="col-lg-1"></div>
       <div class="col-lg-5">
@@ -105,53 +128,56 @@ const Login = ({ login, isAuth, user, register }) => {
 
       <div class="col-lg-5">
       <div class="title px-lg-5 pt-lg-4 pb-lg-3 p-4">
-          <h1> Fornitu-Ecommerce</h1>
-      </div>
-      <div class='inputs px-lg-5r py-lg-4 p-4'>
-      <div className='conteiner-login'>
-      <h2>Login</h2>
-        <form onSubmit={handleSubmit} >
-          <div class='mb-3'>
-            <label htmlFor='exampleInputEmail1'>Email address</label>
-            <input type="email" className="form-control" placeholder="Ingresa tu correo" name='email'
-            value={login.email } onChange={handleChange}  />
-            
-           { error && error.email && (
+        <h1 class="display-4">Bienvenido a <span class="text-primary">Furnishing-Store</span></h1>
+        </div>
+        <div class='inputs px-lg-5r py-lg-4 p-4'>
+          <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div class="mb-3">
+          <label htmlFor="exampleInputEmail1" >Email</label>
+            <input
+              className="form-control"
+              type="email"
+              onChange={handleChange}
+              name="email"
+              value={form.email}
+            />
+            {error.email && (
               <span >{error.email}</span>
-              )}
-            
-            
-            
-            <div className='form-group'>
-                <label htmlFor='exampleInputPassword1'>Password</label>
-                <input type="password" className="form-control" placeholder="Ingresa tu contraseña" name='password' value={login.password} onChange={handleChange} />
-                
-               { error && error.password && (
-                  <span >{error.password}</span>
-                )}
-               
-            </div>
-                <button type="submit" class="btn btn-primary" disabled={!login.email || !login.password}  >Submit</button>
+            )}
           </div>
-          <br/>
-
-          <div className='text-center'>
-            <span>¿No tienes cuenta?</span>
-            <Link to='/register'>Registrate</Link>
-            
+          <div className="form-group">
+          <label htmlFor="exampleInputPassword1">Contraseña</label>
+            <input
+              className="form-control"
+              id="exampleInputPassword1"
+              type="password"
+              onChange={handleChange}
+              name="contrasena"
+              value={form.contrasena}
+            />
+            {error.contrasena && (
+              <span >{error.contrasena}</span>
+            )}
           </div>
-
+          <input type="submit" value="Ingresar"  />
+          <Button variant="primary" onClick={handleSesionGoogle}>
+            iniciar sesión con Google
+          </Button>
+          <h4>Aún no te has registrado? </h4>
+          <Link to="/register" >
+            Registrarse
+          </Link>
+          <Link to="/login/recoverpassword">¿Olvidaste la contraseña?</Link>
         </form>
-        
-       </div>
       </div>
-
       </div>
+    </div>
+      
+    
+  );
+};
 
-    </div>    
-
-  )      
-}
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ login, register }, dispatch);
 };
