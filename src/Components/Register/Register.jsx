@@ -1,12 +1,14 @@
 import React, { useState , useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { register, updateUser } from '../../Actions/Auth'
+import { bindActionCreators } from "redux";
 import { validateEmail , validateTlf } from '../../Helpers/ValidateForm'
 import Swal from "sweetalert2";
 import uno from '../../Assets/1.jpg'
 import dos from '../../Assets/2.jpg'
 import tres from '../../Assets/3.jpg'
 import './Registro.module.css'
+import { connect } from 'react-redux';
 
 const initialForm = {
     nombre: '',
@@ -80,7 +82,7 @@ const validateform = function (form) {
 };
 
 
-export default function Register({ updateuser, register, isAuth, user, edit = false }) {
+function Register({ updateuser, register, isAuth, user, edit = false }) {
 
   const navigate = useNavigate();
   const [form, setForm] = useState(
@@ -275,3 +277,15 @@ export default function Register({ updateuser, register, isAuth, user, edit = fa
 
   )
 }
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ register, updateUser }, dispatch);
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.loginReducer.isAuth,
+    user: state.loginReducer.userDetail,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
