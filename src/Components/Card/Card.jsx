@@ -1,9 +1,25 @@
 import React from 'react'
 import './Card.module.css'
 import {Link} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import { addItem} from '../../Actions/cart'
 import styles from './Card.module.css'
+import Swal from "sweetalert2";
+export default function Card({img, title,category, price, id }){
+const dispatch = useDispatch();
 
-export default function Card({img, title,category, price, id, onClick}){
+    const handleAdd =  () => {
+        console.log(id)
+       dispatch(addItem(id));
+        Swal.fire({
+          icon: "success",
+          title: "Producto agregado al carrito",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      };
+
+
     return (
     
     <div className={styles.card} style={{"maxWidth": "35%"}}>
@@ -17,7 +33,7 @@ export default function Card({img, title,category, price, id, onClick}){
         </Link>
         <p className="card-text"> category: {category}</p>
         <p><b>${price}</b></p>
-        <button onClick={()=>onClick()} className='btn btn-outline-dark'>Agregar al carrito</button>
+        <button onClick={ handleAdd} className='btn btn-outline-dark'>Agregar al carrito</button>
     </div>
     )
 }

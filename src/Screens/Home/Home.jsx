@@ -1,13 +1,13 @@
 import React from 'react'
 import {useState} from 'react'
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { getAllProducts, cleanUp} from '../../Actions/products';
 import Card from '../../Components/Card/Card';
-import {useSelector} from 'react-redux'
 import './Home.module.css'
 import styles from './Home.module.css'
 import icon from '../../Assets/cart.svg'
 import Paging from '../../Components/Paging/Paging';
+import ShoppingBtn from '../../Components/Shopping/ShoppingBtn';
 
 
 export default function Home() {
@@ -23,7 +23,7 @@ React.useEffect(()=>{
 
 
 
-  const [cartSize, setCartSize] = useState(0)
+  
 
   const allProducts = useSelector((state) => state.productsReducer.products)
   const [currentPage, setCurrentPage] = useState(1)
@@ -37,15 +37,12 @@ const paginado = (pageNum) => {
   setCurrentPage(pageNum)
 }
 
-  function handleCart(e){
-    setCartSize(cartSize + 1)
-}
+  
   return (
     <div className='container-fluid'>
       Home
-      <div className={styles.cart}>
-        <p><b>{cartSize}</b></p>
-        <img src={icon} className={styles.icon} alt="cart.svg"/>
+      <div className={styles.cart} >
+      <ShoppingBtn className={styles.icon}/>
       </div>
         <div className={styles.pagination}>
               <Paging 
@@ -63,7 +60,7 @@ const paginado = (pageNum) => {
       
       
       {
-        currentProducts?.map(e=> <Card  key={e.id} id={e.id} onClick={handleCart} img={e.images[0]} title={e.title} category={e.category} price={e.price}/> 
+        currentProducts?.map(e=> <Card  key={e.id} id={e.id}  img={e.images[0]} title={e.title} category={e.category} price={e.price}/> 
         ) 
       }
      
