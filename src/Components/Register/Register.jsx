@@ -76,9 +76,9 @@ const validateform = function (form) {
     errors.telefono = "Escriba un número de telefono válido";
   }
 
-  if (form.confirm_contrasena !== form.contrasena) {
-    errors.confirm_contrasena = "Las contraseñas no coinciden";
-  }
+  // if (form.confirm_contrasena !== form.contrasena) {
+  //   errors.confirm_contrasena = "Las contraseñas no coinciden";
+  // }
   if (!form.localidad) {
     errors.localidad = 'Debe ingresear la localidad donde reside'
 }
@@ -109,8 +109,8 @@ export default function Register() {
 
   useEffect(() => {
     
-    if (isRegister ) {
-      
+    if (isRegister  ) {
+      console.log(isRegister)
       Swal.fire({
         text: `Cuenta creada con éxito , inicie sesión para ingresar`,
         icon: "success",
@@ -142,7 +142,7 @@ export default function Register() {
     
     if(Object.keys(error).length){
       console.log('entro',form)
-
+      console.log(error)
       Swal.fire({
         text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,
         icon: "error",
