@@ -57,6 +57,12 @@ function Login({ login, isAuth, user }) {
       console.log(errors)
       return window.alert("El formulario contiene errrores");
     }
+    Swal.fire({
+      title: 'Espere, validando información',    
+      text: 'Este mensaje desaparecerá en 5 segundos',
+      icon: 'info',      
+      timer: 5000,
+    })
     login(form);
   };
 
