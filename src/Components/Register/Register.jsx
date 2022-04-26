@@ -87,7 +87,7 @@ const validateform = function (form) {
 };
 
 export default function Register() {
-  const isAuth = useSelector(state => state.loginReducer.isAuth)
+  const isRegister = useSelector(state => state.loginReducer.isRegister)
   const [focus , setFocus] = useState({ 
   nombre: false,
   usuario: false,
@@ -104,12 +104,12 @@ export default function Register() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [form, setForm] = useState(formulario)
   const [error, setError] = useState({})
-  console.log(isAuth)
+  
   const dispatch = useDispatch()
 
   useEffect(() => {
     
-    if (isAuth ) {
+    if (isRegister ) {
       
       Swal.fire({
         text: `Cuenta creada con éxito , inicie sesión para ingresar`,
@@ -120,7 +120,7 @@ export default function Register() {
      return navigate("/login");
      
     }
-  }, [isAuth, navigate]);
+  }, [isRegister, navigate]);
 
   const handleChange = (name, value) => {
     
@@ -137,16 +137,16 @@ export default function Register() {
   }
  
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     
-    if(!Object.keys(error).length){
+    if(Object.keys(error).length){
       console.log('entro',form)
 
       Swal.fire({
         text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,
         icon: "error",
-        confirmButtonText: "danger",
+        confirmButtonText: "Ok",
       });
     }
     else{

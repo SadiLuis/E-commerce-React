@@ -13,7 +13,7 @@ import {
 } from './Index';
 
 import {BASEURL} from '../Assets/URLS';
-
+import Swal from 'sweetalert2'
 import getHeaderToken from '../Helpers/getHeaderToken';
 
 
@@ -73,18 +73,26 @@ export function register({
           console.log("body")
           console.log(body)
           let { data } = await axios.post(`${BASEURL}/user/register`, body, config);
- 
+           
           // console.log(data);
           dispatch({
              type: REGISTER_SUCCESS,
-             payload: data
+             payload: true
           })
-          dispatch(getUserDetail());
+          
          } catch (error) {
             console.log(error);
+
+            Swal.fire({
+               icon: 'error',
+               title: 'Datos incorrectos',
+               text: 'Algo salió mal , intentelo de nuevo ingresando los datos nuevamente!',
+              
+             })
+
             dispatch({
                 type: REGISTER_FAILED,
-                payload: error.response.data
+                payload: false
             })
             }
     }
