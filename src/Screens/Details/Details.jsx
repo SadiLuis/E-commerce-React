@@ -2,10 +2,11 @@ import React, { createRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import {getProductById} from "../../Actions/products.js"
+import { addItem } from "../../Actions/cart.js";
 import "./Details.css"
 import BotonPago from "../../Components/BtnPago/BtnPago.jsx";
 import { WhatsApp } from "../../Actions/whatsApp.js";
-
+import Swal from 'sweetalert2'
 export default function Detail() {
   
   const { idProduct } = useParams();
@@ -32,6 +33,19 @@ export default function Detail() {
       dispatch(WhatsApp(title, price))
   }
 
+
+  const handleAdd =  () => {
+    console.log(idProduct)
+    dispatch(addItem(parseInt(idProduct)));
+    
+    Swal.fire({
+      
+      icon: "success",
+      title: "Producto agregado al carrito",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
  
   
   if(product.title) {
@@ -62,7 +76,7 @@ export default function Detail() {
                <p><b>Stock:</b> {product?.cantidad} unidades </p>
                
               {/* <div class="btnGroup"> */}
-              <button class="cart btn btn-outline-secondary">Agregar al carrito</button>
+              <button class="cart btn btn-outline-secondary" type='button' onClick={handleAdd}>Agregar al carrito</button>
               <br />
               <button onClick={()=>handleWhatsApp(product.title, product.price)}class="cart btn btn-outline-success">Preguntar al WhatsApp</button>
               <br />
