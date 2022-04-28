@@ -10,6 +10,7 @@ import Paging from '../../Components/Paging/Paging';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 //import{FormGroup, Label} from "react-bootstrap"
 import ShoppingBtn from '../../Components/Shopping/ShoppingBtn';
+import productsReducer from '../../Reducers/Products';
 
 
 
@@ -61,10 +62,10 @@ function handleClick(e) {
 //   filterByCategory(e.target.value);
 // }
 
-// function handleOrderByPrice(e) {
-//   e.preventDefault();
-//   orderByPrice(e.target.value);
-// }
+function handleOrderByPrice(e) {
+  e.preventDefault();
+  dispatch(orderByPrice(e.target.value));
+}
 
 // function handleOrderByRate(e) {
 //   e.preventDefault();
@@ -88,6 +89,13 @@ function handleClick(e) {
 
         <SearchBar />
       </form>
+      <div className={styles.filtroPrecio} >
+                <label>PRECIO</label>
+                <select className={styles.selectors} onChange={handleOrderByPrice}>
+                  <option value="asc">Menor precio</option>
+                  <option value="desc">Mayor precio</option>
+                </select>
+              </div>
     
     
           <div>
@@ -103,6 +111,9 @@ function handleClick(e) {
       <div className={styles.contain_btn_products}><button className='btn btn-outline-success' onClick={handleClick}>
         Sin Filtros
       </button></div>
+
+      
+
 
         <div>
          <h1>Filtro por Categoría</h1>
@@ -157,6 +168,7 @@ Sillas
   </div> */}
         {/* </div>
 ) */}
+               
 
 
 

@@ -250,9 +250,9 @@ function NavBar({ isAuth, user }) {
       </div>
 
     </nav>
-    <nav className="navbar navbar-light bg-light">
+    <nav className="navbar navbar-light bg-light" >
         <div className="container-fluid" 
-        style={{height:"3.5rem"}}
+        style={{height:"3rem"}}
         >
           <span className="navbar-brand" 
           
