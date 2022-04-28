@@ -13,6 +13,7 @@ const initialState = {
     token: localStorage.getItem('token_ecommerce'),
     isAuth: null,
     userDetail: null,
+    isRegister:null,
     recoveryPass:[],
 }
 
@@ -22,7 +23,6 @@ export default function loginRegistroReducer(state = initialState, action) {
         case GET_USER_DETAIL:
             return { ...state, isAuth: true, userDetail: action.payload };
         case LOGIN_SUCCESS:
-        case REGISTER_SUCCESS:
             // Set Token in localstorage
             localStorage.setItem('token_ecommerce', action.payload.token);
             return {
@@ -30,7 +30,7 @@ export default function loginRegistroReducer(state = initialState, action) {
                 token: action.payload.token,
                 isAuth: true,
             };
-        case REGISTER_FAILED:
+        
         case AUTHENTICATION_ERROR:
         case LOGIN_FAILED:
         case LOGOUT:
@@ -50,6 +50,15 @@ export default function loginRegistroReducer(state = initialState, action) {
                 ...state,
                 recoveryPass:[...action.payload]
             }
+            case REGISTER_SUCCESS: return {
+                ...state ,
+                isRegister: action.payload
+            }
+            case REGISTER_FAILED: return {
+                ...state,
+                isRegister: action.payload
+            }
+
 
         default: return state;
     }

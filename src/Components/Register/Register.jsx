@@ -1,25 +1,29 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { register, updateUser } from '../../Actions/Auth'
-import { validateEmail , validateTlf } from '../../Helpers/ValidateForm'
-import Swal from "sweetalert2";
+import {register} from '../../Actions/Auth'
+import { validateEmail,validateTlf } from '../../Helpers/ValidateForm'
+import Swal from 'sweetalert2'
 import uno from '../../Assets/1.jpg'
 import dos from '../../Assets/2.jpg'
-import tres from '../../Assets/3.jpg'
-import './Registro.module.css'
-
-const initialForm = {
-    nombre: '',
-    usuario: '',
-    contrasena: '',
-    confirm_contrasena: '',
-    email: '',
-    pais: '',
-    provincia: '',
-    direccion: '',
-    telefono: '',
-    fotoPerfil: ''
+import tres from '../../Assets/img4.jpeg'
+import { useDispatch ,useSelector} from 'react-redux'
+import {IoEyeOff ,IoEye} from "react-icons/io5"
+import style  from "./Register.module.css"
+const formulario = {
+  nombre: '',
+  usuario: '',
+  contrasena: '',
+  email: '',
+  pais: '',
+  provincia: '',
+  direccion: '',
+  telefono: '',
+  localidad: '',
+ 
 }
+
+ 
+
 const validateform = function (form) {
   const errors = {};
   if (!form.nombre.trim()) {
@@ -40,8 +44,8 @@ const validateform = function (form) {
 
   if (!form.contrasena.trim()) {
     errors.contrasena = "Campo requerido";
-  } else if (form.contrasena.length < 10) {
-    errors.contrasena = "Mínimo 10 caracteres";
+  } else if (form.contrasena.length < 6) {
+    errors.contrasena = "Mínimo 6 caracteres";
   }
 
   if (!form.email.trim()) {
@@ -72,206 +76,255 @@ const validateform = function (form) {
     errors.telefono = "Escriba un número de telefono válido";
   }
 
-  if (form.confirm_contrasena !== form.contrasena) {
-    errors.confirm_contrasena = "Las contraseñas no coinciden";
-  }
+  // if (form.confirm_contrasena !== form.contrasena) {
+  //   errors.confirm_contrasena = "Las contraseñas no coinciden";
+  // }
+  if (!form.localidad) {
+    errors.localidad = 'Debe ingresear la localidad donde reside'
+}
 
   return errors;
 };
 
-
-export default function Register({ updateuser, register, isAuth, user, edit = false }) {
-
-  const navigate = useNavigate();
-  const [form, setForm] = useState(
-    edit ? { ...user, confirm_contrasena: "", contrasena: "" } : initialForm
-  );
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    const newform = { ...form, [name]: value };
-    setForm(newform);
-    const errors = validateform(newform, edit);
-    setErrors(errors);
-    return newform;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const errors = validateform(form);
-
-    const userForm = { ...form };
-    delete userForm.confirm_contrasena;
-
-    edit ? updateUser(userForm) : register(userForm);
-
-  };
+export default function Register() {
+  const isRegister = useSelector(state => state.loginReducer.isRegister)
+  const [focus , setFocus] = useState({ 
+  nombre: false,
+  usuario: false,
+  contrasena: false,
+  email: false,
+  pais: false,
+  provincia: false,
+  direccion: false,
+  telefono: false,
+  localidad: false,
+  })
+  const [visible , setVisible] = useState('password')
+  const navigate = useNavigate()
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [form, setForm] = useState(formulario)
+  const [error, setError] = useState({})
+  
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    // Si ya está logueado que lo redireccione al dashboard
-    if (isAuth && user && !edit) {
-      setForm(initialForm);
-      const { nombre, rol } = user;
+    
+    if (isRegister  ) {
+      console.log(isRegister)
       Swal.fire({
-        text: `Bienvenidx ${nombre}`,
+        text: `Cuenta creada con éxito , inicie sesión para ingresar`,
         icon: "success",
         confirmButtonText: "Ok",
       });
-      async function db() {
-       // await postCart();
-      }
-      isAuth && db();
-      if (rol === "1") return navigate("/dashboard/user");
-      if (rol === "2") return navigate("/dashboard/admin");
+      
+     return navigate("/login");
+     
     }
-  }, [isAuth, navigate, user, edit]);
+  }, [isRegister, navigate]);
 
+  const handleChange = (name, value) => {
+    
+    const newform = { ...form, [name]: value };
+    if(typeof value === 'string'){
+    setForm(newform);
+    const errors = validateform(newform);
+    setError(errors);
+    } 
+    else{
+    setFocus({ ...focus, [name]: value })
+    }
+    return newform;
+  }
+ 
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    if(Object.keys(error).length){
+      console.log('entro',form)
+      console.log(error)
+      Swal.fire({
+        text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    }
+    else{
+    setForm(formulario)
+    dispatch(register(form))
+    }
+
+  }
+
+  const mostrarPassword = () =>{
+    console.log(visible)
+    if(visible === 'password') setVisible('text')
+    else setVisible('password')
+  }
 
   return (
-    <div className="row g-0 pt-3">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-5">
-        <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img class="tamaño" src={uno} alt="First slide" />
-            </div>
-            <div className="carousel-item">
-              <img className="tamaño" src={dos} alt="Second slide" />
-            </div>
-            <div className="carousel-item">
-              <img className="tamaño" src={tres} alt="Third slide" />
-            </div>
-          </div>
-          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Next</span>
-          </button>
+     <div className={`row g-0 pt-1 `}>
+   <div lassName={` ${style.container}`}>
+  <div className={style.containerReg}>
+  <div className="col-sm-4">
+    <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+      <div className= {`carousel-inner ${style.containerCarousel}`}>
+        <div className={`carousel-item active  ${style.containerImg}`}>
+          <img className={style.tamaño} src={uno} alt="First slide" />
+        </div>
+        <div className={`carousel-item   ${style.containerImg}`}>
+          <img className={style.tamaño} src={dos} alt="Second slide" />
+        </div>
+        <div className={`carousel-item   ${style.containerImg}`}>
+          <img className={style.tamaño} src={tres} alt="Third slide" />
         </div>
       </div>
-      <div class="col-lg-5">
-        <div class="title px-lg-5 pt-lg-4 pb-2 p-4">
-          <h1> Gracias por visitarnos! </h1>
-        </div>
-        <br />
-        {/* <div class='px-lg-5r py-lg-4 p-4'></div> */}
-        <h2>Registro</h2>
-        <form  onSubmit={handleSubmit}>
-     <div >
-
-      <div >
-      <label>Nombre</label>
-
-      <div >
-      <input  type="text" name="nombre" value={form.nombre} onChange={handleChange}/>
-                {errors.nombre && <span >{errors.nombre}</span>}
-      </div>
-
-      <label>Usuario</label>
-      <div>
-      <input  type="text" name="usuario" value={form.usuario} onChange={handleChange}/>
-                {errors.usuario && <span >{errors.usuario}</span>}
-      </div>
-
-
-      <label>Contraseña</label>
-      <div >
-        <input  type="password" name="contrasena" value={form.contrasena} onChange={handleChange}/>
-                {errors.contrasena && <span >{errors.contrasena}</span>}
-      </div>
-
-
-      <label>Confirmar contraseña</label>
-      <div  >
-        <input  type="password" name="confirm_contrasena" value={form.confirm_contrasena} onChange={handleChange}/>
-        {errors.confirm_contrasena && <span >{errors.confirm_contrasena}</span>}
-      </div>
-
-      <label>Email</label>
-      <div  >
-        <input  type="email" name="email" value={form.email} onChange={handleChange}/>
-        {errors.email && <span >{errors.email}</span>}
-      </div>
-
-      </div>
-      <div>
-
-      <label>País</label>
-      <div >
-        <input  type="text" name="pais" value={form.pais} onChange={handleChange}/>
-        {errors.pais && <span >{errors.pais}</span>}
-      </div>
-
-      <label>Provincia</label>
-      <div >
-        <input type="text" name="provincia" value={form.provincia} onChange={handleChange}/>
-        {errors.provincia && <span >{errors.provincia}</span>}
-      </div>
-
-      <label>Dirección</label>
-      <div >
-        <input  type="text" name="direccion" value={form.direccion} onChange={handleChange}/>
-        {errors.direccion && <span >{errors.direccion}</span>}
-      </div>
-
-      <label>Telefono</label>
-      <div >
-        <input  type="text" name="telefono" value={form.telefono} onChange={handleChange}/>
-        {errors.telefono && <span >{errors.telefono}</span>}
-      </div>
-
-      </div>
-     </div>
-
-     <div >
-         <div>
-
-           <div>
-
-            <input type='checkbox' required/>
-            <label>Acepto terminos y condiciones</label>
-         </div>
-      <input
-              type="submit"
-              value={edit ? "Guardar cambios" : "Registrarse"}
-              
-            />
-           </div>
-        <span />
-           <div>
-           <div>
-            {/* <Button className={style.btn_google} onClick={handleSesionGoogle}>iniciar sesión con Google</Button> */}
-
-           </div>
-
-
-           <div>
-            {!edit && (
-              <div >
-                <h5 > Ya tienes cuenta?</h5>
-                <Link to="/login">
-                 <button >Ingresar</button> 
-                </Link>
-              </div>
-            )}
-           </div>
-           </div>
-
-     </div>
-
-     </form>
-
-      </div>
-
-
+      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
     </div>
+  </div>
+  <div className="col-lg-4">
+    <div className="title px-lg-5 pt-lg-4 pb-2 p-4">
+      
+    </div>
+    <br />
+    {/* <div class='px-lg-5r py-lg-4 p-4'></div> */}
+    <h2>Registro</h2>
+    {/* FORM LOGIN */}
+    {/* <div className='col-md-4'>
+      <div className='mt-5 ms-5'> */}
+    {/* <h1 className='text-center'> REGISTRO </h1> */}
+    <form onSubmit={handleSubmit} className={style.form} >
+      <div className={`mb-1 ${style.formInput}`} style={{marginTop:'5px'}}>
+        {/* CORREO */}
+        <label htmlFor="exampleInputEmail1" style={{fontSize:'15px'}}>&nbsp; Correo</label>
+        <input  onFocus={(e) => handleChange(e.target.name , true)}
+        
+         type="email" className={` ${style.input}`}
+          name='email' value={form.email} onChange={(e) => handleChange(e.target.name, e.target.value)} 
+          id="exampleInputEmail1" aria-describedby="emailHelp"
+         placeholder="Ingresa tu correo" />
+        {focus.email && error.email && <span className={`text-danger ${style.span}`}>{error.email}</span> }
+      </div>
+      {/* Nombre */}
+      <div className={`mb-1 ${style.formInput}`}>
+        <label htmlFor="exampleInputPassword1">&nbsp; Nombre</label>
+        <input type="text" className={` ${style.input}`} id="exampleInputPassword1"
+          onChange={(e) => handleChange(e.target.name, e.target.value)} 
+          value={form.nombre} name='nombre' placeholder="Nombre" 
+          onFocus={(e) => handleChange(e.target.name , true)}
+        
+         />
+          {focus.nombre && error.nombre && <span className={`text-danger ${style.span}`}>{error.nombre}</span> }
+      </div>
+      {/* USUARIO */}
+      <div className={`mb-1 ${style.formInput}`}>
+        <label htmlFor="exampleInputPassword1">&nbsp; Nombre de usuario</label>
+        <input type="text"  className={ style.input} id="exampleInputPassword1" 
+        placeholder="Nombre de usuario" name='usuario' 
+        value={form.usuario} 
+        onChange={(e) => handleChange(e.target.name, e.target.value)}
+        onFocus={(e) => handleChange(e.target.name , true)}
+       
+        />
+        {focus.usuario && error.usuario && <span className={`text-danger ${style.span}`}>{error.usuario}</span> }
+      </div>
+      {/* Contraseña  */}
+      <div className={`mb-1 ${style.formInput}`}>
+        <label htmlFor="exampleInputPassword1">&nbsp; Contraseña</label>
+       <div className={style.containerInput}>
+        <input type={visible}  className={` ${style.input}`} id="exampleInputPassword1"
+         name='contrasena' placeholder="Password" value={form.contrasena}
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+          onFocus={(e) => handleChange(e.target.name , true)}
+          />
+        <button class={`btn btn-primary ${style.contrasena}`} type='button' >
+        {visible === 'text' && <IoEyeOff className={style.inputContrasena}  type="button" onClick={mostrarPassword} /> }
+        {visible === 'password' && <IoEye  className={style.inputContrasena} type="button" onClick={mostrarPassword} /> }
+        </button>
+        </div>
+        <div style={{marginTop:'-65px'}}>
+        {focus.contrasena && error.contrasena && <span className={`text-danger ${style.span}`} >{error.contrasena}</span> }
+        </div>
+      </div>
+     
 
-  )
+      {/* PAIS */}
+      <div className={`mb-1 ${style.formInput}`} style={{marginTop:'-95px'}}>
+        <label htmlFor="exampleInputPassword1">&nbsp; País</label>
+        <input type="text"  className={` ${style.input}`} id="exampleInputPassword1"
+          onChange={(e) => handleChange(e.target.name, e.target.value)} 
+          value={form.pais} placeholder="Pais" name='pais'
+          onFocus={(e) => handleChange(e.target.name , true)}
+           />
+          {focus.pais && error.pais && <span className={`text-danger ${style.span}`}>{error.pais}</span> }
+      </div>
+
+      {/* Provincia */}
+      <div className={`mb-1 ${style.formInput}`}>
+        <label htmlFor="exampleInputPassword1">&nbsp; Provincia</label>
+        <input type="text"  className={` ${style.input}`} id="exampleInputPassword1"
+          onChange={(e) => handleChange(e.target.name, e.target.value)} 
+          value={form.provincia}
+           placeholder="Provincia" name='provincia' 
+           onFocus={(e) => handleChange(e.target.name , true)}
+         />
+          {focus.provincia && error.provincia && <span className={`text-danger ${style.span}`}>{error.provincia}</span> }
+      </div>
+      {/* Ciudad */}
+      <div className={`mb-1 ${style.formInput}`}>
+        <label htmlFor="exampleInputPassword1">&nbsp; Ciudad</label>
+        <input type="text"  className={` ${style.input}`} id="exampleInputPassword1"
+          onChange={(e) => handleChange(e.target.name, e.target.value)} 
+          value={form.localidad} placeholder="Ciudad" name='localidad'
+          onFocus={(e) => handleChange(e.target.name , true)}
+          />
+          {focus.localidad && error.localidad && <span className={`text-danger ${style.span}`}  style={{marginLeft:'100px'}}>{error.localidad}</span> }
+      </div>
+      {/* DIRECCIONS */}
+      <div className={`mb-1 ${style.formInput}`}>
+        <label htmlFor="exampleInputPassword1">&nbsp; Dirección</label>
+        <input type="text"  className={` ${style.input}`} id="exampleInputPassword1"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+           value={form.direccion} 
+           placeholder="Direccion" 
+           name='direccion' 
+           onFocus={(e) => handleChange(e.target.name , true)}
+          />
+          {focus.direccion && error.direccion && <span className={`text-danger ${style.span}`}>{error.direccion}</span> }
+      </div>
+      {/* Telefono */}
+      <div className={`mb-1 ${style.formInput}`}>
+        <label htmlFor="exampleInputPassword1">&nbsp; Teléfono</label>
+        <input type="text"  className={ style.input} id="exampleInputPassword1"
+          onChange={(e) => handleChange(e.target.name, e.target.value)}
+           value={form.telefono} 
+           placeholder="Telefono"
+            name='telefono' 
+            onFocus={(e) => handleChange(e.target.name , true)}
+           />
+          {focus.telefono && error.telefono && <span className={`text-danger ${style.span}`} style={{marginLeft:'110px'}}>{error.telefono}</span> }
+      </div>
+
+      <div className="form-group form-check" style={{marginTop:'-25px'}}>
+      </div>
+      <button type="submit" class="btn btn-primary w-100" >Registrarse</button>
+      <div div className="form-group form-check p-2 text-center" style={{marginTop:'5px'}}>
+        <small  >El equipo de mueblesApp nunca te pedirá tu correo o contraseña. </small>
+      </div>
+
+    </form>
+
+  </div>
+ </div>
+  </div>
+</div>
+
+)
 }
