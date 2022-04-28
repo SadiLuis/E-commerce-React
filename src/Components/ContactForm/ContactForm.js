@@ -50,91 +50,90 @@ function ContactForm() {
   }
   return (
     <>
-    {/* <div className={styles.topForm}>
+      <div className={styles.topForm}>
      <h3>Contactanos</h3> 
-    </div> */}
-      <div className="container mt-5">
-        
-      </div>
-      <div className="container mt-5">
-        {status && renderAlert()}
-        <form className="row g-3" onSubmit={handleSubmit}>
-          <div className="col-md-6">
-            <label htmlFor="primerNombre" className="form-label">
-              Nombre
-            </label>
-            <input
-              onChange={handleChange}
-              type="text"
-              className="form-control"
-              id="primerNombre"
-              name="primerNombre"
-              required
-            ></input>
-          </div>
+    </div> 
+       <><div className="container mt-5">
 
-          <div className="col-md-6">
-            <label htmlFor="apellido" className="form-label">
-              Apellido
-            </label>
-            <input
-              onChange={handleChange}
-              type="text"
-              className="form-control"
-              id="apellido"
-              name="apellido"
-              required
-            ></input>
-          </div>
-          <div className="col-md-8">
-            <label htmlFor="email" className="form-label">
-              E-mail
-            </label>
-            <input
-              onChange={handleChange}
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              required
-            ></input>
-          </div>
-          <div className="col-md-4">
-            <label htmlFor="telefono" className="form-label">
-              Teléfono
-            </label>
-            <input
-              onChange={handleChange}
-              type="text"
-              className="form-control"
-              id="telefono"
-              name="telefono"
-            ></input>
-          </div>
-          <div className="col-md-12">
-            <label htmlFor="comentarios" className="form-label">
-              Su mensaje
-            </label>
-            <textarea
-              onChange={handleChange}
-              className="form-control"
-              id="mensaje"
-              name="mensaje"
-              rows="3"
-              required
-            ></textarea>
-          </div>
-          <div className="col-md-12">
-            <button type="submit" className={styles.boton}>
-              <span>
-                <BsEnvelope></BsEnvelope>
-              </span>
-              Enviar
-            </button>
-          </div>
-        </form>
-      </div>
-      
+        </div><div className="container mt-5">
+            {status && renderAlert()}
+            <form className="row g-3" onSubmit={handleSubmit}>
+              <div className="col-md-6">
+                <label htmlFor="primerNombre" className="form-label">
+                  Nombre
+                </label>
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  className="form-control"
+                  id="primerNombre"
+                  name="primerNombre"
+                  required
+                ></input>
+              </div>
+
+              <div className="col-md-6">
+                <label htmlFor="apellido" className="form-label">
+                  Apellido
+                </label>
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  className="form-control"
+                  id="apellido"
+                  name="apellido"
+                  required
+                ></input>
+              </div>
+              <div className="col-md-8">
+                <label htmlFor="email" className="form-label">
+                  E-mail
+                </label>
+                <input
+                  onChange={handleChange}
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  required
+                ></input>
+              </div>
+              <div className="col-md-4">
+                <label htmlFor="telefono" className="form-label">
+                  Teléfono
+                </label>
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  className="form-control"
+                  id="telefono"
+                  name="telefono"
+                ></input>
+              </div>
+              <div className="col-md-12">
+                <label htmlFor="comentarios" className="form-label">
+                  Su mensaje
+                </label>
+                <textarea
+                  onChange={handleChange}
+                  className="form-control"
+                  id="mensaje"
+                  name="mensaje"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <div className="col-md-12">
+                <button type="submit" className={styles.boton}>
+                  <span>
+                    <BsEnvelope></BsEnvelope>
+                  </span>
+                  Enviar
+                </button>
+              </div>
+            </form>
+          </div></>
+ 
     </>
   );
 }
