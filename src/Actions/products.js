@@ -34,4 +34,20 @@ export function getProductById(id) {
   
    }
    return action
-}
+
+ }
+
+   export function getProductsByCat(idCategory) {
+      return async function (dispatch) {
+         try {
+            var json = await axios.get(`${BASEURL}/products/category/${idCategory}`);
+            return dispatch({
+               type: "GET_PRODUCT_BY_CAT",
+               payload: json.data
+            })
+         } catch (err) {
+            console.log(err)
+         }
+      }
+   }
+  

@@ -4,7 +4,8 @@ const initialState = {
     detailProduct : [],
     products: [],
     allProducts: getProductLocalStorage(),
-    cart: getCartLocalStorage()
+    cart: getCartLocalStorage(),
+    sameCategory: []
 }
 
 export default function productsReducer(state = initialState, action) {
@@ -94,7 +95,12 @@ export default function productsReducer(state = initialState, action) {
             return {
                 ...state,
                 cart: newCart
-            } 
+            };
+            case "GET_PRODUCT_BY_CAT": 
+            return {
+                ...state,
+                sameCategory: payload
+            }
             default: 
                 return {...state}
 

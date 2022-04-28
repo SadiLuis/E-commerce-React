@@ -1,0 +1,81 @@
+.container{
+    margin: 0;
+    padding: 0;
+    color: grey;
+    text-decoration: solid;
+}
+
+
+.containerCarousel{
+        margin: 0;
+        padding: 0;
+        display: grid;
+        justify-content: space-between;
+        max-width: 100%;
+        grid-template-columns: 10px 230px 230px 230px 230px 10px;
+        grid-template-rows: 450px;
+
+        
+}
+
+.carouselCards{
+    justify-content: space-evenly;
+    display: flex;
+    max-width: 230px;
+    max-height: 100%;
+    object-fit: cover;
+    box-sizing: border-box;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+.carouselCard{
+    max-width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+}
+
+.carouselCard img{
+    align-items: center;
+    justify-content: center;
+}
+
+.carouselCard p{
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.carouselBtn{
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.btnPrev{
+    margin-left: 0;
+    
+    padding: 0;
+    background-color: white;
+    max-width: 10px;
+    max-height: 80%;
+    align-items: center;
+    border: none;
+    
+}
+
+.btnNext{
+    
+    padding: 0;
+    right: 0;
+    background-color: white;
+    max-width: 10px;
+    max-height: 80%;
+    align-items: center;
+    border: none;
+}
+
+
+.carouselCard a{
+    text-decoration: none;
+}
