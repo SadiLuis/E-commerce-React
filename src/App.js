@@ -5,7 +5,9 @@ import Register from "./Components/Register/Register";
 import Detail from "./Screens/Details/Details";
 import Home from "./Screens/Home/Home";
 import Cart from './Components/Cart/Cart'
-import Carousel from "./Components/Carousel/Carousel";
+
+import Profile from "./Screens/Profile/Profile";
+
 
 
 
@@ -19,7 +21,8 @@ function App() {
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/" element={<Home />} />
         <Route path='/cart' element={<Cart />} />
-        <Route path="/carousel" element={<Carousel />} />
+        <Route path="/user" element={<Profile/>}/>
+
       </Routes>
 
     </div>
