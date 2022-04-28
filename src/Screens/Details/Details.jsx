@@ -7,6 +7,7 @@ import "./Details.css"
 import BotonPago from "../../Components/BtnPago/BtnPago.jsx";
 import { WhatsApp } from "../../Actions/whatsApp.js";
 import Swal from 'sweetalert2'
+import Carousel from "../../Components/Carousel/Carousel.jsx";
 export default function Detail() {
   
   const { idProduct } = useParams();
@@ -50,49 +51,43 @@ export default function Detail() {
   
   if(product.title) {
   return ( 
-    
-    <div className="details">
-      <div className="big-img">
+      <>
+            <div class="containerDetail">
+                <div class="thumb" ref={myRef}>
+                  {product?.images.map( (img, index) => (
+                    <img src={img} alt="product" key={index}
+                    onClick={()=> handleTab(index)}
+                    />
+                  ))}
+                </div>
+              <div class="bigImg">
+                  <img src={product?.images[index]} alt="product " />
+
+              </div>
+              <div class="detailBox">
+                <h1><b>{product?.title}</b></h1>
+                <h4><b>${product?.price}</b></h4>
+                <br />  
+                <p><b>Description:</b> {product?.description}</p>
+                <span><b>Size:</b> {product?.size}</span> 
+                <div class="btnGroup">
+                      <div class="btnBerna">
+                        <button class="btn btn-secondary" type='button' onClick={handleAdd}>Agregar al carrito</button>
+                      </div>
+                      <div class="btnBerna">
+                        <button onClick={()=>handleWhatsApp(product.title, product.price)}class="btn btn-success">Preguntar al WhatsApp</button>
+                      </div>
+                </div>
+               </div>
+               <div class="recommended">
+                 <Carousel category={product?.category} />
+              </div>
+
             
-            <img src={product?.images[index]} alt="product " />
-            
-            <div className="thumb" ref={myRef}>
-              {product?.images.map( (img, index) => (
-                <img src={img} alt="product" key={index}
-                onClick={()=> handleTab(index)}
-                />
-              ))}
+
             </div>
-      
-      </div>
 
-       <div className="box">
-             <div className="row">
-               <h2>{product?.title}</h2>
-               <span>${product?.price}</span>
-               <br />
-               <p><b>Descripcion:</b> {product?.description}</p>
-               <p><b>Medidas:</b> {product?.size}</p>
-               <p><b>Stock:</b> {product?.cantidad} unidades </p>
-               
-              {/* <div class="btnGroup"> */}
-              <button class="cart btn btn-outline-secondary" type='button' onClick={handleAdd}>Agregar al carrito</button>
-              <br />
-              <button onClick={()=>handleWhatsApp(product.title, product.price)}class="cart btn btn-outline-success">Preguntar al WhatsApp</button>
-              <br />
-              <BotonPago 
-              price={product.price}
-              />
-              {/* </div>    */}
-             
-             </div>
-       </div>
-
-       
-        
-        
-
-     </div> 
+      </> 
      )
   }else {
     return (<h1>Loading...</h1>)
