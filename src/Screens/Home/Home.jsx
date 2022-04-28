@@ -5,11 +5,11 @@ import {useState} from 'react'
 import { getAllProducts, cleanUp, orderByPrice,
   orderByRate, getCategories, filterByCategory} from '../../Actions/products';
 import Card from '../../Components/Card/Card';
-import {useSelector} from 'react-redux'
+
 
 import { useDispatch,useSelector } from "react-redux";
 
-import Card from '../../Components/Card/Card';
+
 
 import styles from './Home.module.css'
 
@@ -42,7 +42,7 @@ React.useEffect(()=>{
 
 
   
-
+  const [cartSize, setCartSize]=useState("")
   const allProducts = useSelector((state) => state.productsReducer.products)
   console.log(allProducts)
   const categories= useSelector((state)=>state.productsReducer.categories)
@@ -106,10 +106,10 @@ const paginado = (pageNum) => {
 
           <div className='container-fluid'>
 
-            <div className={styles.cart}>
+            {/* <div className={styles.cart}>
               <p><b>{cartSize}</b></p>
               <img src={icon} className={styles.icon} alt="cart.svg" />
-            </div>
+            </div> */}
             {/* <div>
               <h1>FILTROS Y ORDENAMIENTOS - SIN FILTROS</h1>
               <div className={styles.title}><h4>Nuestros Productos</h4></div>
@@ -168,39 +168,40 @@ const paginado = (pageNum) => {
 
 
           </div>
-      //  </div>
+        //</div>
+  )
 
   
-  return (
-    <div className='container-fluid'>
-      Home
-      <div className={styles.cart} >
-      <ShoppingBtn className={styles.icon}/>
-      </div>
-        <div className={styles.pagination}>
-              <Paging 
-        productsOnPage={productsOnPage} 
-        allProducts={allProducts.length} 
-        paginado={paginado}
+  // return (
+  //   <div className='container-fluid'>
+  //     Home
+  //     <div className={styles.cart} >
+  //     <ShoppingBtn className={styles.icon}/>
+  //     </div>
+  //       <div className={styles.pagination}>
+  //             <Paging 
+  //       productsOnPage={productsOnPage} 
+  //       allProducts={allProducts.length} 
+  //       paginado={paginado}
 
-        />
-        </div>
+  //       />
+  //       </div>
         
      
       
      
-        <div className={styles.row}>
+  //       <div className={styles.row}>
       
       
-      {
-        currentProducts?.map(e=> <Card  key={e.id} id={e.id}  img={e.images[0]} title={e.title} category={e.category} price={e.price}/> 
-        ) 
-      }
+  //     {
+  //       currentProducts?.map(e=> <Card  key={e.id} id={e.id}  img={e.images[0]} title={e.title} category={e.category} price={e.price}/> 
+  //       ) 
+  //     }
      
-     </div>
+  //    </div>
      
       
-      </div>
+  //     </div>
 
-  )
+  
 }

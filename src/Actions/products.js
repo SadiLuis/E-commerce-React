@@ -94,7 +94,7 @@ export function searchByName(name) {
    }
 
 
- }
+ 
 
    export function getProductsByCat(idCategory) {
       return async function (dispatch) {

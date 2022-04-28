@@ -11,7 +11,6 @@ import Profile from "./Screens/Profile/Profile"
 
 import Cart from './Components/Cart/Cart'
 
-import Profile from "./Screens/Profile/Profile";
 
 
 
@@ -32,7 +31,7 @@ function App() {
         <Route path="/contactform" element={<ContactForm />} />
         <Route path="/profile" element={<Profile/>} />
         <Route path='/cart' element={<Cart />} />
-        <Route path="/user" element={<Profile/>}/>
+        {/* <Route path="/user" element={<Profile/>}/> */}
 
 
       </Routes>
