@@ -68,16 +68,17 @@ export default function productsReducer(state = initialState, action) {
            
         case ORDER_BY_PRICE:
             let sortedPrice = payload === "asc" ?
-                [...state.filtered].sort(function (a, b) {
+                [...state.products].sort(function (a, b) {
                     return (a.price - b.price);
                 }) :
-                [...state.filtered].sort(function (a, b) {
+                [...state.products].sort(function (a, b) {
                     return (b.price - a.price)
                 })
             return {
                 ...state,
-                filtered: sortedPrice
+                products: sortedPrice
             }
+
         case ORDER_BY_RATE:
             let sortedRate = payload === "asc" ?
                 [...state.filtered].sort(function (a, b) {
