@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {NavLink, useNavigate} from "react-router-dom"
 //import CartBtn from "../ShoppingCart/CartBtn";
-import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch } from "react-redux";
  //import { logout } from "../../actions/auth";
 // import { updateCart } from "../../actions/cart";
@@ -65,7 +64,7 @@ const NavBarAll = () => {
         }}
       >
          <CartBtn /> 
-      </NavLink>  */}
+      </NavLink>   */}
     </>
   );
 };
@@ -253,19 +252,21 @@ function NavBar({ isAuth, user }) {
     </nav>
     <nav className="navbar navbar-light bg-light">
         <div className="container-fluid" 
-        style={{height:"3rem"}}
+        style={{height:"3.5rem"}}
         >
           <span className="navbar-brand" 
-      style={{
+          
+       style={{
         fontSize: "5rem",
         fontWeight: "bold",
         color: "black",
-        border: "solid", borderColor:"orange", borderStyle:"solid",
+        // border: "solid", borderColor:"orange", borderStyle:"solid",
          marginBottom:"15rem"
         
       }}>
         <h1 >Mobi</h1>
-           
+      
+      
 
           </span>
 
@@ -275,13 +276,13 @@ function NavBar({ isAuth, user }) {
               <button
                 style={{
                   border: "none",
-          background: "none",
-          color: "black",
-          fontSize: "1rem",
-          marginLeft: "0.05rem",
-          cursor: "pointer",
-          textDecoration: "none",
-          marginBottom:"15rem"
+                  background: "none",
+                  color: "black",
+                  fontSize: "1rem",
+                  marginLeft: "0.05rem",
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  marginBottom:"15rem"
                 }}
               >
                 Salir
@@ -291,14 +292,10 @@ function NavBar({ isAuth, user }) {
             <>
               <NavBarAll />
               <NavBarLogin />
+              
             </>
           )}
-          <div className={styles.buscador}>
-
-          <form className="d-flex">
-            <SearchBar  />
-          </form>
-          </div>
+          
         </div>
       </nav></>
   

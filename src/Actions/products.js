@@ -6,7 +6,7 @@ import Swal from "sweetalert2"
 export function getProductById(id) {
     return async function (dispatch) {
        try {
-          var json = await axios.get(`${BASEURL}"/products/${id}`);
+          var json = await axios.get(`${BASEURL}/products/${id}`);
           return dispatch({
              type: "GET_PRODUCT_BY_ID",
              payload: json.data
