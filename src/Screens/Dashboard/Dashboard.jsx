@@ -7,11 +7,17 @@ const Dashboard = () => {
   return (
     <>
     <div className="container-fluid">
-    <div className="row flex-nowrap">
         {/* <TopNavbarAdmin/> */}
-        <SidebarAdmin/>  
-        <HomeSectionAdmin/>
-      </div>
+        <h3>Navbar de Janina</h3>
+        <div className="row">
+          <div className="col-auto col-md-2 col-xl-2 px-0 ">
+          <SidebarAdmin/> 
+          </div>
+          <div className="col-10">
+          <HomeSectionAdmin/>
+          </div>
+       
+        </div>
       </div>
       </>
   )

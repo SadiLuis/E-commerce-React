@@ -29,9 +29,11 @@ const TableProducts = () => {
 
 
     return (
-        <>
-            <div className='table-responsive'>
-                <table className="table table-bordered border-success">
+        <div className='row'>
+            <div className='col'>
+                <p class="h4">Productos</p>
+                <div className='table-responsive'>
+                <table className="table table-sm table-hover table-striped table-bordered border-success">
                     <thead className='table-dark'>
                         <tr>
                             <th scope="col"></th>
@@ -60,6 +62,7 @@ const TableProducts = () => {
                         ))}
                     </tbody>
                 </table>
+                </div>
             </div>
             <Paging
                 productsOnPage={productsOnPage}
@@ -67,7 +70,7 @@ const TableProducts = () => {
                 paginado={paginado}
 
             />
-        </>
+        </div>
     )
 }
 
