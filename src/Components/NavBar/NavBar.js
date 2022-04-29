@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
  //import { logout } from "../../actions/auth";
 // import { updateCart } from "../../actions/cart";
 // import Footer from "../Footer/Footer";
+import ShoppingBtn from '../Shopping/ShoppingBtn'
 import styles from "./NavBar.module.css"
 import { connect } from "react-redux";
 
@@ -50,9 +51,7 @@ const NavBarAll = () => {
       >
         Contáctenos
       </NavLink>
-       {/* <NavLink
-        to="/cart"
-        style={{
+      <div  style={{
           border: "none",
           background: "none",
           color: "black",
@@ -60,11 +59,10 @@ const NavBarAll = () => {
           marginLeft: "0.05rem",
           cursor: "pointer",
           textDecoration: "none",
-          marginBottom:"15rem"
-        }}
-      >
-         <CartBtn /> 
-      </NavLink>   */}
+           marginBottom:"15rem"
+        }}>
+      <ShoppingBtn />
+        </div >
     </>
   );
 };

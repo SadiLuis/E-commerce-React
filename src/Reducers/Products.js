@@ -1,31 +1,12 @@
 
-import { SEARCH_BY_NAME, GET_CATEGORIES, ORDER_BY_PRICE, ORDER_BY_RATE, FILTER_BY_CATEGORY } from "../Actions/Index";
-
-// const initialState = {
-//     detailProduct : [],
-//     products: [],
-//     allProducts:[],
-//     productoPorNombre:[],
-//     filtered:[],
-//     categories:[],
-//     cart: getCartLocalStorage(),
-//     sameCategory: []
-// }
-
-import {UPDATE_CART ,ADD_ITEM ,REST_ITEM ,DELETE_ITEM} from '../Actions/Index';
+import { SEARCH_BY_NAME, GET_CATEGORIES, ORDER_BY_PRICE, ORDER_BY_RATE, FILTER_BY_CATEGORY
+,UPDATE_CART ,ADD_ITEM ,REST_ITEM ,DELETE_ITEM } from "../Actions/Index";
 import { getCartLocalStorage, saveCartLocalStorage , getProductLocalStorage ,saveProductLocalStorage } from "../Helpers/localstorage";
-// const initialState = {
-//     detailProduct : [],
-//     products: [],
-//     allProducts: getProductLocalStorage(),
-//     cart: getCartLocalStorage(),
-//     sameCategory: []
 
-// }
 const initialState = {
     detailProduct : [],
     products: [],
-    allProducts:[],
+    allProducts:getProductLocalStorage(),
     productoPorNombre:[],
     filtered:[],
     categories:[],
