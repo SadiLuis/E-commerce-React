@@ -9,7 +9,7 @@ import { Col, Form, Row, Button } from "react-bootstrap";
 import uno from '../../Assets/1.jpg'
 import dos from '../../Assets/2.jpg'
 import tres from '../../Assets/3.jpg'
-import './Login.module.css'
+import style from './Login.module.css'
 
 const initialLogin = {
   email: '',
@@ -86,13 +86,13 @@ function Login({ login, isAuth, user }) {
         <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img className="tamaño" src={uno} alt="First slide" />
+              <img src={uno} alt="First slide" />
             </div>
             <div className="carousel-item">
-              <img className="tamaño" src={dos} alt="Second slide" />
+              <img src={dos} alt="Second slide" />
             </div>
             <div className="carousel-item">
-              <img className="tamaño" src={tres} alt="Third slide" />
+              <img  src={tres} alt="Third slide" />
             </div>
           </div>
           <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -108,7 +108,7 @@ function Login({ login, isAuth, user }) {
 
       <div class="col-lg-5">
       <div class="title px-lg-5 pt-lg-4 pb-lg-3 p-4">
-          <h1> Fornitu-Ecommerce</h1>
+          <h1> MOBI</h1>
       </div>
       <div class='inputs px-lg-5r py-lg-4 p-4'>
       <div className='conteiner-login'>
@@ -139,7 +139,7 @@ function Login({ login, isAuth, user }) {
           <br/>
 
           <div className='text-center'>
-            <span>¿No tienes cuenta?</span>
+            <span className="">¿No tienes cuenta?</span>
             <Link to='/register'>Registrate</Link> 
             
           </div>
