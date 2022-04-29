@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useId } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import DataTable from "react-data-table-component";
 import { getAllProducts } from '../../Actions/products';
 import Paging from '../Paging/Paging';
 import { Link } from 'react-router-dom';

@@ -1,17 +1,25 @@
-.title {
-    color: white;
-    font-family: "MonteCarlo", cursive;
-    background-color: #646464;
-    opacity: 0.75;
-    border-radius: 5px;
+.tituloLOg{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
 }
 
-.tamaño {
-    border-radius: 5px;
+.loginSpan{
+    margin: 15px; 
 }
 
-@media screen and (max-width: 1000px) {
-    .carousel {
-        display: none;
-    }
+.LogRegis{
+    margin: 15px;
+    border-color: black ;
+    border-style: solid ;
+    border-width: 1px ;
+    border-radius: 5px ;
+}
+
+.LogRegis:hover{
+    border-color: #33fd00 ;
+    border-style: solid ;
+    border-width: 1px ;
+    border-radius: 5px ;
 }

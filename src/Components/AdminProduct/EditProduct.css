@@ -1,0 +1,25 @@
+.box{
+    display: flex;
+    max-width: 900px;
+    min-width: 290px;
+    margin: 25px;
+}
+.icon{
+    width: 25px;
+    
+   
+}
+.thumb img {
+    max-width: 10%;
+    max-height: 10%;
+    
+}
+.thumb {
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+.titulo {
+    margin-top: 50px;
+}

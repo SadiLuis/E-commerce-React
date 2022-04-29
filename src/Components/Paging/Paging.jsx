@@ -4,7 +4,7 @@ import styles from './Paging.module.css'
 export default function Paging({productsOnPage, allProducts, paginado, next, previous}){
 const pageNumbers = []
 
-for(let i=0; i<=Math.ceil(allProducts/productsOnPage); i++){
+for(let i=0; i<Math.ceil(allProducts/productsOnPage); i++){
     pageNumbers.push(i +1)
 }
 
