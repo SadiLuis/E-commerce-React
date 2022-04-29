@@ -4,7 +4,7 @@ import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import Detail from "./Screens/Details/Details";
 import Home from "./Screens/Home/Home";
-
+import Landing from './Screens/Landing/Landing'
 import  NavBarAll from "./Components/NavBar/NavBar"
 import ContactForm from "./Components/ContactForm/ContactForm";
 import Profile from "./Screens/Profile/Profile"
@@ -33,6 +33,7 @@ function App() {
         <Route path="/contactform" element={<ContactForm />} />
         <Route path="/profile" element={<Profile/>} />
         <Route path='/cart' element={<Cart />} />
+        <Route exact path="/" element={<Landing />} />
         {/* <Route path="/user" element={<Profile/>}/> */}
 
 
