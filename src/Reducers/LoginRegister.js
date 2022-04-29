@@ -36,7 +36,7 @@ export default function loginRegistroReducer(state = initialState, action) {
         case LOGOUT:
             // Eliminamos el token del localStorage y la info del usuario
             localStorage.removeItem('token_ecommerce');
-            localStorage.removeItem('cart');
+           
             
             return {
                 ...state,
