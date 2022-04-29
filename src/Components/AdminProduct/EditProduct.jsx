@@ -2,8 +2,9 @@ import React, { createRef, useEffect, useState } from 'react'
 import {getProductById} from "../../Actions/products.js"
 import {getAllCategories} from "../../Actions/Category.js"
 import { useSelector, useDispatch } from "react-redux";
-import './Product.css'
+import './EditProduct.css'
 import icon from '../../Assets/pencil.svg'
+import { useParams } from 'react-router-dom';
 
 
 export default function Product() {
