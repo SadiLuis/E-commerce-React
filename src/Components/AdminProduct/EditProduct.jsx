@@ -2,12 +2,12 @@ import React, { createRef, useEffect, useState } from 'react'
 import {getProductById} from "../../Actions/products.js"
 import {getAllCategories} from "../../Actions/Category.js"
 import { useSelector, useDispatch } from "react-redux";
-import styles from './Product.module.css'
+import './Product.css'
 import icon from '../../Assets/pencil.svg'
 
 
 export default function Product() {
-  const  idProduct = "23"
+  const { idProduct } = useParams();
   const dispatch = useDispatch()
   let myRef = createRef()
   const product = useSelector((state) => state.productsReducer.detailProduct);
@@ -24,7 +24,30 @@ export default function Product() {
   }, [idProduct])
   console.log("product", product)
   console.log("categorias", categories)
+  console.log("referencia", myRef)
   
+  useEffect(() => {
+    setInput({
+      title: product.title,
+      price: product.price,
+      description: product.description,
+      category: product.category,
+      images: product.images,
+      size: product.size,
+      cantidad: product.cantidad,
+    });
+  }, [product]);
+
+  const [input, setInput] = useState({
+    title: product.title,
+    price: product.price,
+    description: product.description,
+    category: product.category,
+    images: product.images,
+    size: product.size,
+    cantidad: product.cantidad,
+  });
+
   const handleTab = (index) => {
     setIndex(index)
     const images = myRef.current.children
@@ -42,8 +65,8 @@ export default function Product() {
 
   if(product.title) {
     return (
-    <div className='container-sm'>
-      <h2>Editar Producto</h2>
+    <div className='container-md'>
+      <h2 className='titulo'>Editar Producto</h2>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Nombre</span>
             <input type="text" class="form-control" placeholder={product?.title} aria-label="Username" aria-describedby="basic-addon1"></input>

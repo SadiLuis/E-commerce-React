@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
+import { login, register } from "../../Actions/Auth";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from '../../Actions/Auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { ValidateForm } from '../../Helpers/ValidateForm';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { validateEmail } from "../../Helpers/ValidateForm";
+import Swal from "sweetalert2";
+import { Col, Form, Row, Button } from "react-bootstrap";
 import uno from '../../Assets/1.jpg'
 import dos from '../../Assets/2.jpg'
 import tres from '../../Assets/3.jpg'
@@ -10,67 +13,71 @@ import './Login.module.css'
 
 const initialLogin = {
   email: '',
-  password: '',
+  contrasena: '',
 }
 //VALIDACIONES////
 const validateForm = (form) => {
   const { email, contrasena } = form;
   const errors = {};
 
-  if (!email()) {
+  if (!email) {
     errors.email = "El email es requerido";
-  } else if (!validateForm(email)) {
+  } else if (!validateEmail(email)) {
     errors.email = "Email no válido";
   }
 
-  if (!contrasena()) {
+  if (!contrasena) {
     errors.contrasena = "La contraseña es requerida";
   }
 
   return errors;
 };
 
-export default function Login() {
-  //const isAuthenticated = useSelector((state) => state.loginRegistroReducer.isAuth);
-  const dispatch = useDispatch();
+function Login({ login, isAuth, user }) {
+  
   const navigate = useNavigate();
-  //const user = useSelector((state) => state.loginRegistroReducer.userDetail);
-  const [login, setLogin] = useState(initialLogin)
-  const [error, setError] = useState({})
-
+  const [form, setForm] = useState(initialLogin);
+  const [error, setError] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const newLogin = { ...login, [name]: value }
 
-    setLogin(newLogin)
-    setError(validateForm(newLogin))
-  }
+    const newForm = { ...form, [name]: value };
 
+    setForm(newForm);
+    setError(validateForm(newForm));
+  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const errors = validateForm(login)
-    setError(errors)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = validateForm(form);
+    setError(errors);
 
-    if (Object.keys(errors).length === 0) {
-      const { email, password } = login;
-      const data = { email, password }
-      dispatch(login(data))
+    if (Object.keys(errors).length) {
+      console.log(errors)
+      return window.alert("El formulario contiene errrores");
     }
-  }
+    Swal.fire({
+      title: 'Espere, validando información',    
+      text: 'Este mensaje desaparecerá en 5 segundos',
+      icon: 'info',      
+      timer: 5000,
+    })
+    login(form);
+  };
 
-  // useEffect(() => {
-  //   if(isAuthenticated && user){
-  //     const { rol } = user;
-  //     setLogin(initialLogin)
-  //     // async function DB (){
-  //     //   await postCart()
-  //     // }
-  //     isAuthenticated()
-  //     rol === '2' ? navigate('/dashboard/admin') : navigate('/home')
-  //   }
-  // }, [isAuthenticated, user, navigate])
+  useEffect(() => {
+    // Si ya está logueado que lo redireccione al dashboard
+    if (isAuth && user) {
+      const { rol } = user;
+      setForm(initialLogin);
+      async function db() {
+        //await postCart();
+      }
+      isAuth && db();
+      rol === "2" ? navigate("/dashboard/admin") : navigate("/");
+    }
+  }, [isAuth, navigate, user]);
 
   return (
     <div class="row g-0 pt-3">
@@ -110,7 +117,7 @@ export default function Login() {
           <div class='mb-3'>
             <label htmlFor='exampleInputEmail1'>Email address</label>
             <input type="email" className="form-control" placeholder="Ingresa tu correo" name='email'
-            value={login.email } onChange={handleChange}  />
+            value={form.email } onChange={handleChange}  />
             
            { error && error.email && (
               <span >{error.email}</span>
@@ -120,20 +127,20 @@ export default function Login() {
             
             <div className='form-group'>
                 <label htmlFor='exampleInputPassword1'>Password</label>
-                <input type="password" className="form-control" placeholder="Ingresa tu contraseña" name='password' value={login.password} onChange={handleChange} />
+                <input type="password" className="form-control" placeholder="Ingresa tu contraseña" name='contrasena' value={form.contrasena} onChange={handleChange} />
                 
                { error && error.password && (
-                  <span >{error.password}</span>
+                  <span >{error.contrasena}</span>
                 )}
                
             </div>
-                <button type="submit" class="btn btn-primary" disabled={!login.email || !login.password}  >Submit</button>
+                <button type="submit" class="btn btn-primary"  disabled={!form.email || !form.contrasena} >Submit</button>
           </div>
           <br/>
 
           <div className='text-center'>
             <span>¿No tienes cuenta?</span>
-            <Link to='/register'>Registrate</Link>
+            <Link to='/register'>Registrate</Link> 
             
           </div>
 
@@ -144,11 +151,20 @@ export default function Login() {
 
       </div>
 
-    </div>
-
-    
-      
-    
+    </div>   
 
   )      
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ login, register }, dispatch);
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.loginReducer.isAuth,
+    user: state.loginReducer.userDetail,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
