@@ -1,18 +1,19 @@
 import { mobile } from "../../Helpers/responsive";
 import styled from 'styled-components'
-export const Container = styled.div `
- width: 85%;
- align-items:center;
- margin:auto;
- margin-top: -60px
- object-fit: cover;
- object-fit: contain;
+export const Anuncio = styled.div `
+height:30px;
+background-color: teal;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size: 14px;
+font-weight:500px;
+ 
 `
 export const Wrapper = styled.div`
 padding:3px;
-font-family: sans-serif;
-
-
+margin:auto;
 ${mobile({ padding: "5px" })};
 `
 export const Title = styled.div`
@@ -25,7 +26,7 @@ display:flex;
 align-items:center;
 justify-content: space-between;
 position: relative;
-top: -50px
+top: 50px
 `
 export const TopButton = styled.button`
   padding: 5px;
@@ -43,8 +44,7 @@ ${mobile({ flexDirection: "column" })}
 `
 export const Info= styled.div`
 flex:3;
-margin-top: -150px
-
+margin-top:100px
 `
 
 export const Product = styled.div`
@@ -55,6 +55,7 @@ width:90%;
 box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
  border-radius: 10px;
  background-color: white;
+ margin-bottom:10px;
 ${mobile({ flexDirection: "column" })}
 `
 
@@ -62,23 +63,20 @@ export const ProductDetail = styled.div`
 flex: 2;
   display: flex;
   justify-content:space-around;
-  position:relative
+  
+  
 `
 export const Image = styled.img`
 width:25%;
-height:180px;
+height:150px;
 align-self:center;
-margin-bottom: -25px
+margin-bottom: -5px
 `
 
 export const Details = styled.div`
 display:flex;
 flex-direction:column;
-
-position: relative;
-top: -10px
-
-
+justify-content:space-evenly;
 `
 
 export const ProductName = styled.span`
@@ -90,56 +88,52 @@ export const ProductId = styled.span``
 export const ProductSize = styled.span``
 
 
-export const PriceDetail = styled.div`
+export const PriceDetail = styled.div  `
 flex:1;
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
+ `
 
-`
 export const ProductAmountContainer = styled.div`
 display:flex;
-align-items:center;
-margin-bottom:-120px;
-
+flex-direction:column;
+margin: auto;
+position: relative;
 `
 export const ProductAmount = styled.div`
 font-size:24px;
 display: flex;
-border: 5px solid black
-font-family: sans-serif;
-
+ margin-top: 20px;
 ${mobile({ margin: "5px 15px" })};
 `
 export const ProductPrice = styled.div`
 font-size:30px;
-font-family: sans-serif;
-
+margin: auto;
+padding-top:30px;
 ${mobile({ marginBottom: "20px" })};
 `
 export const Summary= styled.div`
 flex:1;
 border: 0.5px solid lightgray;
 padding:20px;
-height:70vh;
+height:60vh;
 margin-left:-80px;
-margin-top:-120px;
-
+margin-top:100px;
 `
 export const SummaryTitle= styled.h1`
 font-weight:200;
-font-family: sans-serif;
 font-size:30px
 `
 
 export const SummaryItem= styled.div`
-margin:5px 0px;
+margin:25px 0px;
 display:flex;
 justify-content:space-between;
 font-weight:${props=>props.type ==='total' && '500'};
 font-size:${props=>props.type ==='total' && '24px'};
-font-family: sans-serif`
+`
 
 export const SummaryItemText= styled.span``
 
@@ -150,14 +144,32 @@ width: 100%;
 padding: 10px;
 font-weight: 600;
 cursor:pointer;
+margin-top:20px;
 `
 
 export const TopTexts= styled.div`
+ margin:auto;
 ${mobile({ display: "none" })};
 `
 export const TopText = styled.span `
 text-decoration:undefined;
 cursor:pointer;
 margin: 0px 10px;
-font-family: sans-serif;
+`
+
+export const ButtonEmpty = styled.button`
+  margin: auto;
+  font-size: 120px;
+  padding: 0;
+  
+`
+export const DeleteBtn = styled.div`
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+`
+export const InputCart = styled.input`
+height:30px;
+width:40px;
+text-align:right;
 `

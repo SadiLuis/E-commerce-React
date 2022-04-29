@@ -1,0 +1,41 @@
+.carousel {
+    margin-top: 17px;
+    position: relative;
+    align-items: center;
+}
+
+.box2 img {
+    vertical-align: middle;
+    border-style: none
+}
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    padding-top: 15px;
+    padding-right: 45px;
+    padding-left: 45px;
+}
+
+.info {
+    font-family: Graphik Web, sans-serif;
+    color: black;
+    font-size: 14px;
+}
+
+.titleInfo {
+    font-family: Graphik Web, sans-serif;
+    font-weight: bold;
+}
+
+.footer {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))
+}
+
+.titleFooter {
+    color: beige;
+}

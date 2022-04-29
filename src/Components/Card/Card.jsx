@@ -22,7 +22,7 @@ const dispatch = useDispatch();
 
     return (
     
-    <div className={styles.card} style={{"maxWidth": "35%"}}>
+    <div className={styles.card} style={{"maxWidth": "90%"}}>
         <Link to={`/detail/${id}`}>
         <img className="card-img-top" src={img}></img>
         </Link>
