@@ -1,10 +1,4 @@
-div{
-    padding-top: 1rem;
-    padding-bottom: 2rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    justify-content: space-evenly;
-}
+
 
 .icon{
     width: 35px;
@@ -19,7 +13,12 @@ div{
 .cart > p {
     font-size: medium;
 }
-.row {
+.row {    
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    justify-content: space-evenly;
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
     display: flex;
@@ -49,3 +48,10 @@ div{
 
 
 }
+
+/* .filtroPrecio{
+    margin-left: auto;
+    margin-right: 5rem;
+    margin-top: 50px;
+
+} */
