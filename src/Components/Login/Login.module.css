@@ -1,5 +1,25 @@
+.tituloLOg{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
 
-
-.logspan{
+.loginSpan{
     margin: 15px; 
+}
+
+.LogRegis{
+    margin: 15px;
+    border-color: black ;
+    border-style: solid ;
+    border-width: 1px ;
+    border-radius: 5px ;
+}
+
+.LogRegis:hover{
+    border-color: #33fd00 ;
+    border-style: solid ;
+    border-width: 1px ;
+    border-radius: 5px ;
 }
