@@ -8,7 +8,6 @@ const Dashboard = () => {
     <>
     <div className="container-fluid">
         {/* <TopNavbarAdmin/> */}
-        <h3>Navbar de Janina</h3>
         <div className="row">
           <div className="col-auto col-md-2 col-xl-2 px-0 ">
           <SidebarAdmin/> 

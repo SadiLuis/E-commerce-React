@@ -48,7 +48,7 @@ const TableProducts = () => {
                         {currentProducts.map(p => (
                             <tr >
                                 <td  className='text-center'>
-                                    <Link to={`/EditProduct/${p.id}`}>
+                                    <Link to={`/dashboard/admin/EditProduct/${p.id}`}>
                                     <i className="fs-4 bi-pencil-fill"></i>
                                     </Link>
                                     

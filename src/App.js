@@ -7,6 +7,7 @@ import Home from "./Screens/Home/Home";
 
 import  NavBarAll from "./Components/NavBar/NavBar"
 import ContactForm from "./Components/ContactForm/ContactForm";
+import EditProduct from "./Components/AdminProduct/EditProduct"
 import Profile from "./Screens/Profile/Profile"
 
 import Cart from './Components/Cart/Cart'
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Register />} />
         <Route path="/dashboard/admin" element={<Dashboard />} />
+        <Route path="/dashboard/admin/EditProduct/:idProduct" element={<EditProduct />} />
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/detail/:idProduct" element={<Detail />} />
