@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch,useSelector } from "react-redux";
 import { getAllUsers } from '../../Actions/users';
+import { getUserDetail, logout } from '../../Actions/Auth';
 import { Link } from 'react-router-dom';
 import './Profile.module.css'
 export default function Profile() {
@@ -8,10 +9,10 @@ export default function Profile() {
   
   const dispatch = useDispatch()
   React.useEffect(()=> {
-    dispatch(getAllUsers())
+    dispatch(getUserDetail())
   }, [])
   
-  const allUsers = useSelector((state)=> state.userReducer.users)
+  const myUser = useSelector((state)=> state.loginReducer.userDetail)
   
   return (
     <div className='account'>
@@ -27,7 +28,7 @@ export default function Profile() {
         </div>
         
         {
-          allUsers.length && <div className='col-auto'><button className='btn btn-link'>Sign Out</button></div>
+          myUser && <div className='col-auto'><button className='btn btn-link' onClick={()=> dispatch(logout())}>Sign Out</button></div>
         }
 
         </div>
@@ -36,7 +37,7 @@ export default function Profile() {
         
         {
          
-            allUsers.length?
+            myUser?
               <div className='row'>
                 <div className='col col-lg-6'>
                   Todavía no tienes pedidos cargados
@@ -44,9 +45,9 @@ export default function Profile() {
                 <div className='col col-lg-6'>
                 
                     <div className='text-center'>
-                      <p className='mb-3'>{allUsers[1].nombre}</p>
-                      <p className='mb-3'>Nombre de usuario: {allUsers[1].usuario}</p>
-                       <img src={allUsers[1].avatar} id="profile" className='rounded-circle' style={{width: "35%"}} alt="avatar" />
+                      <p className='mb-3'>{myUser.nombre}</p>
+                      <p className='mb-3'>Nombre de usuario: {myUser.usuario}</p>
+                       <img src={myUser.avatar} id="profile" className='rounded-circle' style={{width: "35%"}} alt="avatar" />
                       </div>
                   
                   
@@ -59,8 +60,8 @@ export default function Profile() {
                   </div>
                   <div className='address'>
                     <div className=' text-center mb-5'>
-                      <p>Pais: {allUsers[1].pais}</p>
-                  <p>Teléfono: {allUsers[1].telefono}</p>
+                      <p>Pais: {myUser.pais}</p>
+                  <p>Teléfono: {myUser.telefono}</p>
                     </div>
                   
                   </div>
