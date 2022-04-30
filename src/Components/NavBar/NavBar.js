@@ -177,7 +177,7 @@ const NavBarAdmin = () => {
       ) : (
         <NavBarAuthenticated />
       )}
-      {admin ? (
+     {/*  {admin ? (
         <button className="btn btn-success" onClick={handleUsuarioNormal}>
           Comprador
         </button>
@@ -185,7 +185,7 @@ const NavBarAdmin = () => {
         <button className="btn btn-success" onClick={handleAdmin}>
           Administrador
         </button>
-      )}
+      )} */}
     </>
   );
 };

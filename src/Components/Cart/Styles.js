@@ -7,7 +7,7 @@ color:white;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size: 14px;
+font-size: 16px;
 font-weight:500px;
  
 `
@@ -39,7 +39,7 @@ export const TopButton = styled.button`
 
 export const Button = styled.div`
 display:flex;
-justify-content:space-between;;
+justify-content:space-between;
 ${mobile({ flexDirection: "column" })}
 `
 export const Info= styled.div`
@@ -50,7 +50,7 @@ margin-top:100px
 export const Product = styled.div`
 display:flex;
 justify-content:space-between;
-height: 180px;
+height: 200px;
 width:90%;
 box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
  border-radius: 10px;
@@ -76,16 +76,24 @@ margin-bottom: -5px
 export const Details = styled.div`
 display:flex;
 flex-direction:column;
-justify-content:space-evenly;
+justify-content:center;
+
 `
 
 export const ProductName = styled.span`
- 
+margin: 8px 0px 8px 0px;
+font-size:15px;
 `
 
-export const ProductId = styled.span``
+export const ProductId = styled.span`
+margin: 8px 0px 8px 0px;
 
-export const ProductSize = styled.span``
+`
+
+export const ProductSize = styled.span`
+margin: 8px 0px 8px 0px;
+font-size:16px;
+`
 
 
 export const PriceDetail = styled.div  `
@@ -105,13 +113,13 @@ position: relative;
 export const ProductAmount = styled.div`
 font-size:24px;
 display: flex;
- margin-top: 20px;
+margin-top:20px;
 ${mobile({ margin: "5px 15px" })};
 `
 export const ProductPrice = styled.div`
 font-size:30px;
 margin: auto;
-padding-top:30px;
+padding-top:50px;
 ${mobile({ marginBottom: "20px" })};
 `
 export const Summary= styled.div`
@@ -172,4 +180,12 @@ export const InputCart = styled.input`
 height:30px;
 width:40px;
 text-align:right;
+`
+
+export const ProductTotal = styled.div`
+font-size:16px;
+margin: auto;
+position: absolute;
+top: 75px;
+left: 27px;
 `
