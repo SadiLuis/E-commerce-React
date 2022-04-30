@@ -58,6 +58,9 @@ export default function loginRegistroReducer(state = initialState, action) {
                 ...state,
                 isRegister: action.payload
             }
+            case 'UPDATE_USER_IMG': return {
+                ...state
+            }
 
 
         default: return state;

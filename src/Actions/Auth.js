@@ -154,6 +154,23 @@ export function updateUser(newUser) {
        }
     }
  }
+ export function updateUserImg(body) {
+   return async function (dispatch) {
+      try {
+         await axios.put(
+            `${BASEURL}/user/updateImg`,
+            body,
+          /*   getHeaderToken() */
+         )
+         dispatch(getUserDetail());
+         return {
+            type: 'UPDATE_USER_IMG',
+         };
+      } catch (err) {
+         console.log(err.response.data)
+      }
+   }
+}
 
 
 export function recoveryPassword  (email) {
