@@ -108,6 +108,7 @@ export const ProductAmountContainer = styled.div`
 display:flex;
 flex-direction:column;
 margin: auto;
+margin-top:40px;
 position: relative;
 `
 export const ProductAmount = styled.div`
