@@ -1,25 +1,37 @@
-import React from 'react'
+import React,  { useState } from 'react'
 import { useDispatch,useSelector } from "react-redux";
 import { getAllUsers } from '../../Actions/users';
+import { getUserDetail, logout, updateUserImg} from '../../Actions/Auth';
 import { Link } from 'react-router-dom';
-import './Profile.module.css'
+import style  from './Profile.module.css'
 export default function Profile() {
   
   
   const dispatch = useDispatch()
   React.useEffect(()=> {
-    dispatch(getAllUsers())
+    dispatch(getUserDetail())
   }, [])
-  
-  const allUsers = useSelector((state)=> state.userReducer.users)
-  
+  const [input, setInput] = useState({
+    img: ""
+  })
+  const myUser = useSelector((state)=> state.loginReducer.userDetail)
+   const handleChange = (e) => {
+     setInput({
+       
+       [e.target.name] : e.target.value
+    })
+   }
+   let body = {id: myUser?.id, img: input.img}
+   const handleSubmit = () => {
+    dispatch(updateUserImg(body))
+   }
   return (
     <div className='account'>
       <div className="py-5">
       <div className='container'>
     <div className='row'>
         <div className='col'>
-          <button className='btn btn-link'><Link to='/'>Back to home</Link></button>
+          <button className='btn btn-outline-dark'><Link to='/' className={style.Linkprof}>Back to home</Link></button>
           <div className='text-left title'>
             <h1 className='py-2 mb-5' >Mi cuenta</h1>
           </div>
@@ -27,7 +39,7 @@ export default function Profile() {
         </div>
         
         {
-          allUsers.length && <div className='col-auto'><button className='btn btn-link'>Sign Out</button></div>
+          myUser && <div className='col-auto'><button className='btn btn-outline-dark' onClick={()=> dispatch(logout())}>Sign Out</button></div>
         }
 
         </div>
@@ -36,7 +48,7 @@ export default function Profile() {
         
         {
          
-            allUsers.length?
+            myUser?
               <div className='row'>
                 <div className='col col-lg-6'>
                   Todavía no tienes pedidos cargados
@@ -44,9 +56,14 @@ export default function Profile() {
                 <div className='col col-lg-6'>
                 
                     <div className='text-center'>
-                      <p className='mb-3'>{allUsers[1].nombre}</p>
-                      <p className='mb-3'>Nombre de usuario: {allUsers[1].usuario}</p>
-                       <img src={allUsers[1].avatar} id="profile" className='rounded-circle' style={{width: "35%"}} alt="avatar" />
+                      <p class='mb-3' className={style.profileP}>{myUser.nombre}</p>
+                      <p class='mb-3' className={style.profileP}>Nombre de usuario: {myUser.usuario}</p>
+                       <img src={myUser.avatar} id="profile" className='rounded-circle' style={{width: "35%"}} alt="avatar" />
+                       <form onSubmit={() => handleSubmit()}>
+                          <input type="text" value={input.img} name= "img" className={style.profileInput} onChange={(e) => handleChange(e)} />
+                          <button type='submit' className='btn btn-outline-dark m-1 p-1' >enviar</button>
+                       </form>
+                       
                       </div>
                   
                   
@@ -59,8 +76,8 @@ export default function Profile() {
                   </div>
                   <div className='address'>
                     <div className=' text-center mb-5'>
-                      <p>Pais: {allUsers[1].pais}</p>
-                  <p>Teléfono: {allUsers[1].telefono}</p>
+                      <p  className={style.profileP}>Pais: {myUser.pais}</p>
+                  <p className={style.profileP}>Teléfono: {myUser.telefono}</p>
                     </div>
                   
                   </div>
@@ -69,7 +86,7 @@ export default function Profile() {
                 </div>
                 </div>
               
-              : <div className='row'>No existe el usuario</div>
+              : <div className='row'  >No existe el usuario</div>
               
             
           }

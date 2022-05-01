@@ -7,3 +7,38 @@
 #profile{
     border: 1px solid black;
 }
+
+.Linkprof{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+.Linkprof:hover{
+    
+    color: rgb(255, 255, 255);
+}
+
+
+.profileInput{
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.btnProfile{
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    border: 1px solid black;
+    border-radius: 10px; 
+}
+
+.profileP{
+    margin: 15px;
+    font-size: medium;
+    color: black;
+
+}

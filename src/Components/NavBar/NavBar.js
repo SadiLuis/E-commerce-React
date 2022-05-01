@@ -5,8 +5,11 @@ import { useDispatch } from "react-redux";
  //import { logout } from "../../actions/auth";
 // import { updateCart } from "../../actions/cart";
 // import Footer from "../Footer/Footer";
+import ShoppingBtn from '../Shopping/ShoppingBtn'
 import styles from "./NavBar.module.css"
 import { connect } from "react-redux";
+import logo from "../../Assets/default.png"
+
 
 
 
@@ -19,6 +22,22 @@ const NavBarAll = () => {
   return (
     <>
       {/* <Footer /> */}
+      <NavLink
+        to="/"
+        style={{
+          border: "none",
+          background: "none",
+          color: "black",
+          fontSize: "1.5rem",
+          marginLeft: "0.01rem",
+          cursor: "pointer",
+          textDecoration: "none",
+           marginBottom:"15rem"
+
+        }}
+      >
+        <img src={logo} style={{width:"5rem", }}></img>
+      </NavLink>
       <NavLink
         to="/home"
         style={{
@@ -50,9 +69,7 @@ const NavBarAll = () => {
       >
         Contáctenos
       </NavLink>
-       {/* <NavLink
-        to="/cart"
-        style={{
+      <div  style={{
           border: "none",
           background: "none",
           color: "black",
@@ -60,11 +77,10 @@ const NavBarAll = () => {
           marginLeft: "0.05rem",
           cursor: "pointer",
           textDecoration: "none",
-          marginBottom:"15rem"
-        }}
-      >
-         <CartBtn /> 
-      </NavLink>   */}
+           marginBottom:"15rem"
+        }}>
+      <ShoppingBtn />
+        </div >
     </>
   );
 };
@@ -179,7 +195,7 @@ const NavBarAdmin = () => {
       ) : (
         <NavBarAuthenticated />
       )}
-      {admin ? (
+     {/*  {admin ? (
         <button className="btn btn-success" onClick={handleUsuarioNormal}>
           Comprador
         </button>
@@ -187,7 +203,7 @@ const NavBarAdmin = () => {
         <button className="btn btn-success" onClick={handleAdmin}>
           Administrador
         </button>
-      )}
+      )} */}
     </>
   );
 };
@@ -245,7 +261,7 @@ function NavBar({ isAuth, user }) {
         color: "white",
         
       }}
-      >Envíos gratis por pedidos mayoristas
+      >Envíos gratis por órdenes de compra superiores a $7.000.
       </span >
       </div>
 
@@ -254,7 +270,7 @@ function NavBar({ isAuth, user }) {
         <div className="container-fluid" 
         style={{height:"3rem"}}
         >
-          <span className="navbar-brand" 
+          {/* <span className="navbar-brand" 
           
        style={{
         fontSize: "5rem",
@@ -268,7 +284,7 @@ function NavBar({ isAuth, user }) {
       
       
 
-          </span>
+          </span> */}
 
           {isAuth && user ? (
             <>

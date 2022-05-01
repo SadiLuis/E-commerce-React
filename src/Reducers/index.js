@@ -9,9 +9,7 @@ import userReducer from './users';
 const rootReducer = combineReducers({
     productsReducer,
     loginReducer,
-
-    // categoriesReducer
-
+    categoriesReducer,
     userReducer
 
 })
