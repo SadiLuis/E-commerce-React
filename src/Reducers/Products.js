@@ -42,7 +42,8 @@ export default function productsReducer(state = initialState, action) {
             case SEARCH_BY_NAME:
             return {
                 ...state,
-                products:payload
+                products:payload,
+                filtered:payload
                 
 
             }
