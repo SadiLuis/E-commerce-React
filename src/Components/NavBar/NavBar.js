@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {NavLink, useNavigate} from "react-router-dom"
 //import CartBtn from "../ShoppingCart/CartBtn";
-import { useDispatch } from "react-redux";
- //import { logout } from "../../actions/auth";
+import { useDispatch, useSelector } from "react-redux";
+ import { logout } from "../../Actions/Auth";
 // import { updateCart } from "../../actions/cart";
 // import Footer from "../Footer/Footer";
 import ShoppingBtn from '../Shopping/ShoppingBtn'
 import styles from "./NavBar.module.css"
 import { connect } from "react-redux";
-import logo from "../../Assets/default.png"
+import logo from "../../Assets/default.png";
+import Logout from '../Login/Logout';
 
 
 
@@ -19,6 +20,7 @@ import logo from "../../Assets/default.png"
 
 // logo,  home, contactenos 
 const NavBarAll = () => {
+
   return (
     <>
       {/* <Footer /> */}
@@ -86,9 +88,18 @@ const NavBarAll = () => {
 };
 
 // login y register
-const NavBarLogin = () => {
+const NavBarLogin = ({isAuth, myUser}) => {
+     const dispatch=useDispatch();
+     const navigate=useNavigate();
+   const user= useSelector((state)=> state.loginReducer.userDetail);
+
+ function handleLogoutUser(e){
+  e.preventDefault();
+  dispatch(logout())
+}
   return (
     <>
+    
       <NavLink
         to="/login"
         style={{
@@ -100,10 +111,36 @@ const NavBarLogin = () => {
           cursor: "pointer",
           textDecoration: "none",
            marginBottom:"15rem"
-        }}
+        }} 
+        
       >
         Log in
       </NavLink>
+
+{isAuth && myUser?(
+  <> {user.rol==="1"? <Logout/> : <NavBarLogin />}
+  <button onClick={handleLogoutUser}
+  // style={{
+  //   border: "none",
+  //   background: "none",
+  //   color: "black",
+  //   fontSize: "1rem",
+  //   marginLeft: "0.05rem",
+  //   cursor: "pointer",
+  //   textDecoration: "none",
+  //    marginBottom:"15rem"
+  // }}
+  >
+    
+  </button>
+  </>
+):(
+          <>
+           </>
+)
+}
+
+
       <NavLink
         to="/register"
         style={{
@@ -119,6 +156,8 @@ const NavBarLogin = () => {
       >
         Registrarse
       </NavLink>
+
+      
     </>
   );
 };
@@ -237,11 +276,11 @@ function NavBar({ isAuth, user }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const handleLogout = () => {
-  //   setFlag(true);
-  //   dispatch(logout());
-  //   navigate("/home");
-  // };
+  const handleLogout = () => {
+    setFlag(true);
+    dispatch(logout());
+    navigate("/home");
+  };
 
   // useEffect(() => {
   //   if (flag) dispatch(updateCart());
@@ -270,26 +309,11 @@ function NavBar({ isAuth, user }) {
         <div className="container-fluid" 
         style={{height:"3rem"}}
         >
-          {/* <span className="navbar-brand" 
           
-       style={{
-        fontSize: "5rem",
-        fontWeight: "bold",
-        color: "black",
-        // border: "solid", borderColor:"orange", borderStyle:"solid",
-         marginBottom:"15rem"
-        
-      }}>
-        <h1 >Mobi</h1>
-      
-      
-
-          </span> */}
-
           {isAuth && user ? (
             <>
               {user.rol === "2" ? <NavBarAdmin /> : <NavBarAuthenticated />}
-              <button
+              <button onClick={handleLogout}
                 style={{
                   border: "none",
                   background: "none",
@@ -303,6 +327,7 @@ function NavBar({ isAuth, user }) {
               >
                 Salir
               </button>
+              
             </>
           ) : (
             <>
@@ -311,6 +336,10 @@ function NavBar({ isAuth, user }) {
               
             </>
           )}
+
+            
+
+          
           
         </div>
       </nav></>

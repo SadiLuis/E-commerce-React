@@ -10,6 +10,7 @@ import uno from '../../Assets/1.jpg'
 import dos from '../../Assets/2.jpg'
 import tres from '../../Assets/3.jpg'
 import style from './Login.module.css'
+//import LoginGoogle from "./LoginGoogle";
 
 const initialLogin = {
   email: '',
@@ -171,6 +172,7 @@ function Login({ login, isAuth, user }) {
         </form>
         
        </div>
+       {/* <LoginGoogle /> */}
       </div>
 
       </div>
