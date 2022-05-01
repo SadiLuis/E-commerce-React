@@ -3,7 +3,7 @@ import { useDispatch,useSelector } from "react-redux";
 import { getAllUsers } from '../../Actions/users';
 import { getUserDetail, logout, updateUserImg} from '../../Actions/Auth';
 import { Link } from 'react-router-dom';
-import './Profile.module.css'
+import style  from './Profile.module.css'
 export default function Profile() {
   
   
@@ -31,7 +31,7 @@ export default function Profile() {
       <div className='container'>
     <div className='row'>
         <div className='col'>
-          <button className='btn btn-link'><Link to='/'>Back to home</Link></button>
+          <button className='btn btn-outline-dark'><Link to='/' className={style.Linkprof}>Back to home</Link></button>
           <div className='text-left title'>
             <h1 className='py-2 mb-5' >Mi cuenta</h1>
           </div>
@@ -39,7 +39,7 @@ export default function Profile() {
         </div>
         
         {
-          myUser && <div className='col-auto'><button className='btn btn-link' onClick={()=> dispatch(logout())}>Sign Out</button></div>
+          myUser && <div className='col-auto'><button className='btn btn-outline-dark' onClick={()=> dispatch(logout())}>Sign Out</button></div>
         }
 
         </div>
@@ -56,12 +56,12 @@ export default function Profile() {
                 <div className='col col-lg-6'>
                 
                     <div className='text-center'>
-                      <p className='mb-3'>{myUser.nombre}</p>
-                      <p className='mb-3'>Nombre de usuario: {myUser.usuario}</p>
+                      <p class='mb-3' className={style.profileP}>{myUser.nombre}</p>
+                      <p class='mb-3' className={style.profileP}>Nombre de usuario: {myUser.usuario}</p>
                        <img src={myUser.avatar} id="profile" className='rounded-circle' style={{width: "35%"}} alt="avatar" />
                        <form onSubmit={() => handleSubmit()}>
-                          <input type="text" value={input.img} name= "img" onChange={(e) => handleChange(e)} />
-                          <button type='submit'>enviar</button>
+                          <input type="text" value={input.img} name= "img" className={style.profileInput} onChange={(e) => handleChange(e)} />
+                          <button type='submit' className='btn btn-outline-dark m-1 p-1' >enviar</button>
                        </form>
                        
                       </div>
@@ -76,8 +76,8 @@ export default function Profile() {
                   </div>
                   <div className='address'>
                     <div className=' text-center mb-5'>
-                      <p>Pais: {myUser.pais}</p>
-                  <p>Teléfono: {myUser.telefono}</p>
+                      <p  className={style.profileP}>Pais: {myUser.pais}</p>
+                  <p className={style.profileP}>Teléfono: {myUser.telefono}</p>
                     </div>
                   
                   </div>
@@ -86,7 +86,7 @@ export default function Profile() {
                 </div>
                 </div>
               
-              : <div className='row'>No existe el usuario</div>
+              : <div className='row'  >No existe el usuario</div>
               
             
           }
