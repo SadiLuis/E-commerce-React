@@ -7,7 +7,7 @@ const HomeSectionAdmin = () => {
   return (
     <div className='mt-1'>
       <OverviewBox/>
-    <TableProducts/>
+      <TableProducts/>
     </div>
     
    

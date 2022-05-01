@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../../Actions/products';
 import Paging from '../Paging/Paging';
 import { Link } from 'react-router-dom';
+import InputAutoComplete from '../InputAutoComplete/InputAutoComplete';
 
 
 const TableProducts = () => {
@@ -32,6 +33,11 @@ const TableProducts = () => {
         <div className='row'>
             <div className='col'>
                 <p class="h4">Productos</p>
+                <InputAutoComplete
+                    placeholder={'Buscar Producto'}
+                    fieldSearch={'title'}
+                    data={allProducts}
+                />
                 <div className='table-responsive'>
                 <table className="table table-sm table-hover table-striped table-bordered border-success">
                     <thead className='table-dark'>
