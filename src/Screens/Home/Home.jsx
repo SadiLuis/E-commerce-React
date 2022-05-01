@@ -42,7 +42,7 @@ React.useEffect(()=>{
   const indexFirstProduct = indexLastProduct - productsOnPage
   const currentProducts = allProducts.slice(indexFirstProduct, indexLastProduct)
 
-
+ console.log(currentProducts)
 const paginado = (pageNum) => {
   setCurrentPage(pageNum)
 }
@@ -105,7 +105,7 @@ function handleOrderByName(e) {
           {/* SEARCHBAR */}
           <div className={styles.search}>
               <form >
-                <SearchBar />
+                <SearchBar  setPage={setCurrentPage}/>
               </form>
           </div>
         
