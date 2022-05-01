@@ -1,7 +1,7 @@
-import React from 'react'
+import React,  { useState } from 'react'
 import { useDispatch,useSelector } from "react-redux";
 import { getAllUsers } from '../../Actions/users';
-import { getUserDetail, logout } from '../../Actions/Auth';
+import { getUserDetail, logout, updateUserImg} from '../../Actions/Auth';
 import { Link } from 'react-router-dom';
 import './Profile.module.css'
 export default function Profile() {
@@ -11,9 +11,20 @@ export default function Profile() {
   React.useEffect(()=> {
     dispatch(getUserDetail())
   }, [])
-  
+  const [input, setInput] = useState({
+    img: ""
+  })
   const myUser = useSelector((state)=> state.loginReducer.userDetail)
-  
+   const handleChange = (e) => {
+     setInput({
+       
+       [e.target.name] : e.target.value
+    })
+   }
+   let body = {id: myUser?.id, img: input.img}
+   const handleSubmit = () => {
+    dispatch(updateUserImg(body))
+   }
   return (
     <div className='account'>
       <div className="py-5">
@@ -48,6 +59,11 @@ export default function Profile() {
                       <p className='mb-3'>{myUser.nombre}</p>
                       <p className='mb-3'>Nombre de usuario: {myUser.usuario}</p>
                        <img src={myUser.avatar} id="profile" className='rounded-circle' style={{width: "35%"}} alt="avatar" />
+                       <form onSubmit={() => handleSubmit()}>
+                          <input type="text" value={input.img} name= "img" onChange={(e) => handleChange(e)} />
+                          <button type='submit'>enviar</button>
+                       </form>
+                       
                       </div>
                   
                   

@@ -9,7 +9,7 @@ import {
   import { Link } from "react-router-dom";
  import{ Product , ProductDetail ,
   ProductName ,ProductId ,ProductSize ,ProductAmountContainer ,ProductAmount ,ProductPrice ,Image ,
-  Details ,PriceDetail , DeleteBtn , InputCart} from './Styles'
+  Details ,PriceDetail , DeleteBtn , InputCart , ProductTotal} from './Styles'
   import { IoRemove, IoAdd } from "react-icons/io5";
   import Swal from "sweetalert2";
 
@@ -58,24 +58,29 @@ function Items({ id, title, price, image, stock, quantity ,size ,category}) {
       <ProductDetail>
         <Image src={image} />
          <Details>
-          <ProductName style={{paddingBottom:'2px'}}>
+          <ProductName >
              <b >Producto:</b> 
             <Link to={'/detail/'+ id}>
-            {title.toUpperCase()}
+            {' '+ title.toUpperCase()}
              </Link>
           </ProductName>
-            <ProductId style={{paddingBottom:'2px'}}>
-              <b>Categoría:</b> {category}
+            <ProductId >
+              <b>Precio:</b> $ {price}
             </ProductId>
                  
-            <ProductSize style={{paddingBottom:'5px'}}>
+            <ProductSize >
              <b>Tamaño:</b> {size}
+            </ProductSize>
+            <ProductSize >
+             <b>Categoría:</b> {category}
             </ProductSize>
             </Details>
               </ProductDetail>
                  <PriceDetail>
                  <ProductAmountContainer>
+                    <b style={{position:'absolute',  top:'-10px' , left:'25px'}}>Unidades</b> 
                    <ProductAmount>
+                     
                      <IoRemove style={{marginRight:'15px' , marginTop:'5px' , cursor:'pointer'}} 
                      type='button' onClick={handleButtonMenos}/>
                     <InputCart
@@ -90,6 +95,7 @@ function Items({ id, title, price, image, stock, quantity ,size ,category}) {
                     <IoAdd style={{marginLeft:'10px' , marginTop:'5px' , cursor:'pointer'}}
                      type='button' onClick={handleButtonMas}/>
                  </ProductAmount>
+                      <ProductTotal ><b>Subtotal</b></ProductTotal>
                      <ProductPrice>$ {fixedPrice}</ProductPrice>
                 </ProductAmountContainer>
                 </PriceDetail>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {useState} from 'react'
 import { getAllProducts, cleanUp, orderByPrice,
-  orderByRate, getCategories, filterByCategory} from '../../Actions/products';
+  orderByRate, getCategories, filterByCategory, orderAlfabeticamente} from '../../Actions/products';
 import Card from '../../Components/Card/Card';
 import { useDispatch,useSelector } from "react-redux";
 import styles from './Home.module.css'
@@ -11,7 +11,7 @@ import SearchBar from '../../Components/SearchBar/SearchBar';
 //import{FormGroup, Label} from "react-bootstrap"
 import ShoppingBtn from '../../Components/Shopping/ShoppingBtn';
 import CategoriasForm from '../../Components/Checkbox/CategoriasForm';
-
+import {Loader} from '../../Components/Loader/Loader'
 
 
 export default function Home() {
@@ -42,7 +42,7 @@ React.useEffect(()=>{
   const indexFirstProduct = indexLastProduct - productsOnPage
   const currentProducts = allProducts.slice(indexFirstProduct, indexLastProduct)
 
-
+ console.log(currentProducts)
 const paginado = (pageNum) => {
   setCurrentPage(pageNum)
 }
@@ -62,6 +62,10 @@ function handleClick(e) {
 function handleOrderByPrice(e) {
   e.preventDefault();
   dispatch(orderByPrice(e.target.value));
+}
+function handleOrderByName(e) {
+  e.preventDefault();
+  dispatch(orderAlfabeticamente(e.target.value));
 }
 
 
@@ -88,6 +92,11 @@ function handleOrderByPrice(e) {
                   <option value="asc">Menor precio</option>
                   <option value="desc">Mayor precio</option>
                 </select>
+                <select className={styles.selectors} onChange={handleOrderByName}>
+                  <option value="cero">Ordenar por letra</option>
+                  <option value="A-Z">A-Z</option>
+                  <option value="Z-A">Z-A</option>
+                  </select>
               </div> 
 
           </div>
@@ -96,7 +105,7 @@ function handleOrderByPrice(e) {
           {/* SEARCHBAR */}
           <div className={styles.search}>
               <form >
-                <SearchBar />
+                <SearchBar  setPage={setCurrentPage}/>
               </form>
           </div>
         
@@ -120,8 +129,10 @@ function handleOrderByPrice(e) {
           <div className={styles.grilla}>
               <div className={styles.grillaCards}>
                   {
-                      currentProducts?.map(e => <Card key={e.id} id={e.id} img={e.images[0]} title={e.title} category={e.category} price={e.price} />
-                  )} 
+                    allProducts.length ? currentProducts?.map(e => <Card key={e.id} id={e.id} img={e.images[0]} title={e.title} category={e.category} price={e.price} />)
+                                    :  <Loader />
+                  } 
+                 
               </div>
             
 

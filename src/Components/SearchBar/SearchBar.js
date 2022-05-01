@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { searchByName } from "../../Actions/products";
 import styles from "./SearchBar.module.css"
 
-function SearchBar() {
+function SearchBar({setPage}) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 
@@ -16,7 +16,7 @@ function SearchBar() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    if (!name) {
+    if (!name.length) {
       Swal.fire({
         position: "center",
         icon: "error",
@@ -25,6 +25,7 @@ function SearchBar() {
       });
       //alert("Escriba el producto que desea buscar");
     }
+    setPage(1)
     dispatch(searchByName(name));
     setName("");
   }
