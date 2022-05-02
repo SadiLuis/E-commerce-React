@@ -14,8 +14,9 @@ function Carousel({category}) {
     if (category === "Sillas") idCategory = 1
     if(category === "Sillones") idCategory = 2
     if(category === "Mesas") idCategory = 3
-    //////Falta categoria 4
-    ////Falta categoria 5
+    if(category === "Iluminacion") idCategory = 4
+    if(category === "Exterior") idCategory = 5
+    
     const dispatch = useDispatch()
     let recommendedProducts = useSelector((state) => state.productsReducer.sameCategory)
 

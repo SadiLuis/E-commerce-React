@@ -105,8 +105,8 @@ export default function Profile() {
                   </div>
                   <div className='address'>
                     <div className=' text-center mb-5'>
-                      <p  className={style.profileP}>Pais: {myUser.pais}</p>
-                  <p className={style.profileP}>Teléfono: {myUser.telefono}</p>
+                      <p  className={styles.profileP}>Pais: {myUser.pais}</p>
+                  <p className={styles.profileP}>Teléfono: {myUser.telefono}</p>
                     </div>
                  
                       
