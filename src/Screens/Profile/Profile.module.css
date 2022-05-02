@@ -9,6 +9,7 @@
     padding-top: 0rem;
 
     position: relative;
+    align-self: center;
   
 }
 .buttons{
@@ -44,6 +45,12 @@
   /*   color:#c8935b; */
     width: 7.9rem;
     margin-bottom: 1rem;
+}
+.titleCart{
+      font-weight: bold;
+    background: -webkit-linear-gradient(#c8935b, rgb(173, 159, 159));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .profileImg{
     width: 8rem;
@@ -82,4 +89,13 @@
 .modalClose:hover{
     color: #ff001891;
     transition: 6ms
+}
+.cartProfile > div{
+    display: flex;
+    flex-direction: row;
+   
+}
+.profileContainer{
+    display: flex;
+    flex-direction: column-reverse;
 }
