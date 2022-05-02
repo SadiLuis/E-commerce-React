@@ -12,6 +12,7 @@ import Profile from "./Screens/Profile/Profile"
 
 import Cart from './Components/Cart/Cart'
 import Dashboard from "./Screens/Dashboard/Dashboard";
+import CreateProduct from "./Components/AdminProduct/CreateProduct";
 
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/profile" element={<Profile/>} />
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
+        <Route path='/crearproducto' element={<CreateProduct />} />
         {/* <Route path="/user" element={<Profile/>}/> */}
 
 

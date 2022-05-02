@@ -110,4 +110,9 @@ export function searchByName(name) {
       }
    }
   
-
+   export function postProduct(product) {
+      return async function () {
+        const create = await axios.post(`${BASEURL}/products`, product);
+        return create;
+      };
+    }
