@@ -45,10 +45,10 @@ const TableOrders = () => {
                                     </td>
 
                                     <td>{o.usuario.nombre}</td>
-                                    <td>1</td>
+                                    <td>Ver detalle</td>
                                     <td>{o.totalPedido}</td>
                                     <td>{o.status}</td>
-                                    <td></td>
+                                    <td>{o.fechaCreacion.slice(0, 10)}</td>
                                     
                                 </tr>
                             ))}

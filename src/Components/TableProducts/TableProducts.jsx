@@ -104,7 +104,7 @@ const TableProducts = () => {
                                     <td>{p.title}</td>
                                     <td>{p.price}</td>
                                     <td>{p.cantidad > 0
-                                        ? <span className='text-success fw-bold'>En Stock</span>
+                                        ? <span>{p.cantidad}</span>
                                         : <span className='text-danger fw-bold'>Sin Stock disponible</span>}
                                     </td>
                                     <td>{p.category}</td>
