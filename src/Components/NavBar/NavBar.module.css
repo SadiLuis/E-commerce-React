@@ -5,7 +5,7 @@ ul {
     margin:  25px;
     padding: 2px;
     /* overflow: hidden; */
-   
+    
   }
   
   li {
@@ -41,8 +41,41 @@ ul {
  nav{
   border-bottom: solid 2px black;
 } 
-/* .buscador{
-  display:inline-flex;
-    
-    
-} */
+
+ .navbar-brand span {
+  display: flex;
+  justify-content: center;
+  font-family: monospace;
+}
+
+.navbar-brand > .text {
+  max-width: 0;
+  animation: typing 3s steps(var(--characters)) infinite;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.navbar-brand:after {
+  content: " |";
+  animation: blink 1s infinite;
+  animation-timing-function: step-end;
+}
+
+@keyframes typing {
+  75%,
+  100% {
+    max-width: calc(var(--characters) * 1ch);
+  }
+}
+
+@keyframes blink {
+  0%,
+  75%,
+  100% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+} 
+ 

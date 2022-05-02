@@ -41,7 +41,7 @@ const Cart = () => {
     <Wrapper>
        
         <Top>
-        <TopButton type='filled' className='btn btn-outline-dark' onClick={()=> navigate('/')} >CONTINUAR COMPRANDO</TopButton>
+        <TopButton type='filled' className='btn btn-outline-dark' onClick={()=> navigate('/home')} >CONTINUAR COMPRANDO</TopButton>
         <TopTexts>
 <TopText>Carrito de compras</TopText>
 

@@ -5,6 +5,9 @@ import { getUserDetail, logout, updateUserImg} from '../../Actions/Auth';
 import { Link } from 'react-router-dom';
 import Modal from '../Modal/Modal.jsx';
 import styles from './Profile.module.css'
+
+
+
 export default function Profile() {
   
   
@@ -47,6 +50,7 @@ export default function Profile() {
      <div className='account'>
       <div className={styles.container}> 
       <div className='container'>
+
     <div className={`row `}>
         <div className={` ${styles.buttons}`}>
           <button className={`btn ${styles.btnLink}`}><Link to='/'>Back to home</Link></button>
@@ -58,6 +62,7 @@ export default function Profile() {
         </div>
         
       
+
 
         </div>
 <div className={`text-left ${styles.containerTitle} `}>
@@ -75,6 +80,7 @@ export default function Profile() {
                 <div className={`col col-lg-6 ${styles.profile}`}>
                 
                     <div className='text-center'>
+
                       <div className={` text-center ${styles.profilePicDiv}`}>
                       <img src={myUser.avatar} id="profile" className={` ${styles.profileImg} `}  alt="avatar" />
                       <br/>
@@ -85,6 +91,7 @@ export default function Profile() {
                       <b><p className='mb-3'>{myUser.nombre}</p></b>
                       <p className='mb-3'>Nombre de usuario: <b>{myUser.usuario}</b></p>
                       <p className='mb-3'> email: <b>{myUser.email} </b></p>
+
                        
                       </div>
                   
@@ -98,8 +105,8 @@ export default function Profile() {
                   </div>
                   <div className='address'>
                     <div className=' text-center mb-5'>
-                      <p>Pais: {myUser.pais}</p>
-                  <p>Teléfono: {myUser.telefono}</p>
+                      <p  className={style.profileP}>Pais: {myUser.pais}</p>
+                  <p className={style.profileP}>Teléfono: {myUser.telefono}</p>
                     </div>
                  
                       
@@ -119,7 +126,7 @@ export default function Profile() {
                       } 
                 </div>
               
-              : <div className='row'>No existe el usuario</div>
+              : <div className='row'  >No existe el usuario</div>
               
             
           }

@@ -11,7 +11,7 @@ import SearchBar from '../../Components/SearchBar/SearchBar';
 //import{FormGroup, Label} from "react-bootstrap"
 import ShoppingBtn from '../../Components/Shopping/ShoppingBtn';
 import CategoriasForm from '../../Components/Checkbox/CategoriasForm';
-
+import {Loader} from '../../Components/Loader/Loader'
 
 
 export default function Home() {
@@ -42,7 +42,7 @@ React.useEffect(()=>{
   const indexFirstProduct = indexLastProduct - productsOnPage
   const currentProducts = allProducts.slice(indexFirstProduct, indexLastProduct)
 
-
+ console.log(currentProducts)
 const paginado = (pageNum) => {
   setCurrentPage(pageNum)
 }
@@ -105,7 +105,7 @@ function handleOrderByName(e) {
           {/* SEARCHBAR */}
           <div className={styles.search}>
               <form >
-                <SearchBar />
+                <SearchBar  setPage={setCurrentPage}/>
               </form>
           </div>
         
@@ -129,8 +129,10 @@ function handleOrderByName(e) {
           <div className={styles.grilla}>
               <div className={styles.grillaCards}>
                   {
-                      currentProducts?.map(e => <Card key={e.id} id={e.id} img={e.images[0]} title={e.title} category={e.category} price={e.price} />
-                  )} 
+                    allProducts.length ? currentProducts?.map(e => <Card key={e.id} id={e.id} img={e.images[0]} title={e.title} category={e.category} price={e.price} />)
+                                    :  <Loader />
+                  } 
+                 
               </div>
             
 
