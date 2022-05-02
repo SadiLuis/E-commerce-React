@@ -30,18 +30,18 @@ const Cart = () => {
    
   }, [dispatch]);
      
-  let total = items.length >=3 ? subtotal  : subtotal + 150
+  let total = subtotal >= 7000 ? subtotal  : subtotal + 150
 
   return (
     <>
     
    <Anuncio >
-    Aprovecha la oferta !! llevando 3 productos o más el envío es gratis
+    Aprovechá la oferta !! Comprando por más de $7000 el envío es gratis
    </Anuncio>
     <Wrapper>
        
         <Top>
-        <TopButton type='filled' className='btn btn-outline-dark' onClick={()=> navigate('/')} >CONTINUAR COMPRANDO</TopButton>
+        <TopButton type='filled' className='btn btn-outline-dark' onClick={()=> navigate('/home')} >CONTINUAR COMPRANDO</TopButton>
         <TopTexts>
 <TopText>Carrito de compras</TopText>
 
@@ -79,7 +79,7 @@ const Cart = () => {
                 </SummaryItem>
                 <SummaryItem>
                 <SummaryItemText> Descuento de envío</SummaryItemText>
-                <SummaryItemText>$ {items.length >= 3 ? -150 :  0 } </SummaryItemText>
+                <SummaryItemText>$ {subtotal >= 7000 ? -150 :  0 } </SummaryItemText>
                 </SummaryItem>
                 <SummaryItem  type='total'>
                 <SummaryItemText> Total</SummaryItemText>
@@ -100,7 +100,7 @@ const Cart = () => {
               <br />
               <ButtonEmpty
                 className="btn btn-secondary pb-4 pe-3 ps-3 rounded-15"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/home")}
                 
               >
                 <div >

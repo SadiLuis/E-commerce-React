@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BASEURL } from '../Assets/URLS';
-import { SEARCH_BY_NAME, GET_CATEGORIES, FILTER_BY_CATEGORY, ORDER_BY_PRICE, ORDER_BY_RATE } from './Index';
+import { SEARCH_BY_NAME, GET_CATEGORIES, FILTER_BY_CATEGORY, ORDER_BY_PRICE, ORDER_BY_RATE, ORDER_ALFABETICAMENTE } from './Index';
 import Swal from "sweetalert2"
 
 export function getProductById(id) {
@@ -60,6 +60,13 @@ export function searchByName(name) {
    export function orderByPrice(payload) {
       return {
          type: ORDER_BY_PRICE,
+         payload
+      }
+   }
+
+   export function orderAlfabeticamente(payload) {
+      return {
+         type: ORDER_ALFABETICAMENTE,
          payload
       }
    }
