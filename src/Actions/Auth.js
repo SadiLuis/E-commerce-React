@@ -15,7 +15,7 @@ import {
 import {BASEURL} from '../Assets/URLS';
 import Swal from 'sweetalert2'
 import getHeaderToken from '../Helpers/getHeaderToken';
-
+import {createCartDb ,getCartDB} from './cart'
 
 
 export const getUserDetail = () => {
@@ -26,11 +26,13 @@ export const getUserDetail = () => {
          const { data } = await axios.get(`${BASEURL}/user`, headers);
          //toast(`Bienvenido ${data.nombre}`)
          // console.log(data);
+         
          dispatch({
             type: GET_USER_DETAIL,
             payload: data
          })
          //dispatch(getPedidosByUser(data.id));
+         dispatch(getCartDB(data.id))
       } catch (error) {
          console.log(error.response.data);
          dispatch({
@@ -78,6 +80,8 @@ export function register({
              type: REGISTER_SUCCESS,
              payload: true
           })
+
+         
           
          } catch (error) {
             console.log(error);
@@ -118,7 +122,8 @@ export function login({ email, contrasena }) {
             type: LOGIN_SUCCESS,
             payload: data
          });
-
+         
+         createCartDb()
          dispatch(getUserDetail());
       } catch (err) {
          //toast.error(err.response.data);
