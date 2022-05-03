@@ -5,7 +5,9 @@ import Register from "./Components/Register/Register";
 import Detail from "./Screens/Details/Details";
 import Home from "./Screens/Home/Home";
 import Landing from './Screens/Landing/Landing'
+
 import  NavBarAll from "./Components/NavBar/NavBar"
+
 import ContactForm from "./Components/ContactForm/ContactForm";
 import EditProduct from "./Components/AdminProduct/EditProduct"
 import Profile from "./Screens/Profile/Profile"
@@ -28,9 +30,9 @@ import ResPassword from "./Components/RestarPassword/ResPassword";
 function App() {
   return (
     <div className="App">
-       
-        <NavBarAll /> 
-         
+
+      <NavBarAll />
+
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Register />} />
@@ -43,7 +45,7 @@ function App() {
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />
         <Route path="/contactform" element={<ContactForm />} />
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/profile" element={<Profile />} />
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
         {/* <Route path="/user" element={<Profile/>}/> */}
@@ -52,7 +54,7 @@ function App() {
 
 
       </Routes>
-      
+
 
     </div>
   );

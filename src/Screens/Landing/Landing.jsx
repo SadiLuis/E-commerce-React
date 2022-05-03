@@ -34,7 +34,9 @@ const Landing = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
+
       <div class="col1 col">
+
 
         <hr class="border-dark border" />
 
@@ -47,21 +49,27 @@ const Landing = () => {
               <div class="pb-5">
                 <div class="image">
                   <div class="pb-3 mb-3">
+
                     <span class="bg-light d-block" >
+
                       <div class="embed-responsive embed-responsive-3by2">
                         <div class="embed-responsive-item">
                           <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/UMAGE_packshot_5102_5501-1_AConversationPiece_blackoak_petrolblue_highres_1_1_640x@2x.progressive.jpg?v=1638884064" alt="Conversation Piece Lounge Chair" />
                         </div>
                       </div>
+
                     </span>
+
 
                   </div>
                 </div>
                 <div class="titleInfo">
                   <h3 class="mb-3 ">
+
                     <span>
                       Conversation Piece Lounge Chair
                     </span>
+
                   </h3>
 
                 </div>
@@ -77,21 +85,27 @@ const Landing = () => {
               <div class="pb-5">
                 <div class="image">
                   <div class="pb-3 mb-3">
+
                     <span class="bg-light d-block" >
+
                       <div class="embed-responsive embed-responsive-3by2">
                         <div class="embed-responsive-item">
                           <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/BoomerangHM2SoapedOakw.LoopMarine_640x@2x.progressive.jpg?v=1626238627" alt="Boomerang Armchair HM2" />
                         </div>
                       </div>
+
                     </span>
+
 
                   </div>
                 </div>
                 <div class="titleInfo">
                   <h3 class="mb-3">
+
                     <span>
                       Boomerang Armchair HM2
                     </span>
+
                   </h3>
 
                 </div>
@@ -106,21 +120,27 @@ const Landing = () => {
               <div class="pb-5">
                 <div class="image">
                   <div class="pb-3 mb-3">
+
                     <span class="bg-light d-block" >
+
                       <div class="embed-responsive embed-responsive-3by2">
                         <div class="embed-responsive-item">
                           <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/FAD02NA_FanDiningChairNaturalOak_Main_640x@2x.progressive.jpg?v=1634723597" alt="Fan Dining Chair" />
                         </div>
                       </div>
+
                     </span>
+
 
                   </div>
                 </div>
                 <div class="titleInfo">
                   <h3 class="mb-3 ">
+
                     <span>
                       Fan Dining Chair
                     </span>
+
                   </h3>
 
                 </div>
@@ -130,21 +150,27 @@ const Landing = () => {
               <div class="pb-5">
                 <div class="image">
                   <div class="pb-3 mb-3">
+
                     <span class="bg-light d-block" >
+
                       <div class="embed-responsive embed-responsive-3by2">
                         <div class="embed-responsive-item">
                           <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/100030_S.A.C.diningchair_1_exposed1_640x@2x.progressive.jpg?v=1625484071" alt="S.A.C. Dining Chair" />
                         </div>
                       </div>
+
                     </span>
+
 
                   </div>
                 </div>
                 <div class="titleInfo">
                   <h3 class="mb-3 ">
+
                     <span>
                       S.A.C. Dining Chair
                     </span>
+
                   </h3>
 
                 </div>
@@ -155,7 +181,9 @@ const Landing = () => {
         </div>
       </div>
 
+
       <div class="col1 col">
+
         <hr class="border-dark border" />
       </div>
 
@@ -167,9 +195,11 @@ const Landing = () => {
                 <div class="title">
                   <div class="m-0">
                     <h2 class="mb-5">
+
                       <span class="titleInfo">
                         Ofertas
                       </span>
+
                     </h2>
                   </div>
                 </div>
@@ -183,6 +213,7 @@ const Landing = () => {
           <div class="mb-5">
             <div class="container">
               <div class="row">
+
                 <div class="col-6 col-sm-6">
                   <div class="producto">
                     <div class="pb5">
@@ -251,6 +282,7 @@ const Landing = () => {
                         </div>
                       </div>
 
+
                     </div>
                   </div>
                 </div>
@@ -259,12 +291,15 @@ const Landing = () => {
           </div>
         </div>
 
+
         <div >
 
         </div>
       </div>
 
+
       <div class="footer py-5">
+
         <div class="container">
           <div class="row">
             <div class="col-6 col-lg-4">
@@ -286,9 +321,11 @@ const Landing = () => {
                     <div class="mb-5">
                       <div class="link">
                         <div class="m-0">
+
                           <span>
                             About Us
                           </span>
+
                         </div>
                       </div>
                     </div>
@@ -315,9 +352,11 @@ const Landing = () => {
                     <div class="mb-5">
                       <div class="link">
                         <div class="m-0">
+
                           <span onClick={() => navigate('/contactform')}>
                             E-mail Us
                           </span>
+
                         </div>
                       </div>
                     </div>
@@ -344,9 +383,11 @@ const Landing = () => {
                     <div class="mb-5">
                       <div class="link">
                         <div class="m-0">
+
                           <span>
                             FAQ
                           </span>
+
                         </div>
                       </div>
                     </div>
@@ -366,4 +407,6 @@ const Landing = () => {
   )
 }
 
+
 export default Landing
+
