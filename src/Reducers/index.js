@@ -7,12 +7,16 @@ import ordersReducer from './Orders';
 
 
 
+
+
 const rootReducer = combineReducers({
     productsReducer,
-    loginReducer,
+   loginReducer,
     categoriesReducer,
     userReducer,
-    ordersReducer
+    ordersReducer,
+   
+    
 })
 
 

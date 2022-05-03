@@ -27,6 +27,8 @@ export default function Profile() {
   })
   const [modalClose, setModalClose] = useState(false)
   const myUser = useSelector((state)=> state.loginReducer.userDetail)
+  console.log(myUser)
+  
    const handleChange = (e) => {
      setInput({
        

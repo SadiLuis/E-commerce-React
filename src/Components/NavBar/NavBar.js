@@ -20,6 +20,8 @@ import Logout from '../Login/Logout';
 
 // logo,  home, contactenos 
 const NavBarAll = () => {
+  // const usuario=useSelector(state =>state.loginReducer.userDetail)
+  // console.log(usuario)
 
   return (
     <>
@@ -91,7 +93,10 @@ const NavBarAll = () => {
 const NavBarLogin = ({isAuth, myUser}) => {
      const dispatch=useDispatch();
      const navigate=useNavigate();
-   const user= useSelector((state)=> state.loginReducer.userDetail);
+   const user= useSelector((state)=> state.loginReducer.userDetail)
+   console.log(user)
+   
+   
    
 
  function handleLogoutUser(e){
@@ -119,7 +124,7 @@ const NavBarLogin = ({isAuth, myUser}) => {
       </NavLink>
 
 {isAuth && myUser?(
-  <> {user.rol==="1"? <Logout/> : <NavBarLogin /> }
+  <> {user.rol==="1"? <Logout/>  : <NavBarLogin /> }
   <button onClick={handleLogoutUser}
   // style={{
   //   border: "none",
@@ -250,6 +255,8 @@ const NavBarAdmin = () => {
 
 // NavBarAll y perfil
 const NavBarAuthenticated = () => {
+  const usuario=useSelector(state =>state.loginReducer.userDetail)
+  console.log(usuario)
   return (
     <>
       <NavBarAll />
@@ -262,17 +269,22 @@ const NavBarAuthenticated = () => {
           fontSize: "1rem",
           marginLeft: "0.05rem",
           cursor: "pointer",
-          textDecoration: "none",
-          marginBottom:"15rem"
+          textDecoration: "underline",
+          marginBottom:"15rem",
+          fontWeight:"bolder"
         }}
       >
-        Perfil
+        {usuario.nombre}
+        {<img src={usuario.img ? usuario.img : usuario.avatar} style={{ marginBottom: "25px", height: "3.5rem", width: "3.5rem", border: "solid", borderColor: "black", borderRadius: "9999px" }}></img>}
+        
       </NavLink>
     </>
   );
 };
 
 function NavBar({ isAuth, user }) {
+  
+  
   const [flag, setFlag] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -301,8 +313,10 @@ function NavBar({ isAuth, user }) {
         color: "white",
         
       }}
-      >Envíos gratis por órdenes de compra superiores a $7.000.
+      >Envíos gratis por órdenes de compra superiores a $7.000. 
+       
       </span >
+      
       </div>
 
     </nav>
@@ -350,10 +364,12 @@ function NavBar({ isAuth, user }) {
 
 
 const mapStateToProps = (state) => {
+  
   return {
     isAuth: state.loginReducer.isAuth,
     user: state.loginReducer.userDetail,
   };
 };
+
 
 export default connect(mapStateToProps, null)(NavBar);
