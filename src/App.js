@@ -9,7 +9,7 @@ import  NavBarAll from "./Components/NavBar/NavBar"
 import ContactForm from "./Components/ContactForm/ContactForm";
 import EditProduct from "./Components/AdminProduct/EditProduct"
 import Profile from "./Screens/Profile/Profile"
-
+import Orders from "./Screens/Orders/Orders";
 import Cart from './Components/Cart/Cart'
 import Dashboard from "./Screens/Dashboard/Dashboard";
 
@@ -37,6 +37,7 @@ function App() {
         <Route path="/profile" element={<Profile/>} />
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
+        <Route exact path="/orders" element={<Orders/>}/>
         {/* <Route path="/user" element={<Profile/>}/> */}
 
 
