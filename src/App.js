@@ -12,9 +12,12 @@ import Profile from "./Screens/Profile/Profile"
 
 import Cart from './Components/Cart/Cart'
 import Dashboard from "./Screens/Dashboard/Dashboard";
+
 import AddCategory from "./Components/AddCategory/AddCategory";
 import Customers from "./Components/Customers/Customers";
 import Orders from "./Components/Orders/Orders";
+import ResPassword from "./Components/RestarPassword/ResPassword";
+
 
 
 
@@ -44,6 +47,8 @@ function App() {
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
         {/* <Route path="/user" element={<Profile/>}/> */}
+
+        <Route path="/recupass" element={<ResPassword/>}/>
 
 
       </Routes>

@@ -177,7 +177,7 @@ export default function Profile() {
                       } 
                 </div>
               
-              : <div className='row'  >No existe el usuario</div>
+              : <div className='row' >No existe el usuario</div>
               
             
           }
