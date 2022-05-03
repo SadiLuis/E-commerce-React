@@ -1,5 +1,4 @@
 /*  AUTERIZACION Y LOGIN */
-
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILED = "LOGIN_FAILED";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
@@ -8,6 +7,7 @@ export const LOGOUT = "LOGOUT";
 export const GET_USER_DETAIL = "GET_USER_DETAIL";
 export const AUTHENTICATION_ERROR = "AUTHENTICATION_ERROR";
 export const UPDATE_USER = "UPDATE_USER";
+export const RECOVERY_PASSWORD = "RECOVERY_PASSWORD";
 
 
 
@@ -20,7 +20,6 @@ export const GET_CATEGORIES="GET_CATEGORIES";
 
 
 
-export const RECOVERY_PASSWORD = "RECOVERY_PASSWORD";
 // Carrito
 export const ADD_ITEM = "ADD_ITEM";
 export const DELETE_CART = "DELETE_CART";
