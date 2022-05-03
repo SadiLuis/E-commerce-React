@@ -1,31 +1,12 @@
 
-import { SEARCH_BY_NAME, GET_CATEGORIES, ORDER_BY_PRICE, ORDER_BY_RATE, FILTER_BY_CATEGORY } from "../Actions/Index";
-
-// const initialState = {
-//     detailProduct : [],
-//     products: [],
-//     allProducts:[],
-//     productoPorNombre:[],
-//     filtered:[],
-//     categories:[],
-//     cart: getCartLocalStorage(),
-//     sameCategory: []
-// }
-
-import {UPDATE_CART ,ADD_ITEM ,REST_ITEM ,DELETE_ITEM} from '../Actions/Index';
+import { SEARCH_BY_NAME, GET_CATEGORIES, ORDER_BY_PRICE, ORDER_BY_RATE, FILTER_BY_CATEGORY
+,UPDATE_CART ,ADD_ITEM ,REST_ITEM ,DELETE_ITEM, ORDER_ALFABETICAMENTE } from "../Actions/Index";
 import { getCartLocalStorage, saveCartLocalStorage , getProductLocalStorage ,saveProductLocalStorage } from "../Helpers/localstorage";
-// const initialState = {
-//     detailProduct : [],
-//     products: [],
-//     allProducts: getProductLocalStorage(),
-//     cart: getCartLocalStorage(),
-//     sameCategory: []
 
-// }
 const initialState = {
     detailProduct : [],
     products: [],
-    allProducts:[],
+    allProducts:getProductLocalStorage(),
     productoPorNombre:[],
     filtered:[],
     categories:[],
@@ -61,23 +42,49 @@ export default function productsReducer(state = initialState, action) {
             case SEARCH_BY_NAME:
             return {
                 ...state,
-                products:payload
+                products:payload,
+                filtered:payload
                 
 
             }
            
         case ORDER_BY_PRICE:
             let sortedPrice = payload === "asc" ?
-                [...state.filtered].sort(function (a, b) {
+                [...state.products].sort(function (a, b) {
                     return (a.price - b.price);
                 }) :
-                [...state.filtered].sort(function (a, b) {
+                [...state.products].sort(function (a, b) {
                     return (b.price - a.price)
                 })
             return {
                 ...state,
-                filtered: sortedPrice
+                products: sortedPrice
             }
+            case ORDER_ALFABETICAMENTE:
+                let sortedName= action.payload==="A-Z" ?
+                [...state.products].sort(function(a,b){
+                    if(a.title.toLowerCase() > b.title.toLowerCase()){
+                        return 1;
+                    }
+                    if(b.title.toLowerCase()>a.title.toLowerCase()){
+                        return -1;
+                    }
+                    return 0;
+                }) : [...state.products].sort(function(a,b){
+                    if(a.title.toLowerCase() > b.title.toLowerCase()){
+                        return -1;
+                    } if(b.title.toLowerCase() > a.title.toLowerCase()){
+                        return 1;
+                    }
+                    return 0;
+                })
+                return{
+                    ...state,
+                    products:sortedName
+                }
+
+
+
         case ORDER_BY_RATE:
             let sortedRate = payload === "asc" ?
                 [...state.filtered].sort(function (a, b) {

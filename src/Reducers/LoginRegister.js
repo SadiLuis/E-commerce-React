@@ -36,7 +36,7 @@ export default function loginRegistroReducer(state = initialState, action) {
         case LOGOUT:
             // Eliminamos el token del localStorage y la info del usuario
             localStorage.removeItem('token_ecommerce');
-            localStorage.removeItem('cart');
+           
             
             return {
                 ...state,
@@ -45,11 +45,11 @@ export default function loginRegistroReducer(state = initialState, action) {
                 userDetail: null
             };
 
-        case RECOVERY_PASSWORD:
-            return {
-                ...state,
-                recoveryPass:[...action.payload]
-            }
+            case RECOVERY_PASSWORD:
+                return {
+                    ...state,
+                    recoveryPass:action.payload
+                }
             case REGISTER_SUCCESS: return {
                 ...state ,
                 isRegister: action.payload
@@ -57,6 +57,9 @@ export default function loginRegistroReducer(state = initialState, action) {
             case REGISTER_FAILED: return {
                 ...state,
                 isRegister: action.payload
+            }
+            case 'UPDATE_USER_IMG': return {
+                ...state
             }
 
 

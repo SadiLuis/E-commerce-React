@@ -9,7 +9,7 @@ import {
   import { Link } from "react-router-dom";
  import{ Product , ProductDetail ,
   ProductName ,ProductId ,ProductSize ,ProductAmountContainer ,ProductAmount ,ProductPrice ,Image ,
-  Details ,PriceDetail} from './Styles'
+  Details ,PriceDetail , DeleteBtn , InputCart , ProductTotal} from './Styles'
   import { IoRemove, IoAdd } from "react-icons/io5";
   import Swal from "sweetalert2";
 
@@ -58,24 +58,32 @@ function Items({ id, title, price, image, stock, quantity ,size ,category}) {
       <ProductDetail>
         <Image src={image} />
          <Details>
-          <ProductName style={{paddingBottom:'15px'}}>
-             <b >Producto:</b> {title.toUpperCase()}
+          <ProductName >
+             <b >Producto:</b> 
+            <Link to={'/detail/'+ id}>
+            {' '+ title.toUpperCase()}
+             </Link>
           </ProductName>
-            <ProductId style={{paddingBottom:'15px'}}>
-              <b>Categoría:</b> {category}
+            <ProductId >
+              <b>Precio:</b> $ {price}
             </ProductId>
                  
-            <ProductSize style={{paddingBottom:'15px'}}>
+            <ProductSize >
              <b>Tamaño:</b> {size}
+            </ProductSize>
+            <ProductSize >
+             <b>Categoría:</b> {category}
             </ProductSize>
             </Details>
               </ProductDetail>
                  <PriceDetail>
                  <ProductAmountContainer>
+                    <b style={{position:'absolute',  top:'-10px' , left:'25px'}}>Unidades</b> 
                    <ProductAmount>
-                    <IoAdd style={{marginRight:'10px' , marginTop:'5px' , cursor:'pointer'}}
-                     type='button' onClick={handleButtonMas}/>
-                    <input
+                     
+                     <IoRemove style={{marginRight:'15px' , marginTop:'5px' , cursor:'pointer'}} 
+                     type='button' onClick={handleButtonMenos}/>
+                    <InputCart
                       type="number"
                       value={input}
                       min={1}
@@ -84,15 +92,16 @@ function Items({ id, title, price, image, stock, quantity ,size ,category}) {
                      onChange={handleChange}
                     disabled
                     />
-                     <IoRemove style={{marginLeft:'10px' , marginTop:'5px' , cursor:'pointer'}} 
-                     type='button' onClick={handleButtonMenos}/>
+                    <IoAdd style={{marginLeft:'10px' , marginTop:'5px' , cursor:'pointer'}}
+                     type='button' onClick={handleButtonMas}/>
                  </ProductAmount>
+                      <ProductTotal ><b>Subtotal</b></ProductTotal>
+                     <ProductPrice>$ {fixedPrice}</ProductPrice>
                 </ProductAmountContainer>
-                    <ProductPrice>$ {fixedPrice}</ProductPrice>
                 </PriceDetail>
-                    <div>
+                    <DeleteBtn>
                   <button className='btn btn-outline-danger' onClick={handleDelete}>Quitar</button>
-                  </div>
+                  </DeleteBtn>
         </Product>
   )
 }

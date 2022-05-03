@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {NavLink, useNavigate} from "react-router-dom"
 //import CartBtn from "../ShoppingCart/CartBtn";
-import SearchBar from "../SearchBar/SearchBar";
-import { useDispatch } from "react-redux";
- //import { logout } from "../../actions/auth";
+import { useDispatch, useSelector } from "react-redux";
+ import { logout } from "../../Actions/Auth";
 // import { updateCart } from "../../actions/cart";
 // import Footer from "../Footer/Footer";
+import ShoppingBtn from '../Shopping/ShoppingBtn'
 import styles from "./NavBar.module.css"
 import { connect } from "react-redux";
+import logo from "../../Assets/default.png";
+import Logout from '../Login/Logout';
+
 
 
 
@@ -17,9 +20,28 @@ import { connect } from "react-redux";
 
 // logo,  home, contactenos 
 const NavBarAll = () => {
+  // const usuario=useSelector(state =>state.loginReducer.userDetail)
+  // console.log(usuario)
+
   return (
     <>
       {/* <Footer /> */}
+      <NavLink
+        to="/"
+        style={{
+          border: "none",
+          background: "none",
+          color: "black",
+          fontSize: "1.5rem",
+          marginLeft: "0.01rem",
+          cursor: "pointer",
+          textDecoration: "none",
+           marginBottom:"15rem"
+
+        }}
+      >
+        <img src={logo} style={{width:"5rem", }}></img>
+      </NavLink>
       <NavLink
         to="/home"
         style={{
@@ -51,9 +73,7 @@ const NavBarAll = () => {
       >
         Contáctenos
       </NavLink>
-       {/* <NavLink
-        to="/cart"
-        style={{
+      <div  style={{
           border: "none",
           background: "none",
           color: "black",
@@ -61,19 +81,31 @@ const NavBarAll = () => {
           marginLeft: "0.05rem",
           cursor: "pointer",
           textDecoration: "none",
-          marginBottom:"15rem"
-        }}
-      >
-         <CartBtn /> 
-      </NavLink>  */}
+           marginBottom:"15rem"
+        }}>
+      <ShoppingBtn />
+        </div >
     </>
   );
 };
 
 // login y register
-const NavBarLogin = () => {
+const NavBarLogin = ({isAuth, myUser}) => {
+     const dispatch=useDispatch();
+     const navigate=useNavigate();
+   const user= useSelector((state)=> state.loginReducer.userDetail)
+   console.log(user)
+   
+   
+   
+
+ function handleLogoutUser(e){
+  e.preventDefault();
+  dispatch(logout())
+}
   return (
     <>
+    
       <NavLink
         to="/login"
         style={{
@@ -85,10 +117,36 @@ const NavBarLogin = () => {
           cursor: "pointer",
           textDecoration: "none",
            marginBottom:"15rem"
-        }}
+        }} 
+        
       >
         Log in
       </NavLink>
+
+{isAuth && myUser?(
+  <> {user.rol==="1"? <Logout/>  : <NavBarLogin /> }
+  <button onClick={handleLogoutUser}
+  // style={{
+  //   border: "none",
+  //   background: "none",
+  //   color: "black",
+  //   fontSize: "1rem",
+  //   marginLeft: "0.05rem",
+  //   cursor: "pointer",
+  //   textDecoration: "none",
+  //    marginBottom:"15rem"
+  // }}
+  >
+    
+  </button> 
+  </>
+):(
+          <>
+           </>
+)
+}
+
+
       <NavLink
         to="/register"
         style={{
@@ -104,6 +162,8 @@ const NavBarLogin = () => {
       >
         Registrarse
       </NavLink>
+
+      
     </>
   );
 };
@@ -180,7 +240,7 @@ const NavBarAdmin = () => {
       ) : (
         <NavBarAuthenticated />
       )}
-      {admin ? (
+     {/*  {admin ? (
         <button className="btn btn-success" onClick={handleUsuarioNormal}>
           Comprador
         </button>
@@ -188,13 +248,15 @@ const NavBarAdmin = () => {
         <button className="btn btn-success" onClick={handleAdmin}>
           Administrador
         </button>
-      )}
+      )} */}
     </>
   );
 };
 
 // NavBarAll y perfil
 const NavBarAuthenticated = () => {
+  const usuario=useSelector(state =>state.loginReducer.userDetail)
+  console.log(usuario)
   return (
     <>
       <NavBarAll />
@@ -207,26 +269,31 @@ const NavBarAuthenticated = () => {
           fontSize: "1rem",
           marginLeft: "0.05rem",
           cursor: "pointer",
-          textDecoration: "none",
-          marginBottom:"15rem"
+          textDecoration: "underline",
+          marginBottom:"15rem",
+          fontWeight:"bolder"
         }}
       >
-        Perfil
+        {usuario.nombre}
+        {<img src={usuario.img ? usuario.img : usuario.avatar} style={{ marginBottom: "25px", height: "3.5rem", width: "3.5rem", border: "solid", borderColor: "black", borderRadius: "9999px" }}></img>}
+        
       </NavLink>
     </>
   );
 };
 
 function NavBar({ isAuth, user }) {
+  
+  
   const [flag, setFlag] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const handleLogout = () => {
-  //   setFlag(true);
-  //   dispatch(logout());
-  //   navigate("/home");
-  // };
+  const handleLogout = () => {
+    setFlag(true);
+    dispatch(logout());
+    navigate("/home");
+  };
 
   // useEffect(() => {
   //   if (flag) dispatch(updateCart());
@@ -246,59 +313,49 @@ function NavBar({ isAuth, user }) {
         color: "white",
         
       }}
-      >Envíos gratis por pedidos mayoristas
+      >Envíos gratis por órdenes de compra superiores a $7.000. 
+       
       </span >
+      
       </div>
 
     </nav>
-    <nav className="navbar navbar-light bg-light">
+    <nav className="navbar navbar-light bg-light" >
         <div className="container-fluid" 
         style={{height:"3rem"}}
         >
-          <span className="navbar-brand" 
-      style={{
-        fontSize: "5rem",
-        fontWeight: "bold",
-        color: "black",
-        border: "solid", borderColor:"orange", borderStyle:"solid",
-         marginBottom:"15rem"
-        
-      }}>
-        <h1 >Mobi</h1>
-           
-
-          </span>
-
+          
           {isAuth && user ? (
             <>
               {user.rol === "2" ? <NavBarAdmin /> : <NavBarAuthenticated />}
-              <button
+              <button onClick={handleLogout}
                 style={{
                   border: "none",
-          background: "none",
-          color: "black",
-          fontSize: "1rem",
-          marginLeft: "0.05rem",
-          cursor: "pointer",
-          textDecoration: "none",
-          marginBottom:"15rem"
+                  background: "none",
+                  color: "black",
+                  fontSize: "1rem",
+                  marginLeft: "0.05rem",
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  marginBottom:"15rem"
                 }}
               >
                 Salir
               </button>
+              
             </>
           ) : (
             <>
               <NavBarAll />
               <NavBarLogin />
+              
             </>
           )}
-          <div className={styles.buscador}>
 
-          <form className="d-flex">
-            <SearchBar  />
-          </form>
-          </div>
+            
+
+          
+          
         </div>
       </nav></>
   
@@ -307,10 +364,12 @@ function NavBar({ isAuth, user }) {
 
 
 const mapStateToProps = (state) => {
+  
   return {
     isAuth: state.loginReducer.isAuth,
     user: state.loginReducer.userDetail,
   };
 };
+
 
 export default connect(mapStateToProps, null)(NavBar);

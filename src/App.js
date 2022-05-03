@@ -5,11 +5,21 @@ import Register from "./Components/Register/Register";
 import Detail from "./Screens/Details/Details";
 import Home from "./Screens/Home/Home";
 import Landing from './Screens/Landing/Landing'
-import NavBarAll from "./Components/NavBar/NavBar"
+
+import  NavBarAll from "./Components/NavBar/NavBar"
+
 import ContactForm from "./Components/ContactForm/ContactForm";
+import EditProduct from "./Components/AdminProduct/EditProduct"
 import Profile from "./Screens/Profile/Profile"
 
 import Cart from './Components/Cart/Cart'
+import Dashboard from "./Screens/Dashboard/Dashboard";
+
+import AddCategory from "./Components/AddCategory/AddCategory";
+import Customers from "./Components/Customers/Customers";
+import Orders from "./Components/Orders/Orders";
+import ResPassword from "./Components/RestarPassword/ResPassword";
+
 
 
 
@@ -25,6 +35,12 @@ function App() {
 
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Register />} />
+        <Route path="/dashboard/admin" element={<Dashboard />} />
+        <Route path="/dashboard/admin/EditProduct/:idProduct" element={<EditProduct />} />
+        <Route path="/dashboard/admin/addCategory" element={<AddCategory />} />
+        <Route path="/dashboard/admin/customers" element={<Customers />} />
+        <Route path="/dashboard/admin/orders" element={<Orders/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />
@@ -33,6 +49,8 @@ function App() {
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
         {/* <Route path="/user" element={<Profile/>}/> */}
+
+        <Route path="/recupass" element={<ResPassword/>}/>
 
 
       </Routes>

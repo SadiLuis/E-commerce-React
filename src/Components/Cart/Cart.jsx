@@ -3,8 +3,10 @@ import Items from './Items'
 import {useSelector,useDispatch} from "react-redux";
 import {updateCart} from '../../Actions/cart'
 import {Wrapper, Top ,TopButton ,TopText ,TopTexts ,Button ,Info 
-   ,SummaryItem ,Summary ,SummaryItemText ,SummaryButton ,SummaryTitle} from './Styles'
+   ,SummaryItem ,Summary ,SummaryItemText ,SummaryButton ,SummaryTitle ,ButtonEmpty , Anuncio} from './Styles'
 import { useNavigate } from 'react-router-dom';
+import { FaCartPlus } from "react-icons/fa";
+import BotonPago from '../BtnPago/BtnPago'
 
 const Cart = () => {
   let items = useSelector((state) => {
@@ -18,7 +20,7 @@ const Cart = () => {
 
     return completeProducts;
   });
-  const total = useSelector((state) => state.productsReducer.cart.precioTotal);
+  const subtotal = useSelector((state) => state.productsReducer.cart.precioTotal);
   items = items?.filter((e) => e);
   const navigate = useNavigate()
  const dispatch = useDispatch()
@@ -27,10 +29,15 @@ const Cart = () => {
     dispatch(updateCart());
    
   }, [dispatch]);
+     
+  let total = subtotal >= 7000 ? subtotal  : subtotal + 150
 
   return (
-<>
+    <>
     
+   <Anuncio >
+    Aprovechá la oferta !! Comprando por más de $7000 el envío es gratis
+   </Anuncio>
     <Wrapper>
        
         <Top>
@@ -40,10 +47,10 @@ const Cart = () => {
 
 
         </TopTexts>
-        <TopButton className='btn btn-outline-secondary'>COMPRAR AHORA</TopButton>
-
+        {/*<TopButton className='btn btn-outline-secondary'>COMPRAR AHORA</TopButton> */}
         </Top>
-        <Button>
+        {items.length ?
+        (<Button>
             <Info>
             {items?.map((i) => (
                 <Items
@@ -64,28 +71,52 @@ const Cart = () => {
                 <SummaryTitle>RESUMEN DEL PEDIDO</SummaryTitle>
                 <SummaryItem>
                 <SummaryItemText>Subtotal</SummaryItemText>
-                <SummaryItemText>$ {total}</SummaryItemText>
+                <SummaryItemText>$ {subtotal}</SummaryItemText>
                 </SummaryItem>
                 <SummaryItem>
                 <SummaryItemText>Costo de envío</SummaryItemText>
-                <SummaryItemText>$5.90</SummaryItemText>
+                <SummaryItemText>$ 150</SummaryItemText>
                 </SummaryItem>
                 <SummaryItem>
                 <SummaryItemText> Descuento de envío</SummaryItemText>
-                <SummaryItemText>$ -5.90</SummaryItemText>
+                <SummaryItemText>$ {subtotal >= 7000 ? -150 :  0 } </SummaryItemText>
                 </SummaryItem>
                 <SummaryItem  type='total'>
                 <SummaryItemText> Total</SummaryItemText>
-                <SummaryItemText>$ {total}</SummaryItemText>
+                <SummaryItemText>$ { total }</SummaryItemText>
                 </SummaryItem>
-<SummaryButton  className='btn btn-dark'>COMPRAR AHORA</SummaryButton>
+               {/* <SummaryButton  className='btn btn-dark'>COMPRAR AHORA</SummaryButton>*/}
+               {/* <BotonPago price={total} />*/}
+                
             </Summary>
 
-        </Button>
-    </Wrapper>
-   
-</>  )
-}
+        </Button>) 
+          : (
+            <Button style={{display:'flex' , alignContent:'center', flexDirection:'column' ,justifyContent:'center' , marginTop:'80px'}}>
+             
+              <TopText style={{fontSize:'30px' ,margin:'auto'}}>
+                Aún no ha guardado productos en el carrito
+              </TopText>
+              <br />
+              <ButtonEmpty
+                className="btn btn-secondary pb-4 pe-3 ps-3 rounded-15"
+                onClick={() => navigate("/home")}
+                
+              >
+                <div >
+                  <FaCartPlus />
+                  <br />
+                  <h3>Añadir un nuevo producto</h3>
+                </div>
+              </ButtonEmpty>
+              
+            </Button>
+            
+          )}
+        </Wrapper>)
+        
+     </> )
+    }
 
 export default Cart
  

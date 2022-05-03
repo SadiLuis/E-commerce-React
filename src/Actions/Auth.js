@@ -154,13 +154,45 @@ export function updateUser(newUser) {
        }
     }
  }
+ export function updateUserImg(body) {
+   return async function (dispatch) {
+      try {
+         await axios.put(
+            `${BASEURL}/user/updateImg`,
+            body,
+          /*   getHeaderToken() */
+         )
+         dispatch(getUserDetail());
+         return {
+            type: 'UPDATE_USER_IMG',
+         };
+      } catch (err) {
+         console.log(err.response.data)
+      }
+   }
+}
 
 
 export function recoveryPassword  (email) {
-    let post =  axios.post(`${BASEURL}/password`, 
-    {"email": `${email}`},
-    {
-        'content-Type': 'application/json',
-    })
-    console.log(post);
+   return async function (dispatch) {
+      try{
+         const config = {
+            headers: {
+               'Content-Type': 'application/json',
+         }
+      }
+      const body = {email}
+      const res = await axios.post(`${BASEURL}/resetPassword`, body, config)
+      dispatch({
+         type: RECOVERY_PASSWORD,
+         payload: res.data
+      })
+   } catch (err) {
+      console.log(err.response.data)
+      dispatch({
+         type: RECOVERY_PASSWORD,
+         payload: err.response.data
+         })
+      }
+   }
 }

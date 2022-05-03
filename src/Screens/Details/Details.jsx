@@ -53,7 +53,7 @@ export default function Detail() {
   return ( 
       <>
             <div class="containerDetail">
-                <div class="thumb" ref={myRef}>
+                <div class="thumb2" ref={myRef}>
                   {product?.images.map( (img, index) => (
                     <img src={img} alt="product" key={index}
                     onClick={()=> handleTab(index)}

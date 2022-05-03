@@ -34,7 +34,9 @@ const Landing = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-      <div class="col">
+
+      <div class="col1 col">
+
 
         <hr class="border-dark border" />
 
@@ -47,21 +49,27 @@ const Landing = () => {
               <div class="pb-5">
                 <div class="image">
                   <div class="pb-3 mb-3">
-                    <a class="bg-light d-block" >
+
+                    <span class="bg-light d-block" >
+
                       <div class="embed-responsive embed-responsive-3by2">
                         <div class="embed-responsive-item">
                           <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/UMAGE_packshot_5102_5501-1_AConversationPiece_blackoak_petrolblue_highres_1_1_640x@2x.progressive.jpg?v=1638884064" alt="Conversation Piece Lounge Chair" />
                         </div>
                       </div>
-                    </a>
+
+                    </span>
+
 
                   </div>
                 </div>
                 <div class="titleInfo">
                   <h3 class="mb-3 ">
-                    <a>
+
+                    <span>
                       Conversation Piece Lounge Chair
-                    </a>
+                    </span>
+
                   </h3>
 
                 </div>
@@ -77,21 +85,27 @@ const Landing = () => {
               <div class="pb-5">
                 <div class="image">
                   <div class="pb-3 mb-3">
-                    <a class="bg-light d-block" >
+
+                    <span class="bg-light d-block" >
+
                       <div class="embed-responsive embed-responsive-3by2">
                         <div class="embed-responsive-item">
                           <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/BoomerangHM2SoapedOakw.LoopMarine_640x@2x.progressive.jpg?v=1626238627" alt="Boomerang Armchair HM2" />
                         </div>
                       </div>
-                    </a>
+
+                    </span>
+
 
                   </div>
                 </div>
                 <div class="titleInfo">
                   <h3 class="mb-3">
-                    <a>
+
+                    <span>
                       Boomerang Armchair HM2
-                    </a>
+                    </span>
+
                   </h3>
 
                 </div>
@@ -106,21 +120,27 @@ const Landing = () => {
               <div class="pb-5">
                 <div class="image">
                   <div class="pb-3 mb-3">
-                    <a class="bg-light d-block" >
+
+                    <span class="bg-light d-block" >
+
                       <div class="embed-responsive embed-responsive-3by2">
                         <div class="embed-responsive-item">
                           <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/FAD02NA_FanDiningChairNaturalOak_Main_640x@2x.progressive.jpg?v=1634723597" alt="Fan Dining Chair" />
                         </div>
                       </div>
-                    </a>
+
+                    </span>
+
 
                   </div>
                 </div>
                 <div class="titleInfo">
                   <h3 class="mb-3 ">
-                    <a>
+
+                    <span>
                       Fan Dining Chair
-                    </a>
+                    </span>
+
                   </h3>
 
                 </div>
@@ -130,21 +150,27 @@ const Landing = () => {
               <div class="pb-5">
                 <div class="image">
                   <div class="pb-3 mb-3">
-                    <a class="bg-light d-block" >
+
+                    <span class="bg-light d-block" >
+
                       <div class="embed-responsive embed-responsive-3by2">
                         <div class="embed-responsive-item">
                           <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/100030_S.A.C.diningchair_1_exposed1_640x@2x.progressive.jpg?v=1625484071" alt="S.A.C. Dining Chair" />
                         </div>
                       </div>
-                    </a>
+
+                    </span>
+
 
                   </div>
                 </div>
                 <div class="titleInfo">
                   <h3 class="mb-3 ">
-                    <a>
+
+                    <span>
                       S.A.C. Dining Chair
-                    </a>
+                    </span>
+
                   </h3>
 
                 </div>
@@ -155,7 +181,9 @@ const Landing = () => {
         </div>
       </div>
 
-      <div class="col">
+
+      <div class="col1 col">
+
         <hr class="border-dark border" />
       </div>
 
@@ -167,9 +195,11 @@ const Landing = () => {
                 <div class="title">
                   <div class="m-0">
                     <h2 class="mb-5">
-                      <a>
+
+                      <span class="titleInfo">
                         Ofertas
-                      </a>
+                      </span>
+
                     </h2>
                   </div>
                 </div>
@@ -183,31 +213,76 @@ const Landing = () => {
           <div class="mb-5">
             <div class="container">
               <div class="row">
-                <div class="col-6 col-lg-3">
+
+                <div class="col-6 col-sm-6">
                   <div class="producto">
                     <div class="pb5">
-                      oferta1
+
+                      <div class="image">
+                        <div class="mb-3">
+                          <span class="bg-light d-block">
+                            <div class="embed-responsive embed-responsive-1by1">
+                              <div class="embed-responsive-item">
+                                <img class="w-100 lazyloaded" alt="Rest Sofa 2" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/NewProject01_89fe0188-2c94-483e-aaea-e514d7dc575e_640x@2x.progressive.jpg?v=1624364876" />
+                              </div>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="title">
+                        <div class="m-0">
+                          <p class="m-0">
+                            <strong>
+                              Rest Sofa 2
+                            </strong>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="price">
+                        <div class="pb-3 mb-4">
+                          <s class="text-danger">
+                            $4,749
+                          </s>
+                        </div>
+                      </div>
+
+
                     </div>
                   </div>
                 </div>
-                <div class="col-6 col-lg-3">
+                <div class="col-6 col-sm-6">
                   <div class="producto">
                     <div class="pb5">
-                      oferta2
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                  <div class="producto">
-                    <div class="pb5">
-                      oferta3
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                  <div class="producto">
-                    <div class="pb5">
-                      oferta4
+
+                      <div class="image">
+                        <div class="mb-3">
+                          <span class="bg-light d-block">
+                            <div class="embed-responsive embed-responsive-1by1">
+                              <div class="embed-responsive-item">
+                                <img class="w-100 lazyloaded" alt="Juice Rectangular Table" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Juice_41_1_640x@2x.progressive.jpg?v=1625140351" />
+                              </div>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="title">
+                        <div class="m-0">
+                          <p class="m-0">
+                            <strong>
+                              Juice Rectangular Table
+                            </strong>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="price">
+                        <div class="pb-3 mb-4">
+                          <s class="text-danger">
+                            $8,491
+                          </s>
+                        </div>
+                      </div>
+
+
                     </div>
                   </div>
                 </div>
@@ -215,12 +290,16 @@ const Landing = () => {
             </div>
           </div>
         </div>
+
+
         <div >
 
         </div>
       </div>
 
-      <div class="footer  py-5">
+
+      <div class="footer py-5">
+
         <div class="container">
           <div class="row">
             <div class="col-6 col-lg-4">
@@ -242,9 +321,11 @@ const Landing = () => {
                     <div class="mb-5">
                       <div class="link">
                         <div class="m-0">
-                          <a>
+
+                          <span>
                             About Us
-                          </a>
+                          </span>
+
                         </div>
                       </div>
                     </div>
@@ -271,9 +352,11 @@ const Landing = () => {
                     <div class="mb-5">
                       <div class="link">
                         <div class="m-0">
-                          <a onClick={() => navigate('/contactform')}>
-                            E-mail:
-                          </a>
+
+                          <span onClick={() => navigate('/contactform')}>
+                            E-mail Us
+                          </span>
+
                         </div>
                       </div>
                     </div>
@@ -300,9 +383,11 @@ const Landing = () => {
                     <div class="mb-5">
                       <div class="link">
                         <div class="m-0">
-                          <a>
+
+                          <span>
                             FAQ
-                          </a>
+                          </span>
+
                         </div>
                       </div>
                     </div>
@@ -322,4 +407,6 @@ const Landing = () => {
   )
 }
 
+
 export default Landing
+
