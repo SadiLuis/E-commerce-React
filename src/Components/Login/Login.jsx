@@ -67,6 +67,7 @@ function Login({ login, isAuth, user }) {
     login(form);
   };
 
+
   useEffect(() => {
     // Si ya está logueado que lo redireccione al dashboard
     if (isAuth && user) {
@@ -76,8 +77,23 @@ function Login({ login, isAuth, user }) {
         //await postCart();
       }
       isAuth && db();
-      rol === "2" ? navigate("/dashboard/admin") : navigate("/home");
+      rol === "2" ? navigate("/dashboard/admin") : navigate("/home")
+      
     }
+    // //SI EL USUIARIO TIENE ROL 3 NO PUEDE ENTRAR AL LOGIN
+    // if (user) {
+    //   const { rol } = user;
+    //   if (rol === "3") {
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: 'Oops...',
+    //       text: 'No tienes permisos para entrar',
+    //       setTime : 5000
+    //     })
+    //     navigate("/home")
+    //   }
+    // }
+    
   }, [isAuth, navigate, user]);
 
     const [index, setIndex] = useState(0);
@@ -165,8 +181,11 @@ function Login({ login, isAuth, user }) {
 
           <div className='text-center'>
             <span className={style.loginSpan}>¿No tienes cuenta?</span>
-            <Link to='/register' className="btn btn-outline-dark p-0" >Registrate</Link> 
-            
+            <Link to='/register' className="btn btn-outline-dark p-0" >Registrate</Link>             
+          </div>
+          <div className="text-center">
+            <span> ¿Olvidaste tu contraseña? </span>
+              <Link to='/recupassj' className="btn btn-outline-dark p-0" >Recuperar</Link>          
           </div>
 
         </form>
