@@ -1,0 +1,9 @@
+
+  .title{
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: -webkit-linear-gradient(#c8935b, rgb(173, 159, 159));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }

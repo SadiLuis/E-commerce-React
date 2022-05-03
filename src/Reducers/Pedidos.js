@@ -1,10 +1,11 @@
 
-
 const initialState = {
     allPedidos: [],
     filteredPedidos: [],
     pedidoDetail: null,
-    userPedidos: []
+    userPedidos: [],
+    pedidosById: []
+
 }
 
 export default function pedidosReducer(state = initialState, action) {
@@ -13,9 +14,14 @@ export default function pedidosReducer(state = initialState, action) {
     switch (type) {
         case "GET_PEDIDOS_BY_USER":
             return { ...state, userPedidos: payload };
-        
-        
+        case 'GET_ORDERS_ID': 
+            return{
+                ...state,
+                pedidosById: action.payload
+            }
+      
             default:
             return { ...state }
-    }
+        
+    }     
 }

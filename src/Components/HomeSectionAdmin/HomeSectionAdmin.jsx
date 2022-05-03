@@ -5,9 +5,9 @@ import styles from './HomeSectionAdmin.module.css'
 
 const HomeSectionAdmin = () => {
   return (
-    <div className='mt-1'>
-      <OverviewBox/>
-    <TableProducts/>
+    <div>
+      {/* <OverviewBox/> */}
+      <TableProducts/>
     </div>
     
    

@@ -6,13 +6,20 @@ import userReducer from './users';
 import pedidosReducer from './Pedidos';
 import commentReducer from "./Comment"
 
+import pedidosReducer from './Pedidos';
+
+import ordersReducer from './Orders';
+
+
+
 
 
 const rootReducer = combineReducers({
     productsReducer,
-    loginReducer,
+   loginReducer,
     categoriesReducer,
     userReducer,
+    ordersReducer,
     pedidosReducer,
     commentReducer,
 
