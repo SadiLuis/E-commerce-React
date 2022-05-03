@@ -12,6 +12,8 @@ import Profile from "./Screens/Profile/Profile"
 
 import Cart from './Components/Cart/Cart'
 import Dashboard from "./Screens/Dashboard/Dashboard";
+import CreateReview from "./Components/Review/CreateReview/CreateReview";
+import Reviews from "./Components/Review/ScreenReviews/Reviews";
 
 
 
@@ -39,7 +41,8 @@ function App() {
         <Route exact path="/" element={<Landing />} />
         {/* <Route path="/user" element={<Profile/>}/> */}
 
-
+        <Route exact path="/review/:idProduct" element={<CreateReview />} />
+        <Route exact path="/review" element={<Reviews />} />
       </Routes>
       
 
