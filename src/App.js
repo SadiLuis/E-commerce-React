@@ -12,6 +12,9 @@ import Profile from "./Screens/Profile/Profile"
 
 import Cart from './Components/Cart/Cart'
 import Dashboard from "./Screens/Dashboard/Dashboard";
+import AddCategory from "./Components/AddCategory/AddCategory";
+import Customers from "./Components/Customers/Customers";
+import Orders from "./Components/Orders/Orders";
 
 
 
@@ -30,6 +33,9 @@ function App() {
         <Route path="/registro" element={<Register />} />
         <Route path="/dashboard/admin" element={<Dashboard />} />
         <Route path="/dashboard/admin/EditProduct/:idProduct" element={<EditProduct />} />
+        <Route path="/dashboard/admin/addCategory" element={<AddCategory />} />
+        <Route path="/dashboard/admin/customers" element={<Customers />} />
+        <Route path="/dashboard/admin/orders" element={<Orders/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />
