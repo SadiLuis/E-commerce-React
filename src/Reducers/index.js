@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
     categoriesReducer,
     userReducer,
 
-    pedidosReducer
+    pedidosReducer,
 
 
     ordersReducer,
