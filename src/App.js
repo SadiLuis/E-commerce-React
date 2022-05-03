@@ -12,7 +12,7 @@ import ContactForm from "./Components/ContactForm/ContactForm";
 import EditProduct from "./Components/AdminProduct/EditProduct"
 import Profile from "./Screens/Profile/Profile"
 
-import Orders from "./Screens/Orders/Orders";
+import MyOrders from "./Screens/MyOrders/MyOrders"; 
 
 import {useDispatch ,useSelector} from 'react-redux'
 
@@ -22,7 +22,7 @@ import {getUserDetail} from './Actions/Auth'
 
 import AddCategory from "./Components/AddCategory/AddCategory";
 import Customers from "./Components/Customers/Customers";
-import Orders from "./Components/Orders/Orders";
+ import Orders from "./Components/Orders/Orders"; 
 import ResPassword from "./Components/RestarPassword/ResPassword";
 
 
@@ -62,7 +62,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
-        <Route exact path="/orders" element={<Orders/>}/>
+        <Route exact path="/orders" element={<MyOrders/>}/>
         {/* <Route path="/user" element={<Profile/>}/> */}
 
         <Route path="/recupass" element={<ResPassword/>}/>

@@ -4,7 +4,10 @@ import { getPedidosById } from "../../Actions/Pedidos";
 import { useSelector } from "react-redux";
 import { getUserDetail } from "../../Actions/Auth";
 import styles from './Orders.module.css'
-export default function Orders (){
+
+
+
+export default function MyOrders (){
 
     const dispatch = useDispatch()
     const myUser = useSelector((state)=> state.loginReducer.userDetail)
