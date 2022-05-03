@@ -6,7 +6,6 @@ import userReducer from './users';
 import pedidosReducer from './Pedidos';
 import commentReducer from "./Comment"
 
-import pedidosReducer from './Pedidos';
 
 import ordersReducer from './Orders';
 
