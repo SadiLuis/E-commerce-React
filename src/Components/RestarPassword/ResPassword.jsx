@@ -46,20 +46,20 @@ export default function ResPassword() {
           setTime : 5000
         })
       }
-    }, [recupContr])
+    }, [recupContr, state.email])
     
 
 
   return (
     <div>
-       <div >
+       <div className='text-center' >
             <form onSubmit={handleSubmit} >
 
               <label  >Ingresa tu correo</label>
               <input  type='text' onChange={handleChange} icon={'f'}/>
               {/* <p >Introduce un correo valido</p> */}
               
-              <input  type='submit' value='Recuperar'/>
+              <input  type='submit' className='btn btn-outline-dark'  value='Recuperar'/>
 
             </form>
            </div>          

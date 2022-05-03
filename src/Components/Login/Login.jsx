@@ -185,7 +185,7 @@ function Login({ login, isAuth, user }) {
           </div>
           <div className="text-center">
             <span> ¿Olvidaste tu contraseña? </span>
-              <Link to='/recupassj' className="btn btn-outline-dark p-0" >Recuperar</Link>          
+              <Link to='/recupass' className="btn btn-outline-dark p-0" >Recuperar</Link>          
           </div>
 
         </form>
