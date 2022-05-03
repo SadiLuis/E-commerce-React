@@ -12,13 +12,14 @@ import SearchBar from '../../Components/SearchBar/SearchBar';
 import ShoppingBtn from '../../Components/Shopping/ShoppingBtn';
 import CategoriasForm from '../../Components/Checkbox/CategoriasForm';
 import {Loader} from '../../Components/Loader/Loader'
-
+import { updateCart } from '../../Actions/cart';
 
 export default function Home() {
   
   const dispatch = useDispatch()
 
 React.useEffect(()=>{
+  dispatch(updateCart())
   dispatch(getAllProducts())
   return () => {
     dispatch(cleanUp())

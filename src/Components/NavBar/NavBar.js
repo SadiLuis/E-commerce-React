@@ -292,7 +292,7 @@ function NavBar({ isAuth, user }) {
   const handleLogout = () => {
     setFlag(true);
     dispatch(logout());
-    navigate("/home");
+    navigate("/");
   };
 
   // useEffect(() => {
