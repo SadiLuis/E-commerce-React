@@ -15,7 +15,7 @@ import {
 import {BASEURL} from '../Assets/URLS';
 import Swal from 'sweetalert2'
 import getHeaderToken from '../Helpers/getHeaderToken';
-import {createCartDb ,getCartDB} from './cart'
+import {createCartDb } from './cart'
 
 
 export const getUserDetail = () => {
@@ -32,7 +32,7 @@ export const getUserDetail = () => {
             payload: data
          })
          //dispatch(getPedidosByUser(data.id));
-         dispatch(getCartDB(data.id))
+         dispatch(createCartDb(data.id))
       } catch (error) {
          console.log(error.response.data);
          dispatch({
@@ -123,7 +123,7 @@ export function login({ email, contrasena }) {
             payload: data
          });
          
-         createCartDb()
+         
          dispatch(getUserDetail());
       } catch (err) {
          //toast.error(err.response.data);

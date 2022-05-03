@@ -42,7 +42,8 @@ export const getCartDB = (userId) => async dispatch => {
       const {products } = cartLocal
       console.log(products , 'productos storage')
       console.log('db' , data)
-      let newCart = {}
+      let newCart = {};
+      let newProducts= [];
       let carritoDB = data.CarritoDetalles?.map(el => {
          return { id: el.productoId, quantity: el.cantidad }
      })
@@ -50,41 +51,38 @@ export const getCartDB = (userId) => async dispatch => {
      if(products.length ){
         console.log('entro')
      if(carritoDB.length){
-       for(let cartDB of carritoDB){
-        let itemCart = products.find(e => e.id === cartDB.id);
-         if (itemCart) {
-           
-            let newProducts = products.map(item => 
+       
+       let auxCart=[];
+        
+        
+           carritoDB.forEach(cartDB => {
+            newProducts = products.map(item =>  
                  item.id === cartDB.id
-                 ?{...item, quantity: item.quantity + cartDB.quantity }
+                 ?{quantity: item.quantity + cartDB.quantity }
                  : item )
-             
+            })
+
+           for(let cart of newProducts){
+            auxCart = carritoDB.filter(cartDB => cartDB.id !== cart.id)
+           }
              
              newCart = {
-                 products: newProducts,
-                 precioTotal: newProducts.reduce((prev, e) => {
+                 products: [...newProducts,...auxCart],
+                 precioTotal:[...newProducts, ...auxCart].reduce((prev, e) => {
                      let prod = json.data.find(el => el.id === e.id);
 
                      return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
                  }, 0)
 
              };
-             console.log(newCart)
-             } else {
-             newCart = {
-                 products: [...products, { id: cartDB.id, quantity: cartDB.quantity }],
-                 precioTotal: Math.round((cartLocal.precioTotal + json.data.find(e => e.id === cartDB.id).price) * 100) / 100
-             };
-             console.log(newCart)
-            }
-       }
-         console.log(newCart)
+             console.log(newProducts , auxCart)
+             
        saveCartDb(newCart)
 
       } else{
          newCart = {
             products: products,
-            precioTotal: products.length ? carritoDB.reduce((prev, e) => {
+            precioTotal: products.length ? products.reduce((prev, e) => {
                 let prod = json.data.find(el => el.id === e.id);
    
                 return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
@@ -110,11 +108,11 @@ export const getCartDB = (userId) => async dispatch => {
 
    } catch (err) {
      
-      return console.log(err.response.data);
+      return console.log(err);
    }
 }
 
-export const createCartDb = async () => {
+export const createCartDb = (id) => async dispatch => {
 
    try{
 
@@ -122,6 +120,7 @@ export const createCartDb = async () => {
       {},
       getHeaderToken())
 
+      dispatch(getCartDB(id))
  }catch(e){
      console.log(e)
      

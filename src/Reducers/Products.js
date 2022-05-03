@@ -2,7 +2,7 @@
 import { SEARCH_BY_NAME, GET_CATEGORIES, ORDER_BY_PRICE, ORDER_BY_RATE, FILTER_BY_CATEGORY
 ,UPDATE_CART ,ADD_ITEM ,REST_ITEM ,DELETE_ITEM, ORDER_ALFABETICAMENTE ,GET_CART} from "../Actions/Index";
 import { getCartLocalStorage, saveCartLocalStorage , getProductLocalStorage ,saveProductLocalStorage , getCartDb ,setCartDb, saveCartDb } from "../Helpers/localstorage";
-import {deleteProductCart} from '../Actions/cart'
+import {deleteProductCart,addItemCart} from '../Actions/cart'
 const initialState = {
     detailProduct : [],
     products: [],
@@ -10,9 +10,8 @@ const initialState = {
     productoPorNombre:[],
     filtered:[],
     categories:[],
-    cart: getCartLocalStorage(),
+    cart: localStorage.token_ecommerce ? getCartLocalStorage() : getCartDb(),
     sameCategory: [],
-    cartDb: getCartDb(),
     idCart: null
 }
 
@@ -116,13 +115,21 @@ export default function productsReducer(state = initialState, action) {
                 if(localStorage.token_ecommerce){
                     const localS = getCartDb()
                     console.log()
-                  state.cartDb && localS.products?.forEach((el) =>  addItemCart(el, state.idCart))
+                  state.idCart && localS.products?.forEach((el) =>  addItemCart(el, state.idCart))
+                 
+                  return {
+                      ...state,
+                      cart: getCartDb()
+                  }
                 }
-            return { 
+                else{
+                    
+               return { 
                 ...state,
                  cart: getCartLocalStorage(),
-                 cartDb: getCartDb()  
+                  
                 }
+             }
             case ADD_ITEM:
 
             itemCart = state.cart.products.find(e => e.id === payload);
@@ -156,7 +163,7 @@ export default function productsReducer(state = initialState, action) {
                return {
                 ...state,
                 cart: newCart,
-                cartDb: newCart
+                
                };
              case REST_ITEM:
             itemCart = state.cart.products.find(e => e.id === payload);
@@ -177,7 +184,7 @@ export default function productsReducer(state = initialState, action) {
             return {
                 ...state,
                 cart: newCart,
-                cartDb: newCart
+                
             };
             case DELETE_ITEM:
             itemCart = state.cart.products.find(e => e.id === payload);
@@ -196,7 +203,7 @@ export default function productsReducer(state = initialState, action) {
             return {
                 ...state,
                 cart: newCart,
-                cartDb: newCart
+                
             };
             case "GET_PRODUCT_BY_CAT": 
             return {
@@ -205,7 +212,7 @@ export default function productsReducer(state = initialState, action) {
             }
             case GET_CART: return {
                 ...state,
-                cartDB: payload,
+                cart: payload,
                 idCart: idCart
             }
 

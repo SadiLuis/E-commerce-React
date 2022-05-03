@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
@@ -9,10 +9,10 @@ import  NavBarAll from "./Components/NavBar/NavBar"
 import ContactForm from "./Components/ContactForm/ContactForm";
 import EditProduct from "./Components/AdminProduct/EditProduct"
 import Profile from "./Screens/Profile/Profile"
-
+import {useDispatch ,useSelector} from 'react-redux'
 import Cart from './Components/Cart/Cart'
 import Dashboard from "./Screens/Dashboard/Dashboard";
-
+import {getUserDetail} from './Actions/Auth'
 
 
 
@@ -20,6 +20,15 @@ import Dashboard from "./Screens/Dashboard/Dashboard";
 
 
 function App() {
+  const token = useSelector((state) => state.loginReducer.token);
+  const isAuth = useSelector((state) => state.loginReducer.isAuth);
+  const userDetail = useSelector((state) => state.loginReducer.userDetail);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    token && !isAuth && !userDetail && dispatch(getUserDetail());
+  }, [token, dispatch, userDetail, isAuth]);
+  
   return (
     <div className="App">
        
