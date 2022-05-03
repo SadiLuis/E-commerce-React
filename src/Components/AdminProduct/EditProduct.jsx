@@ -2,6 +2,7 @@ import React, { createRef, useEffect, useState } from 'react'
 import {getProductById} from "../../Actions/products.js"
 import {getAllCategories} from "../../Actions/Category.js"
 import { useSelector, useDispatch } from "react-redux";
+import SidebarAdmin from '../SidebarAdmin/SidebarAdmin';
 import './EditProduct.css'
 import icon from '../../Assets/pencil.svg'
 import { useParams } from 'react-router-dom';
@@ -66,7 +67,15 @@ export default function Product() {
 
   if(product.title) {
     return (
-    <div className='container-md'>
+      <>
+      
+      <div className="container-fluid">
+        {/* <TopNavbarAdmin/> */}
+        <div className="row">
+          <div className="col-auto col-md-2 col-xl-2 px-0 ">
+            <SidebarAdmin/>
+          </div>
+          <div className="col-10">
       <h2 className='titulo'>Editar Producto</h2>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Nombre</span>
@@ -101,7 +110,10 @@ export default function Product() {
             <span class="input-group-text" id="basic-addon1">Stock</span>
             <span class="form-control">{product?.cantidad}</span>
               </div>*/}
+             </div> 
     </div>
+    </div>
+    </>
     )
   }else {
     return (<h1>Loading...</h1>)
