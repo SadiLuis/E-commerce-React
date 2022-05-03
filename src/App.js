@@ -18,12 +18,17 @@ import {useDispatch ,useSelector} from 'react-redux'
 
 import Cart from './Components/Cart/Cart'
 import Dashboard from "./Screens/Dashboard/Dashboard";
+
+import CreateReview from "./Components/Review/CreateReview/CreateReview";
+import Reviews from "./Components/Review/ScreenReviews/Reviews";
+
 import {getUserDetail} from './Actions/Auth'
 
 import AddCategory from "./Components/AddCategory/AddCategory";
 import Customers from "./Components/Customers/Customers";
  import Orders from "./Components/Orders/Orders"; 
 import ResPassword from "./Components/RestarPassword/ResPassword";
+
 
 
 
@@ -64,6 +69,10 @@ function App() {
         <Route exact path="/" element={<Landing />} />
         <Route exact path="/orders" element={<MyOrders/>}/>
         {/* <Route path="/user" element={<Profile/>}/> */}
+
+
+        <Route exact path="/review/:idProduct" element={<CreateReview />} />
+        <Route exact path="/review" element={<Reviews />} />
 
         <Route path="/recupass" element={<ResPassword/>}/>
 
