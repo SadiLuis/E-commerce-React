@@ -92,6 +92,7 @@ const NavBarLogin = ({isAuth, myUser}) => {
      const dispatch=useDispatch();
      const navigate=useNavigate();
    const user= useSelector((state)=> state.loginReducer.userDetail);
+   
 
  function handleLogoutUser(e){
   e.preventDefault();
@@ -118,7 +119,7 @@ const NavBarLogin = ({isAuth, myUser}) => {
       </NavLink>
 
 {isAuth && myUser?(
-  <> {user.rol==="1"? <Logout/> : <NavBarLogin />}
+  <> {user.rol==="1"? <Logout/> : <NavBarLogin /> }
   <button onClick={handleLogoutUser}
   // style={{
   //   border: "none",
@@ -132,7 +133,7 @@ const NavBarLogin = ({isAuth, myUser}) => {
   // }}
   >
     
-  </button>
+  </button> 
   </>
 ):(
           <>

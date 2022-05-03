@@ -59,13 +59,13 @@ function handleClick(e) {
 
 
 
-function handleOrderByPrice(e) {
+function handleOrder(e) {
   e.preventDefault();
-  dispatch(orderByPrice(e.target.value));
-}
-function handleOrderByName(e) {
-  e.preventDefault();
-  dispatch(orderAlfabeticamente(e.target.value));
+  if(e.target.value==="A-Z" || e.target.value==="Z-A"){
+    dispatch(orderAlfabeticamente(e.target.value));
+  }else {
+    dispatch(orderByPrice(e.target.value))
+  }
 }
 
 
@@ -87,13 +87,12 @@ function handleOrderByName(e) {
           <div className={styles.sort}>
 
                <div className={styles.filtroPrecio} >
-                <select className={styles.selectors} onChange={handleOrderByPrice}>
+                <select className={styles.selectors} onChange={handleOrder}>
                   <option value="cero">Ordenar</option>
                   <option value="asc">Menor precio</option>
                   <option value="desc">Mayor precio</option>
-                </select>
-                <select className={styles.selectors} onChange={handleOrderByName}>
-                  <option value="cero">Ordenar por letra</option>
+                
+                  
                   <option value="A-Z">A-Z</option>
                   <option value="Z-A">Z-A</option>
                   </select>
