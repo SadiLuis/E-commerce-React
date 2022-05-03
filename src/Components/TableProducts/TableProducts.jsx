@@ -28,14 +28,25 @@ const TableProducts = () => {
 
     const id = useId();
 
-    function handleOrderByPrice(e) {
+    function handleSelect(e) {
         e.preventDefault();
-        dispatch(orderByPrice(e.target.value));
+        if(e.target.value==="A-Z"||e.target.value==="Z-A"){
+            dispatch(orderAlfabeticamente(e.target.value));
+        }else{
+            if (e.target.value==="asc"||e.target.value==="desc") {
+                dispatch(orderByPrice(e.target.value));
+            }
+        }
     }
-    function handleOrderByName(e) {
-        e.preventDefault();
-        dispatch(orderAlfabeticamente(e.target.value));
-    }
+
+    // function handleOrderByPrice(e) {
+    //     e.preventDefault();
+    //     dispatch(orderByPrice(e.target.value));
+    // }
+    // function handleOrderByName(e) {
+    //     e.preventDefault();
+    //     dispatch(orderAlfabeticamente(e.target.value));
+    // }
 
     return (
         <div className='row'>
@@ -54,21 +65,14 @@ const TableProducts = () => {
 
 
                     <div className='col'>
-                        <select className='form-select' onChange={handleOrderByPrice}>
-                            <option value="cero">Ordenar por precio</option>
+                        <select className='form-select' onChange={handleSelect}>
+                            <option value="cero">Ordenar productos</option>
                             <option value="asc">Menor precio</option>
                             <option value="desc">Mayor precio</option>
-                        </select>
-                    </div>
-                    <div className='col'>
-                        <select className='form-select' onChange={handleOrderByName}>
-                            <option value="cero">Ordenar por letra</option>
                             <option value="A-Z">A-Z</option>
                             <option value="Z-A">Z-A</option>
                         </select>
                     </div>
-
-
 
                     <div className='col'>
                         <SearchBar setPage={setCurrentPage} />

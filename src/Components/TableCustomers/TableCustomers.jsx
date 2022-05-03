@@ -44,7 +44,8 @@ const TableCustomers = () => {
                             {currentCustomers.map(c => (
                                 <tr >
                                     <td className='text-center'>
-                                        <i className="fs-4 bi-x-circle-fill"></i>
+                                        <i className="fs-4 bi-x-circle-fill pe-auto"  
+                                        role='button'></i>
                                     </td>
 
                                     <td>{c.nombre}</td>
