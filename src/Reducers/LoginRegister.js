@@ -45,11 +45,11 @@ export default function loginRegistroReducer(state = initialState, action) {
                 userDetail: null
             };
 
-        case RECOVERY_PASSWORD:
-            return {
-                ...state,
-                recoveryPass:[...action.payload]
-            }
+            case RECOVERY_PASSWORD:
+                return {
+                    ...state,
+                    recoveryPass:action.payload
+                }
             case REGISTER_SUCCESS: return {
                 ...state ,
                 isRegister: action.payload

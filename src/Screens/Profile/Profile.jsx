@@ -27,6 +27,8 @@ export default function Profile() {
   })
   const [modalClose, setModalClose] = useState(false)
   const myUser = useSelector((state)=> state.loginReducer.userDetail)
+  console.log(myUser)
+  
    const handleChange = (e) => {
      setInput({
        
@@ -173,7 +175,7 @@ export default function Profile() {
                       } 
                 </div>
               
-              : <div className='row'  >No existe el usuario</div>
+              : <div className='row' >No existe el usuario</div>
               
             
           }
