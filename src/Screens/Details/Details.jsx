@@ -8,6 +8,7 @@ import BotonPago from "../../Components/BtnPago/BtnPago.jsx";
 import { WhatsApp } from "../../Actions/whatsApp.js";
 import Swal from 'sweetalert2'
 import Carousel from "../../Components/Carousel/Carousel.jsx";
+import Review from "../../Components/Review/ScreenReviews/Reviews.jsx";
 export default function Detail() {
   
   const { idProduct } = useParams();
@@ -53,7 +54,7 @@ export default function Detail() {
   return ( 
       <>
             <div class="containerDetail">
-                <div class="thumb" ref={myRef}>
+                <div class="thumb2" ref={myRef}>
                   {product?.images.map( (img, index) => (
                     <img src={img} alt="product" key={index}
                     onClick={()=> handleTab(index)}
@@ -81,6 +82,12 @@ export default function Detail() {
                </div>
                <div class="recommended">
                  <Carousel category={product?.category} />
+              </div>
+
+              <div class="comentariosProducto">
+                    <Review
+                    idProduct={product?.id}
+                    />
               </div>
 
             

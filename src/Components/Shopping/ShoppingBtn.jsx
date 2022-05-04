@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux'
 import icon from '../../Assets/cart.svg'
 import {Link} from 'react-router-dom'
 export default function ShoppingBtn() {
-  const item = useSelector((state) => state.productsReducer.cart.products);
+  const item = useSelector((state) =>  state.productsReducer.cart.products);
   console.log(item)
   return (
     <div>

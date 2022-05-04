@@ -8,8 +8,8 @@ const Dashboard = () => {
     <>
     <div className="container-fluid">
         {/* <TopNavbarAdmin/> */}
-        <div className="row">
-          <div className="col-auto col-md-2 col-xl-2 px-0 ">
+        <div className="row ">
+          <div className="col-auto col-md-2 col-xl-2 px-0 bg-dark">
           <SidebarAdmin/> 
           </div>
           <div className="col-10">
