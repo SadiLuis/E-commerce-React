@@ -5,11 +5,12 @@ import Register from "./Components/Register/Register";
 import Detail from "./Screens/Details/Details";
 import Home from "./Screens/Home/Home";
 import Landing from './Screens/Landing/Landing'
-import  NavBarAll from "./Components/NavBar/NavBar"
+import NavBarAll from "./Components/NavBar/NavBar"
 import ContactForm from "./Components/ContactForm/ContactForm";
 import EditProduct from "./Components/AdminProduct/EditProduct"
 import Profile from "./Screens/Profile/Profile"
-
+import FAQs from './Screens/Landing/FAQs'
+import About from './Screens/Landing/About'
 import Cart from './Components/Cart/Cart'
 import Dashboard from "./Screens/Dashboard/Dashboard";
 
@@ -22,9 +23,9 @@ import Dashboard from "./Screens/Dashboard/Dashboard";
 function App() {
   return (
     <div className="App">
-       
-        <NavBarAll /> 
-         
+
+      <NavBarAll />
+
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Register />} />
@@ -34,14 +35,16 @@ function App() {
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />
         <Route path="/contactform" element={<ContactForm />} />
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/profile" element={<Profile />} />
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/faqs" element={<FAQs />} />
         {/* <Route path="/user" element={<Profile/>}/> */}
 
 
       </Routes>
-      
+
 
     </div>
   );
