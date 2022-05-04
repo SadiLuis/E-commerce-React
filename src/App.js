@@ -6,6 +6,8 @@ import Detail from "./Screens/Details/Details";
 import Home from "./Screens/Home/Home";
 import Landing from './Screens/Landing/Landing'
 
+import FAQs from './Screens/Landing/FAQs'
+import About from './Screens/Landing/About'
 import  NavBarAll from "./Components/NavBar/NavBar"
 
 import ContactForm from "./Components/ContactForm/ContactForm";
@@ -67,6 +69,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/faqs" element={<FAQs />} />
         <Route exact path="/orders" element={<MyOrders/>}/>
         {/* <Route path="/user" element={<Profile/>}/> */}
 
