@@ -17,7 +17,7 @@ export default function pedidosReducer(state = initialState, action) {
         case 'GET_ORDERS_ID': 
             return{
                 ...state,
-                pedidosById: action.payload
+                pedidosById: payload
             }
       
             default:
