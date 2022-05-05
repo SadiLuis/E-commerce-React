@@ -38,7 +38,7 @@ import ResPassword from "./Components/RestarPassword/ResPassword";
 
 
 
-dd9515ff40f9c3f3da46b59f07b32643b7bc80
+
 
 
 
@@ -66,6 +66,7 @@ function App() {
         <Route path="/registro" element={<Register />} />
         <Route path="/dashboard/admin" element={<Dashboard />} />
         <Route path="/dashboard/admin/EditProduct/:idProduct" element={<EditProduct />} />
+        <Route path="/dashboard/admin/createProduct" element={<CreateProduct />} />
         <Route path="/dashboard/admin/addCategory" element={<AddCategory />} />
         <Route path="/dashboard/admin/customers" element={<Customers />} />
         <Route path="/dashboard/admin/orders" element={<Orders/>}/>
