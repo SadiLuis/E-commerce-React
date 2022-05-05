@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import {Link} from 'react-router-dom'
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getPedidosById } from "../../Actions/Pedidos";
@@ -43,9 +44,33 @@ export default function MyOrders (){
     {
       Header: "Productos",
       accessor: (row) => row.productos.map((a) => a.producto).join(" "),
+      
       Cell: ({ row }) => (
+        
         <span>
-           {row.original.productos.map((e,i)=>  <p>{e.producto}, </p>)}
+          
+           {row.original.productos.map((e,i)=>  
+            i === row.original.productos.length -1 ? 
+            <div>
+           
+             <Link to={`/detail/${e.productoId}`}><p>{e.producto}</p></Link>
+             <Link to={`/review/${e.productoId}`}><button style={{marginBottom: '0rem'}}>review</button></Link>
+             
+             </div>
+             :
+             <div>
+              <div>
+           
+             <Link to={`/detail/${e.productoId}`}><p>{e.producto},</p></Link>
+             <Link to={`/review/${e.productoId}`}><button>review</button></Link>
+             
+             </div>
+
+             </div>
+             )
+             
+             
+             }
 
         </span>
        
@@ -53,7 +78,8 @@ export default function MyOrders (){
     },
     {
       Header: 'Total',
-      accessor: 'totalPedido'
+      accessor: 'totalPedido',
+      Cell: data =>  <b><p>${data.value}</p></b>
     },
   ], [])
 
