@@ -3,6 +3,13 @@
     padding: 0;
     color: grey;
     text-decoration: solid;
+    margin-left: 0px;
+    box-sizing: border-box;
+}
+
+.container titulo{
+    margin-left: 0;
+    
 }
 
 

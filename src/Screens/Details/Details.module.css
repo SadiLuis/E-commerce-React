@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 120px 4fr 3fr;
     box-sizing: border-box;
-    grid-template-rows: 700px 600px;
+    grid-template-rows: 700px 600px 700px;
     margin: 20px;
 }
 
@@ -90,10 +90,17 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    grid-column: 1/4;
+    grid-column: 2/4;
+    grid-row: 2/3;
 
 }
 
 .comentariosProducto{
     display: flex;
-}
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    grid-column: 2/4;
+    grid-row: 3/4;
+    align-items: center;
+}   
