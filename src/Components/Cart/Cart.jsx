@@ -10,7 +10,7 @@ import BotonPago from '../BtnPago/BtnPago'
 
 const Cart = () => {
   let items = useSelector((state) => {
-    let completeProducts = state.productsReducer.cart.products;
+    let completeProducts =  state.productsReducer.cart.products;
     completeProducts = completeProducts.map((e) => {
       const finded = state.productsReducer.allProducts.find(
         (el) => el.id === e.id

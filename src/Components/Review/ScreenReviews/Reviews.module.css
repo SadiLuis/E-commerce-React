@@ -1,0 +1,30 @@
+.bigContainer{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;  
+}
+
+.bigContainer h1 {
+    color: grey;
+    text-decoration: solid;
+}
+
+.bigNumber{
+    color: gray;
+    display: block;
+    align-items: center;
+    align-content: center;
+    margin-left: 0;
+    margin: 30px auto;    
+}
+
+.reviewCards{
+    align-items: center;
+}
+
+.eachCard {
+    color: gray;
+    margin: 15px auto;
+    align-content: flex-start;
+    font-size: 8px;
+}

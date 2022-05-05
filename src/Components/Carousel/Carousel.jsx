@@ -22,7 +22,7 @@ function Carousel({category}) {
 
     let [interval, setInterval] = useState({
         init: 0,
-        end: 4
+        end: 3
     })
     
     useEffect(() => {
@@ -36,8 +36,8 @@ function Carousel({category}) {
         let auxInit = interval.init
         let auxEnd= interval.end
         setInterval({
-            init: auxInit + 4,
-            end: auxEnd + 4
+            init: auxInit + 3,
+            end: auxEnd + 3
         })
         
     }
@@ -46,19 +46,17 @@ function Carousel({category}) {
         let auxInit = interval.init
         let auxEnd= interval.end
         setInterval({
-            init: auxInit - 4,
-            end: auxEnd - 4
+            init: auxInit - 3,
+            end: auxEnd - 3
         })
     }
 
-    console.log("init", interval.init)
-    console.log("end", interval.end)
      
   if (recommendedProducts.length > 0) {
       return (
           
             <div class="container">
-                <h2 class="text-start-bold">Mas productos de la categoría {category} que podrían interesarte</h2>
+                <h2 class="titulo">Mas productos de la categoría <b>{category}</b> que podrían interesarte</h2>
                 {/* <!-- Slider --> */}
                 
 

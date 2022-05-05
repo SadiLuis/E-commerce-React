@@ -3,16 +3,25 @@ import productsReducer from './Products';
 import loginReducer from './LoginRegister';
 import categoriesReducer from './Categories';
 import userReducer from './users';
+import pedidosReducer from './Pedidos';
+import commentReducer from "./Comment"
+
+
 import ordersReducer from './Orders';
+
+
 
 
 
 const rootReducer = combineReducers({
     productsReducer,
-    loginReducer,
+   loginReducer,
     categoriesReducer,
     userReducer,
-    ordersReducer
+    ordersReducer,
+    pedidosReducer,
+    commentReducer,
+
 })
 
 
