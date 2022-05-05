@@ -93,3 +93,7 @@
     grid-column: 1/4;
 
 }
+
+.comentariosProducto{
+    display: flex;
+}
