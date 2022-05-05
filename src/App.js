@@ -15,6 +15,7 @@ import Dashboard from "./Screens/Dashboard/Dashboard";
 import AddCategory from "./Components/AddCategory/AddCategory";
 import Customers from "./Components/Customers/Customers";
 import Orders from "./Components/Orders/Orders";
+import UserDetailAdmin from "./Components/UserDetailAdmin/UserDetailAdmin";
 
 
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/dashboard/admin/addCategory" element={<AddCategory />} />
         <Route path="/dashboard/admin/customers" element={<Customers />} />
         <Route path="/dashboard/admin/orders" element={<Orders/>}/>
+        <Route path="/dashboard/admin/userDetailAdmin/:id" element={<UserDetailAdmin/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />
