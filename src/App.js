@@ -20,6 +20,7 @@ import {useDispatch ,useSelector} from 'react-redux'
 
 import Cart from './Components/Cart/Cart'
 import Dashboard from "./Screens/Dashboard/Dashboard";
+import CreateProduct from "./Components/AdminProduct/CreateProduct";
 
 import CreateReview from "./Components/Review/CreateReview/CreateReview";
 import Reviews from "./Components/Review/ScreenReviews/Reviews";
@@ -30,6 +31,7 @@ import AddCategory from "./Components/AddCategory/AddCategory";
 import Customers from "./Components/Customers/Customers";
  import Orders from "./Components/Orders/Orders"; 
 import ResPassword from "./Components/RestarPassword/ResPassword";
+
 
 
 
@@ -74,7 +76,7 @@ function App() {
         <Route exact path="/orders" element={<MyOrders/>}/>
         {/* <Route path="/user" element={<Profile/>}/> */}
 
-
+        <Route path="/createproduct" element={<CreateProduct/>} />
         <Route exact path="/review/:idProduct" element={<CreateReview />} />
         <Route exact path="/review" element={<Reviews />} />
 

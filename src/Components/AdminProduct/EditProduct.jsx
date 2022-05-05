@@ -6,6 +6,7 @@ import SidebarAdmin from '../SidebarAdmin/SidebarAdmin';
 import './EditProduct.css'
 import icon from '../../Assets/pencil.svg'
 import { useParams } from 'react-router-dom';
+import { validation } from './validation';
 
 
 export default function Product() {
@@ -14,7 +15,7 @@ export default function Product() {
   let myRef = createRef()
   const product = useSelector((state) => state.productsReducer.detailProduct);
   const categories = useSelector((state) => state.categoriesReducer.categories);
-  
+  const [errors, setErrors] = useState({});
   let [index, setIndex] = useState(0)
   
   useEffect(() => {
@@ -49,7 +50,7 @@ export default function Product() {
     size: product.size,
     cantidad: product.cantidad,
   });
-
+  console.log("input", input)
   const handleTab = (index) => {
     setIndex(index)
     const images = myRef.current.children
@@ -64,6 +65,18 @@ export default function Product() {
         countryId: [...input.countryId, e.target.value]
     })
   }*/
+  function handleChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+    setErrors(
+      validation({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
+  }
 
   if(product.title) {
     return (
@@ -79,7 +92,14 @@ export default function Product() {
       <h2 className='titulo'>Editar Producto</h2>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Nombre</span>
-            <input type="text" class="form-control" placeholder={product?.title} aria-label="Username" aria-describedby="basic-addon1"></input>
+            <input type="text" 
+            class="form-control" 
+            
+            aria-label="Username" 
+            aria-describedby="basic-addon1"
+            value={input.title}
+            onChange={(e) => handleChange(e)}>
+            </input>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Categoría</span>
