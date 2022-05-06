@@ -324,7 +324,6 @@ const Landing = () => {
                           <span class="links" onClick={() => navigate('/about')}>
                             About Us
                           </span>
-
                         </div>
                       </div>
                     </div>
@@ -343,7 +342,7 @@ const Landing = () => {
                   </div>
                   <div class="titleFooter">
                     <div class="mb-3">
-                      <strong>
+                      <strong >
                         Contact
                       </strong>
                     </div>

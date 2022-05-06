@@ -51,3 +51,19 @@ export const saveCartDb = (cart) => {
   cart = JSON.stringify(cart);
   localStorage.setItem('cartDb', cart);
 };
+
+
+export const getPedido = () => {
+  try {
+    
+    const pedido = localStorage.getItem('pedido');
+    return pedido ? JSON.parse(pedido) : {}
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const savePedido = (pedido) => {
+  pedido = JSON.stringify(pedido);
+  localStorage.setItem('pedido', pedido);
+};

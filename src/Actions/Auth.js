@@ -50,7 +50,8 @@ export function register({
     pais,
     provincia,
     direccion,
-    telefono }) {
+    telefono,
+    }) {
     return async function (dispatch) {
        try {
           // Configuro los headers
@@ -69,7 +70,8 @@ export function register({
              pais,
              provincia,
              direccion,
-             telefono
+             telefono,
+           
           };
           console.log("body")
           console.log(body)
@@ -128,9 +130,15 @@ export function login({ email, contrasena }) {
       } catch (err) {
          //toast.error(err.response.data);
          console.log(err.response.data);
-
+         Swal.fire({
+            icon: 'error',
+            title: 'Datos incorrectos',
+            text: 'Algo salió mal , intentelo de nuevo ingresando los datos nuevamente!',
+           
+          })
          // Si ocurrió un error durante el logen, envio el login_fail
          return dispatch({
+            
             type: LOGIN_FAILED
          });
       }

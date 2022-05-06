@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BASEURL } from '../Assets/URLS';
-
+import {getUserDetail} from './Auth'
 
 
  export function getAllUsers(){
@@ -16,3 +16,19 @@ import { BASEURL } from '../Assets/URLS';
        }
     }
  }
+
+ export function updateOrderUser(body) {
+   return async function (dispatch) {
+      try {
+         await axios.post(
+            `${BASEURL}/user/updateOrder`,
+            body,
+         
+         )
+         dispatch(getUserDetail());
+        
+      } catch (err) {
+         console.log(err)
+      }
+   }
+}
