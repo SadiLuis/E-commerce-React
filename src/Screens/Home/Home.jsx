@@ -19,7 +19,7 @@ import PushBar from '../Landing/PushBar.jsx'
 export default function Home() {
 
   const dispatch = useDispatch()
-  const [showNewsletter, setShowNewsletter] = useState(true)
+  const [showNewsletter, setShowNewsletter] = useState(false)
 
   React.useEffect(() => {
     dispatch(updateCart())
