@@ -67,3 +67,19 @@ import {getUserDetail} from './Auth'
       type: 'CLEAN_DISABLED_USER'
    }
 }
+
+   export function updateOrderUser(body) {
+      return async function (dispatch) {
+         try {
+            await axios.post(
+               `${BASEURL}/user/updateOrder`,
+               body,
+            
+            )
+            dispatch(getUserDetail());
+           
+         } catch (err) {
+            console.log(err)
+         }
+      }
+   }
