@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import uno from '../../Assets/uno.JPG'
 import dos from '../../Assets/dos.JPG'
 import tres from '../../Assets/tres.JPG';
@@ -317,18 +317,17 @@ const Landing = () => {
                       </strong>
                     </div>
                   </div>
-                  <div class="links">
+                  <div>
                     <div class="mb-5">
-                      <div class="link">
-                        <div class="m-0">
-
-                          <span onClick={() => navigate('/about')}>
+                      <div>
+                        <div class="m-0" >
+                          <span class="links" onClick={() => navigate('/about')}>
                             About Us
                           </span>
-
                         </div>
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -348,15 +347,13 @@ const Landing = () => {
                       </strong>
                     </div>
                   </div>
-                  <div class="links">
+                  <div>
                     <div class="mb-5">
                       <div class="link">
                         <div class="m-0">
-
-                          <span onClick={() => navigate('/contactform')}>
+                          <span class="links" onClick={() => navigate('/contactform')}>
                             E-mail Us
                           </span>
-
                         </div>
                       </div>
                     </div>
@@ -379,15 +376,13 @@ const Landing = () => {
                       </strong>
                     </div>
                   </div>
-                  <div class="links">
+                  <div>
                     <div class="mb-5">
                       <div class="link">
                         <div class="m-0">
-
-                          <span onClick={() => navigate('/faqs')}>
-                            FAQ
+                          <span class="links" onClick={() => navigate('/faqs')}>
+                            FAQs
                           </span>
-
                         </div>
                       </div>
                     </div>
@@ -395,13 +390,8 @@ const Landing = () => {
                 </div>
               </div>
             </div>
-
-
-
           </div>
-
         </div>
-
       </div>
     </div >
   )
