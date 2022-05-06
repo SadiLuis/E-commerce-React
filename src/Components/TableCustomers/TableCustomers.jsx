@@ -26,10 +26,7 @@ const TableCustomers = () => {
         setCurrentPage(pageNum)
     }
 
-    const changeStatus = (statusUser, id) => {
-        dispatch(changeStatusUser(status, id))
-        console.log('status:', statusUser, 'id:', id)
-    }
+    
 
     return (
         <>

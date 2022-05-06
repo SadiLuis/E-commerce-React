@@ -35,6 +35,7 @@ import UserDetailAdmin from "./Components/UserDetailAdmin/UserDetailAdmin";
 
  
 import ResPassword from "./Components/RestarPassword/ResPassword";
+import OrderDetailAdmin from "./Components/OrderDetailAdmin/OrderDetailAdmin";
 
 
 
@@ -71,6 +72,7 @@ function App() {
         <Route path="/dashboard/admin/customers" element={<Customers />} />
         <Route path="/dashboard/admin/orders" element={<Orders/>}/>
         <Route path="/dashboard/admin/userDetailAdmin/:id" element={<UserDetailAdmin/>}/>
+        <Route path="/dashboard/admin/orderDetailAdmin/:id/:idUser" element={<OrderDetailAdmin/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />

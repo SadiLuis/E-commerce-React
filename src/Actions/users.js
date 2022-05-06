@@ -57,6 +57,12 @@ import { BASEURL } from '../Assets/URLS';
 
  export function cleanUserDetail(){
     return {
-       type: 'CLEAR_USER_DETAIL'
+       type: 'CLEAN_USER_DETAIL'
     }
  }
+
+ export function cleanUserDisabled(){
+   return {
+      type: 'CLEAN_DISABLED_USER'
+   }
+}

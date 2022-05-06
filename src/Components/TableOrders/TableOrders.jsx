@@ -43,7 +43,7 @@ const TableOrders = () => {
                                 <td>{o.usuario.nombre}</td>
                                 <td>
 
-                                        <Link to={`/dashboard/admin/OrderDetailAdmin/${o.pedidoId}`}>
+                                        <Link to={`/dashboard/admin/OrderDetailAdmin/${o.pedidoId}/${o.usuario.id}`}>
                                             Ver Detalle
                                         </Link>
 

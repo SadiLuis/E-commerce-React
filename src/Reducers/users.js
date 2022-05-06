@@ -2,7 +2,8 @@ import { getAllUsers } from '../Actions/users'
 
 const initialState = {
     users: [],
-    userDetail: {}
+    userDetail: {},
+    userDisabled: ''
 }
 
 export default function userReducer(state = initialState, action) {
@@ -21,7 +22,17 @@ export default function userReducer(state = initialState, action) {
         case 'CLEAN_USER_DETAIL':
             return {
                 ...state,
-                userDetail:{}
+                userDetail: {}
+            }
+        case 'DISABLED_USER':
+            return {
+                ...state,
+                userDisabled: action.payload
+            }
+        case 'CLEAN_DISABLED_USER':
+            return {
+                ...state,
+                userDisabled: ''
             }
         default:
             return { ...state }

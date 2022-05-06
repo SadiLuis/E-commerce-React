@@ -81,3 +81,23 @@ export function editStatusOrder(orderId, newStatus) {
       }
    }
 }
+
+export function getOrderById(orderId) {
+    return async function (dispatch) {
+        try {
+            const response = await axios.get(`${BASEURL}/pedidos/${orderId}`);
+            return dispatch({
+                type: 'GET_ORDER_BY_ID',
+                payload: response.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export function cleanOrderDetail() {
+    return {
+        type: 'CLEAN_ORDER_DETAIL'
+    }
+}
