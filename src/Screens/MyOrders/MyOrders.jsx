@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { getUserDetail } from "../../Actions/Auth";
 import styles from './Orders.module.css'
 import ProductTable from "../../Components/ProductTable/ProductTable";
+import HistoryOrders from "./HistoryOrders";
 
 
 
@@ -24,75 +25,24 @@ export default function MyOrders (){
   
   const pedidos = useSelector((state)=> state.pedidosReducer.pedidosById)
   
-  const columns = useMemo(()=> [
-    {
-      Header: 'Fecha',
-      accessor: 'fechaCreacion',
-      Cell: data => {
-        return data.value.slice(0,10)
-      }
-    },
-    {
-      Header: 'Estado',
-      accessor: 'status',
-      Cell: data => {
-         return data.value === 'PENDIENTE' ? (<p style={{color: 'red'}}>{data.value}</p>) :
-        (<p style={{color: 'green'}}>{data.value}</p>)
-      }
-    },
 
-    {
-      Header: "Productos",
-      accessor: (row) => row.productos.map((a) => a.producto).join(" "),
-      
-      Cell: ({ row }) => (
-        
-        <span>
-          
-           {row.original.productos.map((e,i)=>  
-            i === row.original.productos.length -1 ? 
-            <div>
-           
-             <Link to={`/detail/${e.productoId}`}><p>{e.producto}</p></Link>
-             <Link to={`/review/${e.productoId}`}><button style={{marginBottom: '0rem'}}>review</button></Link>
-             
-             </div>
-             :
-             <div>
-              <div>
-           
-             <Link to={`/detail/${e.productoId}`}><p>{e.producto},</p></Link>
-             <Link to={`/review/${e.productoId}`}><button>review</button></Link>
-             
-             </div>
-
-             </div>
-             )
-             
-             
-             }
-
-        </span>
-       
-      )
-    },
-    {
-      Header: 'Total',
-      accessor: 'totalPedido',
-      Cell: data =>  <b><p>${data.value}</p></b>
-    },
-  ], [])
-
-  const data = useMemo(()=> pedidos )
     
     return(
         
-      <div className="table-container">
+      <div >
         <h1 className={styles.title}>Historial de pedidos</h1>
-      {
-        
-        <ProductTable columns={columns} data={data} />
-      }
+          {
+            pedidos.length && pedidos.map(e => (
+                <div>
+                <HistoryOrders fecha={e.fechaCreacion} productos={e.productos} total={e.totalPedido} status={e.status}/>
+                
+                </div>
+               
+                
+            )
+          
+            )
+          }
    
      
     </div>
