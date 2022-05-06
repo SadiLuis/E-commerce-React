@@ -78,3 +78,22 @@ export const getDetailPedido = (pedido) => {
    }
 }
 
+export function editStatusPedido(orderId, newStatus) {
+   
+   return async function (dispatch) {
+      
+      try {
+         const body = {
+            status : newStatus
+         }
+         const config = getHeaderToken()
+         const response = await axios.put(`${BASEURL}/pedidos/${orderId}`, body, config)
+         return {
+            type: 'EDIT_STATUS_ORDER',
+            payload: response.data
+         }
+      } catch (err) {
+         return console.log(err.response.data);
+      }
+   }
+}

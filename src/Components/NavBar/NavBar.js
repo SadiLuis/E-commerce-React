@@ -204,7 +204,7 @@ const NavBarAdmin = () => {
           marginBottom:"15rem"
             }}
           >
-            Dashboard
+            Dashboar
           </NavLink>
           <NavLink
             to="/dashboard/sales"
