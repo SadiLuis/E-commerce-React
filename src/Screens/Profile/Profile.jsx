@@ -73,20 +73,18 @@ export default function Profile() {
       <div className={styles.container}> 
       <div className='container'>
 
-    <div className={`row `}>
+{/*     <div className={`row `}>
         <div className={` ${styles.buttons}`}>
           <button className={`btn ${styles.btnLink}`}><Link to='/'>Back to home</Link></button>
             
-       {/*  {
-          myUser && <button className={` ${styles.btnLink}`} onClick={()=> dispatch(logout())}>Sign Out</button>
-        } */}
+      
           
         </div>
 
         </div>
             <div className={`text-left ${styles.containerTitle} `}>
             <h3 className={styles.title}>Mi cuenta</h3>
-          </div>
+          </div> */}
             
      
         
@@ -138,7 +136,7 @@ export default function Profile() {
                       <b><p className='mb-3'>{myUser.nombre}</p></b>
                       <p className='mb-3'>Nombre de usuario: <b>{myUser.usuario}</b></p>
                       <p className='mb-3'> email: <b>{myUser.email} </b></p>
-
+                        <Link to={'/orders'}><button className='btn btn-outline-dark'>Historial de pedidos</button></Link>
                        
                       </div>
                   

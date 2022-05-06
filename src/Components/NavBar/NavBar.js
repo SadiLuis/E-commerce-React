@@ -204,7 +204,7 @@ const NavBarAdmin = () => {
           marginBottom:"15rem"
             }}
           >
-            Dashboard
+            Dashboar
           </NavLink>
           <NavLink
             to="/dashboard/sales"
@@ -292,7 +292,7 @@ function NavBar({ isAuth, user }) {
   const handleLogout = () => {
     setFlag(true);
     dispatch(logout());
-    navigate("/home");
+    navigate("/");
   };
 
   // useEffect(() => {

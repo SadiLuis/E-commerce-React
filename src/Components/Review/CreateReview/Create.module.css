@@ -1,0 +1,62 @@
+.radioInput{
+    display: none;
+}
+
+.star{
+    cursor: pointer;
+    transition: color 200ms;
+}
+
+.container{
+    box-sizing: border-box;
+    margin: 50px;
+    align-items: center;
+    color: gray;
+}
+
+.containerRating{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.comentario{
+    margin-top: 20px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+
+.productImg{
+    border: 1px solid rgb(211, 211, 211);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: 130px;
+    max-height: 130px;
+    box-sizing: border-box;
+    margin-right: 100px;
+    align-items: center;
+    
+}
+
+.productImg img{
+    max-width: 125px;
+    max-height: 125px;
+}
+
+.subtitle{
+    margin-top: 5px;
+    margin-left: 30px;
+    display: flex;
+    justify-content: space-between;
+    max-width: 300px;
+}
+
+.underTextArea{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 300px;
+}

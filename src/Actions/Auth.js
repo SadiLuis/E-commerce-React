@@ -15,7 +15,7 @@ import {
 import {BASEURL} from '../Assets/URLS';
 import Swal from 'sweetalert2'
 import getHeaderToken from '../Helpers/getHeaderToken';
-
+import {createCartDb } from './cart'
 
 
 export const getUserDetail = () => {
@@ -26,11 +26,13 @@ export const getUserDetail = () => {
          const { data } = await axios.get(`${BASEURL}/user`, headers);
          //toast(`Bienvenido ${data.nombre}`)
          // console.log(data);
+         
          dispatch({
             type: GET_USER_DETAIL,
             payload: data
          })
          //dispatch(getPedidosByUser(data.id));
+         dispatch(createCartDb(data.id))
       } catch (error) {
          console.log(error.response.data);
          dispatch({
@@ -48,7 +50,8 @@ export function register({
     pais,
     provincia,
     direccion,
-    telefono }) {
+    telefono,
+    }) {
     return async function (dispatch) {
        try {
           // Configuro los headers
@@ -67,7 +70,8 @@ export function register({
              pais,
              provincia,
              direccion,
-             telefono
+             telefono,
+           
           };
           console.log("body")
           console.log(body)
@@ -78,6 +82,8 @@ export function register({
              type: REGISTER_SUCCESS,
              payload: true
           })
+
+         
           
          } catch (error) {
             console.log(error);
@@ -118,14 +124,21 @@ export function login({ email, contrasena }) {
             type: LOGIN_SUCCESS,
             payload: data
          });
-
+         
+         
          dispatch(getUserDetail());
       } catch (err) {
          //toast.error(err.response.data);
          console.log(err.response.data);
-
+         Swal.fire({
+            icon: 'error',
+            title: 'Datos incorrectos',
+            text: 'Algo salió mal , intentelo de nuevo ingresando los datos nuevamente!',
+           
+          })
          // Si ocurrió un error durante el logen, envio el login_fail
          return dispatch({
+            
             type: LOGIN_FAILED
          });
       }

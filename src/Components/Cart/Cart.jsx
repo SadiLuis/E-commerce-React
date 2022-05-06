@@ -6,11 +6,11 @@ import {Wrapper, Top ,TopButton ,TopText ,TopTexts ,Button ,Info
    ,SummaryItem ,Summary ,SummaryItemText ,SummaryButton ,SummaryTitle ,ButtonEmpty , Anuncio} from './Styles'
 import { useNavigate } from 'react-router-dom';
 import { FaCartPlus } from "react-icons/fa";
-import BotonPago from '../BtnPago/BtnPago'
-
+import { postOrder } from '../../Actions/orders';
+import Swal from 'sweetalert2'
 const Cart = () => {
   let items = useSelector((state) => {
-    let completeProducts = state.productsReducer.cart.products;
+    let completeProducts =  state.productsReducer.cart.products;
     completeProducts = completeProducts.map((e) => {
       const finded = state.productsReducer.allProducts.find(
         (el) => el.id === e.id
@@ -22,6 +22,7 @@ const Cart = () => {
   });
   const subtotal = useSelector((state) => state.productsReducer.cart.precioTotal);
   items = items?.filter((e) => e);
+  const isAuth = useSelector((state) => state.loginReducer.isAuth);
   const navigate = useNavigate()
  const dispatch = useDispatch()
 
@@ -31,6 +32,39 @@ const Cart = () => {
   }, [dispatch]);
      
   let total = subtotal >= 7000 ? subtotal  : subtotal + 150
+
+  const handlebtnCompra = () => {
+    if (!isAuth) {
+      Swal.fire({
+        title: "Necesita estar registrado para realizar la compra",
+        showDenyButton: false,
+        showCancelButton: true,
+        confirmButtonText: "Registrarse",
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          navigate("/register");
+        }
+      });
+    } else {
+      if (items.length > 0) {
+        let pedido = {
+          pedidos: items.map((e) => ({
+            productoId: e.id,
+            cantidad: e.quantity,
+          })),
+        };
+        dispatch(postOrder(pedido));
+        navigate("/pedido");
+      } else {
+        Swal.fire({
+          text: `No hay productos en el carrito`,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      }
+    }
+  };
 
   return (
     <>
@@ -85,7 +119,7 @@ const Cart = () => {
                 <SummaryItemText> Total</SummaryItemText>
                 <SummaryItemText>$ { total }</SummaryItemText>
                 </SummaryItem>
-               {/* <SummaryButton  className='btn btn-dark'>COMPRAR AHORA</SummaryButton>*/}
+                <SummaryButton  className='btn btn-dark' onClick={handlebtnCompra}>COMPRAR AHORA</SummaryButton>
                {/* <BotonPago price={total} />*/}
                 
             </Summary>

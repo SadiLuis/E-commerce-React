@@ -13,7 +13,7 @@ export function Pago(price) {
           
           setTimeout(function () {
             window.location.href = res.data;
-          }, 3000);
+          }, 5000);
           
           await Swal.fire({
             title:"Estás por ser redirigido al sitio de mercadoPago para concretar el pago",

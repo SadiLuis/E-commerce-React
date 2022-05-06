@@ -2,6 +2,8 @@ import { ADD_ITEM, DELETE_CART, DELETE_CART_DB, DELETE_ITEM, GET_CART, REST_ITEM
 import { BASEURL } from '../Assets/URLS';
 import getHeaderToken from '../Helpers/getHeaderToken';
 import axios from 'axios'
+import {getCartLocalStorage, saveCartDb } from '../Helpers/localstorage'
+
 export const addItem = (id) => {
    return {
       type: ADD_ITEM,
@@ -34,26 +36,113 @@ export const getCartDB = (userId) => async dispatch => {
          `${BASEURL}/carritos/${userId}`,
          config
       );
-      return dispatch({ type: GET_CART, payload: data });
+      const json = await axios.get(`${BASEURL}/products`);
+
+      const cartLocal = getCartLocalStorage()
+      const {products } = cartLocal
+      console.log(products , 'productos storage')
+      console.log('db' , data)
+      let newCart = {};
+      let newProducts= [];
+      let carritoDB = data.CarritoDetalles?.map(el => {
+         return { id: el.productoId, quantity: el.cantidad }
+     })
+     console.log(carritoDB)
+     if(products.length ){
+        console.log('entro')
+     if(carritoDB.length){
+       
+       let auxCart=[];
+        
+        
+           carritoDB.forEach(cartDB => {
+            newProducts = products.map(item =>  
+                 item.id === cartDB.id
+                 ?{quantity: item.quantity + cartDB.quantity }
+                 : item )
+            })
+
+           for(let cart of newProducts){
+            auxCart = carritoDB.filter(cartDB => cartDB.id !== cart.id)
+           }
+             
+             newCart = {
+                 products: [...newProducts,...auxCart],
+                 precioTotal:[...newProducts, ...auxCart].reduce((prev, e) => {
+                     let prod = json.data.find(el => el.id === e.id);
+
+                     return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
+                 }, 0)
+
+             };
+             console.log(newProducts , auxCart)
+             
+       saveCartDb(newCart)
+
+      } else{
+         newCart = {
+            products: products,
+            precioTotal: products.length ? products.reduce((prev, e) => {
+                let prod = json.data.find(el => el.id === e.id);
+   
+                return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
+            }, 0)
+            : 0
+         }
+         saveCartDb(newCart)
+      }
+
+     }else{
+      newCart = {
+         products: carritoDB,
+         precioTotal: carritoDB.length ? carritoDB.reduce((prev, e) => {
+             let prod = json.data.find(el => el.id === e.id);
+
+             return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
+         }, 0)
+         : 0
+     };
+     saveCartDb(newCart)
+     }
+      return dispatch({ type: GET_CART, payload: newCart , idCart: data.id});
+
    } catch (err) {
      
-      return console.log(err.response.data);
+      return console.log(err);
    }
 }
 
-export const createCartDb = async () => {
+export const createCartDb = (id) => async dispatch => {
+
+   try{
+
    await axios.post(`${BASEURL}/carritos`,
       {},
       getHeaderToken())
+
+      dispatch(getCartDB(id))
+ }catch(e){
+     console.log(e)
+     
+   }
 }
 
 export const addItemCart = async (cart, id) => {
+
+   try{
    await axios.put(`${BASEURL}/carritos/add`,
       {
          carritoId: id,
          productoId: cart.id,
          cantidad: cart.quantity
       }, getHeaderToken())
+           
+     
+
+   }catch(e){
+     console.log(e)   
+     
+    }
 }
 
 export const deleteProductCart = async (product, id) => {
@@ -64,13 +153,14 @@ export const deleteProductCart = async (product, id) => {
       }, getHeaderToken())
 }
 
-export const deleteAllCartDB = id => async dispatch => {
+export const deleteAllCartDB = async id =>  {
    try {
-      const res = await axios.delete(`${BASEURL}/carritos/${id}`, getHeaderToken())
-      const data = res.data
-      return dispatch({ type: DELETE_CART_DB, payload: data })
+   
+      await axios.delete(`${BASEURL}/carritos/${id}`, getHeaderToken())
+     
+      
    } catch (err) {
-      return console.log(err.response.data);
+      return console.log(err);
    }
 }
 

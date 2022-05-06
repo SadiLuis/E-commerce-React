@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {Pago} from '../../Actions/pago'
-
-
+import { updateOrderUser } from '../../Actions/users';
+import {deleteAllCartDB} from '../../Actions/cart'
+import swal from 'sweetalert2'
 const BotonPago = (props) => {
-
+  const idUser = useSelector(state=> state.loginReducer.userDetail.id)
 const dispatch = useDispatch()
 let price = props.price
 //   let idConductora = props.idConductora
@@ -41,6 +42,11 @@ let price = props.price
    
    async function handlePago(e, price) {
         e.preventDefault()
+        if (!props.order.phone && !props.order.contactName && !props.order.username) {
+         return swal("Por favor, completá los datos personales");
+       }
+        deleteAllCartDB(idUser)
+        dispatch(updateOrderUser(props.order))
         dispatch(Pago(price))
    }
         

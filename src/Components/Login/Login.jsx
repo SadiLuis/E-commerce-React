@@ -51,26 +51,34 @@ function Login({ login, isAuth, user }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const errors = validateForm(form);
-    setError(errors);
-
-    if (Object.keys(errors).length) {
-      console.log(errors)
-      return window.alert("El formulario contiene errrores");
-    }
-    Swal.fire({
-      title: 'Espere, validando información',    
-      text: 'Este mensaje desaparecerá en 5 segundos',
-      icon: 'info',      
-      timer: 5000,
-    })
-    login(form);
+    
+   console.log('entro' , error)
+    if(Object.keys(error).length){
+      console.log('entro',form)
+      console.log(error)
+      Swal.fire({
+        text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    } else{
+      Swal.fire({
+        title: 'Espere, validando información',    
+        text: 'Este mensaje desaparecerá en 5 segundos',
+        icon: 'info',      
+        timer: 5000,
+      })
+      login(form);
+      }
+   
+    
   };
 
 
   useEffect(() => {
     // Si ya está logueado que lo redireccione al dashboard
     if (isAuth && user) {
+      
       const { rol } = user;
       setForm(initialLogin);
       async function db() {
@@ -175,7 +183,7 @@ function Login({ login, isAuth, user }) {
                 )}
                
             </div>
-                <button type="submit" className='btn btn-outline-dark mt-2 text-center' disabled={!form.email || !form.contrasena} >Enviar</button>
+                <button type="submit" className='btn btn-outline-dark mt-2 text-center' disabled={!form.email || !form.contrasena} onClick={handleSubmit} >Enviar</button>
           </div>
           <br/>
 

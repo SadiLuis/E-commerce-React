@@ -1,8 +1,8 @@
 
 import { SEARCH_BY_NAME, GET_CATEGORIES, ORDER_BY_PRICE, ORDER_BY_RATE, FILTER_BY_CATEGORY
-,UPDATE_CART ,ADD_ITEM ,REST_ITEM ,DELETE_ITEM, ORDER_ALFABETICAMENTE } from "../Actions/Index";
-import { getCartLocalStorage, saveCartLocalStorage , getProductLocalStorage ,saveProductLocalStorage } from "../Helpers/localstorage";
-
+,UPDATE_CART ,ADD_ITEM ,REST_ITEM ,DELETE_ITEM, ORDER_ALFABETICAMENTE ,GET_CART ,DELETE_CART_DB ,DELETE_CART} from "../Actions/Index";
+import { getCartLocalStorage, saveCartLocalStorage , getProductLocalStorage ,saveProductLocalStorage , getCartDb ,setCartDb, saveCartDb } from "../Helpers/localstorage";
+import {deleteProductCart,addItemCart} from '../Actions/cart'
 const initialState = {
     detailProduct : [],
     products: [],
@@ -10,12 +10,13 @@ const initialState = {
     productoPorNombre:[],
     filtered:[],
     categories:[],
-    cart: getCartLocalStorage(),
-    sameCategory: []
+    cart: localStorage.token_ecommerce ? getCartLocalStorage() : getCartDb(),
+    sameCategory: [],
+    idCart: null
 }
 
 export default function productsReducer(state = initialState, action) {
-    const { type, payload } = action;
+    const { type, payload, idCart} = action;
     let newCart = state.cart, newProducts, itemCart;
     switch (type) {
 
@@ -111,7 +112,24 @@ export default function productsReducer(state = initialState, action) {
 
 
             case UPDATE_CART:
-            return { ...state, cart: getCartLocalStorage() }
+                if(localStorage.token_ecommerce){
+                    const localS = getCartDb()
+                    console.log()
+                  state.idCart && localS.products?.forEach((el) =>  addItemCart(el, state.idCart))
+                 
+                  return {
+                      ...state,
+                      cart: getCartDb()
+                  }
+                }
+                else{
+                    
+               return { 
+                ...state,
+                 cart: getCartLocalStorage(),
+                  
+                }
+             }
             case ADD_ITEM:
 
             itemCart = state.cart.products.find(e => e.id === payload);
@@ -131,18 +149,21 @@ export default function productsReducer(state = initialState, action) {
                     }, 0)
 
                 };
-                saveCartLocalStorage(newCart);
+               
                 } else {
                 newCart = {
                     products: [...state.cart.products, { id: payload, quantity: 1 }],
                     precioTotal: Math.round((state.cart.precioTotal + state.allProducts.find(e => e.id === payload).price) * 100) / 100
                 };
                }
-                saveCartLocalStorage(newCart);
-           
+
+               if(localStorage.token_ecommerce) saveCartDb(newCart)
+               else saveCartLocalStorage(newCart);
+                
                return {
                 ...state,
-                cart: newCart
+                cart: newCart,
+                
                };
              case REST_ITEM:
             itemCart = state.cart.products.find(e => e.id === payload);
@@ -157,11 +178,13 @@ export default function productsReducer(state = initialState, action) {
                     products: newProducts,
                     precioTotal: Math.round((state.cart.precioTotal - state.allProducts.find(e => e.id === payload).price) * 100) / 100
                 };
-                saveCartLocalStorage(newCart);
+                if(localStorage.token_ecommerce) saveCartDb(newCart)
+               else saveCartLocalStorage(newCart);
             }
             return {
                 ...state,
-                cart: newCart
+                cart: newCart,
+                
             };
             case DELETE_ITEM:
             itemCart = state.cart.products.find(e => e.id === payload);
@@ -170,16 +193,41 @@ export default function productsReducer(state = initialState, action) {
                 precioTotal:
                     Math.round(( state.cart.precioTotal - (itemCart.quantity * state.allProducts.find(e => e.id === payload).price)) * 100)  / 100
             });
-            saveCartLocalStorage(newCart)
+            if(localStorage.token_ecommerce){
+                deleteProductCart(payload,state.idCart)
+                saveCartDb(newCart)
+            } 
+                
+            else saveCartLocalStorage(newCart);
+
             return {
                 ...state,
-                cart: newCart
+                cart: newCart,
+                
             };
             case "GET_PRODUCT_BY_CAT": 
             return {
                 ...state,
                 sameCategory: payload
             }
+            case GET_CART: return {
+                ...state,
+                cart: payload,
+                idCart: idCart
+            }
+           
+            case DELETE_CART:
+             newCart = {
+               products: [],
+               precioTotal: 0
+            }
+            saveCartLocalStorage(newCart)
+            if(localStorage.token_ecommerce) saveCartDb(newCart)
+            return {
+                 ...state,
+                 cart: newCart,
+        
+                    }
 
             default: 
                 return {

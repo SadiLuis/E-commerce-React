@@ -37,7 +37,7 @@ const SidebarAdmin = () => {
                         
                     </li>
                     <li>
-                        <Link to={``}>
+                        <Link to={`/dashboard/admin/createProduct`}>
                         <button  className="nav-link px-0 align-start text-white">
                             <i className="fs-5 bi-plus-circle"></i>
                             <span className="ms-1 d-none d-sm-inline fs-6">Agregar producto</span>
