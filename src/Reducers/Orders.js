@@ -1,9 +1,9 @@
 
-
+import {savePedido , getPedido} from '../Helpers/localstorage'
 const initialState = {
     allOrders: [],
     filteredOrders: [],
-    orderDetail: null,
+    orderDetail: getPedido(),
     userOrders: []
 }
 
@@ -14,6 +14,7 @@ export default function ordersReducer(state = initialState, action) {
         case 'GET_ORDER_BY_USER':
             return { ...state, userOrders: payload };
         case 'GET_ORDER_DETAIL':
+             savePedido(payload)
             return { ...state, orderDetail: payload }
         case 'GET_ORDERS':
             return {

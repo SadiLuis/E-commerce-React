@@ -19,7 +19,15 @@ export default function pedidosReducer(state = initialState, action) {
                 ...state,
                 pedidosById: action.payload
             }
-      
+        case 'GET_PEDIDO_DETAIL':
+           return { ...state, pedidoDetail: payload }
+        
+        case 'EDIT_STATUS':
+            return {
+                ...state,
+                allPedidos: payload,
+                filteredPedidos: payload
+            }
             default:
             return { ...state }
         

@@ -2,7 +2,7 @@ import axios from 'axios';
 //import { toast } from 'react-toastify';
 import { BASEURL } from '../Assets/URLS';
 import getHeaderToken from '../Helpers/getHeaderToken';
-
+import {deleteAllCart ,deleteAllCartDB} from './cart'
 export const getDetailOrder = (order) => {
    return { type: 'GET_ORDER_DETAIL', payload: order};
 }
@@ -16,6 +16,7 @@ export const postOrder = (order) => {
             getHeaderToken()
          );
          // console.log(data);
+
          return dispatch(getDetailOrder(data));
       } catch (err) {
          console.log(err.response.data);
@@ -46,6 +47,7 @@ export const getAllOrders = () => {
             `${BASEURL}/pedidos`,
             getHeaderToken()
          );
+
          return dispatch({ type: 'GET_ORDERS', payload: data });
       } catch (err) {
          console.log(err);
@@ -68,14 +70,40 @@ export const getOrdersByUser = (userId) => async dispatch => {
 }
 
 export function editStatusOrder(orderId, newStatus) {
+   
    return async function (dispatch) {
+      
       try {
+         const body = {
+            status : newStatus
+         }
          const config = getHeaderToken()
-         const response = await axios.put(`${BASEURL}/pedidos/${orderId}`, newStatus, config)
+         const response = await axios.put(`${BASEURL}/pedidos/${orderId}`, body, config)
          return {
             type: 'EDIT_STATUS_ORDER',
             payload: response.data
          }
+      } catch (err) {
+         return console.log(err.response.data);
+      }
+   }
+}
+export function changeStatus(id, newStatus) {
+       
+   const body = { 
+      idPedido: id,
+      status: newStatus
+   }
+   return async function (dispatch) {
+      try {
+         //const config = getHeaderToken()
+         const response = await axios.post(`${BASEURL}/pedidos/update`, body)
+         dispatch(deleteAllCart())
+         
+         return dispatch({
+            type: 'EDIT_STATUS',
+            payload: response.data
+         })
       } catch (err) {
          return console.log(err.response.data);
       }

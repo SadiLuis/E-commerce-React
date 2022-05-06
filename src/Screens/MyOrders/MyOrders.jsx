@@ -17,7 +17,7 @@ export default function MyOrders (){
        dispatch(getUserDetail())
         myUser && dispatch(getPedidosById(myUser.id)) 
    }, [myUser?.id]) 
-    
+    console.log(pedidos)
     return(
         
         <div>
@@ -27,6 +27,7 @@ export default function MyOrders (){
   <thead className="thead-dark">
     <tr>
       <th scope="col">Fecha</th>
+      <th scope="col">Pagado</th>
       <th scope="col">Estado</th>
       <th scope="col">Productos</th>
       <th scope="col">Total</th>
@@ -34,11 +35,13 @@ export default function MyOrders (){
   </thead>
   {
      pedidos.length && pedidos.map(e=> (
-         
+        
          <tbody key={e.pedidoId}>
     <tr>
       <th scope="row" style={{width: '15rem', border:'1px solid black'}}>{e.fechaCreacion && e.fechaCreacion.slice(0,10)}</th>
-       {e.status === 'PENDIENTE'? <td style={{color: 'red', border:'1px solid black'}}>{e.status}</td> : <td style={{color: 'green', border:'1px solid black'}}>{e.status}</td>}
+      {e.pagado ? <td style={{color: 'green', border:'1px solid black'}}>SI</td> : <td style={{color: 'red', border:'1px solid black'}}>NO</td>}
+       {e.status === 'PENDIENTE'? <td style={{color: 'red', border:'1px solid black'}}>{e.status}</td> : e.status === 'ENPROCESO' ? <td style={{color: 'orange', border:'1px solid black'}}>{e.status}</td>
+       :e.statuts ==='ENVIADO' ? <td style={{color: 'yellow', border:'1px solid black'}}>{e.status}</td> : <td style={{color: 'GREEN', border:'1px solid black'}}>{e.status}</td>}
       <td style={{border:'1px solid black'}}>{e.productos && e.productos.map(e=>(
           
           <p key={e.pedidoId}>{e.producto}</p>
