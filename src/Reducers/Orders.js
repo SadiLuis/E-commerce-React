@@ -22,7 +22,7 @@ export default function ordersReducer(state = initialState, action) {
                 allOrders: payload,
                 filteredOrders: payload
             }
-        case 'EDIT_STATUS_ORDER':
+        case 'EDIT_STATUS':
             return {
                 ...state,
                 allOrders: payload,
