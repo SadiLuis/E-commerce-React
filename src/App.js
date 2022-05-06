@@ -29,10 +29,21 @@ import {getUserDetail} from './Actions/Auth'
 
 import AddCategory from "./Components/AddCategory/AddCategory";
 import Customers from "./Components/Customers/Customers";
- import Orders from "./Components/Orders/Orders"; 
+
+import Orders from "./Components/Orders/Orders";
+import UserDetailAdmin from "./Components/UserDetailAdmin/UserDetailAdmin";
+
+ 
 import ResPassword from "./Components/RestarPassword/ResPassword";
+<<<<<<< HEAD
+import OrderDetailAdmin from "./Components/OrderDetailAdmin/OrderDetailAdmin";
+
+
+
+=======
 import Checkout from "./Components/Checkout/Checkout";
 import CheckoutConfirm from "./Components/Checkout/CheckoutDetail/CheckoutConfirm";
+>>>>>>> a9aaaf9949677b261df222a735510ca4e8c402e8
 
 
 
@@ -61,9 +72,12 @@ function App() {
         <Route path="/registro" element={<Register />} />
         <Route path="/dashboard/admin" element={<Dashboard />} />
         <Route path="/dashboard/admin/EditProduct/:idProduct" element={<EditProduct />} />
+        <Route path="/dashboard/admin/createProduct" element={<CreateProduct />} />
         <Route path="/dashboard/admin/addCategory" element={<AddCategory />} />
         <Route path="/dashboard/admin/customers" element={<Customers />} />
         <Route path="/dashboard/admin/orders" element={<Orders/>}/>
+        <Route path="/dashboard/admin/userDetailAdmin/:id" element={<UserDetailAdmin/>}/>
+        <Route path="/dashboard/admin/orderDetailAdmin/:id/:idUser" element={<OrderDetailAdmin/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />

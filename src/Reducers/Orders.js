@@ -28,6 +28,17 @@ export default function ordersReducer(state = initialState, action) {
                 allOrders: payload,
                 filteredOrders: payload
             }
+        case 'GET_ORDER_BY_ID':
+            console.log('estoy aqui')
+            return {
+                ...state,
+                orderDetail: payload
+            }
+        case 'CLEAN_ORDER_DETAIL':
+            return {
+                ...state,
+                orderDetail: null
+            }
         default:
             return { ...state }
     }
