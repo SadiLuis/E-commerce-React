@@ -1,6 +1,6 @@
 
 import { SEARCH_BY_NAME, GET_CATEGORIES, ORDER_BY_PRICE, ORDER_BY_RATE, FILTER_BY_CATEGORY
-,UPDATE_CART ,ADD_ITEM ,REST_ITEM ,DELETE_ITEM, ORDER_ALFABETICAMENTE ,GET_CART} from "../Actions/Index";
+,UPDATE_CART ,ADD_ITEM ,REST_ITEM ,DELETE_ITEM, ORDER_ALFABETICAMENTE ,GET_CART ,DELETE_CART_DB ,DELETE_CART} from "../Actions/Index";
 import { getCartLocalStorage, saveCartLocalStorage , getProductLocalStorage ,saveProductLocalStorage , getCartDb ,setCartDb, saveCartDb } from "../Helpers/localstorage";
 import {deleteProductCart,addItemCart} from '../Actions/cart'
 const initialState = {
@@ -215,6 +215,19 @@ export default function productsReducer(state = initialState, action) {
                 cart: payload,
                 idCart: idCart
             }
+           
+            case DELETE_CART:
+             newCart = {
+               products: [],
+               precioTotal: 0
+            }
+            saveCartLocalStorage(newCart)
+            if(localStorage.token_ecommerce) saveCartDb(newCart)
+            return {
+                 ...state,
+                 cart: newCart,
+        
+                    }
 
             default: 
                 return {

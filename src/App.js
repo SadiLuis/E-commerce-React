@@ -35,10 +35,15 @@ import UserDetailAdmin from "./Components/UserDetailAdmin/UserDetailAdmin";
 
  
 import ResPassword from "./Components/RestarPassword/ResPassword";
+<<<<<<< HEAD
 import OrderDetailAdmin from "./Components/OrderDetailAdmin/OrderDetailAdmin";
 
 
 
+=======
+import Checkout from "./Components/Checkout/Checkout";
+import CheckoutConfirm from "./Components/Checkout/CheckoutDetail/CheckoutConfirm";
+>>>>>>> a9aaaf9949677b261df222a735510ca4e8c402e8
 
 
 
@@ -84,13 +89,15 @@ function App() {
         <Route path="/faqs" element={<FAQs />} />
         <Route exact path="/orders" element={<MyOrders/>}/>
         {/* <Route path="/user" element={<Profile/>}/> */}
+         <Route path="/pedido" element={<Checkout />} />
+
 
         <Route path="/createproduct" element={<CreateProduct/>} />
         <Route exact path="/review/:idProduct" element={<CreateReview />} />
         <Route exact path="/review" element={<Reviews />} />
 
         <Route path="/recupass" element={<ResPassword/>}/>
-
+         <Route path= "/pago" element ={< CheckoutConfirm />} /> 
 
       </Routes>
 

@@ -23,7 +23,7 @@ import styled from "styled-components";
       padding: 0.5rem;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
-
+      font-size: small;
       :last-child {
         border-right: 0;
       }
@@ -41,6 +41,23 @@ import styled from "styled-components";
   input{
     margin-bottom: 2rem;
   }
+  button{
+    background: none;
+    font-size: xx-small;
+    border-width: thin;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+  button:hover{
+    background: -webkit-linear-gradient(#c8935b, rgb(173, 159, 159));
+    color: white;
+    
+  }
+  p{
+    margin-bottom: 0.1rem;
+
+  }
+  
 `;
 
 export default TableContainer

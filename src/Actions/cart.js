@@ -153,13 +153,14 @@ export const deleteProductCart = async (product, id) => {
       }, getHeaderToken())
 }
 
-export const deleteAllCartDB = id => async dispatch => {
+export const deleteAllCartDB = async id =>  {
    try {
-      const res = await axios.delete(`${BASEURL}/carritos/${id}`, getHeaderToken())
-      const data = res.data
-      return dispatch({ type: DELETE_CART_DB, payload: data })
+   
+      await axios.delete(`${BASEURL}/carritos/${id}`, getHeaderToken())
+     
+      
    } catch (err) {
-      return console.log(err.response.data);
+      return console.log(err);
    }
 }
 

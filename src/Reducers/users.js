@@ -9,6 +9,7 @@ const initialState = {
 export default function userReducer(state = initialState, action) {
     const { type, payload } = action;
     switch (type) {
+
         case 'GET_ALL_USERS':
             return {
                 ...state,
