@@ -31,8 +31,8 @@ import AddCategory from "./Components/AddCategory/AddCategory";
 import Customers from "./Components/Customers/Customers";
  import Orders from "./Components/Orders/Orders"; 
 import ResPassword from "./Components/RestarPassword/ResPassword";
-
-
+import Checkout from "./Components/Checkout/Checkout";
+import CheckoutConfirm from "./Components/Checkout/CheckoutDetail/CheckoutConfirm";
 
 
 
@@ -75,13 +75,15 @@ function App() {
         <Route path="/faqs" element={<FAQs />} />
         <Route exact path="/orders" element={<MyOrders/>}/>
         {/* <Route path="/user" element={<Profile/>}/> */}
+         <Route path="/pedido" element={<Checkout />} />
+
 
         <Route path="/createproduct" element={<CreateProduct/>} />
         <Route exact path="/review/:idProduct" element={<CreateReview />} />
         <Route exact path="/review" element={<Reviews />} />
 
         <Route path="/recupass" element={<ResPassword/>}/>
-
+         <Route path= "/pago" element ={< CheckoutConfirm />} /> 
 
       </Routes>
 
