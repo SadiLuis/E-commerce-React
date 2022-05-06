@@ -22,7 +22,7 @@ export default function pedidosReducer(state = initialState, action) {
         case 'GET_PEDIDO_DETAIL':
            return { ...state, pedidoDetail: payload }
         
-        case 'EDIT_STATUS':
+        case 'EDIT_STATUS_ORDER':
             return {
                 ...state,
                 allPedidos: payload,
