@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { getProductById } from '../../../Actions/products';
 import styles from "./Create.module.css"
-import { postReview } from '../../../Actions/Comments';
+import { getCommentByProductId, postReview } from '../../../Actions/Comments';
 import Swal from "sweetalert2";
 import { validationFunction } from "./ValidationFunction";
 
@@ -23,11 +23,17 @@ function CreateReview() {
 
 
   const product = useSelector((state) => state.productsReducer.detailProduct);
+  const reviews = useSelector((state) => state.commentReducer.comentariosProducto)
+  const user = useSelector((state) => state.loginReducer.userDetail)
 
   
-
+  let comentoAntes = reviews?.filter(elem => elem.usuarioId == user?.id).length > 0 ? true : false 
+  console.log("comentoAntes", comentoAntes)
+  
   useEffect(() => {
     dispatch(getProductById(idProduct))
+    dispatch(getCommentByProductId(idProduct))
+
   }, [idProduct])
 
 
@@ -50,7 +56,17 @@ function CreateReview() {
     let errors = validationFunction(comment);
     setErrors(errors);
 
-    if(!Object.keys(errors).length) {
+    if(comentoAntes) {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "Perdone pero solo puede calificar 1 vez el producto!",
+        showConfirmButton: true,
+        timer: 15000,
+      }).then(function() {
+        window.location = "/detail/" + parseInt(idProduct) 
+      })
+    }else if(!Object.keys(errors).length) {
       
     dispatch(postReview(comment))
     Swal.fire({
@@ -58,9 +74,9 @@ function CreateReview() {
       icon: "success",
       title: "Gracias por valorar el producto!",
       showConfirmButton: true,
-      timer: 3000,
+      timer: 5000,
     }).then(function() {
-      window.location = "/home/" //+ productId 
+      window.location = "/detail/" + parseInt(idProduct) 
     });
     } else {
       Swal.fire({
@@ -68,7 +84,7 @@ function CreateReview() {
         icon: "warning",
         title: "El foromulario contiene errores, reviselo por favor!",
         showConfirmButton: true,
-        timer: 3000,
+        timer: 5000,
       })
     }
 

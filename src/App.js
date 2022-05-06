@@ -6,6 +6,8 @@ import Detail from "./Screens/Details/Details";
 import Home from "./Screens/Home/Home";
 import Landing from './Screens/Landing/Landing'
 
+import FAQs from './Screens/Landing/FAQs'
+import About from './Screens/Landing/About'
 import  NavBarAll from "./Components/NavBar/NavBar"
 
 import ContactForm from "./Components/ContactForm/ContactForm";
@@ -18,6 +20,7 @@ import {useDispatch ,useSelector} from 'react-redux'
 
 import Cart from './Components/Cart/Cart'
 import Dashboard from "./Screens/Dashboard/Dashboard";
+import CreateProduct from "./Components/AdminProduct/CreateProduct";
 
 import CreateReview from "./Components/Review/CreateReview/CreateReview";
 import Reviews from "./Components/Review/ScreenReviews/Reviews";
@@ -30,6 +33,7 @@ import Customers from "./Components/Customers/Customers";
 import ResPassword from "./Components/RestarPassword/ResPassword";
 import Checkout from "./Components/Checkout/Checkout";
 import CheckoutConfirm from "./Components/Checkout/CheckoutDetail/CheckoutConfirm";
+
 
 
 
@@ -67,10 +71,14 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/faqs" element={<FAQs />} />
         <Route exact path="/orders" element={<MyOrders/>}/>
         {/* <Route path="/user" element={<Profile/>}/> */}
          <Route path="/pedido" element={<Checkout />} />
 
+
+        <Route path="/createproduct" element={<CreateProduct/>} />
         <Route exact path="/review/:idProduct" element={<CreateReview />} />
         <Route exact path="/review" element={<Reviews />} />
 
