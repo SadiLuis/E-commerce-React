@@ -14,15 +14,19 @@ export default function MyOrders (){
   
   const dispatch = useDispatch()
   const myUser = useSelector((state)=> state.loginReducer.userDetail)
+  const pedidos = useSelector((state)=> state.pedidosReducer.pedidosById)
  
  
    React.useEffect(() => {
+    
+    dispatch(getPedidosById(myUser.id)) 
+  }, [myUser])  
+
+  React.useEffect(() => {
     dispatch(getUserDetail())
-    myUser && dispatch(getPedidosById(myUser.id)) 
-  }, [myUser?.id])  
+  }, [])
 
   
-  const pedidos = useSelector((state)=> state.pedidosReducer.pedidosById)
   
   const columns = useMemo(()=> [
     {
@@ -85,8 +89,11 @@ export default function MyOrders (){
 
   const data = useMemo(()=> pedidos )
     
-    return(
+    if (pedidos.status == 404) {
+      return (<h1>No tiene pedidos este usuario</h1>)
+    }else {
         
+      return (
       <div className="table-container">
         <h1 className={styles.title}>Historial de pedidos</h1>
       {
@@ -98,3 +105,5 @@ export default function MyOrders (){
     </div>
   );
 }
+      
+};
