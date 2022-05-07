@@ -304,7 +304,7 @@ function NavBar({ isAuth, user }) {
         <TypewriterComponent
         onInit={(typewriter)=>
           typewriter
-          .typeString("Envíos gratis por órdenes de compra superirores a $7.000")
+          .typeString("Envíos gratis por órdenes de compra superiores a $7.000")
           .pauseFor(2000)
           .start()
           
