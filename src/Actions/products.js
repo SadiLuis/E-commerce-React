@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BASEURL } from '../Assets/URLS';
-import { SEARCH_BY_NAME, GET_CATEGORIES, FILTER_BY_CATEGORY, ORDER_BY_PRICE, ORDER_BY_RATE, ORDER_ALFABETICAMENTE } from './Index';
+import { SEARCH_BY_NAME, GET_CATEGORIES, FILTER_BY_CATEGORY, ORDER_BY_PRICE, ORDER_BY_RATE, ORDER_ALFABETICAMENTE, PUT_PRODUCT_BY_ID } from './Index';
 import Swal from "sweetalert2"
 
 export function getProductById(id) {
@@ -123,3 +123,18 @@ export function searchByName(name) {
         return create;
       };
     }
+
+    export function putProductByID(id, body) {
+      return async function (dispatch) {
+        try {
+          var json = await axios.put(`${BASEURL}/products/${id}`, body);
+    
+          return dispatch({
+            type: PUT_PRODUCT_BY_ID,
+            payload: json.data,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }    

@@ -1,40 +1,39 @@
 import React, { createRef, useEffect, useState } from 'react'
-import {getProductById} from "../../Actions/products.js"
-import {getAllCategories} from "../../Actions/Category.js"
+import { postProduct } from "../../Actions/products"
+import { getAllCategories } from "../../Actions/Category.js"
+import {getProductById, putProductByID} from "../../Actions/products.js"
 import { useSelector, useDispatch } from "react-redux";
-import SidebarAdmin from '../SidebarAdmin/SidebarAdmin';
 import './EditProduct.css'
+import Axios from "axios";
 import icon from '../../Assets/pencil.svg'
+import { validation } from "./validation";
+import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2'
 import { useParams } from 'react-router-dom';
-import { validation } from './validation';
+
 
 
 export default function Product() {
-  const { idProduct } = useParams();
+  const { idProduct } = useParams();  
   const dispatch = useDispatch()
   let myRef = createRef()
-  const product = useSelector((state) => state.productsReducer.detailProduct);
   const categories = useSelector((state) => state.categoriesReducer.categories);
-  const [errors, setErrors] = useState({});
+  const product = useSelector((state) => state.productsReducer.detailProduct);
+  const [inputImages, setInputImages] = useState("");
   let [index, setIndex] = useState(0)
-  
-  useEffect(() => {
-    dispatch(getAllCategories())
-  }, [])
-  
+  var data = {}
+  console.log("producto", product)
+
   useEffect(() => {
     dispatch(getProductById(idProduct))
   }, [idProduct])
-  console.log("product", product)
-  console.log("categorias", categories)
-  console.log("referencia", myRef)
-  
+
   useEffect(() => {
     setInput({
       title: product.title,
       price: product.price,
       description: product.description,
-      category: product.category,
+      categoriaId: product.category,
       images: product.images,
       size: product.size,
       cantidad: product.cantidad,
@@ -45,97 +44,321 @@ export default function Product() {
     title: product.title,
     price: product.price,
     description: product.description,
-    category: product.category,
+    categoriaId: product.category,
     images: product.images,
     size: product.size,
     cantidad: product.cantidad,
   });
+  
+  const [focus , setFocus] = useState({ 
+    title: false,
+    price: false,
+    description: false,
+    size: false,
+    categoriaId: false,
+    images: false,
+    cantidad: false,
+  })
+  const [inputsize, setInputsize] = useState({
+    height: [],
+    width: [],
+    depth: [],
+  });
+  
   console.log("input", input)
+  const [error, setError] = useState({})
+
+  
+  function handleChangeSize(e) {
+    setInputsize({
+      ...inputsize,
+      [e.target.name]: e.target.value,
+    });
+  }
+  if(!input.size){
+  input.size = (inputsize.height + "x").concat((inputsize.width) + "x").concat(inputsize.depth) + "cm"
+  }
+  useEffect(() => {
+    dispatch(getAllCategories())
+  }, [])
+   
+  
+  //data.title = input.title;
+  //data.price = input.price;
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+       
+    if(Object.keys(error).length){
+      
+      Swal.fire({
+        text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    }
+    else{
+    setInput(input)
+    dispatch(putProductByID(idProduct, input))
+    Swal.fire({
+      text: `Producto atualizado con éxito!`,
+      icon: "success",
+      confirmButtonText: "Ok",
+    });
+    }
+
+  }
+   
+
+  //console.log("input", input.price)
   const handleTab = (index) => {
     setIndex(index)
     const images = myRef.current.children
     for (let i = 0; i < images.length; i++) {
       images[i].className = images[i].className.replace("active", "")
     }
-    images[index].className= "active"
-  }
-  /*function handleCategories(e){
-    setInput({
-        ...input,
-        countryId: [...input.countryId, e.target.value]
-    })
-  }*/
-  function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-    setErrors(
-      validation({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
+    images[index].className = "active"
   }
 
-  if(product.title) {
-    return (
-      <>
-      
-      <div className="container-fluid">
-        {/* <TopNavbarAdmin/> */}
-        <div className="row">
-          <div className="col-auto col-md-2 col-xl-2 px-0 ">
-            <SidebarAdmin/>
-          </div>
-          <div className="col-10">
-      <h2 className='titulo'>Editar Producto</h2>
+   const handleChange = (name, value) => {
+    
+    const newform = { ...input, [name]: value };
+    if(typeof value === 'string' || typeof value === 'array'){
+    setInput(newform);
+    //const errors = validation(newform);
+    //console.log("error", errors)
+    //setError(errors);
+    } 
+    else{
+    setFocus({ ...focus, [name]: value })
+    }
+    return newform;
+  }
+  function handleSelectCategory(e) {
+    setInput({
+      ...input,
+      categoriaId: e.target.value,
+    });
+  }
+  function addImage(e) {
+    setInput({
+      ...input,
+      images: [...input.images, { url: inputImages, alt: "" }],
+    });
+    setInputImages("");
+  }
+  //console.log("imagen", input.images)
+  let arr = [];
+  const uploadImage = (files) => {
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append("file", files[i]);
+      formData.append("upload_preset", 'preset_pabs');
+      console.log("img", formData)
+      const newAxios = Axios.create();
+      newAxios
+        .post(
+          'https://api.cloudinary.com/v1_1/herway-app/image/upload',
+          formData
+        )
+        .then((res) => {
+          arr.push(res.data.secure_url);
+          setInput({
+            ...input,
+            images: [...input.images, arr[0]],
+          });
+        });
+    }
+  };
+  function handleDeleteImage(e) {
+    e.preventDefault();
+    setInput({
+      ...input,
+      images: input.images.flat().filter((name) => name !== e.target.name),
+    });
+  }
+
+  return (
+    <div className='container-md'>
+      <form
+       onSubmit={handleSubmit}
+        >
+        <h2 className="titulo">Editar Producto</h2>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Nombre</span>
-            <input type="text" 
-            class="form-control" 
-            
-            aria-label="Username" 
+          <span class="input-group-text" id="basic-addon1">Nombre</span>
+          <input onFocus={(e) => handleChange(e.target.name , true)}
+            type="text"
+            class="form-control"
+            aria-label="Username"
             aria-describedby="basic-addon1"
+            name='title'
             value={input.title}
-            onChange={(e) => handleChange(e)}>
-            </input>
+            onChange={(e) => handleChange(e.target.name, e.target.value)}> 
+          </input>
+          {focus.title && error.title && <span>{error.title}</span> }
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Categoría</span>
-            <span class="form-control">{product?.category}</span>
-            <select class="form-select" aria-label="Default select example">
-              <option hidden selected>Modificar categoría</option>
-              {categories?.map((category) => (
-                            <option value= {category.id}>{category.nombre}</option>
-                        ))}
-            </select>
+          <span class="input-group-text" id="basic-addon1">Categoría</span>
+          <span class="form-control">{input.categoriaId}</span>
+          <select class="form-select" aria-label="Default select example" name='categoriaId' 
+          onFocus={(e) => handleChange(e.target.name , true)}
+          onChange={(e) => handleSelectCategory(e)}>
+            <option hidden selected>Modificar categoría</option>
+            {categories?.map((category) => (
+              <option value={category.id}>{category.nombre}</option>
+            ))}
+          </select>
+          {focus.categoriaId && error.categoriaId && <span>{error.categoriaId}</span> }
         </div>
         <div class="input-group">
-            <span class="input-group-text">Descripción</span>
-            <textarea class="form-control" aria-label="With textarea">{product?.description}</textarea>
-        </div>
-        <div className="thumb" ref={myRef}>
-              {product?.images.map( (img, index) => (
-                <img src={img} alt="product" key={index}
-                onClick={()=> handleTab(index)}
-                />
-              ))}
+          <span class="input-group-text">Descripción</span>
+          <textarea onFocus={(e) => handleChange(e.target.name , true)}
+            class="form-control"
+            aria-label="With textarea"
+            name='description'
+            value={input.description}
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
+          ></textarea>
+          {focus.description && error.description && <span>{error.description}</span> }
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Precio</span>
-            <input type="text" class="form-control" placeholder={"$ " + product?.price} aria-label="Username" aria-describedby="basic-addon1"></input>
+          <span class="input-group-text" id="basic-addon1">Medidas</span>
+          <input onFocus={(e) => handleChange(e.target.name , true)}
+            type="text"
+            class="form-control"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            name='size'
+            value={input.size}
+            onChange={(e) => handleChange(e.target.name, e.target.value)}> 
+          </input>
+          <span class="input-group-text" id="basic-addon1">Alto</span>
+          <input type="number"
+            class="form-control"
+            placeholder="cm"
+            name='height'
+            value={inputsize.height}
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            onChange={(e) => handleChangeSize(e)}>
+          </input>
+          <span class="input-group-text" id="basic-addon1">Ancho</span>
+          <input type="number"
+            class="form-control"
+            placeholder="cm"
+            name='width'
+            value={inputsize.width}
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            onChange={(e) => handleChangeSize(e)}>
+          </input>
+          <span class="input-group-text" id="basic-addon1">Profundidad</span>
+          <input type="number"
+            class="form-control"
+            placeholder="cm"
+            name='depth'
+            value={inputsize.depth}
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            onChange={(e) => handleChangeSize(e)}>
+          </input>
         </div>
-        {/*<div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Stock</span>
-            <span class="form-control">{product?.cantidad}</span>
-              </div>*/}
-             </div> 
+        <div className="thumb" ref={myRef}>
+          {input.images?.map((img, index) => (
+            <img src={img} alt="product" key={index}
+              onClick={() => handleTab(index)}
+            />
+          ))}
+        </div>
+        <div>
+          <label>Imagenes</label>
+          <div>
+            <input
+              type="text"
+              placeholder="URL..."
+              value={inputImages}
+              onChange={(e) => setInputImages(e.target.value)}
+            />
+            <img
+              className="cursor-pointer"
+              onClick={(e) => addImage(e)}
+
+              alt=""
+            />
+          </div>
+          <div>
+            <input
+              type="file"
+              multiple
+              onChange={(e) => {
+                uploadImage(e.target.files);
+              }}
+            ></input>
+          </div>
+          <div className="flex">
+            {input.images &&
+              input.images.flat().map((name) => {
+                return (
+                  <div>
+                    <img
+
+                      src={name.url}
+                      alt={name.url}
+                    />
+                    <button
+
+                      name={name}
+                      onClick={(name) => handleDeleteImage(name)}
+                    >
+                      X
+                    </button>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Precio</span>
+          <input onFocus={(e) => handleChange(e.target.name , true)} 
+            type="text"
+            class="form-control"
+            placeholder="$ 0.00"
+            name='price'
+            value={input.price}
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            onChange={(e) => handleChange(e.target.name, e.target.value)}>
+          </input>
+          {focus.price && error.price && <span>{error.price}</span> }
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Stock</span>
+          <input onFocus={(e) => handleChange(e.target.name , true)}  
+            type="text"
+            class="form-control"
+            placeholder="ingrese stock"
+            name='cantidad'
+            value={input.cantidad}
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            onChange={(e) => handleChange(e.target.name, e.target.value)}>
+          </input>
+          {focus.cantidad && error.cantidad && <span>{error.cantidad}</span> }
+        </div>
+        <div>
+        <button
+          text="Create Product"
+          type="submit"
+          onClick={(e) => handleSubmit(e)}>Actualizar Producto
+
+        </button>
+        <Link to = {`/dashboard/admin`}> <button>Cancelar</button></Link>
+        </div>
+        
+      </form>
+     
     </div>
-    </div>
-    </>
-    )
-  }else {
-    return (<h1>Loading...</h1>)
-  }              
+  )
+
 }
