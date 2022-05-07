@@ -20,7 +20,7 @@ const CheckoutConfirm = () => {
   const dispatch = useDispatch()
   const order = datosPago[4].split("=");
   const idOrder = order[1];
-   
+   console.log(datosPago)
   useEffect(() => {
    if(orden){
      dispatch(changeStatus(orden.pedidoId , true))
@@ -56,12 +56,14 @@ const CheckoutConfirm = () => {
               Fecha:{" "}
               {orden?.fechaCreacion.slice(0, 10)}
             </ListGroup.Item>
-            <ListGroup.Item>ID de compra: {idOrder} </ListGroup.Item>
+            <ListGroup.Item>ID de compra: {datosPago[2].split('=')[1]} </ListGroup.Item>
+            <ListGroup.Item>Método de pago: {datosPago[5].split('=')[1] === "credit_card" ? ' Tarjeta de crédito' : ' Tarjeta de Debito'}</ListGroup.Item>
             <ListGroup.Item>Estado del pago: Aprobada</ListGroup.Item>
            <ListGroup.Item>Dirección: {user?.direccion }</ListGroup.Item> 
             <ListGroup.Item>
               Productos: {orden?.productos?.map((p) => p.producto + ", ")}
             </ListGroup.Item>
+            <ListGroup.Item>Costo de envío:{orden?.totalPedido >= 7000 ? ' $ 0' : ' $ 150'}</ListGroup.Item>
             <ListGroup.Item>
               {" "}
            Estado del pedido: Estamos preparando tu pedido
@@ -92,8 +94,8 @@ const CheckoutConfirm = () => {
             <ListGroup.Item>
               Productos: {orden?.productos?.map((p) => p.producto + ", ")}
             </ListGroup.Item>
-           
-            <ListGroup.Item>Total: ${orden?.totalPedido}</ListGroup.Item>
+            
+            <ListGroup.Item>Total: ${orden?.totalPedido }</ListGroup.Item>
           </ListGroup>
           <Button className="container" variant="dark" onClick={onClick}>
             Volver

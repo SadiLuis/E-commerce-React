@@ -5,6 +5,7 @@ import styles from './Orders.module.css'
 import { Link } from 'react-router-dom'
 
 export default function HistoryOrders ({fecha, productos, total, status}) {
+   
     const dispatch = useDispatch()
     const product = useSelector((state) => state.productsReducer.detailProduct);
      React.useEffect(()=> {
@@ -23,7 +24,7 @@ export default function HistoryOrders ({fecha, productos, total, status}) {
      }
 
 
-
+ 
     return (
         <div style={{textAlign: '-webkit-center'}}>
             <div className={styles.container}>

@@ -17,7 +17,7 @@ import { updateCart } from '../../Actions/cart';
 import PushBar from '../Landing/PushBar.jsx'
 
 export default function Home() {
-
+ const [flag , setFlag] = useState(false)
   const dispatch = useDispatch()
   const [showNewsletter, setShowNewsletter] = useState(false)
 
@@ -126,7 +126,7 @@ export default function Home() {
 
       {/* Filtros */}
       <div className={styles.filters}>
-        <CategoriasForm />
+        <CategoriasForm setFlag={setFlag}/>
       </div>
 
 
@@ -138,7 +138,7 @@ export default function Home() {
         <div className={styles.grillaCards}>
           {
             allProducts.length ? currentProducts?.map(e => <Card key={e.id} id={e.id} img={e.images[0]} title={e.title} category={e.category} price={e.price} />)
-              : <Loader />
+              : !allProducts.length && flag ? <h2>No se encontraron productos</h2> : <Loader />
           }
 
         </div>

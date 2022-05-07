@@ -79,10 +79,10 @@ export function editStatusOrder(orderId, newStatus) {
             }
             const config = getHeaderToken()
             const response = await axios.put(`${BASEURL}/pedidos/${orderId}`, body, config)
-            return {
+            return dispatch({
                 type: 'EDIT_STATUS_ORDER',
                 payload: response.data
-            }
+            })
         } catch (err) {
             return console.log(err.response.data);
         }
