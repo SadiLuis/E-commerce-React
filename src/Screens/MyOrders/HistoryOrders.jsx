@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts, getProductById } from '../../Actions/products'
 import styles from './Orders.module.css'
+import { Link } from 'react-router-dom'
 
 export default function HistoryOrders ({fecha, productos, total, status}) {
     const dispatch = useDispatch()
@@ -25,9 +26,6 @@ export default function HistoryOrders ({fecha, productos, total, status}) {
 
     return (
         <div style={{textAlign: '-webkit-center'}}>
-          {
-              console.log('filtrado: ', filteredProducts)
-          } 
             <div className={styles.container}>
                 <div className={styles.header}>
                     <p><b>Fecha: </b></p>
@@ -39,7 +37,7 @@ export default function HistoryOrders ({fecha, productos, total, status}) {
                     <div className={styles.wrapper}>
                          <div className={styles.status}>
                              {
-                                 status === 'PENDIENTE' ? <p style={{color: 'red'}}>{status}</p> : <p>Estado: {status}</p>
+                                 status === 'PENDIENTE' ? <p style={{color: 'red', padding:'0.7rem'}}>{status}</p> : <p style={{padding:'0.7rem'}}>Estado: {status}</p>
                              }
                     
                 </div>
@@ -55,8 +53,8 @@ export default function HistoryOrders ({fecha, productos, total, status}) {
                         
                            <div className={styles.products}>
                                <div className={styles.titleButton}>
-                                   <p><b>{e.title} </b></p>
-                                <button style={{font: '-webkit-small-control' ,marginBottom:'1rem', fontSize: 'xx-small'}} className='btn btn-outline-dark' >review</button>
+                                   <Link to={`/detail/${e.id}`}><p><b>{e.title} </b></p></Link>
+                                <Link to={`/review/${e.id}`}><button style={{font: '-webkit-small-control' ,marginBottom:'1rem', fontSize: 'xx-small'}} className='btn btn-outline-dark' >review</button></Link>
                                 </div> 
                                 
                                 <img src={e.images[0]} alt="img" style={{width: '50px' }} />

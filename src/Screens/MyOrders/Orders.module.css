@@ -29,7 +29,7 @@
     filter: drop-shadow(0 0 1px rgba(0,0,0,.12));
     border: 1px solid black;
     /* margin: 0rem 40vh 2rem 40vh; */
-    width: 70rem;
+    width: fit-content;
     height: fit-content;
     align-self: center;
     display: flex;
@@ -47,6 +47,7 @@
   .products{
    display: flex;
    flex-direction: row;
+   padding: 0.75rem;
 
   }
   .productsQuantity{
