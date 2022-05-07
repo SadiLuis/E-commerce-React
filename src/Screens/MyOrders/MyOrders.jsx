@@ -6,7 +6,7 @@ import { getPedidosById } from "../../Actions/Pedidos";
 import { useSelector } from "react-redux";
 import { getUserDetail } from "../../Actions/Auth";
 import styles from './Orders.module.css'
-import ProductTable from "../../Components/ProductTable/ProductTable";
+
 import HistoryOrders from "./HistoryOrders";
 
 
