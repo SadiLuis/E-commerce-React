@@ -1,5 +1,6 @@
 const initialState = {
-    categories: []
+    categories: [],
+    
 }
 
 export default function categoriesReducer(state = initialState, action) {

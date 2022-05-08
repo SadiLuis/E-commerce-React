@@ -6,16 +6,16 @@ import { useSelector } from "react-redux";
 const CheckoutList = () => {
   const pedidoDetail =
   useSelector((state) => state.ordersReducer.orderDetail) || {};
-  const {productos , totalPedido} = pedidoDetail
-  let total = totalPedido >= 7000 ? -150 : 0
+  const {productos , totalPedido , pedidoId} = pedidoDetail
+  let total = totalPedido >= 7000 ? 0 : 150
   return (
     <div className="mb-4">
     <div className="container bg-light rounded-15">
-      <h3>Resumen del pedido</h3>
+      <h3>Resumen del pedido Nº: {pedidoId}</h3>
       <table className="table table-bordered align-middle">
         <thead>
           <tr>
-            <td className="h5">Nº pedido</td>
+            <td className="h5">ID pedido</td>
             <td className="h5">Producto</td>
             <td className="h5">Precio Unitario</td>
             <td className="h5">Cantidad</td>
@@ -45,8 +45,8 @@ const CheckoutList = () => {
             </tr>
           )}
           <tr>
-            <td colSpan={"4"} className="h4">
-              Descuento de envío
+            <td colSpan={"4"} className="h5">
+              Costo de envío
             </td>
             <td >$ {total}</td>
           </tr>
