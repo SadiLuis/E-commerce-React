@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { getAllOrders } from '../../Actions/orders';
@@ -22,6 +22,7 @@ const TableOrders = () => {
         setCurrentPage(pageNum)
     }
 
+    const id = useId();
     return (
         <>
             <div className='table-responsive'>
@@ -38,19 +39,19 @@ const TableOrders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentOrders.map(o => (
-                            <tr >
-                                <td>{o.usuario.nombre}</td>
-                                <td>
+                        {currentOrders.map((o,id) => (
+                            <tr key={`tr-${id}`}>
+                                <td key={`name-${id}`}>{o.usuario.nombre}</td>
+                                <td key={`detail-${id}`}>
 
                                         <Link to={`/dashboard/admin/OrderDetailAdmin/${o.pedidoId}/${o.usuario.id}`}>
                                             Ver Detalle
                                         </Link>
 
                                 </td>
-                                <td>{o.totalPedido}</td>
-                                <td>{o.status}</td>
-                                <td>{o.fechaCreacion.slice(0, 10)}</td>
+                                <td key={`total-${id}`}>{o.totalPedido}</td>
+                                <td key={`status-${id}`}>{o.status}</td>
+                                <td key={`date-${id}`}>{o.fechaCreacion.slice(0, 10)}</td>
 
                             </tr>
                         ))}

@@ -35,15 +35,12 @@ import UserDetailAdmin from "./Components/UserDetailAdmin/UserDetailAdmin";
 
  
 import ResPassword from "./Components/RestarPassword/ResPassword";
-<<<<<<< HEAD
+
 import OrderDetailAdmin from "./Components/OrderDetailAdmin/OrderDetailAdmin";
 
-
-
-=======
 import Checkout from "./Components/Checkout/Checkout";
 import CheckoutConfirm from "./Components/Checkout/CheckoutDetail/CheckoutConfirm";
->>>>>>> a9aaaf9949677b261df222a735510ca4e8c402e8
+
 
 
 

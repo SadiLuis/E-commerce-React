@@ -83,3 +83,10 @@ import {getUserDetail} from './Auth'
          }
       }
    }
+
+   export function orderUser(payload) {
+      return {
+         type: 'ORDER_USER',
+         payload
+      }
+   }

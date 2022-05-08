@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useId } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getOrderById } from '../../Actions/orders';
@@ -8,13 +8,15 @@ import SidebarAdmin from '../SidebarAdmin/SidebarAdmin'
 
 const OrderDetailAdmin = () => {
     const dispatch = useDispatch();
-    const { id,idUser } = useParams();
+    const { id, idUser } = useParams();
     const order = useSelector(state => state.ordersReducer.orderDetail);
     const userById = useSelector(state => state.userReducer.userDetail)
     useEffect(() => {
         dispatch(getOrderById(id));
         dispatch(getUserById(idUser))
     }, [dispatch, id])
+
+    const keyId = useId();
     return (
         <div className="container-fluid">
             <div className='row'>
@@ -22,15 +24,30 @@ const OrderDetailAdmin = () => {
                     <SidebarAdmin />
                 </div>
                 <div className='col'>
-                    <div className="row h4">Detalle del pedido</div>
+                    <div className="row">
+                        <div className="col">
+                            <div className="row h4">Detalle del pedido</div>
+                        </div>
+                    </div>
+
+                    {/* <div className="row">
+                        <div className="col">
+                            {order.status==='PENDIENTE'
+                                ?<button>Aceptar</button>
+                                :<button>Rechazar</button>
+                            }
+
+                        </div>
+                    </div> */}
+
                     <div className="row">
                         <div className="col">
 
-                            <div class="card border-dark mb-3">
-                                <div class="card-header text-center">
+                            <div className="card border-dark mb-3">
+                                <div className="card-header text-center">
                                     Usuario:{userById.usuario}
                                 </div>
-                                <div class="card-body text-start">
+                                <div className="card-body text-start">
                                     <div className="row">
                                         <div className="col">
                                             <p className="mb-0 fs-5">numero pedido:</p>
@@ -77,17 +94,17 @@ const OrderDetailAdmin = () => {
                                     Articulos
                                 </div>
                                 <div className="card-body">
-                                    {order?.productos.map(p => (
-                                        <div className="row">
-                                            <div className="col">
+                                    {order?.productos.map((p,keyId) => (
+                                        <div key={`article-${keyId}`} className="row">
+                                            <div key={`quantity-${keyId}`} className="col">
                                                 <p className="mb-0 fs-5">
                                                     {p.producto}X{p.cantidad}
                                                 </p>
                                             </div>
-                                            <div className="col">
+                                            <div key={`price-${keyId}`} className="col">
                                                 <p className="mb-0 fs-5">P.U.={p.precioUnitario}</p>
                                             </div>
-                                            <div className="col">
+                                            <div key={`total-${keyId}`} className="col">
                                                 <p className="mb-0 fs-5">Total:{p.total}</p>
                                             </div>
                                         </div>
