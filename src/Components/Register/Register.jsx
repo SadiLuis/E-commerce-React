@@ -168,7 +168,7 @@ export default function Register() {
   <div className={style.containerReg}>
   <div className="col-sm-4">
     <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-      <div className= {`carousel-inner ${style.containerCarousel}`}>
+      <div className= {`carousel-inner ${style.containerCarousel}`} style={{height: '62rem'}}>
         <div className={`carousel-item active  ${style.containerImg}`}>
           <img className={style.tamaño} src={uno} alt="First slide" />
         </div>
@@ -203,7 +203,7 @@ export default function Register() {
     <form onSubmit={handleSubmit} className={style.form} >
       <div className={`mb-1 ${style.formInput}`} style={{marginTop:'5px'}}>
         {/* CORREO */}
-        <label className='labelExample' htmlFor="exampleInputEmail1" style={{fontSize:'15px'}}>&nbsp; Correo</label>
+        <label className={style.labelExample} htmlFor="exampleInputEmail1" style={{fontSize:'15px'}}>&nbsp; Correo</label>
         <input  onFocus={(e) => handleChange(e.target.name , true)}
         
          type="email" className={` ${style.input}`}
@@ -214,7 +214,7 @@ export default function Register() {
       </div>
       {/* Nombre */}
       <div className={`mb-1 ${style.formInput}`}>
-        <label className='labelExample' htmlFor="exampleInputPassword1">&nbsp; Nombre</label>
+        <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Nombre</label>
         <input type="text" className={` ${style.input}`} id="exampleInputPassword1"
           onChange={(e) => handleChange(e.target.name, e.target.value)} 
           value={form.nombre} name='nombre' placeholder="Nombre" 
@@ -225,7 +225,7 @@ export default function Register() {
       </div>
       {/* USUARIO */}
       <div className={`mb-1 ${style.formInput}`}>
-        <label className='labelExample' htmlFor="exampleInputPassword1">&nbsp; Nombre de usuario</label>
+        <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Nombre de usuario</label>
         <input type="text"  className={ style.input} id="exampleInputPassword1" 
         placeholder="Nombre de usuario" name='usuario' 
         value={form.usuario} 
@@ -237,27 +237,31 @@ export default function Register() {
       </div>
       {/* Contraseña  */}
       <div className={`mb-1 ${style.formInput}`}>
-        <label className='labelExample' htmlFor="exampleInputPassword1">&nbsp; Contraseña</label>
-       <div className={style.containerInputContrasena}>
-        <input type={visible}  className={` ${style.input}`} id="exampleInputPassword1"
+        <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Contraseña</label>
+       {/* <div className={style.containerInputContrasena}> */}
+         {/* <div> */}
+             <input type={visible}  style={{marginBottom: '1rem'}}  className={` ${style.input}`} id="exampleInputPassword1"
          name='contrasena' placeholder="Password" value={form.contrasena}
           onChange={(e) => handleChange(e.target.name, e.target.value)}
           onFocus={(e) => handleChange(e.target.name , true)}
           />
-        <button class={`btn btn-primary ${style.contrasena}`} type='button' >
+        <button class={`btn btn-primary ${style.contrasena}`} style={{color: 'black', background: 'none', border: 'none', marginTop: '2.3rem' }} type='button' >
         {visible === 'text' && <IoEyeOff className={style.inputContrasena}  type="button" onClick={mostrarPassword} /> }
         {visible === 'password' && <IoEye  className={style.inputContrasena} type="button" onClick={mostrarPassword} /> }
         </button>
-        <div style={{marginTop:'-65px'}}>
-        {focus.contrasena && error.contrasena && <span className={`text-danger ${style.span}`} >{error.contrasena}</span> }
-        </div>
-        </div>
+      
+         {/* </div> */}
+      
+       {/*  <div  style={{marginTop:'-65px'}} > */}
+        {focus.contrasena && error.contrasena && <span className={`text-danger ${style.span}`} /* style={{marginTop:'2rem'}} */>{error.contrasena}</span> }
+        {/* </div> */}
+       {/*  </div> */}
       </div>
      
 
       {/* PAIS */}
       <div className={`mb-1 ${style.formInput}`} /* style={{marginTop:'-95px'}} */>
-        <label className='labelExample' htmlFor="exampleInputPassword1">&nbsp; País</label>
+        <label className={style.labelExample} htmlFor="exampleInputPassword1" /* style={{marginTop:'6rem'}} */>&nbsp;  País</label>
         <input type="text"  className={` ${style.input}`} id="exampleInputPassword1"
           onChange={(e) => handleChange(e.target.name, e.target.value)} 
           value={form.pais} placeholder="Pais" name='pais'
@@ -268,7 +272,7 @@ export default function Register() {
 
       {/* Provincia */}
       <div className={`mb-1 ${style.formInput}`}>
-        <label className='labelExample' htmlFor="exampleInputPassword1">&nbsp; Provincia</label>
+        <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Provincia</label>
         <input type="text"  className={` ${style.input}`} id="exampleInputPassword1"
           onChange={(e) => handleChange(e.target.name, e.target.value)} 
           value={form.provincia}
@@ -279,17 +283,17 @@ export default function Register() {
       </div>
       {/* Ciudad */}
       <div className={`mb-1 ${style.formInput}`}>
-        <label className='labelExample' htmlFor="exampleInputPassword1">&nbsp; Ciudad</label>
+        <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Ciudad</label>
         <input type="text"  className={` ${style.input}`} id="exampleInputPassword1"
           onChange={(e) => handleChange(e.target.name, e.target.value)} 
           value={form.localidad} placeholder="Ciudad" name='localidad'
           onFocus={(e) => handleChange(e.target.name , true)}
           />
-          {focus.localidad && error.localidad && <span className={`text-danger ${style.span}`}  style={{marginLeft:'100px'}}>{error.localidad}</span> }
+          {focus.localidad && error.localidad && <span className={`text-danger ${style.span}`}  /* style={{marginLeft:'100px'}} */>{error.localidad}</span> }
       </div>
       {/* DIRECCIONS */}
       <div className={`mb-1 ${style.formInput}`}>
-        <label className='labelExample' htmlFor="exampleInputPassword1">&nbsp; Dirección</label>
+        <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Dirección</label>
         <input type="text"  className={` ${style.input}`} id="exampleInputPassword1"
           onChange={(e) => handleChange(e.target.name, e.target.value)}
            value={form.direccion} 
@@ -301,7 +305,7 @@ export default function Register() {
       </div>
       {/* Telefono */}
       <div className={`mb-1 ${style.formInput}`}>
-        <label className='labelExample' htmlFor="exampleInputPassword1">&nbsp; Teléfono</label>
+        <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Teléfono</label>
         <input type="text"  className={ style.input} id="exampleInputPassword1"
           onChange={(e) => handleChange(e.target.name, e.target.value)}
            value={form.telefono} 
@@ -309,10 +313,10 @@ export default function Register() {
             name='telefono' 
             onFocus={(e) => handleChange(e.target.name , true)}
            />
-          {focus.telefono && error.telefono && <span className={`text-danger ${style.span}`} style={{marginLeft:'110px'}}>{error.telefono}</span> }
+          {focus.telefono && error.telefono && <span className={`text-danger ${style.span}`} /* style={{marginLeft:'110px'}} */>{error.telefono}</span> }
       </div>
 
-      <div className="form-group form-check" style={{marginTop:'-25px'}}>
+      <div className="form-group form-check" /* style={{marginTop:'-25px'}} */>
       </div>
       <button type="submit" class="btn btn-primary w-100" >Registrarse</button>
       <div div className="form-group form-check p-2 text-center" style={{marginTop:'5px'}}>

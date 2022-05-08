@@ -9,6 +9,10 @@
     
 }
 
+.labelExample{
+    margin-top:2rem;
+}
+
 .tamaño {
    
     width: 100vh;
@@ -49,6 +53,8 @@
     margin-top:12rem;
     text-align: center;
    padding: 4%;
+   height: fit-content;
+   margin-bottom: 3rem;
 }
 
 .input{
@@ -57,10 +63,11 @@
   border-radius: .7rem;
   border: 2px solid #00000080;
   height: 2.5rem;
-/*   margin-top: 1.7rem; */
+  margin-top: 0.7rem; 
+/*   margin-bottom: 1rem;
 
  
-  margin-bottom: 3rem;
+  margin-bottom: 3rem; */
 }
 
 .contrasena {
@@ -72,12 +79,12 @@
      height: 2.3rem;
 }
 
-.inputContrasena{
+/* .inputContrasena{
     
     align-items: center;
     font-size: 23px;
     
-}
+} */
  .containerInput{
      position: relative;
      display: flex;
@@ -88,12 +95,13 @@
      margin-bottom:20px
  }
  .containerInputContrasena{
-          position: initial;
-     display: flex;
+        /*   position: initial; */
+     position: relative;
+     /* display: flex; */
      justify-content:center;
-     align-items: center;
+    /*  align-items: center; */
      
-        width: 21.39rem;
+        
      /* margin-bottom:2rem */
  }
 
@@ -105,9 +113,9 @@
  } 
 
  .span{
-     position: absolute;
+    /*  position: absolute; */
   /*    display: flex; */
-      margin-left: 6.2rem; 
+     /*  margin-left: 6.2rem;  */
       width: 5rem;
      
  }
