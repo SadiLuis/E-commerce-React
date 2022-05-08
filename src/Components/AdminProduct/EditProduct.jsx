@@ -200,7 +200,7 @@ export default function Product() {
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Categoría</span>
           <span class="form-control">{input.categoriaId}</span>
-          <select class="form-select" aria-label="Default select example" name='categoriaId' 
+          <select class="form-select" aria-label="Default select example" name='categoria' 
           onFocus={(e) => handleChange(e.target.name , true)}
           onChange={(e) => handleSelectCategory(e)}>
             <option hidden selected>Modificar categoría</option>
