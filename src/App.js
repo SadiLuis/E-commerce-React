@@ -33,14 +33,12 @@ import Customers from "./Components/Customers/Customers";
 import Orders from "./Components/Orders/Orders";
 import UserDetailAdmin from "./Components/UserDetailAdmin/UserDetailAdmin";
 
- 
 import ResPassword from "./Components/RestarPassword/ResPassword";
 
 import OrderDetailAdmin from "./Components/OrderDetailAdmin/OrderDetailAdmin";
 
 import Checkout from "./Components/Checkout/Checkout";
 import CheckoutConfirm from "./Components/Checkout/CheckoutDetail/CheckoutConfirm";
-
 
 
 

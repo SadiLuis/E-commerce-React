@@ -41,6 +41,7 @@ let price = props.price
   
    
    async function handlePago(e, price) {
+     
         e.preventDefault()
         if (!props.order.phone && !props.order.contactName && !props.order.username) {
          return swal("Por favor, completá los datos personales");

@@ -68,8 +68,21 @@ import {getUserDetail} from './Auth'
    }
 }
 
-   export function updateOrderUser(body) {
+   export function updateOrderUser({ username,
+      address,
+      phone,
+      contactName,
+      city,
+      id}) {
       return async function (dispatch) {
+      const body ={
+         address,
+         phone,
+         contactName,
+         city,
+         id,
+         username
+       }
          try {
             await axios.post(
                `${BASEURL}/user/updateOrder`,

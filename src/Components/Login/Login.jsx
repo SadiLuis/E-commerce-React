@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { login, register } from "../../Actions/Auth";
+import { login, register ,resetRegister  } from "../../Actions/Auth";
 import { Link, useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -10,8 +10,7 @@ import uno from '../../Assets/1.jpg'
 import dos from '../../Assets/2.jpg'
 import tres from '../../Assets/3.jpg'
 import style from './Login.module.css'
-//import LoginGoogle from "./LoginGoogle";
-
+import LoginGoogle from "./LoginGoogle";
 const initialLogin = {
   email: '',
   contrasena: '',
@@ -34,7 +33,7 @@ const validateForm = (form) => {
   return errors;
 };
 
-function Login({ login, isAuth, user }) {
+function Login({ login, isAuth, user ,resetRegister }) {
   
   const navigate = useNavigate();
   const [form, setForm] = useState(initialLogin);
@@ -77,6 +76,7 @@ function Login({ login, isAuth, user }) {
 
   useEffect(() => {
     // Si ya está logueado que lo redireccione al dashboard
+    resetRegister()
     if (isAuth && user) {
       
       const { rol } = user;
@@ -191,16 +191,16 @@ function Login({ login, isAuth, user }) {
             <span className={style.loginSpan}>¿No tienes cuenta?</span>
             <Link to='/register' className="btn btn-outline-dark p-0" >Registrate</Link>             
           </div>
-          <div className="text-center">
+         {/*  <div className="text-center">
             <span> ¿Olvidaste tu contraseña? </span>
               <Link to='/recupass' className="btn btn-outline-dark p-0" >Recuperar</Link>          
-          </div>
+          </div> */}
 
         </form>
         
        </div>
-       {/* <LoginGoogle /> */}
       </div>
+        <LoginGoogle /> 
 
       </div>
 
@@ -210,7 +210,7 @@ function Login({ login, isAuth, user }) {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ login, register }, dispatch);
+  return bindActionCreators({ login, register ,resetRegister }, dispatch);
 };
 
 const mapStateToProps = (state) => {
