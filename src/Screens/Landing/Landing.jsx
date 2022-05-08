@@ -1,28 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import uno from '../../Assets/uno.JPG'
 import dos from '../../Assets/dos.JPG'
 import tres from '../../Assets/tres.JPG';
 import '../Landing/Landing.css'
 import { useNavigate } from 'react-router-dom';
-
+import PushBar from '../Landing/PushBar.jsx'
 
 
 const Landing = () => {
 
   const navigate = useNavigate()
+  const [showNewsletter, setShowNewsletter] = useState(false)
+  const [stateNewsletter, setStateNewsletter] = useState({
+    nombre: '',
+    email: ''
+  })
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowNewsletter(true)
+    }, 15000)
+  }, [])
+
+  function handleClose() {
+    setShowNewsletter(false)
+    setStateNewsletter({ nombre: '', email: '' })
+  }
 
   return (
     <div>
       <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
-          <div class="carousel-item active">
-            <img src={uno} class="d-block mx-auto w-75" alt="First slide" />
+          <div className="carousel-item active">
+            <img src={uno} className="d-block mx-auto w-75" alt="First slide" />
           </div>
-          <div class="carousel-item">
-            <img src={dos} class="d-block mx-auto w-75" alt="Second slide" />
+          <div className="carousel-item">
+            <img src={dos} className="d-block mx-auto w-75" alt="Second slide" />
           </div>
-          <div class="carousel-item">
-            <img src={tres} class="d-block mx-auto w-75" alt="Third slide" />
+          <div className="carousel-item">
+            <img src={tres} className="d-block mx-auto w-75" alt="Third slide" />
           </div>
         </div>
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -35,26 +51,26 @@ const Landing = () => {
         </button>
       </div>
 
-      <div class="col1 col">
+      <div className="col1 col">
 
 
-        <hr class="border-dark border" />
+        <hr className="border-dark border" />
 
       </div>
 
-      <div class="m-0 p-3">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="pb-5">
-                <div class="image">
-                  <div class="pb-3 mb-3">
+      <div className="m-0 p-3">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="pb-5">
+                <div className="image">
+                  <div className="pb-3 mb-3">
 
-                    <span class="bg-light d-block" >
+                    <span className="bg-light d-block" >
 
-                      <div class="embed-responsive embed-responsive-3by2">
-                        <div class="embed-responsive-item">
-                          <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/UMAGE_packshot_5102_5501-1_AConversationPiece_blackoak_petrolblue_highres_1_1_640x@2x.progressive.jpg?v=1638884064" alt="Conversation Piece Lounge Chair" />
+                      <div className="embed-responsive embed-responsive-3by2">
+                        <div className="embed-responsive-item">
+                          <img className="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/UMAGE_packshot_5102_5501-1_AConversationPiece_blackoak_petrolblue_highres_1_1_640x@2x.progressive.jpg?v=1638884064" alt="Conversation Piece Lounge Chair" />
                         </div>
                       </div>
 
@@ -63,8 +79,8 @@ const Landing = () => {
 
                   </div>
                 </div>
-                <div class="titleInfo">
-                  <h3 class="mb-3 ">
+                <div className="titleInfo">
+                  <h3 className="mb-3 ">
 
                     <span>
                       Conversation Piece Lounge Chair
@@ -73,7 +89,7 @@ const Landing = () => {
                   </h3>
 
                 </div>
-                <p class=" info mb-3">
+                <p className=" info mb-3">
 
                   Inspirado en la tradición escandinava de las formas de los muebles que fluyen libremente, el sillón de Anders Klem se define por sus curvas. La pieza de conversación es una silla de aspecto muy orgánico, dice el diseñador. Está llena de detalles interesantes, como la forma en que la pata trasera se convierte en una horquilla que mantiene unidos el respaldo y el asiento. La comodidad también es clave, con la posibilidad de cambiar de posición al sentarse sin dejar de tener un apoyo adecuado para la espalda. Con su carcasa de roble aceitado para resaltar las vetas de la superficie, las telas de los tapizados de la silla han sido cuidadosamente seleccionadas para complementar la madera natural.
 
@@ -81,16 +97,16 @@ const Landing = () => {
               </div>
             </div>
 
-            <div class="col-lg-6">
-              <div class="pb-5">
-                <div class="image">
-                  <div class="pb-3 mb-3">
+            <div className="col-lg-6">
+              <div className="pb-5">
+                <div className="image">
+                  <div className="pb-3 mb-3">
 
-                    <span class="bg-light d-block" >
+                    <span className="bg-light d-block" >
 
-                      <div class="embed-responsive embed-responsive-3by2">
-                        <div class="embed-responsive-item">
-                          <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/BoomerangHM2SoapedOakw.LoopMarine_640x@2x.progressive.jpg?v=1626238627" alt="Boomerang Armchair HM2" />
+                      <div className="embed-responsive embed-responsive-3by2">
+                        <div className="embed-responsive-item">
+                          <img className="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/BoomerangHM2SoapedOakw.LoopMarine_640x@2x.progressive.jpg?v=1626238627" alt="Boomerang Armchair HM2" />
                         </div>
                       </div>
 
@@ -99,8 +115,8 @@ const Landing = () => {
 
                   </div>
                 </div>
-                <div class="titleInfo">
-                  <h3 class="mb-3">
+                <div className="titleInfo">
+                  <h3 className="mb-3">
 
                     <span>
                       Boomerang Armchair HM2
@@ -109,23 +125,23 @@ const Landing = () => {
                   </h3>
 
                 </div>
-                <p class="info mb-3">
+                <p className="info mb-3">
 
                   Hvidt & Mølgaard ha añadido esta versión de su sillón Boomerang, lanzado en 1956. Los renombrados diseñadores de mediados de siglo idearon una forma memorablemente aerodinámica, con una estructura de madera pulida a mano y finas patas cónicas de latón. Hay una amplia selección de tapicerías disponibles, junto con la posibilidad de elegir los acabados de roble o nogal aceitados para la estructura del sillón.
 
                 </p>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="pb-5">
-                <div class="image">
-                  <div class="pb-3 mb-3">
+            <div className="col-lg-6">
+              <div className="pb-5">
+                <div className="image">
+                  <div className="pb-3 mb-3">
 
-                    <span class="bg-light d-block" >
+                    <span className="bg-light d-block" >
 
-                      <div class="embed-responsive embed-responsive-3by2">
-                        <div class="embed-responsive-item">
-                          <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/FAD02NA_FanDiningChairNaturalOak_Main_640x@2x.progressive.jpg?v=1634723597" alt="Fan Dining Chair" />
+                      <div className="embed-responsive embed-responsive-3by2">
+                        <div className="embed-responsive-item">
+                          <img className="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/FAD02NA_FanDiningChairNaturalOak_Main_640x@2x.progressive.jpg?v=1634723597" alt="Fan Dining Chair" />
                         </div>
                       </div>
 
@@ -134,8 +150,8 @@ const Landing = () => {
 
                   </div>
                 </div>
-                <div class="titleInfo">
-                  <h3 class="mb-3 ">
+                <div className="titleInfo">
+                  <h3 className="mb-3 ">
 
                     <span>
                       Fan Dining Chair
@@ -146,16 +162,16 @@ const Landing = () => {
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="pb-5">
-                <div class="image">
-                  <div class="pb-3 mb-3">
+            <div className="col-lg-6">
+              <div className="pb-5">
+                <div className="image">
+                  <div className="pb-3 mb-3">
 
-                    <span class="bg-light d-block" >
+                    <span className="bg-light d-block" >
 
-                      <div class="embed-responsive embed-responsive-3by2">
-                        <div class="embed-responsive-item">
-                          <img class="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/100030_S.A.C.diningchair_1_exposed1_640x@2x.progressive.jpg?v=1625484071" alt="S.A.C. Dining Chair" />
+                      <div className="embed-responsive embed-responsive-3by2">
+                        <div className="embed-responsive-item">
+                          <img className="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/100030_S.A.C.diningchair_1_exposed1_640x@2x.progressive.jpg?v=1625484071" alt="S.A.C. Dining Chair" />
                         </div>
                       </div>
 
@@ -164,8 +180,8 @@ const Landing = () => {
 
                   </div>
                 </div>
-                <div class="titleInfo">
-                  <h3 class="mb-3 ">
+                <div className="titleInfo">
+                  <h3 className="mb-3 ">
 
                     <span>
                       S.A.C. Dining Chair
@@ -182,21 +198,21 @@ const Landing = () => {
       </div>
 
 
-      <div class="col1 col">
+      <div className="col1 col">
 
-        <hr class="border-dark border" />
+        <hr className="border-dark border" />
       </div>
 
       <div>
-        <div class="header">
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <div class="title">
-                  <div class="m-0">
-                    <h2 class="mb-5">
+        <div className="header">
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <div className="title">
+                  <div className="m-0">
+                    <h2 className="mb-5">
 
-                      <span class="titleInfo">
+                      <span className="titleInfo">
                         Ofertas
                       </span>
 
@@ -204,43 +220,43 @@ const Landing = () => {
                   </div>
                 </div>
               </div>
-              <div class="col-auto">
+              <div className="col-auto">
               </div>
             </div>
           </div>
         </div>
-        <div class="ofertas">
-          <div class="mb-5">
-            <div class="container">
-              <div class="row">
+        <div className="ofertas">
+          <div className="mb-5">
+            <div className="container">
+              <div className="row">
 
-                <div class="col-6 col-sm-6">
-                  <div class="producto">
-                    <div class="pb5">
+                <div className="col-6 col-sm-6">
+                  <div className="producto">
+                    <div className="pb5">
 
-                      <div class="image">
-                        <div class="mb-3">
-                          <span class="bg-light d-block">
-                            <div class="embed-responsive embed-responsive-1by1">
-                              <div class="embed-responsive-item">
-                                <img class="w-100 lazyloaded" alt="Rest Sofa 2" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/NewProject01_89fe0188-2c94-483e-aaea-e514d7dc575e_640x@2x.progressive.jpg?v=1624364876" />
+                      <div className="image">
+                        <div className="mb-3">
+                          <span className="bg-light d-block">
+                            <div className="embed-responsive embed-responsive-1by1">
+                              <div className="embed-responsive-item">
+                                <img className="w-100 lazyloaded" alt="Rest Sofa 2" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/NewProject01_89fe0188-2c94-483e-aaea-e514d7dc575e_640x@2x.progressive.jpg?v=1624364876" />
                               </div>
                             </div>
                           </span>
                         </div>
                       </div>
-                      <div class="title">
-                        <div class="m-0">
-                          <p class="m-0">
+                      <div className="title">
+                        <div className="m-0">
+                          <p className="m-0">
                             <strong>
                               Rest Sofa 2
                             </strong>
                           </p>
                         </div>
                       </div>
-                      <div class="price">
-                        <div class="pb-3 mb-4">
-                          <s class="text-danger">
+                      <div className="price">
+                        <div className="pb-3 mb-4">
+                          <s className="text-danger">
                             $4,749
                           </s>
                         </div>
@@ -250,33 +266,33 @@ const Landing = () => {
                     </div>
                   </div>
                 </div>
-                <div class="col-6 col-sm-6">
-                  <div class="producto">
-                    <div class="pb5">
+                <div className="col-6 col-sm-6">
+                  <div className="producto">
+                    <div className="pb5">
 
-                      <div class="image">
-                        <div class="mb-3">
-                          <span class="bg-light d-block">
-                            <div class="embed-responsive embed-responsive-1by1">
-                              <div class="embed-responsive-item">
-                                <img class="w-100 lazyloaded" alt="Juice Rectangular Table" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Juice_41_1_640x@2x.progressive.jpg?v=1625140351" />
+                      <div className="image">
+                        <div className="mb-3">
+                          <span className="bg-light d-block">
+                            <div className="embed-responsive embed-responsive-1by1">
+                              <div className="embed-responsive-item">
+                                <img className="w-100 lazyloaded" alt="Juice Rectangular Table" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/Juice_41_1_640x@2x.progressive.jpg?v=1625140351" />
                               </div>
                             </div>
                           </span>
                         </div>
                       </div>
-                      <div class="title">
-                        <div class="m-0">
-                          <p class="m-0">
+                      <div className="title">
+                        <div className="m-0">
+                          <p className="m-0">
                             <strong>
                               Juice Rectangular Table
                             </strong>
                           </p>
                         </div>
                       </div>
-                      <div class="price">
-                        <div class="pb-3 mb-4">
-                          <s class="text-danger">
+                      <div className="price">
+                        <div className="pb-3 mb-4">
+                          <s className="text-danger">
                             $8,491
                           </s>
                         </div>
@@ -298,30 +314,30 @@ const Landing = () => {
       </div>
 
 
-      <div class="footer py-5">
+      <div className="footer py-5">
 
-        <div class="container">
-          <div class="row">
-            <div class="col-6 col-lg-4">
-              <div class="menu">
-                <div class="m-0">
-                  <div class="rule">
-                    <div class="pb-3">
-                      <hr class="border-dark" />
+        <div className="container">
+          <div className="row">
+            <div className="col-6 col-lg-4">
+              <div className="menu">
+                <div className="m-0">
+                  <div className="rule">
+                    <div className="pb-3">
+                      <hr className="border-dark" />
                     </div>
                   </div>
-                  <div class="titleFooter">
-                    <div class="mb-3">
+                  <div className="titleFooter">
+                    <div className="mb-3">
                       <strong>
                         About
                       </strong>
                     </div>
                   </div>
                   <div>
-                    <div class="mb-5">
+                    <div className="mb-5">
                       <div>
-                        <div class="m-0" >
-                          <span class="links" onClick={() => navigate('/about')}>
+                        <div className="m-0" >
+                          <span className="links" onClick={() => navigate('/about')}>
                             About Us
                           </span>
                         </div>
@@ -332,26 +348,26 @@ const Landing = () => {
                 </div>
               </div>
             </div>
-            <div class="col-6 col-lg-4">
-              <div class="menu">
-                <div class="m-0">
-                  <div class="rule">
-                    <div class="pb-3">
-                      <hr class="border-dark" />
+            <div className="col-6 col-lg-4">
+              <div className="menu">
+                <div className="m-0">
+                  <div className="rule">
+                    <div className="pb-3">
+                      <hr className="border-dark" />
                     </div>
                   </div>
-                  <div class="titleFooter">
-                    <div class="mb-3">
+                  <div className="titleFooter">
+                    <div className="mb-3">
                       <strong >
                         Contact
                       </strong>
                     </div>
                   </div>
                   <div>
-                    <div class="mb-5">
-                      <div class="link">
-                        <div class="m-0">
-                          <span class="links" onClick={() => navigate('/contactform')}>
+                    <div className="mb-5">
+                      <div className="link">
+                        <div className="m-0">
+                          <span className="links" onClick={() => navigate('/contactform')}>
                             E-mail Us
                           </span>
                         </div>
@@ -361,26 +377,26 @@ const Landing = () => {
                 </div>
               </div>
             </div>
-            <div class="col-6 col-lg-4">
-              <div class="menu">
-                <div class="m-0">
-                  <div class="rule">
-                    <div class="pb-3">
-                      <hr class="border-dark" />
+            <div className="col-6 col-lg-4">
+              <div className="menu">
+                <div className="m-0">
+                  <div className="rule">
+                    <div className="pb-3">
+                      <hr className="border-dark" />
                     </div>
                   </div>
-                  <div class="titleFooter">
-                    <div class="mb-3">
+                  <div className="titleFooter">
+                    <div className="mb-3">
                       <strong>
                         Support
                       </strong>
                     </div>
                   </div>
                   <div>
-                    <div class="mb-5">
-                      <div class="link">
-                        <div class="m-0">
-                          <span class="links" onClick={() => navigate('/faqs')}>
+                    <div className="mb-5">
+                      <div className="link">
+                        <div className="m-0">
+                          <span className="links" onClick={() => navigate('/faqs')}>
                             FAQs
                           </span>
                         </div>
@@ -393,6 +409,11 @@ const Landing = () => {
           </div>
         </div>
       </div>
+      <PushBar
+        show={showNewsletter}
+        state={stateNewsletter}
+        setState={setStateNewsletter}
+        handleClose={handleClose} />
     </div >
   )
 }
