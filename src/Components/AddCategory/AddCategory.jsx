@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -25,7 +25,8 @@ const AddCategory = () => {
     const CategoriasAll = useSelector(
         (state) => state.categoriesReducer.categories
     );
-    console.log(CategoriasAll);
+    
+    const id = useId();
     useEffect(() => {
         dispatch(getAllCategories());
     }, [dispatch]);
@@ -85,9 +86,9 @@ const AddCategory = () => {
                     <div className='row mb-4'>
                         <div className='col-4'>
                         <select className="form-select" aria-label="">
-                            <option selected>Ver categorias existentes</option>
-                            {CategoriasAll?.map((el) => (
-                                <option key={el.id} value={el.nombre}>
+                            <option defaultValue>Ver categorias existentes</option>
+                            {CategoriasAll?.map((el,id) => (
+                                <option key={`category-${id}`} value={el.nombre}>
                                     {el.nombre}
                                 </option>
                             ))}
