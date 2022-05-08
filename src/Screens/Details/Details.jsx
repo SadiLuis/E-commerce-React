@@ -54,9 +54,7 @@ export default function Detail() {
   if(product.title) {
   return ( 
       <>
-      <div className={styles.typewriter}>
-      
-                </div>
+   
             <div class={styles.containerDetail}>
                 <div class={styles.thumb2} ref={myRef}>
                   {product?.images.map( (img, index) => (

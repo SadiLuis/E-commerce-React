@@ -24,7 +24,7 @@ const Checkout = () => {
     
   });
 
- console.log(usuarioId , detailSend.id)
+ 
   
   const handleChange = (e) => {
     

@@ -20,7 +20,7 @@ export default function Home() {
  const [flag , setFlag] = useState(false)
   const dispatch = useDispatch()
   const [showNewsletter, setShowNewsletter] = useState(false)
-
+  const categorias = useSelector((state) => state.productsReducer.categories)
   React.useEffect(() => {
     dispatch(updateCart())
     dispatch(getAllProducts())
@@ -126,7 +126,7 @@ export default function Home() {
 
       {/* Filtros */}
       <div className={styles.filters}>
-        <CategoriasForm setFlag={setFlag}/>
+        <CategoriasForm setFlag={setFlag} categorias={categorias}/>
       </div>
 
 

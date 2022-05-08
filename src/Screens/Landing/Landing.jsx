@@ -4,13 +4,17 @@ import dos from '../../Assets/dos.JPG'
 import tres from '../../Assets/tres.JPG';
 import '../Landing/Landing.css'
 import { useNavigate } from 'react-router-dom';
-
-
+import { updateCart } from '../../Actions/cart';
+import { useDispatch } from 'react-redux';
 
 const Landing = () => {
-
+ const dispatch = useDispatch();
   const navigate = useNavigate()
 
+  React.useEffect(() => {
+    dispatch(updateCart())
+   
+  }, [dispatch])
   return (
     <div>
       <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
