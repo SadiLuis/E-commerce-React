@@ -14,12 +14,11 @@ import ShoppingBtn from '../../Components/Shopping/ShoppingBtn';
 import CategoriasForm from '../../Components/Checkbox/CategoriasForm';
 import { Loader } from '../../Components/Loader/Loader'
 import { updateCart } from '../../Actions/cart';
-import PushBar from '../Landing/PushBar.jsx'
+
 
 export default function Home() {
  const [flag , setFlag] = useState(false)
   const dispatch = useDispatch()
-  const [showNewsletter, setShowNewsletter] = useState(false)
   const categorias = useSelector((state) => state.productsReducer.categories)
   React.useEffect(() => {
     dispatch(updateCart())
@@ -32,12 +31,7 @@ export default function Home() {
     dispatch(getCategories())
   }, [dispatch])
 
-  useEffect(() => {
-    setTimeout(() => {
-      setShowNewsletter(true)
-    }, 5000)
-  }, [])
-  console.log(showNewsletter)
+
 
 
 
@@ -146,7 +140,7 @@ export default function Home() {
 
       </div>
 
-      <PushBar show={showNewsletter} handleClose={() => setShowNewsletter(false)} />
+
     </div>
 
 
