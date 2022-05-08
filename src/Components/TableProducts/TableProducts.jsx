@@ -13,14 +13,14 @@ const TableProducts = () => {
 
     useEffect(() => {
         dispatch(getAllProducts())
-    }, [dispatch])
+    }, [])
 
     const allProducts = useSelector((state) => state.productsReducer.products)
     const [currentPage, setCurrentPage] = useState(1)
     const [productsOnPage, setProductsOnPage] = useState(10)
     const indexLastProduct = currentPage * productsOnPage
     const indexFirstProduct = indexLastProduct - productsOnPage
-    const currentProducts = allProducts.slice(indexFirstProduct, indexLastProduct)
+    const currentProducts = allProducts?.slice(indexFirstProduct, indexLastProduct)
 
     const paginado = (pageNum) => {
         setCurrentPage(pageNum)
@@ -48,6 +48,11 @@ const TableProducts = () => {
     //     dispatch(orderAlfabeticamente(e.target.value));
     // }
 
+    if(!currentProducts) {
+        return <h1>Loading...</h1>
+    }else{
+
+    
     return (
         <div className='row'>
             <div className='col-12'>
@@ -93,7 +98,7 @@ const TableProducts = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentProducts.map((p,id) => (
+                            {currentProducts?.map((p,id) => (
                                 <tr key={`tr-${id}`}>
                                     <td  key={`edit-${id}`} className='text-center'>
                                         <Link to={`/dashboard/admin/EditProduct/${p.id}`}>
@@ -107,8 +112,8 @@ const TableProducts = () => {
 
                                     <td key={`title-${id}`}>{p.title}</td>
                                     <td key={`price-${id}`}>{p.price}</td>
-                                    <td key={`quantity-${id}`}>{p.cantidad > 0
-                                        ? <span>{p.cantidad}</span>
+                                    <td key={`quantity-${id}`}>{parseInt(p.cantidad) > 0
+                                        ? <span>{parseInt(p.cantidad)}</span>
                                         : <span className='text-danger fw-bold'>Sin Stock disponible</span>}
                                     </td>
                                     <td key={`category-${id}`}>{p.category}</td>
@@ -129,6 +134,7 @@ const TableProducts = () => {
 
         </div>
     )
+    }
 }
 
 export default TableProducts

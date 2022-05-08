@@ -121,7 +121,7 @@ export default function Product() {
   }
 
    const handleChange = (name, value) => {
-    
+    console.log(input)
     const newform = { ...input, [name]: value };
     if(typeof value === 'string' || typeof value === 'array'){
     setInput(newform);
@@ -135,12 +135,15 @@ export default function Product() {
     return newform;
   }
   function handleSelectCategory(e) {
+    console.log(input)
+
     setInput({
       ...input,
-      categoriaId: e.target.value,
+      category: e.target.value,
     });
   }
   function addImage(e) {
+    
     setInput({
       ...input,
       images: [...input.images, { url: inputImages, alt: "" }],
