@@ -9,7 +9,6 @@ import { WhatsApp } from "../../Actions/whatsApp.js";
 import Swal from 'sweetalert2'
 import Carousel from "../../Components/Carousel/Carousel.jsx";
 import Review from "../../Components/Review/ScreenReviews/Reviews.jsx";
-import Typewriter from "typewriter-effect";
 
 export default function Detail() {
   
@@ -56,17 +55,7 @@ export default function Detail() {
   return ( 
       <>
       <div className={styles.typewriter}>
-      <Typewriter 
-                onInit={(typewriter)=>
-                  typewriter 
-                  .typeString("Confirmada su compra, un miembro de MOBI se contactará con usted para definir las opciones para su producto")
-                  .pauseFor(2000)
-                  .deleteAll()
-                  .start()
-                  
-                  
-                }
-                />
+      
                 </div>
             <div class={styles.containerDetail}>
                 <div class={styles.thumb2} ref={myRef}>

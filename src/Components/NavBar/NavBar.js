@@ -10,7 +10,6 @@ import styles from "./NavBar.module.css"
 import { connect } from "react-redux";
 import logo from "../../Assets/default.png";
 import Logout from '../Login/Logout';
-import TypewriterComponent from 'typewriter-effect';
 
 
 
@@ -59,7 +58,21 @@ const NavBarAll = () => {
       >
         Home
       </NavLink>
-      
+      <NavLink
+        to="/contactform"
+        style={{
+          border: "none",
+          background: "none",
+          color: "black",
+          fontSize: "1rem",
+          marginLeft: "0.05rem",
+          cursor: "pointer",
+          textDecoration: "none",
+           marginBottom:"15rem"
+        }}
+      >
+        Contáctenos
+      </NavLink>
       <div  style={{
           border: "none",
           background: "none",
@@ -295,22 +308,12 @@ function NavBar({ isAuth, user }) {
       
       <span className="navbar-brand " 
       style={{
-        fontSize: "0.8rem",
+        fontSize: "0.5rem",
         fontWeight: "bold",
         color: "white",
         
       }}
-      >
-        <TypewriterComponent
-        onInit={(typewriter)=>
-          typewriter
-          .typeString("Envíos gratis por órdenes de compra superiores a $7.000")
-          .pauseFor(2000)
-          .start()
-          
-        }
-       
-      /> 
+      >Envíos gratis por órdenes de compra superiores a $7.000. 
        
       </span >
       
