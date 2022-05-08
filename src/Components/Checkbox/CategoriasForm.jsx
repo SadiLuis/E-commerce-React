@@ -2,9 +2,9 @@ import React from 'react'
 import { useDispatch , useSelector} from 'react-redux';
 import { filterByCategory } from '../../Actions/products';
 
-function CategoriasForm({setFlag}) {
+function CategoriasForm({setFlag , categorias}) {
     const dispatch = useDispatch()
-    const categorias = useSelector((state) => state.categoriesReducer.categories)
+   
      console.log(categorias)
     function handleCheck(e){
         for (let i = 0; i <= categorias?.length; i++){

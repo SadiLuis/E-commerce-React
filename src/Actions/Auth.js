@@ -9,7 +9,9 @@ import {
     REGISTER_FAILED, 
     REGISTER_SUCCESS, 
     UPDATE_USER, 
-    RECOVERY_PASSWORD
+    RECOVERY_PASSWORD,
+    LOGIN_GOOGLE_SUCCESS,
+    LOGIN_GOOGLE_FAILED
 } from './Index';
 
 import {BASEURL} from '../Assets/URLS';
@@ -25,7 +27,7 @@ export const getUserDetail = () => {
       try {
          const { data } = await axios.get(`${BASEURL}/user`, headers);
          //toast(`Bienvenido ${data.nombre}`)
-         // console.log(data);
+         console.log(data);
          
          dispatch({
             type: GET_USER_DETAIL,
@@ -124,7 +126,7 @@ export function login({ email, contrasena }) {
             type: LOGIN_SUCCESS,
             payload: data
          });
-         
+         console.log(data)
          
          dispatch(getUserDetail());
       } catch (err) {
@@ -208,4 +210,51 @@ export function recoveryPassword  (email) {
          })
       }
    }
+}
+
+export function loginGoogle({ email, nombre ,avatar ,usuario }) {
+   return async (dispatch) => {
+      try {
+         // Configuro los headers
+         const config = {
+            headers: {
+               'Content-Type': 'application/json',
+            },
+         };
+         // Armo el payload/body
+         const body = { email, nombre , avatar , usuario};
+
+         // Envío la petición con el body y config armados
+         let { data } = await axios.post(`${BASEURL}/loginGoogle`, body, config);
+         // Si todo bien configuro al usuario como logueado
+         dispatch({
+            type: LOGIN_GOOGLE_SUCCESS,
+            payload: data
+         });
+   
+         dispatch(getUserDetail());
+         
+         
+        
+      } catch (err) {
+         //toast.error(err.response.data);
+         console.log(err);
+         Swal.fire({
+            title: "Se produjo un error",
+            text: "ocurrió un problema con la sesíon de Google",
+            icon: "error",
+          });
+         // Si ocurrió un error durante el logen, envio el login_fail
+         return dispatch({
+            
+            type: LOGIN_GOOGLE_FAILED
+         });
+      }
+   }
+};
+
+export function resetRegister(){
+ return {
+    type:'RESET_REGISTER'
+ }
 }

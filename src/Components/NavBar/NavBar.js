@@ -313,7 +313,7 @@ function NavBar({ isAuth, user }) {
         color: "white",
         
       }}
-      >Envíos gratis por órdenes de compra superiores a $7.000. 
+      >
        
       </span >
       

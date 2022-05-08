@@ -40,14 +40,13 @@ export const getCartDB = (userId) => async dispatch => {
 
       const cartLocal = getCartLocalStorage()
       const {products } = cartLocal
-      console.log(products , 'productos storage')
-      console.log('db' , data)
+     
       let newCart = {};
       let newProducts= [];
       let carritoDB = data.CarritoDetalles?.map(el => {
          return { id: el.productoId, quantity: el.cantidad }
      })
-     console.log(carritoDB)
+    
      if(products.length ){
         console.log('entro')
      if(carritoDB.length){
@@ -75,7 +74,7 @@ export const getCartDB = (userId) => async dispatch => {
                  }, 0)
 
              };
-             console.log(newProducts , auxCart)
+            
              
        saveCartDb(newCart)
 
