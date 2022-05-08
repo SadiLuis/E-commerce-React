@@ -9,6 +9,7 @@ import { WhatsApp } from "../../Actions/whatsApp.js";
 import Swal from 'sweetalert2'
 import Carousel from "../../Components/Carousel/Carousel.jsx";
 import Review from "../../Components/Review/ScreenReviews/Reviews.jsx";
+
 export default function Detail() {
   
   const { idProduct } = useParams();
@@ -53,6 +54,7 @@ export default function Detail() {
   if(product.title) {
   return ( 
       <>
+   
             <div class={styles.containerDetail}>
                 <div class={styles.thumb2} ref={myRef}>
                   {product?.images.map( (img, index) => (

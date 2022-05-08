@@ -9,10 +9,10 @@ import {Loader} from '../Loader/Loader'
 const Checkout = () => {
   
   const pedidoDetail =useSelector((state) => state.ordersReducer.orderDetail) || {};
-  const { totalPedido, pedidoId, usuarioId } = pedidoDetail;
+  const { totalPedido, usuarioId } = pedidoDetail;
   const detailSend = useSelector((state) => state.loginReducer.userDetail)
  
-  let total = totalPedido >= 7000 ? totalPedido - 150  : totalPedido + 150
+  
 
   const [order, setOrder] = useState({
     username: detailSend?.usuario,
@@ -27,13 +27,14 @@ const Checkout = () => {
  
   
   const handleChange = (e) => {
+    
     e.preventDefault();
     setOrder({
       ...order,
       [e.target.name]: e.target.value,
     });
   };
-
+ 
   return (
     <div className={style.cnt}>
       <div className="container">
@@ -102,8 +103,8 @@ const Checkout = () => {
                 </Card.Header>
               </div>
              
-              <Card.Body className={style.bodyDelivery} >
-                   <div className={style.pdn}>
+              <Card.Body className={style.card} >
+                   <div className={style.labels}>
                     <Form.Group className={style.datosEnvio}>
                       <Form.Label className={style.labels}>
                         Ciudad
@@ -120,7 +121,7 @@ const Checkout = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className={style.pdn}>
+                  <div className={style.labels}>
                     <Form.Group className={style.datosEnvio}>
                       <Form.Label className={style.labels}>
                         Domicilio de envío
@@ -140,21 +141,21 @@ const Checkout = () => {
                   
               </Card.Body>
             </div>
-            <p>Nº de pedido: {pedidoId}</p>
+            
             
             <Details />
             
 
-            <p className={style.total}> Total $ {total} </p>
+            <p className={style.total}> Total $ {totalPedido} </p>
             <div className={style.buttonConfirmarCompra}>
-            <BotonPago price={total}  order= {order}/>
+            <BotonPago price={totalPedido}  order= {order}/>
              
             </div>
           </div>
         ) : (
-          <div>
+          
            <Loader />
-          </div>
+          
         )}
       </div>
     </div>

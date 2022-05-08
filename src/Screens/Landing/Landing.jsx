@@ -5,10 +5,12 @@ import tres from '../../Assets/tres.JPG';
 import '../Landing/Landing.css'
 import { useNavigate } from 'react-router-dom';
 import PushBar from '../Landing/PushBar.jsx'
+import { updateCart } from '../../Actions/cart';
+import { useDispatch } from 'react-redux';
 
 
 const Landing = () => {
-
+ const dispatch = useDispatch();
   const navigate = useNavigate()
   const [showNewsletter, setShowNewsletter] = useState(false)
   const [stateNewsletter, setStateNewsletter] = useState({
@@ -27,6 +29,10 @@ const Landing = () => {
     setStateNewsletter({ nombre: '', email: '' })
   }
 
+  React.useEffect(() => {
+    dispatch(updateCart())
+   
+  }, [dispatch])
   return (
     <div>
       <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">

@@ -6,7 +6,9 @@ import {
     LOGOUT,
     GET_USER_DETAIL,
     AUTHENTICATION_ERROR,
-    RECOVERY_PASSWORD
+    RECOVERY_PASSWORD,
+    LOGIN_GOOGLE_FAILED,
+    LOGIN_GOOGLE_SUCCESS
 } from '../Actions/Index'
 
 const initialState = {
@@ -23,16 +25,19 @@ export default function loginRegistroReducer(state = initialState, action) {
         case GET_USER_DETAIL:
             return { ...state, isAuth: true, userDetail: action.payload };
         case LOGIN_SUCCESS:
+        case LOGIN_GOOGLE_SUCCESS:
             // Set Token in localstorage
             localStorage.setItem('token_ecommerce', action.payload.token);
             return {
                 ...state,
                 token: action.payload.token,
                 isAuth: true,
+                
             };
         
         case AUTHENTICATION_ERROR:
         case LOGIN_FAILED:
+        case LOGIN_GOOGLE_FAILED:
         case LOGOUT:
             // Eliminamos el token del localStorage y la info del usuario
             localStorage.removeItem('token_ecommerce');
@@ -61,7 +66,10 @@ export default function loginRegistroReducer(state = initialState, action) {
             case 'UPDATE_USER_IMG': return {
                 ...state
             }
-
+            case 'RESET_REGISTER': return {
+                ...state,
+                isRegister:null
+            }
 
         default: return state;
     }
