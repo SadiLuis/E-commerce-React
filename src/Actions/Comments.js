@@ -91,3 +91,14 @@ export function getCommentByProductId(id) {
       }
     }   
 }
+
+export function getProductRating(idProduct) {
+   return async function (dispatch) {
+      try {
+         const { data } = await axios.get(`${BASEURL}/comments/rating/` + idProduct);
+         dispatch({ type: "GET_PRODUCT_RATING", payload: data });
+      } catch (error) {
+         console.log(error)
+      }
+    }   
+}

@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import {getProductById} from "../../Actions/products.js"
 import { addItem } from "../../Actions/cart.js";
-import "./Details.css"
+import styles from "./Details.module.css"
 import BotonPago from "../../Components/BtnPago/BtnPago.jsx";
 import { WhatsApp } from "../../Actions/whatsApp.js";
 import Swal from 'sweetalert2'
 import Carousel from "../../Components/Carousel/Carousel.jsx";
 import Review from "../../Components/Review/ScreenReviews/Reviews.jsx";
+
 export default function Detail() {
   
   const { idProduct } = useParams();
@@ -53,25 +54,26 @@ export default function Detail() {
   if(product.title) {
   return ( 
       <>
-            <div class="containerDetail">
-                <div class="thumb2" ref={myRef}>
+   
+            <div class={styles.containerDetail}>
+                <div class={styles.thumb2} ref={myRef}>
                   {product?.images.map( (img, index) => (
                     <img src={img} alt="product" key={index}
                     onClick={()=> handleTab(index)}
                     />
                   ))}
                 </div>
-              <div class="bigImg">
+              <div class={styles.bigImg}>
                   <img src={product?.images[index]} alt="product " />
 
               </div>
-              <div class="detailBox">
+              <div class={styles.detailBox}>
                 <h1><b>{product?.title}</b></h1>
                 <h4><b>${product?.price}</b></h4>
                 <br />  
                 <p><b>Description:</b> {product?.description}</p>
                 <span><b>Size:</b> {product?.size}</span> 
-                <div class="btnGroup">
+                <div class={styles.btnGroup}>
                       <div class="btnBerna">
                         <button class="btn btn-secondary" type='button' onClick={handleAdd}>Agregar al carrito</button>
                       </div>
@@ -80,11 +82,11 @@ export default function Detail() {
                       </div>
                 </div>
                </div>
-               <div class="recommended">
+               <div class={styles.recommended}>
                  <Carousel category={product?.category} />
               </div>
 
-              <div class="comentariosProducto">
+              <div class={styles.comentariosProducto}>
                     <Review
                     idProduct={product?.id}
                     />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { login, register } from "../../Actions/Auth";
+import { login, register ,resetRegister  } from "../../Actions/Auth";
 import { Link, useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -10,8 +10,7 @@ import uno from '../../Assets/1.jpg'
 import dos from '../../Assets/2.jpg'
 import tres from '../../Assets/3.jpg'
 import style from './Login.module.css'
-//import LoginGoogle from "./LoginGoogle";
-
+import LoginGoogle from "./LoginGoogle";
 const initialLogin = {
   email: '',
   contrasena: '',
@@ -34,7 +33,7 @@ const validateForm = (form) => {
   return errors;
 };
 
-function Login({ login, isAuth, user }) {
+function Login({ login, isAuth, user ,resetRegister }) {
   
   const navigate = useNavigate();
   const [form, setForm] = useState(initialLogin);
@@ -51,26 +50,35 @@ function Login({ login, isAuth, user }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const errors = validateForm(form);
-    setError(errors);
-
-    if (Object.keys(errors).length) {
-      console.log(errors)
-      return window.alert("El formulario contiene errrores");
-    }
-    Swal.fire({
-      title: 'Espere, validando información',    
-      text: 'Este mensaje desaparecerá en 5 segundos',
-      icon: 'info',      
-      timer: 5000,
-    })
-    login(form);
+    
+   console.log('entro' , error)
+    if(Object.keys(error).length){
+      console.log('entro',form)
+      console.log(error)
+      Swal.fire({
+        text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    } else{
+      Swal.fire({
+        title: 'Espere, validando información',    
+        text: 'Este mensaje desaparecerá en 5 segundos',
+        icon: 'info',      
+        timer: 5000,
+      })
+      login(form);
+      }
+   
+    
   };
 
 
   useEffect(() => {
     // Si ya está logueado que lo redireccione al dashboard
+    resetRegister()
     if (isAuth && user) {
+      
       const { rol } = user;
       setForm(initialLogin);
       async function db() {
@@ -175,7 +183,7 @@ function Login({ login, isAuth, user }) {
                 )}
                
             </div>
-                <button type="submit" className='btn btn-outline-dark mt-2 text-center' disabled={!form.email || !form.contrasena} >Enviar</button>
+                <button type="submit" className='btn btn-outline-dark mt-2 text-center' disabled={!form.email || !form.contrasena} onClick={handleSubmit} >Enviar</button>
           </div>
           <br/>
 
@@ -183,16 +191,16 @@ function Login({ login, isAuth, user }) {
             <span className={style.loginSpan}>¿No tienes cuenta?</span>
             <Link to='/register' className="btn btn-outline-dark p-0" >Registrate</Link>             
           </div>
-          <div className="text-center">
+         {/*  <div className="text-center">
             <span> ¿Olvidaste tu contraseña? </span>
               <Link to='/recupass' className="btn btn-outline-dark p-0" >Recuperar</Link>          
-          </div>
+          </div> */}
 
         </form>
         
        </div>
-       {/* <LoginGoogle /> */}
       </div>
+        <LoginGoogle /> 
 
       </div>
 
@@ -202,7 +210,7 @@ function Login({ login, isAuth, user }) {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ login, register }, dispatch);
+  return bindActionCreators({ login, register ,resetRegister }, dispatch);
 };
 
 const mapStateToProps = (state) => {

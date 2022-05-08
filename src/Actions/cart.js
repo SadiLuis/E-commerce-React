@@ -40,14 +40,13 @@ export const getCartDB = (userId) => async dispatch => {
 
       const cartLocal = getCartLocalStorage()
       const {products } = cartLocal
-      console.log(products , 'productos storage')
-      console.log('db' , data)
+     
       let newCart = {};
       let newProducts= [];
       let carritoDB = data.CarritoDetalles?.map(el => {
          return { id: el.productoId, quantity: el.cantidad }
      })
-     console.log(carritoDB)
+    
      if(products.length ){
         console.log('entro')
      if(carritoDB.length){
@@ -75,7 +74,7 @@ export const getCartDB = (userId) => async dispatch => {
                  }, 0)
 
              };
-             console.log(newProducts , auxCart)
+            
              
        saveCartDb(newCart)
 
@@ -153,13 +152,14 @@ export const deleteProductCart = async (product, id) => {
       }, getHeaderToken())
 }
 
-export const deleteAllCartDB = id => async dispatch => {
+export const deleteAllCartDB = async id =>  {
    try {
-      const res = await axios.delete(`${BASEURL}/carritos/${id}`, getHeaderToken())
-      const data = res.data
-      return dispatch({ type: DELETE_CART_DB, payload: data })
+   
+      await axios.delete(`${BASEURL}/carritos/${id}`, getHeaderToken())
+     
+      
    } catch (err) {
-      return console.log(err.response.data);
+      return console.log(err);
    }
 }
 

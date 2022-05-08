@@ -29,10 +29,18 @@ import {getUserDetail} from './Actions/Auth'
 
 import AddCategory from "./Components/AddCategory/AddCategory";
 import Customers from "./Components/Customers/Customers";
- import Orders from "./Components/Orders/Orders"; 
+
+import Orders from "./Components/Orders/Orders";
+import UserDetailAdmin from "./Components/UserDetailAdmin/UserDetailAdmin";
+
+ 
 import ResPassword from "./Components/RestarPassword/ResPassword";
+import OrderDetailAdmin from "./Components/OrderDetailAdmin/OrderDetailAdmin";
 
 
+
+import Checkout from "./Components/Checkout/Checkout";
+import CheckoutConfirm from "./Components/Checkout/CheckoutDetail/CheckoutConfirm";
 
 
 
@@ -61,9 +69,12 @@ function App() {
         <Route path="/registro" element={<Register />} />
         <Route path="/dashboard/admin" element={<Dashboard />} />
         <Route path="/dashboard/admin/EditProduct/:idProduct" element={<EditProduct />} />
+        <Route path="/dashboard/admin/createProduct" element={<CreateProduct />} />
         <Route path="/dashboard/admin/addCategory" element={<AddCategory />} />
         <Route path="/dashboard/admin/customers" element={<Customers />} />
         <Route path="/dashboard/admin/orders" element={<Orders/>}/>
+        <Route path="/dashboard/admin/userDetailAdmin/:id" element={<UserDetailAdmin/>}/>
+        <Route path="/dashboard/admin/orderDetailAdmin/:id/:idUser" element={<OrderDetailAdmin/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />
@@ -75,13 +86,15 @@ function App() {
         <Route path="/faqs" element={<FAQs />} />
         <Route exact path="/orders" element={<MyOrders/>}/>
         {/* <Route path="/user" element={<Profile/>}/> */}
+         <Route path="/pedido" element={<Checkout />} />
+
 
         <Route path="/createproduct" element={<CreateProduct/>} />
         <Route exact path="/review/:idProduct" element={<CreateReview />} />
         <Route exact path="/review" element={<Reviews />} />
 
         <Route path="/recupass" element={<ResPassword/>}/>
-
+         <Route path= "/pago" element ={< CheckoutConfirm />} /> 
 
       </Routes>
 

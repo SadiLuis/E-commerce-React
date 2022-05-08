@@ -1,5 +1,6 @@
 const initialState = {
-    comentariosProducto: []    
+    comentariosProducto: [],   
+    ratingProducto: []  
 }
 
   
@@ -14,6 +15,12 @@ const initialState = {
             ...state, 
             comentariosProducto: action.payload 
         };
+
+        case "GET_PRODUCT_RATING":
+          return {
+            ...state,
+            ratingProducto: action.payload
+          }
 
             
       default:
