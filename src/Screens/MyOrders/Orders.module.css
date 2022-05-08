@@ -29,14 +29,15 @@
     filter: drop-shadow(0 0 1px rgba(0,0,0,.12));
     border: 1px solid black;
     /* margin: 0rem 40vh 2rem 40vh; */
-    width: fit-content;
+    width: auto;
     height: fit-content;
     align-self: center;
     display: flex;
     flex-direction: column;
     border-style: dotted;
     margin-bottom: 1rem;
-
+    margin-left: 2rem;
+    margin-right: 2rem;
     
   }
   .wrapper{
