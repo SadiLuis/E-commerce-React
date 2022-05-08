@@ -81,7 +81,7 @@ const TableProducts = () => {
                 </div>
 
                 <div className='table-responsive'>
-                    <table className="table table-sm table-hover table-striped table-bordered border-primary">
+                    <table className="table table-sm table-hover table-striped table-bordered border-dark">
                         <thead className='table-dark'>
                             <tr>
                                 <th scope="col"></th>
@@ -93,25 +93,25 @@ const TableProducts = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentProducts.map(p => (
-                                <tr >
-                                    <td className='text-center'>
+                            {currentProducts.map((p,id) => (
+                                <tr key={`tr-${id}`}>
+                                    <td  key={`edit-${id}`} className='text-center'>
                                         <Link to={`/dashboard/admin/EditProduct/${p.id}`}>
                                             <i className="fs-4 bi-pencil-fill"></i>
                                         </Link>
 
                                     </td>
-                                    <td className='text-center'>
+                                    <td key={`delete-${id}`} className='text-center'>
                                         <i className="fs-4 bi-trash3-fill"></i>
                                     </td>
 
-                                    <td>{p.title}</td>
-                                    <td>{p.price}</td>
-                                    <td>{p.cantidad > 0
+                                    <td key={`title-${id}`}>{p.title}</td>
+                                    <td key={`price-${id}`}>{p.price}</td>
+                                    <td key={`quantity-${id}`}>{p.cantidad > 0
                                         ? <span>{p.cantidad}</span>
                                         : <span className='text-danger fw-bold'>Sin Stock disponible</span>}
                                     </td>
-                                    <td>{p.category}</td>
+                                    <td key={`category-${id}`}>{p.category}</td>
                                 </tr>
                             ))}
                         </tbody>

@@ -16,8 +16,7 @@ const UserDetailAdmin = () => {
     useEffect(() => {
         dispatch(getUserById(id))
         return () => {
-            cleanUserDetail();
-            cleanUserDisabled()
+            dispatch(cleanUserDetail());
         }
     }, [dispatch])
 
@@ -56,16 +55,17 @@ const UserDetailAdmin = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     dispatch(changeStatusUser(statusUser, id))
-                    userDisabled.length>0
-                        ?Swal.fire(
-                            'Error',
-                            `${userDisabled}`,
-                            'error'
-                        ):(Swal.fire(
-                            'Deshabilitado',
-                            `Usuario deshabilitado`,
-                            'success'
-                        ))
+                    // userDisabled.length>0
+                    //     ?Swal.fire(
+                    //         'Error',
+                    //         `${userDisabled}`,
+                    //         'error'
+                    //     ):(Swal.fire(
+                    //         'Deshabilitado',
+                    //         `Usuario deshabilitado`,
+                    //         'success'
+                    //     ))
+                    //    dispatch(cleanUserDisabled())
                         navigate('/dashboard/admin/customers')
                 }
             })
@@ -82,19 +82,19 @@ const UserDetailAdmin = () => {
                     <div className="row">
                         <div className="col">
                             <div className="card mb-4 border-dark">
-                                <div class="card-body text-center">
-                                    <img src={userById.avatar} alt="avatar"
+                                <div className="card-body text-center">
+                                    <img src={userById?.avatar} alt="avatar"
                                         className="rounded-circle img-fluid "
                                         width="150" />
-                                    <h5 className="my-3">{userById.usuario}</h5>
+                                    <h5 className="my-3">{userById?.usuario}</h5>
                                     <div className="d-flex justify-content-center mb-2">
-                                        {userById.rol === '3'
+                                        {userById?.rol === '3'
                                             ? (<button
-                                                onClick={() => changeStatus(userById.rol, userById.id, userById.usuario)} type="button" class="btn btn-success">
+                                                onClick={() => changeStatus(userById?.rol, userById.id, userById.usuario)} type="button" className="btn btn-success">
                                                 Habilitar usuario
                                             </button>)
                                             : (<button
-                                                onClick={() => changeStatus(userById.rol, userById.id, userById.usuario)}
+                                                onClick={() => changeStatus(userById?.rol, userById.id, userById.usuario)}
                                                 type="button" className="btn btn-danger">
                                                 Desabilitar usuario
                                             </button>)
@@ -115,7 +115,7 @@ const UserDetailAdmin = () => {
                                     <p className="mb-0 fs-5">Nombre</p>
                                 </div>
                                 <div className="col">
-                                    <p className="mb-0 fs-5">{`${userById.nombre}`}</p>
+                                    <p className="mb-0 fs-5">{`${userById?.nombre}`}</p>
                                 </div>
                             </div>
 
@@ -124,7 +124,7 @@ const UserDetailAdmin = () => {
                                     <p className="mb-0 fs-5">Email</p>
                                 </div>
                                 <div className="col">
-                                    <p className="mb-0 fs-5">{userById.email}</p>
+                                    <p className="mb-0 fs-5">{userById?.email}</p>
                                 </div>
                             </div>
 
@@ -133,7 +133,7 @@ const UserDetailAdmin = () => {
                                     <p className="mb-0 fs-5">Teléfono</p>
                                 </div>
                                 <div className="col">
-                                    <p className="mb-0 fs-5">{userById.telefono}</p>
+                                    <p className="mb-0 fs-5">{userById?.telefono}</p>
                                 </div>
                             </div>
 
@@ -143,7 +143,7 @@ const UserDetailAdmin = () => {
                                     <p className="mb-0 fs-5">Dirección</p>
                                 </div>
                                 <div className="col">
-                                    <p className="mb-0 fs-5">{`${userById.direccion}`}</p>
+                                    <p className="mb-0 fs-5">{`${userById?.direccion}`}</p>
                                 </div>
                             </div>
                             <div className="row">
