@@ -40,13 +40,14 @@ export default function productsReducer(state = initialState, action) {
                 products:[]
             }
 
-            case PUT_PRODUCT_BY_ID:
-                return{
-                    ...state,
-                    products: payload
-                };
+            // case PUT_PRODUCT_BY_ID:
+            //     return{
+            //         ...state,
+            //         products: payload
+            //     };
 
             case SEARCH_BY_NAME:
+                
             return {
                 ...state,
                 products:payload,
