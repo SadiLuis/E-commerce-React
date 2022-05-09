@@ -77,7 +77,7 @@ const AddCategory = () => {
     };
     return (
         <div className="container-fluid">
-            <div className='row'>
+            <div className='row min-vh-100'>
                 <div className="col-auto col-md-2 col-xl-2 px-0 ">
                     <SidebarAdmin />
                 </div>

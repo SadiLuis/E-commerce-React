@@ -51,9 +51,9 @@ function Login({ login, isAuth, user ,resetRegister }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-   console.log('entro' , error)
+   //console.log('entro' , error)
     if(Object.keys(error).length){
-      console.log('entro',form)
+      //console.log('entro',form)
       console.log(error)
       Swal.fire({
         text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,

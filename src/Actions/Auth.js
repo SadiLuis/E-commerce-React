@@ -27,7 +27,7 @@ export const getUserDetail = () => {
       try {
          const { data } = await axios.get(`${BASEURL}/user`, headers);
          //toast(`Bienvenido ${data.nombre}`)
-         console.log(data);
+         //console.log(data);
          
          dispatch({
             type: GET_USER_DETAIL,
@@ -36,7 +36,7 @@ export const getUserDetail = () => {
          //dispatch(getPedidosByUser(data.id));
          dispatch(createCartDb(data.id))
       } catch (error) {
-         console.log(error.response.data);
+         //console.log(error.response.data);
          dispatch({
             type: AUTHENTICATION_ERROR
          })
@@ -75,8 +75,8 @@ export function register({
              telefono,
            
           };
-          console.log("body")
-          console.log(body)
+          //console.log("body")
+          //console.log(body)
           let { data } = await axios.post(`${BASEURL}/user/register`, body, config);
            
           // console.log(data);
@@ -88,7 +88,7 @@ export function register({
          
           
          } catch (error) {
-            console.log(error);
+            //console.log(error);
 
             Swal.fire({
                icon: 'error',
@@ -126,18 +126,26 @@ export function login({ email, contrasena }) {
             type: LOGIN_SUCCESS,
             payload: data
          });
-         console.log(data)
+         //console.log(data)
          
          dispatch(getUserDetail());
       } catch (err) {
          //toast.error(err.response.data);
-         console.log(err.response.data);
-         Swal.fire({
-            icon: 'error',
-            title: 'Datos incorrectos',
-            text: 'Algo salió mal , intentelo de nuevo ingresando los datos nuevamente!',
-           
-          })
+         //console.log(err.response.data);
+         err.response.data==="Usuario bloqueado"
+            ?Swal.fire({
+               icon: 'error',
+               title: 'Usuario dado de baja',
+               text: 'Usted ha sido de baja, por cualquier consulta contactenos',
+              
+             })
+            :Swal.fire({
+               icon: 'error',
+               title: 'Datos incorrectos',
+               text: 'Algo salió mal , intentelo de nuevo ingresando los datos nuevamente!',
+              
+             })
+         
          // Si ocurrió un error durante el logen, envio el login_fail
          return dispatch({
             
@@ -203,7 +211,7 @@ export function recoveryPassword  (email) {
          payload: res.data
       })
    } catch (err) {
-      console.log(err.response.data)
+      //console.log(err.response.data)
       dispatch({
          type: RECOVERY_PASSWORD,
          payload: err.response.data
