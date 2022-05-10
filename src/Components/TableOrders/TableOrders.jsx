@@ -11,12 +11,12 @@ const TableOrders = () => {
         dispatch(getAllOrders())
     }, [dispatch]);
 
-    const orders = useSelector(state => state.ordersReducer.filteredOrders)
+    const orders = useSelector(state => state.ordersReducer?.filteredOrders)
     const [currentPage, setCurrentPage] = useState(1)
     const [ordersOnPage, setOrdersOnPage] = useState(10)
     const indexLastOrder = currentPage * ordersOnPage
     const indexFirstOrder = indexLastOrder - ordersOnPage;
-    const currentOrders = orders.slice(indexFirstOrder, indexLastOrder)
+    const currentOrders = orders?.slice(indexFirstOrder, indexLastOrder)
 
     const paginado = (pageNum) => {
         setCurrentPage(pageNum)
@@ -24,7 +24,7 @@ const TableOrders = () => {
 
     const id = useId();
     return (
-        <>
+        <>  
             <div className='table-responsive'>
                 <table className="table table-sm table-hover table-striped table-bordered border-primary">
                     <thead className='table-dark'>
@@ -39,19 +39,19 @@ const TableOrders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentOrders.map((o,id) => (
+                        {currentOrders?.map((o,id) => (
                             <tr key={`tr-${id}`}>
-                                <td key={`name-${id}`}>{o.usuario.nombre}</td>
+                                <td key={`name-${id}`}>{o?.usuario.nombre}</td>
                                 <td key={`detail-${id}`}>
 
-                                        <Link to={`/dashboard/admin/OrderDetailAdmin/${o.pedidoId}/${o.usuario.id}`}>
+                                        <Link to={`/dashboard/admin/OrderDetailAdmin/${o?.pedidoId}/${o.usuario.id}`}>
                                             Ver Detalle
                                         </Link>
 
                                 </td>
-                                <td key={`total-${id}`}>{o.totalPedido}</td>
-                                <td key={`status-${id}`}>{o.status}</td>
-                                <td key={`date-${id}`}>{o.fechaCreacion.slice(0, 10)}</td>
+                                <td key={`total-${id}`}>{o?.totalPedido}</td>
+                                <td key={`status-${id}`}>{o?.status}</td>
+                                <td key={`date-${id}`}>{o?.fechaCreacion.slice(0, 10)}</td>
 
                             </tr>
                         ))}
