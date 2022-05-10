@@ -41,12 +41,15 @@ export function getProductById(id) {
 export function searchByName(name) {
    return async function (dispatch) {
       try {
-         let respuesta = await axios.get(`${BASEURL}/products`) //OJO: VER BIEN LA ruta por query del back
-        let search = await respuesta.data.filter(elem => elem.title.toLowerCase().includes(name.toLowerCase()) )
-         console.log("search" , search)
+         var respuesta = await axios.get(`${BASEURL}/products?title=${name}`) //OJO: VER BIEN LA ruta por query del back
+         const products = respuesta.data.map(el => {
+            return {...el, category:el.Categorium.nombre}
+         })
+         console.log(products)
+
          return dispatch({
             type: SEARCH_BY_NAME,
-            payload: search
+            payload: products
          })
       } catch (err) {
          Swal.fire({

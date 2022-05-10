@@ -8,7 +8,7 @@ const SidebarAdmin = () => {
 
 
         <div className={styles.sidebar__admin}>
-            <div className="bg-dark d-flex flex-column align-items-sm-start pt-2 text-white vh-100">
+            <div className="bg-dark d-flex flex-column align-items-sm-start pt-2 text-white h-100">
                 <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start ms-1" id="menu">
                     <li>
                         <Link to={`/dashboard/admin/`}>

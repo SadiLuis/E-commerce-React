@@ -74,7 +74,7 @@ const UserDetailAdmin = () => {
 
     return (
         <div className="container-fluid">
-            <div className='row'>
+            <div className='row min-vh-100'>
                 <div className="col-auto col-md-2 col-xl-2 px-0 ">
                     <SidebarAdmin />
                 </div>
@@ -133,7 +133,12 @@ const UserDetailAdmin = () => {
                                     <p className="mb-0 fs-5">Teléfono</p>
                                 </div>
                                 <div className="col">
-                                    <p className="mb-0 fs-5">{userById?.telefono}</p>
+                                    <p className="mb-0 fs-5">
+                                    {`${userById && userById.telefono !==null
+                                            ?userById.telefono
+                                            :'No disponible'}
+                                        `}
+                                    </p>
                                 </div>
                             </div>
 
@@ -143,7 +148,12 @@ const UserDetailAdmin = () => {
                                     <p className="mb-0 fs-5">Dirección</p>
                                 </div>
                                 <div className="col">
-                                    <p className="mb-0 fs-5">{`${userById?.direccion}`}</p>
+                                    <p className="mb-0 fs-5">
+                                        {`${userById && userById.direccion !==null
+                                            ?userById.direccion
+                                            :'No disponible'}
+                                        `}
+                                    </p>
                                 </div>
                             </div>
                             <div className="row">
@@ -151,7 +161,12 @@ const UserDetailAdmin = () => {
                                     <p className="mb-0 fs-5">Provincia</p>
                                 </div>
                                 <div className="col">
-                                    <p className="mb-0 fs-5">{`${userById.provincia}`}</p>
+                                    <p className="mb-0 fs-5">
+                                    {`${userById && userById.provincia !==null
+                                            ?userById.provincia
+                                            :'No disponible'}
+                                        `}
+                                    </p>
                                 </div>
                             </div>
                             <div className="row">
@@ -159,7 +174,12 @@ const UserDetailAdmin = () => {
                                     <p className="mb-0 fs-5">País</p>
                                 </div>
                                 <div className="col">
-                                    <p className="mb-0 fs-5">{`${userById.pais}`}</p>
+                                    <p className="mb-0 fs-5">
+                                    {`${userById && userById.pais !==null
+                                            ?userById.pais
+                                            :'No disponible'}
+                                        `}
+                                    </p>
                                 </div>
                             </div>
                         </div>

@@ -58,21 +58,7 @@ const NavBarAll = () => {
       >
         Home
       </NavLink>
-      <NavLink
-        to="/contactform"
-        style={{
-          border: "none",
-          background: "none",
-          color: "black",
-          fontSize: "1rem",
-          marginLeft: "0.05rem",
-          cursor: "pointer",
-          textDecoration: "none",
-           marginBottom:"15rem"
-        }}
-      >
-        Contáctenos
-      </NavLink>
+      
       <div  style={{
           border: "none",
           background: "none",
@@ -312,8 +298,8 @@ function NavBar({ isAuth, user }) {
         fontWeight: "bold",
         color: "white",
         
-      }}
-      >
+      }} 
+      >Envíos gratis por órdenes de compra superiores a $7.000.
        
       </span >
       

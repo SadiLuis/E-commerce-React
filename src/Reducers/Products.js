@@ -103,7 +103,8 @@ export default function productsReducer(state = initialState, action) {
                 })
             return {
                 ...state,
-                filtered: sortedRate
+                filtered: sortedRate,
+                products: sortedRate
             }
             case GET_CATEGORIES:
             return {

@@ -19,7 +19,7 @@ const OrderDetailAdmin = () => {
     const keyId = useId();
     return (
         <div className="container-fluid">
-            <div className='row'>
+            <div className='row min-vh-100'>
                 <div className="col-auto col-md-2 col-xl-2 px-0 ">
                     <SidebarAdmin />
                 </div>
@@ -77,7 +77,7 @@ const OrderDetailAdmin = () => {
                                             <p className="mb-0 fs-5">Fecha:</p>
                                         </div>
                                         <div className="col">
-                                            <p className="mb-0 fs-5">{order?.fechaCreacion.slice(0, 10)}</p>
+                                            <p className="mb-0 fs-5">{order.fechaCreacion?.slice(0, 10)}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@ const OrderDetailAdmin = () => {
                                     Articulos
                                 </div>
                                 <div className="card-body">
-                                    {order?.productos.map((p,keyId) => (
+                                    {order.productos?.map((p,keyId) => (
                                         <div key={`article-${keyId}`} className="row">
                                             <div key={`quantity-${keyId}`} className="col">
                                                 <p className="mb-0 fs-5">
