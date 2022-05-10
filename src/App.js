@@ -39,7 +39,7 @@ import OrderDetailAdmin from "./Components/OrderDetailAdmin/OrderDetailAdmin";
 
 import Checkout from "./Components/Checkout/Checkout";
 import CheckoutConfirm from "./Components/Checkout/CheckoutDetail/CheckoutConfirm";
-
+import './App.css'
 
 
 

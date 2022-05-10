@@ -19,6 +19,7 @@ const formulario = {
   direccion: '',
   telefono: '',
   localidad: '',
+  contrasenaConfirm: '',
  
 }
 
@@ -46,6 +47,11 @@ const validateform = function (form) {
     errors.contrasena = "Campo requerido";
   } else if (form.contrasena.length < 6) {
     errors.contrasena = "Mínimo 6 caracteres";
+  }
+  if (!form.contrasenaConfirm.trim()) {
+    errors.contrasenaConfirm = "Campo requerido";
+  } else if (form.contrasenaConfirm !== form.contrasena) {
+    errors.contrasenaConfirm = "Las contraseñas deben coincidir";
   }
 
   if (!form.email.trim()) {
@@ -256,6 +262,24 @@ export default function Register() {
         {focus.contrasena && error.contrasena && <span className={`text-danger ${style.span}`} /* style={{marginTop:'2rem'}} */>{error.contrasena}</span> }
         {/* </div> */}
        {/*  </div> */}
+      </div>
+
+
+      {/* CONFIRMAR CONTRASEÑA */}
+           <div className={`mb-1 ${style.formInput}`}>
+        <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Confirmar contraseña</label>
+        <input type={visible}  className={ style.input} id="exampleInputPassword1" 
+        placeholder="Confirmar contraseña" name='contrasenaConfirm' 
+        value={form.contrasenaConfirm} 
+        onChange={(e) => handleChange(e.target.name, e.target.value)}
+        onFocus={(e) => handleChange(e.target.name , true)}
+       
+        />
+        <button class={`btn btn-primary ${style.contrasena}`} style={{color: 'black', background: 'none', border: 'none', marginTop: '2.3rem' }} type='button' >
+        {visible === 'text' && <IoEyeOff className={style.inputContrasena}  type="button" onClick={mostrarPassword} /> }
+        {visible === 'password' && <IoEye  className={style.inputContrasena} type="button" onClick={mostrarPassword} /> }
+        </button>
+        {focus.contrasenaConfirm && error.contrasenaConfirm && <span className={`text-danger ${style.span}`} style={{marginLeft: '1rem'}}>{error.contrasenaConfirm}</span> }
       </div>
      
 
