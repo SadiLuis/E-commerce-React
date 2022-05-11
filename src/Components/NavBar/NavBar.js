@@ -18,6 +18,7 @@ import Logout from '../Login/Logout';
 
 
 
+
 // logo,  home, contactenos 
 const NavBarAll = () => {
   // const usuario=useSelector(state =>state.loginReducer.userDetail)
@@ -59,7 +60,7 @@ const NavBarAll = () => {
         Home
       </NavLink>
       <NavLink
-        to="/contactform"
+        to="/chat"
         style={{
           border: "none",
           background: "none",
@@ -69,10 +70,12 @@ const NavBarAll = () => {
           cursor: "pointer",
           textDecoration: "none",
            marginBottom:"15rem"
+
         }}
       >
-        Contáctenos
+        Chat 
       </NavLink>
+      
       <div  style={{
           border: "none",
           background: "none",
@@ -312,8 +315,8 @@ function NavBar({ isAuth, user }) {
         fontWeight: "bold",
         color: "white",
         
-      }}
-      >
+      }} 
+      >Envíos gratis por órdenes de compra superiores a $7.000.
        
       </span >
       

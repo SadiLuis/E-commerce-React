@@ -32,7 +32,7 @@ export default function MyOrders (){
 
     
     if (pedidos.status == 404) {
-      return (<h1>No tiene pedidos este usuario</h1>)
+      return (<h1 className={styles.title}>No tiene pedidos cargados aún</h1>)
     }else {
         
 

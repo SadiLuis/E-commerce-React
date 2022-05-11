@@ -1,0 +1,86 @@
+.container{
+    position: relative;
+  }
+  
+  .container .card{
+    position: relative;
+    width: 15rem;
+    height: 450px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 2rem;
+  }
+  
+  .container .card:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: -webkit-linear-gradient(#c8935b, rgb(173, 159, 159));
+    clip-path: circle(150px at 80% 20%);
+    transition: 0.5s ease-in-out;
+  }
+  
+  .container .card:hover:before{
+    clip-path: circle(300px at 80% -20%);
+  }
+  
+  .container .card:after{
+    content: 'Nike';
+    position: absolute;
+    top: 30%;
+    left: -20%;
+    font-size: 12em;
+    font-weight: 800;
+    font-style: italic;
+    color: rgba(255,255,25,0.05)
+  }
+  
+  .container .card .imgBx{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10000;
+    width: 100%;
+    height: 220px;
+    transition: 0.5s;
+  }
+  
+  .container .card:hover .imgBx{
+    top: 0%;
+    transform: translateY(0%);
+      
+  }
+  
+  .container .card .imgBx img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) /* rotate(-25deg) */;
+    width: 270px;
+  }
+  
+  .container .card .contentBx{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    text-align: center;
+    transition: 1s;
+    z-index: 10;
+  }
+  
+  .container .card:hover .contentBx{
+    height: 210px;
+  }
+  
+  .container .card .contentBx h2{
+    position: relative;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #fff;
+    margin: 0;
+  }

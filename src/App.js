@@ -40,6 +40,11 @@ import OrderDetailAdmin from "./Components/OrderDetailAdmin/OrderDetailAdmin";
 import Checkout from "./Components/Checkout/Checkout";
 import CheckoutConfirm from "./Components/Checkout/CheckoutDetail/CheckoutConfirm";
 
+import './App.css'
+
+
+import Chat from "./Screens/Chat/Chat";
+
 
 
 
@@ -93,6 +98,9 @@ function App() {
 
         <Route path="/recupass" element={<ResPassword/>}/>
          <Route path= "/pago" element ={< CheckoutConfirm />} /> 
+
+         <Route path= "/chat" element ={< Chat />} /> 
+         
 
       </Routes>
 

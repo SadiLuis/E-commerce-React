@@ -102,7 +102,8 @@ export const getCartDB = (userId) => async dispatch => {
          : 0
      };
      saveCartDb(newCart)
-     }
+   }
+   
       return dispatch({ type: GET_CART, payload: newCart , idCart: data.id});
 
    } catch (err) {

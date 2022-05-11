@@ -8,7 +8,8 @@ import commentReducer from "./Comment"
 
 
 import ordersReducer from './Orders';
-
+import chatReducer from "./Chat"
+import favReducer from './Favs';
 
 
 
@@ -21,6 +22,8 @@ const rootReducer = combineReducers({
     ordersReducer,
     pedidosReducer,
     commentReducer,
+    chatReducer,
+    favReducer,
 
 })
 
