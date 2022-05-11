@@ -1,5 +1,6 @@
 import React from 'react'
 import emailjs from '@emailjs/browser'
+import logo from "../../../Assets/logoM.png"
 
 
 function ConfirmaciónMail(props) {
@@ -11,22 +12,27 @@ function ConfirmaciónMail(props) {
         total:props.total,
         direccion:props.direccion,
         ciudad:props.ciudad,
-        provincia:props.provincia
+        provincia:props.provincia,
+        
         
 
     }
+   
     console.log(templateParams)
     
     
     let serviceId = "service_c72nnat"
     let templateId = "template_yejxn3e"
-    
     let publicId= "nJuhyyhJhkM9n5dSe"
-    emailjs.send(serviceId, templateId, templateParams, publicId)
+    
+    emailjs.send(serviceId, templateId, templateParams,  publicId)
+    
     .then(function(response){
+        
         console.log("Success", response.status, response.text)
     }, function(error){
         console.log("Failed", error)
+        
     })
 
 
@@ -35,8 +41,9 @@ function ConfirmaciónMail(props) {
          
         
          {ConfirmaciónMail}
+         
         
-           <h3>Confirmation Email</h3>
+           
            
         
         

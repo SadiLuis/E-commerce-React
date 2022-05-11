@@ -18,6 +18,7 @@ import Logout from '../Login/Logout';
 
 
 
+
 // logo,  home, contactenos 
 const NavBarAll = () => {
   // const usuario=useSelector(state =>state.loginReducer.userDetail)
@@ -57,6 +58,22 @@ const NavBarAll = () => {
         }}
       >
         Home
+      </NavLink>
+      <NavLink
+        to="/chat"
+        style={{
+          border: "none",
+          background: "none",
+          color: "black",
+          fontSize: "1rem",
+          marginLeft: "0.05rem",
+          cursor: "pointer",
+          textDecoration: "none",
+           marginBottom:"15rem"
+
+        }}
+      >
+        Chat 
       </NavLink>
       
       <div  style={{
