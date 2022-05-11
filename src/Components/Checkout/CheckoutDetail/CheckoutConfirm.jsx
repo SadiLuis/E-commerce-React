@@ -4,7 +4,7 @@ import {changeStatus , editStatusOrder} from "../../../Actions/orders"
 import { ListGroup, Button, Spinner } from "react-bootstrap";
 import {useSelector, useDispatch} from 'react-redux'
 import style from "./CheckoutItem.module.css";
-import ConfirmaciónMail from "../../Checkbox/ConfirmaciónMail/ConfirmaciónMail";
+import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
 
 
 const CheckoutConfirm = () => {
