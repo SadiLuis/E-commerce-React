@@ -61,7 +61,14 @@ export default function Detail() {
       usuarioId: myUser.id,
       productoId: product?.id
      }
-    dispatch(postFav(body))
+    dispatch(postFav(body))  
+     Swal.fire({
+      
+      icon: "success",
+      title: "Producto agregado a favoritos",
+      showConfirmButton: false,
+      timer: 1500,
+    });
    }
     
   
@@ -101,7 +108,7 @@ export default function Detail() {
                         <button onClick={()=>handleWhatsApp(product.title, product.price)}class="btn btn-success">Preguntar al WhatsApp</button>
                       </div>
                       <div className="btnFav">
-                        <button onClick={() => handleFav()}>Fav</button>
+                        <button className={styles.btnFav} onClick={() => handleFav()}>Agregar a favoritos</button>
                       </div>
                 </div>
                </div>
