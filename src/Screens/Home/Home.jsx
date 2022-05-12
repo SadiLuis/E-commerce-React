@@ -120,7 +120,7 @@ export default function Home() {
 
       {/* Filtros */}
       <div className={styles.filters}>
-        <CategoriasForm setFlag={setFlag} categorias={categorias}/>
+        <CategoriasForm setFlag={setFlag} categorias={categorias} setPage={setCurrentPage}/>
       </div>
 
 

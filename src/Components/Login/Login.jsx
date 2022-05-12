@@ -11,6 +11,7 @@ import dos from '../../Assets/2.jpg'
 import tres from '../../Assets/3.jpg'
 import style from './Login.module.css'
 import LoginGoogle from "./LoginGoogle";
+import {IoEyeOff ,IoEye} from "react-icons/io5"
 const initialLogin = {
   email: '',
   contrasena: '',
@@ -34,7 +35,7 @@ const validateForm = (form) => {
 };
 
 function Login({ login, isAuth, user ,resetRegister }) {
-  
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [form, setForm] = useState(initialLogin);
   const [error, setError] = useState({});
@@ -110,6 +111,10 @@ function Login({ login, isAuth, user ,resetRegister }) {
       setIndex(selectedIndex);
     };
 
+    const switchShowPassword = () => {
+      setShowPassword(!showPassword);
+    };
+
   return (
     <div class="row g-0 pt-3">
       <div class="col-lg-1"></div>
@@ -169,17 +174,20 @@ function Login({ login, isAuth, user ,resetRegister }) {
             value={form.email } onChange={handleChange}  />
             
            { error && error.email && (
-              <span >{error.email}</span>
+              <span style={{color:'red'}}>{error.email}</span>
               )}
             
             
             
-            <div className='form-group'>
+            <div className={`form-group ${style.containerLoginPass}`}>
                 <label htmlFor='exampleInputPassword1'>Contraseña</label>
-                <input type="password" className="form-control inputPass" placeholder="Ingresa tu contraseña" name='contrasena' value={form.contrasena} onChange={handleChange} />
-                
+                <input type={showPassword ? "text" : "password"} className="form-control inputPass" placeholder="Ingresa tu contraseña" name='contrasena' value={form.contrasena} onChange={handleChange} />
+                <button type='button' className={style.buttonLoginPass} onClick={switchShowPassword}>
+                {" "}
+                {showPassword ? <IoEyeOff /> : <IoEye />}
+               </button>
                { error && error.password && (
-                  <span >{error.contrasena}</span>
+                  <span style={{color:'red'}}>{error.contrasena}</span>
                 )}
                
             </div>

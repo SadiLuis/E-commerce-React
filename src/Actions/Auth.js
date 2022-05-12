@@ -206,8 +206,20 @@ export function recoveryPassword  (email) {
          type: RECOVERY_PASSWORD,
          payload: res.data
       })
+      Swal.fire({
+         text: `Por favor revise su casilla de correo `,
+         icon: "success",
+         confirmButtonText: "Ok",
+         title:'Se envío un enlace a su Email'
+       });
+
    } catch (err) {
-      //console.log(err.response.data)
+      Swal.fire({
+         icon: 'error',
+         title: 'Datos incorrectos',
+         text: err.response.data.message,
+        
+       })
       dispatch({
          type: RECOVERY_PASSWORD,
          payload: err.response.data
