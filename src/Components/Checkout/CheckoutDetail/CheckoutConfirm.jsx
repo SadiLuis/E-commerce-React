@@ -4,8 +4,9 @@ import {changeStatus , editStatusOrder} from "../../../Actions/orders"
 import { ListGroup, Button, Spinner } from "react-bootstrap";
 import {useSelector, useDispatch} from 'react-redux'
 import style from "./CheckoutItem.module.css";
-import ConfirmaciónMail from "../../Checkbox/ConfirmaciónMail/ConfirmaciónMail";
 import { getUserDetail } from "../../../Actions/Auth";
+import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
+
 
 const CheckoutConfirm = () => {
   const location = useLocation();
@@ -53,7 +54,7 @@ const CheckoutConfirm = () => {
               Compra procesada con éxito!
             </ListGroup.Item>
 
-            {/* meter acá primer mail? */}
+            {/*  acá primer mail */}
 
             <ConfirmaciónMail 
               nombre={ user?.nombre}
@@ -63,7 +64,7 @@ const CheckoutConfirm = () => {
              total= { orden?.totalPedido}
              direccion={user?.direccion}
              ciudad={ user?.ciudad}
-             provincia={ user?.provincia}
+             provincia={ user?.provincia }
             />
 
 

@@ -30,6 +30,7 @@ export function getProductById(id) {
        }
     }
  }
+
  export const cleanUp = () => {
    let action = {
      type: 'CLEAN_UP'
@@ -143,3 +144,23 @@ export function searchByName(name) {
         }
       };
     }    
+
+    export function putProductStatus(idProduct){
+      return async function (dispatch) {
+         try {
+            const productDisabled = axios.put(`${BASEURL}/products/changeStatus/${idProduct}`);
+            return dispatch({
+               type: 'STATUS_PRODUCT',
+               payload: productDisabled.data
+            })
+         } catch (error) {
+            console.log(error)
+         }
+      }
+    }
+
+    export function cleanProductDetail(){
+       return {
+          type: 'CLEAN_DETAIL_PRODUCT'
+       }
+    }

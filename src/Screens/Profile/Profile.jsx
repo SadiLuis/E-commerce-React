@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import Modal from '../Modal/Modal.jsx';
 import Items from '../../Components/Cart/Items';
 import styles from './Profile.module.css'
-
+import { getAllFavs } from '../../Actions/Favs';
+import FavCard from '../FavCard/FavCard';
 
 
 export default function Profile() {
@@ -15,6 +16,7 @@ export default function Profile() {
   
   const dispatch = useDispatch()
   
+  const myUser = useSelector((state)=> state.loginReducer.userDetail)
   
   React.useEffect(()=> {
     dispatch(getUserDetail())
@@ -22,11 +24,15 @@ export default function Profile() {
   }, [dispatch])
 
 
+  React.useEffect(()=> {
+    dispatch(getAllFavs(myUser?.id))
+  }, [myUser])
+
+  const favs = useSelector((state) => state.favReducer.myFavs) 
   const [input, setInput] = useState({
     img: ""
   })
   const [modalClose, setModalClose] = useState(false)
-  const myUser = useSelector((state)=> state.loginReducer.userDetail)
   console.log(myUser)
   
    const handleChange = (e) => {
@@ -93,35 +99,9 @@ export default function Profile() {
           myUser?
           <div className={`row ${styles.profileContainer}`}>
 
-                {
-                  
-                  items.length?
-                  
-                  <div className={`${styles.cartProfile}`}>
-                  {
-                    
-                    items.map((e) => (
-                      <Items
-                      key={e.id}
-                      title={e.title}
-                      image={e.images[0]}
-                      price={e.price}
-                      id={e.id}
-                      stock={e.cantidad}
-                      quantity={e.quantity}
-                      category={e.category}
-                      size={e.size}
-                      />
-                    ))
-                  }
-                  </div> :
 
-<div className='col col-lg-6' style={{alignSelf: 'center', textAlign: 'center', marginBottom:'2rem'}}>
-                  Todavía no tienes pedidos cargados
-                </div>
-         
-        }
-               
+
+            
                 <div className={`col col-lg-6 ${styles.profile}`}>
                 
                     <div className='text-center'>
@@ -157,7 +137,16 @@ export default function Profile() {
                       
                   </div>
                   <div className='cartProducts' style={{textAlign: 'center', marginBottom: '2rem'}}>
-                    <h4 className={styles.titleCart}>Productos en carrito: </h4>
+                    <h4 className={styles.titleCart}>Mis favoritos: </h4>
+                    <div className={styles.Favoritos}>
+
+                        {
+                     favs?.map((e)=> (
+                       <FavCard id={e.productoId}/>
+                     ))
+                    } 
+                    </div>
+                   
                   </div>
                    
         

@@ -46,6 +46,10 @@ import './App.css'
 import Chat from "./Screens/Chat/Chat";
 import ResetPasswordForm from './Components/RestarPassword/ResetPasswordForm'
 
+import DetailProductScreen from "./Components/DetailProductScreen/DetailProductScreen.jsx";
+
+
+
 
 
 
@@ -77,6 +81,7 @@ function App() {
         <Route path="/dashboard/admin/orders" element={<Orders/>}/>
         <Route path="/dashboard/admin/userDetailAdmin/:id" element={<UserDetailAdmin/>}/>
         <Route path="/dashboard/admin/orderDetailAdmin/:id/:idUser" element={<OrderDetailAdmin/>}/>
+        <Route path="/dashboard/admin/detailProduct/:id" element={<DetailProductScreen/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />
@@ -100,6 +105,7 @@ function App() {
 
          <Route path= "/chat" element ={< Chat />} /> 
          <Route path="/login/recoverpassword" element={<ResPassword/>} />
+         
 
          <Route path="/resetpassword/:userId" element={<ResetPasswordForm />} />
       </Routes>

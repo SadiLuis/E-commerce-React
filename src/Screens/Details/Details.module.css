@@ -109,3 +109,12 @@
     font-weight: bold;
    color: grey;
 }
+.btnFav{
+    border-radius: 3px;
+    border: none;
+    background: #cbbc36;
+    color: white;
+}
+.btnFav:hover{
+   background: #958924;
+}
