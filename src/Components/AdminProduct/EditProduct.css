@@ -10,16 +10,43 @@
    
 }
 .thumb img {
-    max-width: 10%;
-    max-height: 10%;
+     max-width: 10rem; 
+ /*    max-height: 10%;  */
     
 }
 .thumb {
+    display: flex;
     flex-direction: row;
     margin: 10px;
+  
     
-    
+}
+.thumb > div {
+    max-width: min-content;
+    margin: 1rem;  
+    position: relative; 
+    max-width: 10rem;
+}
+.thum > div > button {
+    background: none;
 }
 .titulo {
     margin-top: 50px;
+}
+.btnX{
+    
+    width: 27px;
+    height: 27px;
+    border-radius: 9px;
+    background:black;
+    color: white;
+    border: none;
+   
+    
+			
+}
+.errorSpan{
+    margin: 1rem;
+
+    color: red;
 }
