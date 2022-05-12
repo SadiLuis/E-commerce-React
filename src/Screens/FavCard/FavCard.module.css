@@ -6,7 +6,8 @@
     position: relative;
     width: 15rem;
     height: 450px;
-    background: white;
+    background: rgb(177 167 94 / 27%);
+   
     border-radius: 20px;
     overflow: hidden;
     margin: 2rem;
@@ -29,14 +30,14 @@
   }
   
   .container .card:after{
-    content: 'Nike';
+    
     position: absolute;
-    top: 30%;
-    left: -20%;
-    font-size: 12em;
+    top: 50%;
+    left: -5%;
+    font-size: 5rem;
     font-weight: 800;
     font-style: italic;
-    color: rgba(255,255,25,0.05)
+    color: white
   }
   
   .container .card .imgBx{
@@ -61,6 +62,7 @@
     left: 50%;
     transform: translate(-50%, -50%) /* rotate(-25deg) */;
     width: 270px;
+    border-radius: 6px;
   }
   
   .container .card .contentBx{
@@ -77,10 +79,10 @@
     height: 210px;
   }
   
-  .container .card .contentBx h2{
+  .container .card .contentBx a h4{
     position: relative;
     font-weight: 600;
-    letter-spacing: 1px;
-    color: #fff;
+    letter-spacing: 0.25px;
+    color: #212529;
     margin: 0;
   }

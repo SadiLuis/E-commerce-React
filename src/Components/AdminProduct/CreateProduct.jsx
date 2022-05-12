@@ -172,7 +172,7 @@ export default function Product() {
                 value={input.title}
                 onChange={(e) => handleChange(e.target.name, e.target.value)}>
               </input>
-              {focus.title && error.title && <span>{error.title}</span>}
+              {focus.title && error.title && <span className='errorSpan'>{error.title}</span>}
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">Categoría</span>
@@ -185,7 +185,7 @@ export default function Product() {
                   <option value={category.id}>{category.nombre}</option>
                 ))}
               </select>
-              {focus.categoriaId && error.categoriaId && <span>{error.categoriaId}</span>}
+              {focus.categoriaId && error.categoriaId && <span className='errorSpan'>{error.categoriaId}</span>}
             </div>
             <div class="input-group">
               <span class="input-group-text">Descripción</span>
@@ -196,7 +196,7 @@ export default function Product() {
                 value={input.description}
                 onChange={(e) => handleChange(e.target.name, e.target.value)}
               ></textarea>
-              {focus.description && error.description && <span>{error.description}</span>}
+              {focus.description && error.description && <span className='errorSpan'>{error.description}</span>}
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">Medidas</span>
@@ -231,28 +231,67 @@ export default function Product() {
                 onChange={(e) => handleChangeSize(e)}>
               </input>
             </div>
-            <div className="thumb" ref={myRef}>
-              {input.images?.map((img, index) => (
-                <img src={img} alt="product" key={index}
-                  onClick={() => handleTab(index)}
-                />
-              ))}
-            </div>
-            <div>
+            
+            
+            
+            
+            
+            <div style={{margin:'1rem 0rem 1rem 0rem'}}>
               <label>Imagenes</label>
+                <div className="thumb" ref={myRef}>
+                  {input.images?.flat().map((img, index) => ( <div>
+
+                    <img src={img} alt="product" key={index}
+                      onClick={() => handleTab(index)}
+                    />
+
+
+
+              
+                    <button
+
+                        name={img}
+                        onClick={(img) => handleDeleteImage(img)}
+                        style={{position:'absolute', right:'0'} }className='btnX'
+                            >
+                          X
+                        </button>
+              
+              </div>
+              ))
+          
+          }
+              
+           {/*    {input.images &&
+                  input.images.flat().map((name) => {
+                    return (
+                      <div className='loadImg'>
+                       <img
+
+                          src={name.url}
+                          alt={name.url}
+                          /> 
+                        
+                      </div>
+                    );
+                  })}
+               <div className="flexFran"> 
+                
+               </div>  */}
+            </div>
               <div>
                 <input
                   type="text"
                   placeholder="URL..."
                   value={inputImages}
                   onChange={(e) => setInputImages(e.target.value)}
-                />
+                  />
                 <img
                   className="cursor-pointer"
                   onClick={(e) => addImage(e)}
-
+                  
                   alt=""
-                />
+                  />
               </div>
               <div>
                 <input
@@ -261,30 +300,19 @@ export default function Product() {
                   onChange={(e) => {
                     uploadImage(e.target.files);
                   }}
+                  style={{margin:'1rem 0rem 1rem 0rem'}}
                 ></input>
               </div>
-              <div className="flex">
-                {input.images &&
-                  input.images.flat().map((name) => {
-                    return (
-                      <div>
-                        <img
-
-                          src={name.url}
-                          alt={name.url}
-                        />
-                        <button
-
-                          name={name}
-                          onClick={(name) => handleDeleteImage(name)}
-                        >
-                          X
-                        </button>
-                      </div>
-                    );
-                  })}
-              </div>
             </div>
+
+
+
+
+
+
+
+
+
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">Precio</span>
               <input onFocus={(e) => handleChange(e.target.name, true)}
@@ -297,7 +325,7 @@ export default function Product() {
                 aria-describedby="basic-addon1"
                 onChange={(e) => handleChange(e.target.name, e.target.value)}>
               </input>
-              {focus.price && error.price && <span>{error.price}</span>}
+              {focus.price && error.price && <span  className='errorSpan'>{error.price}</span>}
             </div>
 
             <div class="input-group mb-3">
@@ -312,16 +340,16 @@ export default function Product() {
                 aria-describedby="basic-addon1"
                 onChange={(e) => handleChange(e.target.name, e.target.value)}>
               </input>
-              {focus.cantidad && error.cantidad && <span>{error.cantidad}</span>}
+              {focus.cantidad && error.cantidad && <span  className='errorSpan'>{error.cantidad}</span>}
             </div>
             <div>
               <button
                 text="Create Product"
                 type="submit"
-                onClick={(e) => handleSubmit(e)}>Crear Producto
-
+                onClick={(e) => handleSubmit(e)}className='btn btn-outline-dark'>Crear Producto
+                
               </button>
-              <Link to={`/dashboard/admin`}> <button>Cancelar</button></Link>
+              <Link to={`/dashboard/admin`}> <button className='btn btn-outline-dark'>Cancelar</button></Link>
             </div>
 
           </form>

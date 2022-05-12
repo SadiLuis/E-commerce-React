@@ -276,11 +276,35 @@ export default function Product() {
               </input>
             </div>
             <div className="thumb" ref={myRef}>
-              {input.images?.map((img, index) => (
+              {input.images?.flat().map((img, index) => (
+                <div>
+                
+                
                 <img src={img} alt="product" key={index}
                   onClick={() => handleTab(index)}
                 />
-              ))}
+
+               <button
+
+                          name={img}
+                          onClick={(img) => handleDeleteImage(img)}
+                          style={{position:'absolute', right:'0'} }className='btnX'
+                        >
+                          X
+                        </button>
+              
+              </div>
+               
+              ))
+              
+              
+              
+              
+              
+              
+              
+              
+              }
             </div>
             <div>
               <label>Imagenes</label>
@@ -305,10 +329,11 @@ export default function Product() {
                   onChange={(e) => {
                     uploadImage(e.target.files);
                   }}
+                  style={{margin:'1rem 0rem 1rem 0rem'}}
                 ></input>
               </div>
               <div className="flex">
-                {input.images &&
+    {/*             {input.images &&
                   input.images.flat().map((name) => {
                     return (
                       <div>
@@ -317,16 +342,10 @@ export default function Product() {
                           src={name.url}
                           alt={name.url}
                         />
-                        <button
-
-                          name={name}
-                          onClick={(name) => handleDeleteImage(name)}
-                        >
-                          X
-                        </button>
+                       
                       </div>
                     );
-                  })}
+                  })} */}
               </div>
             </div>
             <div className="input-group mb-3">
@@ -362,10 +381,12 @@ export default function Product() {
               <button
                 text="Create Product"
                 type="submit"
-                onClick={(e) => handleSubmit(e)}>Actualizar Producto
-
+                onClick={(e) => handleSubmit(e)}
+                className="btn btn-outline-dark"
+                >Actualizar Producto
+                
               </button>
-              <Link to={`/dashboard/admin`}> <button>Cancelar</button></Link>
+              <Link to={`/dashboard/admin`}> <button className='btn btn-outline-dark'>Cancelar</button></Link>
             </div>
 
           </form>
