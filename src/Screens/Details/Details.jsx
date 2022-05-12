@@ -11,6 +11,8 @@ import Carousel from "../../Components/Carousel/Carousel.jsx";
 import Review from "../../Components/Review/ScreenReviews/Reviews.jsx";
 import { getUserDetail} from '../../Actions/Auth';
 import { postFav } from "../../Actions/Favs.js";
+import animate from "animate.css"
+
 
 
 export default function Detail() {
@@ -77,6 +79,7 @@ export default function Detail() {
   if(product.title) {
   return ( 
       <>
+      <h6 className="animate__animated animate__slideInRight animate__animated animate__fadeOutLeft">Una vez confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles de su producto</h6>
       
       {
         product && console.log('producto: ' ,product)
@@ -90,10 +93,12 @@ export default function Detail() {
                     />
                   ))}
                 </div>
+                
               <div class={styles.bigImg}>
                   <img src={product?.images[index]} alt="product " />
 
               </div>
+              
               <div class={styles.detailBox}>
                 <h1><b>{product?.title}</b></h1>
                 <h4><b>${product?.price}</b></h4>
