@@ -199,13 +199,9 @@ export function updateUser(newUser) {
 export function recoveryPassword  (email) {
    return async function (dispatch) {
       try{
-         const config = {
-            headers: {
-               'Content-Type': 'application/json',
-         }
-      }
+        
       const body = {email}
-      const res = await axios.post(`${BASEURL}/resetPassword`, body, config)
+      const res = await axios.post(`${BASEURL}/password`, body)
       dispatch({
          type: RECOVERY_PASSWORD,
          payload: res.data

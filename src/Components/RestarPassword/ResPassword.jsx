@@ -1,68 +1,65 @@
-import React, { useState, useEffect } from 'react'
-import { recoveryPassword } from '../../Actions/Auth'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import Swal from 'sweetalert2'
+import React,{useState} from "react";
+import styles from './RecoverPassword.module.css'
+import { recoveryPassword } from "../../Actions/Auth";
+import { useDispatch } from "react-redux";
 
-
-
-export default function ResPassword() {
-    const dispatch = useDispatch()
+ const ResPassword = ()=>{
+    const dispatch = useDispatch();
     const [state, setState] = useState({
-        email: 'example@gmail.com',
+        email:'example@example.com'
     })
     let expRegular = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     let Result = expRegular.test(state.email)
-
-    const recupContr = useSelector(state => state.loginReducer.recoveryPass)
-
-    const handleChange = (e) => {
-      e.preventDefault()
-      setState({
-        email: e.target.value
-      })
-      console.log('email', Result)
-    }
-
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      if(state.email === '' || state.email === 'example@gmail.com'){
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Debes ingresar un email valido',
-          setTime : 5000
-        })
-      }
-      dispatch(recoveryPassword(state))
-    }
-
-    useEffect(() => {
-      if(recupContr){
-        Swal.fire({
-          icon: 'success',
-          title: 'Se ha enviado un correo electronico',
-          text: 'Revisa tu bandeja de entrada',
-          setTime : 5000
-        })
-      }
-    }, [recupContr, state.email])
     
 
 
-  return (
-    <div>
-       <div className='text-center' >
-            <form onSubmit={handleSubmit} >
+     const handleChange = (e)=>{
+         setState({
+             email:e.target.value
+            })
+            
+            console.log('esto es result',Result)
+            
+        }
+        
+        const handleSubmit = async(e)=>{
+            e.preventDefault()
+            if(state.email === '' || state.email === 'example@example.com'){
+             alert('Debes incluir un correo valido')
+            }
+            dispatch(recoveryPassword(state.email))
 
-              <label  >Ingresa tu correo</label>
-              <input  type='text' onChange={handleChange} icon={'f'}/>
-              {/* <p >Introduce un correo valido</p> */}
+       
+
+     }
+
+
+           let err = styles.none
+           let errInp = styles.inputText
+           if(Result){
+            err = styles.none
+            errInp = styles.inputText
+           }else{
+            err = styles.errorPass
+            errInp = styles.errorInp
+           }
+           
+           
+           return(
+               <main className={styles.mainPass}>
+           <div className={styles.containPass}>
+            <form onSubmit={handleSubmit} className={styles.formPass}>
+
+              <label className={styles.namePass} >Ingresa tu correo</label>
+              <input className={errInp} type='text' onChange={handleChange} icon={'f'}/>
+              <p className={err}>Introduce un correo valido</p>
               
-              <input  type='submit' className='btn btn-outline-dark'  value='Recuperar'/>
+              <input className={styles.btnPass} type='submit' value='Recuperar'/>
 
             </form>
-           </div>          
-    </div>
-  )
+           </div>
+        </main>
+    )
 }
+
+export default ResPassword

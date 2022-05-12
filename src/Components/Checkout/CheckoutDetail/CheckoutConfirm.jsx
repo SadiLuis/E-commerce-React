@@ -5,7 +5,7 @@ import { ListGroup, Button, Spinner } from "react-bootstrap";
 import {useSelector, useDispatch} from 'react-redux'
 import style from "./CheckoutItem.module.css";
 import ConfirmaciónMail from "../../Checkbox/ConfirmaciónMail/ConfirmaciónMail";
-
+import { getUserDetail } from "../../../Actions/Auth";
 
 const CheckoutConfirm = () => {
   const location = useLocation();
@@ -25,6 +25,7 @@ const CheckoutConfirm = () => {
   const idOrder = order[1];
    console.log(datosPago)
   useEffect(() => {
+   dispatch(getUserDetail());
    if(orden){
      dispatch(changeStatus(orden.pedidoId , true))
      dispatch(editStatusOrder(orden.pedidoId , "ENPROCESO"))
@@ -59,7 +60,7 @@ const CheckoutConfirm = () => {
              email= { user?.email}
              cantidad={ orden?.productos?.map((c)=>c.cantidad)}
              producto={ orden?.productos?.map((p)=>p.producto)}
-             total= { orden?.productos?.map((t)=>t.total)}
+             total= { orden?.totalPedido}
              direccion={user?.direccion}
              ciudad={ user?.ciudad}
              provincia={ user?.provincia}

@@ -44,7 +44,7 @@ import './App.css'
 
 
 import Chat from "./Screens/Chat/Chat";
-
+import ResetPasswordForm from './Components/RestarPassword/ResetPasswordForm'
 
 
 
@@ -95,11 +95,13 @@ function App() {
         <Route exact path="/review/:idProduct" element={<CreateReview />} />
         <Route exact path="/review" element={<Reviews />} />
 
-        <Route path="/recupass" element={<ResPassword/>}/>
+       
          <Route path= "/pago" element ={< CheckoutConfirm />} /> 
 
          <Route path= "/chat" element ={< Chat />} /> 
+         <Route path="/login/recoverpassword" element={<ResPassword/>} />
 
+         <Route path="/resetpassword/:userId" element={<ResetPasswordForm />} />
       </Routes>
 
 

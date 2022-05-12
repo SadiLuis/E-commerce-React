@@ -191,10 +191,10 @@ function Login({ login, isAuth, user ,resetRegister }) {
             <span className={style.loginSpan}>¿No tienes cuenta?</span>
             <Link to='/register' className="btn btn-outline-dark p-0" >Registrate</Link>             
           </div>
-         {/*  <div className="text-center">
+          <div className="text-center">
             <span> ¿Olvidaste tu contraseña? </span>
-              <Link to='/recupass' className="btn btn-outline-dark p-0" >Recuperar</Link>          
-          </div> */}
+              <Link to='/login/recoverpassword' className="btn btn-outline-dark p-0" >Recuperar</Link>          
+          </div> 
 
         </form>
         
