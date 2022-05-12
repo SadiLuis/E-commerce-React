@@ -26,6 +26,7 @@ function MainChat() {
   let [newMessage, setNewMessage] = useState("")
   let [stateMessages, setStateMessages] = useState("")
   let [arrivalMessage, setArrivalMessage] = useState(null)
+  let [notification, setNotification] = useState(null)
   const [room, setRoom] = useState("")
   const scrollRef = useRef()
   let [aux, setAux] =useState(0)
@@ -54,16 +55,30 @@ function MainChat() {
           text: data.newMessage.text,
           createdAt: Date.now(),
         })
-        console.log("has recibido este mensaje: ", data.newMessage)
+        setAuxConver(auxConver + 1)
+        console.log("escuche el evento RECEIVE_MESSAGE")
+        
+        if(data.room !== currentChat?.id || !currentChat ) {
+          
+        console.log("Notificacion", data)
+        setNotification(data)
+        } 
+        
       })
     }, [socket])
   
+    useEffect (() => {
+        socket.on("newConversation", admin => {
+          console.log("escuche el evento newConversation", admin.id, admin)
+          for (let i = 0; i < 5; i++) {
+            socket.emit("join_room", i)
 
-    useEffect(() => {
-      socket.on("event_welcome", message => {
-        console.log(message)
-      })
-  }, [socket])
+          }
+          setAuxConver(auxConver + 1)
+            
+        })  
+    }, [socket])
+
 
   /////////////7///// HASTA ACA SIGUEN LAS COSAS DE SOCKET
 
@@ -76,18 +91,33 @@ function MainChat() {
     if(user){
       dispatch(getChatConversations(user.id))
     }
-  }, [user, ])
+  }, [user, auxConver])
+
+  useEffect(() => {
+    if(conversations.length === 0 && user?.rol === "1") {
+          
+      let admin = allUsers?.find( (elem) => elem.rol === "2")
+      let payload = {
+        
+          memberAdmin: admin.id,
+          memberBuyer: user?.id
+      
+      }
+      dispatch(postChatConversations(payload))
+      socket.emit("newConversation", admin)
+      setAuxConver(auxConver + 1)
+    }
+  }, [conversations])
 
 
 useEffect(() => {
     if (currentChat){   
         dispatch(getChatMessages(currentChat.id))
     }
-}, [currentChat, aux, messages])
+}, [currentChat, aux])
 
 useEffect(() => {
   setStateMessages((prev) => [...prev, arrivalMessage])
-  console.log("stateMessages: ", stateMessages)
   setAux(aux + 1)
 }, [arrivalMessage])
 
@@ -100,20 +130,25 @@ useEffect(() => {
 const handleSubmit =  (e) => {
 
 
-    e.preventDefault();
-    const message = {
+  e.preventDefault();
+  const message = {
         sender: user.id,
         text: newMessage,
-        conversationId: currentChat.id
+        conversationId: currentChat.id,
+
+
     }
 
-    const receiverId = currentChat.memberAdmin === user.id? currentChat.memberBuyer : currentChat.memberAdmin
-    sendMessage(message, currentChat.id)
-    
 
+    const receiverId = currentChat.memberAdmin === user.id? currentChat.memberBuyer : currentChat.memberAdmin
+    
+    
     dispatch(postChatMessage(message))
+    //socket
+    sendMessage(message, currentChat.id)
+
     setNewMessage("")
-    setAux(aux + 1 )
+    setAux(aux + 1)
 
 } 
 
@@ -124,23 +159,9 @@ const handleSetNewMessage = (e) => {
 
 const handleSetChat = (conver) => {
   setCurrentChat(conver)
-  console.log("current Chat", conver)
+  setNotification("")
   socket.emit("join_room", conver.id)
-}
-
-const handleStartChat = (e) => {
-  alert("todavia no funciona!")
-  // e.preventDefault()
-
-  // let admin = allUsers.find( (elem) => elem.rol === "2")
-  // let payload = {
-    
-  //     memberAdmin: admin.id,
-  //     memberBuyer: user.id
-  
-  // }
-  // dispatch(postChatConversations(payload))
-  // setAuxConver(auxConver + 1)
+  console.log("notification", notification)
 }
 
 
@@ -160,12 +181,12 @@ const handleStartChat = (e) => {
                 {
                     conversations?.map((conver) => (
   
-                      // <div onClick={() => setCurrentChat(conver)}> 
                       <div onClick={() => handleSetChat(conver)}>  
                       <Conversation 
                       conversation={conver}
                       currentUser = {user}
                       friend = { allUsers.filter(elem => elem.id === (conver.memberAdmin === user.id ? conver.memberBuyer : conver.memberAdmin) )}
+                      notification = {notification && notification.room === conver.id ? true : false}
                       />
                       </div>
                     ))
@@ -195,18 +216,9 @@ const handleStartChat = (e) => {
                   <button onClick={(e) => handleSubmit(e) } className='chatSubmitButton'>Send</button>
                 </div>
                   </>
-                : <>
-                { user?.rol == 2? <span className='noConversationText'>Open a Conversation to start a chat</span>
                 : 
-                  conversations.length > 0 ?
-                  <span className='noConversationText'>Open a Conversation to start a chat</span>
-                  :      
-                   <div className='noConversationText'>
-                      <button className=' btn btn-outline-secondary' onClick={(e) => handleStartChat(e)}>Empezar a chatear con Mobi ATR</button>
-                   </div>
-                   
-                }
-                </>
+                 <span className='noConversationText'>Abre la conversación para empezar a chatear</span>
+                
                 }
                 
             </div>
@@ -215,14 +227,14 @@ const handleStartChat = (e) => {
           
           <div className='chatOnline'>
               <div className='chatOnlineWrapper'>
-                  ONLINE
+                  
               </div>
           </div>    
         
         
         </div>
       </>
-    );
+    
       </div>
     )
   }

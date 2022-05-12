@@ -53,6 +53,7 @@ import DetailProductScreen from "./Components/DetailProductScreen/DetailProductS
 
 
 
+
 function App() {
   const token = useSelector((state) => state.loginReducer.token);
   const isAuth = useSelector((state) => state.loginReducer.isAuth);
@@ -102,6 +103,7 @@ function App() {
          <Route path= "/pago" element ={< CheckoutConfirm />} /> 
 
          <Route path= "/chat" element ={< Chat />} /> 
+         
 
       </Routes>
 
