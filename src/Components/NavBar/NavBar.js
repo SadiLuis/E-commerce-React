@@ -97,7 +97,7 @@ const NavBarLogin = ({isAuth, myUser}) => {
      const dispatch=useDispatch();
      const navigate=useNavigate();
    const user= useSelector((state)=> state.loginReducer.userDetail)
-   console.log(user)
+   
    
    
    
@@ -259,7 +259,7 @@ const NavBarAdmin = () => {
 // NavBarAll y perfil
 const NavBarAuthenticated = () => {
   const usuario=useSelector(state =>state.loginReducer.userDetail)
-  console.log(usuario)
+  
   return (
     <>
       <NavBarAll />

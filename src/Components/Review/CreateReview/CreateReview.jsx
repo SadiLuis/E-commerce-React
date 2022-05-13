@@ -11,7 +11,7 @@ import { validationFunction } from "./ValidationFunction";
 
 import { FaStar } from 'react-icons/fa'
 
-function CreateReview() {
+function CreateReview({socket}) {
   const { idProduct } = useParams();
   const dispatch = useDispatch()
 
@@ -69,6 +69,9 @@ function CreateReview() {
     }else if(!Object.keys(errors).length) {
       
     dispatch(postReview(comment))
+    //socket
+    socket.emit("notif_newReview", {user: user?.nombre, producto: product?.title})
+    
     Swal.fire({
       position: "center",
       icon: "success",
