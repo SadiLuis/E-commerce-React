@@ -13,7 +13,7 @@ const TableProducts = () => {
 
     useEffect(() => {
         dispatch(getAllProducts())
-    }, [])
+    }, [dispatch])
 
     const allProducts = useSelector((state) => state.productsReducer.products)
     const [currentPage, setCurrentPage] = useState(1)
@@ -90,24 +90,21 @@ const TableProducts = () => {
                         <thead className='table-dark'>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col"></th>
                                 <th scope="col">Titulo</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Cantidad</th>
                                 <th scope="col">Categoria</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {currentProducts?.map((p,id) => (
                                 <tr key={`tr-${id}`}>
-                                    <td  key={`edit-${id}`} className='text-center'>
-                                        <Link to={`/dashboard/admin/EditProduct/${p.id}`}>
-                                            <i className="fs-4 bi-pencil-fill"></i>
-                                        </Link>
-
-                                    </td>
                                     <td key={`delete-${id}`} className='text-center'>
-                                        <i className="fs-4 bi-trash3-fill"></i>
+                                    {p.statusProduct === true
+                                        ? <i className="fs-4 bi-check-circle text-success" ></i>
+                                        : <i className="fs-4 bi-x-circle text-danger"></i>
+                                    }
                                     </td>
 
                                     <td key={`title-${id}`}>{p.title}</td>
@@ -117,6 +114,13 @@ const TableProducts = () => {
                                         : <span className='text-danger fw-bold'>Sin Stock disponible</span>}
                                     </td>
                                     <td key={`category-${id}`}>{p.category}</td>
+                                    <td key={`delete-${id}`} className='text-start'>
+                                        <Link to={`/dashboard/admin/detailproduct/${p.id}`}>
+                                     
+                                            Ver detalle
+                                        
+                                        </Link>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

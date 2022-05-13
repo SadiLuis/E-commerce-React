@@ -4,10 +4,13 @@ import {changeStatus , editStatusOrder} from "../../../Actions/orders"
 import { ListGroup, Button, Spinner } from "react-bootstrap";
 import {useSelector, useDispatch} from 'react-redux'
 import style from "./CheckoutItem.module.css";
-import ConfirmaciónMail from "../../Checkbox/ConfirmaciónMail/ConfirmaciónMail";
+import { getUserDetail } from "../../../Actions/Auth";
+
+// import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
+import Swal from "sweetalert2"
 
 
-const CheckoutConfirm = () => {
+const CheckoutConfirm = ({socket}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const datosPago = location.search.split("&");
@@ -25,17 +28,32 @@ const CheckoutConfirm = () => {
   const idOrder = order[1];
    console.log(datosPago)
   useEffect(() => {
+   dispatch(getUserDetail());
    if(orden){
      dispatch(changeStatus(orden.pedidoId , true))
      dispatch(editStatusOrder(orden.pedidoId , "ENPROCESO"))
+     
+     //socket
+     socket.emit("notif_newOrder", orden)
+
    }
   },[dispatch , orden])
+
   function onClick() {
     navigate("/home");
   }
+  const alerta=()=> {
+    Swal.fire({
+    icon: 'info',
+    title: 'Customice su producto',
+    text: 'Un representante de MOBI ATR se contactará con usted para definir los detalles de su producto',
+    
+  })
+}
 
   return (
     <div>
+    {alerta()}
       {!orden ? (
         <div>
           <Spinner
@@ -52,18 +70,17 @@ const CheckoutConfirm = () => {
               Compra procesada con éxito!
             </ListGroup.Item>
 
-            {/* meter acá primer mail? */}
+            {/*  acá primer mail */}
 
-            <ConfirmaciónMail 
+            {/* <ConfirmaciónMail 
               nombre={ user?.nombre}
              email= { user?.email}
              cantidad={ orden?.productos?.map((c)=>c.cantidad)}
              producto={ orden?.productos?.map((p)=>p.producto)}
-             total= { orden?.productos?.map((t)=>t.total)}
+             total= { orden?.totalPedido}
              direccion={user?.direccion}
              ciudad={ user?.ciudad}
-             provincia={ user?.provincia}
-            />
+            /> */}
 
 
             <ListGroup.Item>

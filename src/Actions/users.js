@@ -84,9 +84,10 @@ import {getUserDetail} from './Auth'
          username
        }
          try {
+          
             await axios.post(`${BASEURL}/user/updateOrder`,body)
 
-            dispatch(getUserDetail());
+          
            
          } catch (err) {
             console.log(err)

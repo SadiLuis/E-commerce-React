@@ -9,6 +9,11 @@ import { WhatsApp } from "../../Actions/whatsApp.js";
 import Swal from 'sweetalert2'
 import Carousel from "../../Components/Carousel/Carousel.jsx";
 import Review from "../../Components/Review/ScreenReviews/Reviews.jsx";
+import { getUserDetail} from '../../Actions/Auth';
+import { postFav } from "../../Actions/Favs.js";
+import animate from "animate.css"
+import { Loader } from "../../Components/Loader/Loader.jsx";
+
 
 
 export default function Detail() {
@@ -22,7 +27,9 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getProductById(idProduct))
+    dispatch(getUserDetail())
   }, [idProduct])
+  const myUser = useSelector((state)=> state.loginReducer.userDetail)
 
   const handleTab = (index) => {
     setIndex(index)
@@ -50,13 +57,34 @@ export default function Detail() {
       timer: 1500,
     });
   };
+
+  const handleFav = () => {
+  
+     let body = {
+      usuarioId: myUser.id,
+      productoId: product?.id
+     }
+    dispatch(postFav(body))  
+     Swal.fire({
+      
+      icon: "success",
+      title: "Producto agregado a favoritos",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+   }
+    
+  
   
   
   if(product.title) {
   return ( 
       <>
+      <h6 className="animate__animated animate__slideInRight animate__animated animate__fadeOutLeft">Una vez confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles de su producto</h6>
       
-   
+      {
+        product && console.log('producto: ' ,product)
+      }
             
             <div class={styles.containerDetail}>
                 <div class={styles.thumb2} ref={myRef}>
@@ -66,10 +94,12 @@ export default function Detail() {
                     />
                   ))}
                 </div>
+                
               <div class={styles.bigImg}>
                   <img src={product?.images[index]} alt="product " />
 
               </div>
+              
               <div class={styles.detailBox}>
                 <h1><b>{product?.title}</b></h1>
                 <h4><b>${product?.price}</b></h4>
@@ -82,6 +112,9 @@ export default function Detail() {
                       </div>
                       <div class="btnBerna">
                         <button onClick={()=>handleWhatsApp(product.title, product.price)}class="btn btn-success">Preguntar al WhatsApp</button>
+                      </div>
+                      <div className="btnFav">
+                        <button className={styles.btnFav} onClick={() => handleFav()}>Agregar a favoritos</button>
                       </div>
                 </div>
                </div>
@@ -102,6 +135,6 @@ export default function Detail() {
       </> 
      )
   }else {
-    return (<h1>Loading...</h1>)
+    return (<Loader/>)
   }
 }

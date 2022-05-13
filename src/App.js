@@ -44,10 +44,21 @@ import './App.css'
 
 
 import Chat from "./Screens/Chat/Chat";
+import ResetPasswordForm from './Components/RestarPassword/ResetPasswordForm'
+
+import DetailProductScreen from "./Components/DetailProductScreen/DetailProductScreen.jsx";
 
 
 
 
+
+import { BASEURL } from '../src/Assets/URLS';
+
+
+
+import io from "socket.io-client"
+import Notifications from "./Components/Notifications/Notification";
+const socket = io.connect(BASEURL)
 
 
 
@@ -61,10 +72,22 @@ function App() {
     token && !isAuth && !userDetail && dispatch(getUserDetail());
   }, [token, dispatch, userDetail, isAuth]);
   
+
+  
+  useEffect(() => {
+    socket.on("event_welcome", (data) => {
+      console.log(data)
+    })
+  }, [socket])
+
+  
+
   return (
+
     <div className="App">
 
       <NavBarAll />
+      <Notifications socket={socket}/>
 
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -77,7 +100,12 @@ function App() {
         <Route path="/dashboard/admin/orders" element={<Orders/>}/>
         <Route path="/dashboard/admin/userDetailAdmin/:id" element={<UserDetailAdmin/>}/>
         <Route path="/dashboard/admin/orderDetailAdmin/:id/:idUser" element={<OrderDetailAdmin/>}/>
-        <Route path="/register" element={<Register />} />
+
+        <Route path="/register" element={<Register socket={socket}/>} />
+
+        <Route path="/dashboard/admin/detailProduct/:id" element={<DetailProductScreen/>}/>
+        
+
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />
         <Route path="/contactform" element={<ContactForm />} />
@@ -92,14 +120,17 @@ function App() {
 
 
         <Route path="/createproduct" element={<CreateProduct/>} />
-        <Route exact path="/review/:idProduct" element={<CreateReview />} />
+        <Route exact path="/review/:idProduct" element={<CreateReview socket={socket}/>} />
         <Route exact path="/review" element={<Reviews />} />
 
         <Route path="/recupass" element={<ResPassword/>}/>
-         <Route path= "/pago" element ={< CheckoutConfirm />} /> 
+         <Route path= "/pago" element ={< CheckoutConfirm socket={socket}/>} /> 
 
          <Route path= "/chat" element ={< Chat />} /> 
+         <Route path="/login/recoverpassword" element={<ResPassword/>} />
+         
 
+         <Route path="/resetpassword/:userId" element={<ResetPasswordForm />} />
       </Routes>
 
 

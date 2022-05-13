@@ -6,6 +6,15 @@
     margin-top: 20px;
 }
 
+.notifConversation{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+
+}
+
 .conversation:hover{
     background-color: lightgray;
 }
@@ -17,6 +26,17 @@
     margin-right: 20px;
 }
 
+
 .conversationName{
     font-weight: 500;
+    font-size: 30px;
+    margin-right: 20px;
 }
+
+.conversationNotif{
+    font-weight: 300;
+    color: green;
+    justify-content: end;
+}
+
+
