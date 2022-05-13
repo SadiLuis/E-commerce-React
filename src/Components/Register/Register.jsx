@@ -92,7 +92,7 @@ const validateform = function (form) {
   return errors;
 };
 
-export default function Register() {
+export default function Register({socket}) {
   const isRegister = useSelector(state => state.loginReducer.isRegister)
   const [focus , setFocus] = useState({ 
   nombre: false,
@@ -147,8 +147,7 @@ export default function Register() {
     e.preventDefault()
     
     if(Object.keys(error).length){
-      console.log('entro',form)
-      console.log(error)
+      
       Swal.fire({
         text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,
         icon: "error",
@@ -158,6 +157,9 @@ export default function Register() {
     else{
     setForm(formulario)
     dispatch(register(form))
+    //socket
+    socket.emit("notif_newRegister", form)
+
     }
 
   }
