@@ -21,61 +21,85 @@ const Notifications = ({ socket}) => {
 
   useEffect(() => {
     socket.on("notif_newMessage", (data) => {
-        
-        if(data.sender == user?.id) return console.log("mismo usuario que sender")
-        let notif = ({
-            sender : data.sender,
-            senderName: data.senderName,
-            type: 1,
-            detail: ""
-        })
-            setChatNotifications((prev) => [...prev, notif]);
-        
+        if(data.receiverId == user?.id) {
+            let notif = ({
+                sender : data.message.sender,
+                senderName: data.message.senderName,
+                receiver: data.receiverId,
+                type: 1,
+                detail: ""
+            })
+                setChatNotifications((prev) => [...prev, notif]);
+            
+        }
     });
-  }, [socket]);
+  }, [socket, user]);
 
   useEffect(() => {
         socket.on("notif_newReview", (data) => {
-            
-            console.log("escuche evento notif_newReview", data)
-            let notif2 = {
-                senderName : data.user,
-                type: 2,
-                detail: data.producto
+            if(user && user?.rol == 2) {
+
+
+                let notif2 = {
+                    senderName : data.user.nombre,
+                    type: 2,
+                    detail: data.producto
+                }
+                setNotifications((prev) => [...prev, notif2])
+                
             }
-            setNotifications((prev) => [...prev, notif2])
-        })
-  }, [socket])
+        })       
+  }, [socket, user])
 
   
   useEffect(() => {
     socket.on("notif_newOrder", (data) => {
-        console.log("escuche evento notif_newOrder", data)
+        //console.log("escuche evento notif_newOrder", data)
+       if (user && user?.rol == 2) {
+            
         let notif3 = {
             senderName: "",
             type: 3,
             detail: data.totalPedido
         }
          setNotifications((prev) => [...prev, notif3])
+        }
     })
-}, [socket])
+}, [socket, user])
+
+
+useEffect(() => {
+    socket.on("notif_newOrderStatus", (data) => {
+        console.log("escuche evento notif_newOrderStatus", data)
+       if (user && user?.id == data.usuarioId) {
+            console.log("me cambiaron el status")
+        let notif5 = {
+            senderName: "Su orden N° " + data.pedidoId,
+            type: 5,
+            detail: data.status === "ENPROCESO" ? "Enviado" : data.status === "ENVIADO" ?  "Entregado" : ""
+        }
+         setNotifications((prev) => [...prev, notif5])
+        }
+    })
+}, [socket, user])
 
 
 
 useEffect(() => {
     socket.on("notif_newRegister", (data) => {
-        console.log("escuche evento notif_newRegister", data)
+        if(user && user?.rol == 2) {
+            
         let notif4 = {
             senderName: data.nombre,
             type: 4,
             detail: ""
         }
          setNotifications((prev) => [...prev, notif4])
+        }
     })
-}, [socket])
+}, [socket, user])
 
 
-  console.log("notifications de review", notifications)
   const displayNotification = ({ senderName, type, detail }) => {
     let action;
     if (type === 1) {
@@ -86,6 +110,8 @@ useEffect(() => {
       action = "Nueva compra por un total de $";
     } else if (type === 4){
         action = "se registró en el sitio";
+      } else if (type === 5) {
+          action = " ha sido "
       }
     return (
       <span className="notificationNotifications">{`${senderName} ${action} ${detail} `}</span>
@@ -103,7 +129,6 @@ useEffect(() => {
     setOpenMessage(false);
   };
 
-  console.log(notifications)
   
   return (
     <div className="navbarNotifications">
@@ -121,7 +146,7 @@ useEffect(() => {
                     <img src={messageIMG} className="iconImgNotifications" alt="" />
                     {
                         
-                        chatNotifications.filter((elem) => elem.sender !== user?.id)?.length > 0 && <div className="counterNotifications">{chatNotifications?.filter((elem) => elem.sender !== user?.id)?.length}</div>
+                        chatNotifications?.length > 0 && <div className="counterNotifications">{chatNotifications?.length}</div>
                     }
             </div>
         </div>
@@ -138,7 +163,7 @@ useEffect(() => {
 {
             openMessage && <div className="notificationsNotifications">
             
-            {  chatNotifications?.filter((elem) => elem.sender !== user?.id).map(n => (  displayNotification(n) )) }
+            {  chatNotifications?.map(n => (  displayNotification(n) )) }
               <button className="btn btn-outline-secondary" onClick={handleReadChat}>Marcar como leido</button>  
                 
              

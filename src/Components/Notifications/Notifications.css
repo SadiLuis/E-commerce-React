@@ -1,10 +1,11 @@
 .navbarNotifications {
     height: 50px;
-    background-color: lightseagreen;
+    
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    color: white;
+    color: black;
     position: relative;
   }
   
