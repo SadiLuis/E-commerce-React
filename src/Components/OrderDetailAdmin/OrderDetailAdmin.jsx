@@ -5,14 +5,19 @@ import Swal from 'sweetalert2';
 import { editStatusOrder, getOrderById } from '../../Actions/orders';
 import { getUserById } from '../../Actions/users';
 import ordersReducer from '../../Reducers/Orders';
+import MailEnviado from '../Mails/MailEnviado';
 import SidebarAdmin from '../SidebarAdmin/SidebarAdmin'
+import MailEntregado from '../Mails/MailEntregado';
+import Status from "../Mails/Status"
 
-const OrderDetailAdmin = () => {
+
+const OrderDetailAdmin = ({socket}) => {
     const dispatch = useDispatch();
     const { id, idUser } = useParams();
     const order = useSelector(state => state.ordersReducer.orderDetail);
     const userById = useSelector(state => state.userReducer.userDetail)
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         dispatch(getOrderById(id));
@@ -38,6 +43,8 @@ const OrderDetailAdmin = () => {
                         `Pedido despachado`,
                         'success'
                     )
+                    //socket Notification
+                    socket.emit("notif_newOrderStatus", order)
                     navigate('/dashboard/admin/orders')
                 }
             })
@@ -60,6 +67,9 @@ const OrderDetailAdmin = () => {
                             `Pedido entregado`,
                             'success'
                         )
+                        
+                    //socket Notification
+                    socket.emit("notif_newOrderStatus", order)
                         navigate('/dashboard/admin/orders')
                     }
                 })
@@ -69,9 +79,11 @@ const OrderDetailAdmin = () => {
     const keyId = useId();
     return (
         <div className="container-fluid">
+            
             <div className='row min-vh-100'>
                 <div className="col-auto col-md-2 col-xl-2 px-0 ">
                     <SidebarAdmin />
+                    <Status />
                 </div>
                 <div className='col'>
                     <div className="row">
@@ -84,20 +96,30 @@ const OrderDetailAdmin = () => {
                                     Pendiente de pago
                                 </button>)
                                 : order.status === 'ENPROCESO'
-                                    ? (<button type="button"
+                                    ? (<><button type="button"
                                         className="btn btn-lg btn-success"
                                         onClick={() => changeStatus(order.status, order.pedidoId)}>
                                         Despachar pedido
-                                    </button>)
+                                    </button>
+                                    
+                                    </>
+                                    )
                                     : order.status === 'ENVIADO'
                                         ? (<button type="button"
                                             className="btn btn-lg btn-success"
                                             onClick={() => changeStatus(order.status, order.pedidoId)}>
+                                            Pedido entregado 
+                                        </button>
+                                        
+                                        
+                                        ) 
+                                        
+                                        : (<><button type="button" className="btn btn-lg btn-primary" disabled>
                                             Pedido entregado
-                                        </button>)
-                                        : (<button type="button" className="btn btn-lg btn-primary" disabled>
-                                            Pedido entregado
-                                        </button>)
+                                        </button>
+                                        
+                                        </>
+                                        )
                             }
 
                         </div>
@@ -144,6 +166,7 @@ const OrderDetailAdmin = () => {
                                                             : 'Entregado'
                                                 }
                                             </p>
+                                           
                                         </div>
                                     </div>
                                     <div className="row">
@@ -168,6 +191,39 @@ const OrderDetailAdmin = () => {
 
                         </div>
                     </div>
+
+                    {/* Mails */}
+                    {/* <div>
+                        {order.status==="ENVIADO" && order.status==="ENVIADO"( 
+                                     <MailEnviado 
+                                     nombre={userById.nombre}
+                                      email={userById.email}
+                                      cantidad={order?.productos?.map((c)=>c.cantidad)}
+                                      producto={order?.productos?.map((p)=>p.producto)}
+                                      total={order?.total?.map((t)=>t.total)}
+                                      pedidoId={order?.pedidoId?.map((pI)=>pI.pedidoId)}
+                                     direccion={userById.direccion}
+                                     ciudad={userById.ciudad}
+                                      provincia={userById.provincia}
+                                     /> ) 
+                                        } */}
+
+                                           
+                                             {/* {order.status==="ENTREGADO" ?
+                                            <MailEntregado 
+                                        nombre={userById.nombre}
+                                        email={userById.email}
+                                        pedidoId={order?.pedidoId?.map((pI)=>pI.pedidoId)}
+                                        direccion={userById.direccion}
+                                    ciudad={userById.ciudad}
+                                    provincia={userById.provincia} 
+                                         /> : <h5>Pedido entregado</h5>
+                                            }  */}
+
+                    {/* </div> */}
+                       
+
+
                     <div className="row">
                         <div className="col">
 
@@ -194,7 +250,7 @@ const OrderDetailAdmin = () => {
 
                                 </div>
                             </div>
-
+                             
 
                         </div>
                     </div>

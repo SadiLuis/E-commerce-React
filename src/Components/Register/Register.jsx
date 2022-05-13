@@ -92,7 +92,7 @@ const validateform = function (form) {
   return errors;
 };
 
-export default function Register() {
+export default function Register({socket}) {
   const isRegister = useSelector(state => state.loginReducer.isRegister)
   const [focus , setFocus] = useState({ 
   nombre: false,
@@ -147,8 +147,7 @@ export default function Register() {
     e.preventDefault()
     
     if(Object.keys(error).length){
-      console.log('entro',form)
-      console.log(error)
+      
       Swal.fire({
         text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,
         icon: "error",
@@ -158,6 +157,9 @@ export default function Register() {
     else{
     setForm(formulario)
     dispatch(register(form))
+    //socket
+    socket.emit("notif_newRegister", form)
+
     }
 
   }
@@ -242,7 +244,7 @@ export default function Register() {
         {focus.usuario && error.usuario && <span className={`text-danger ${style.span}`}>{error.usuario}</span> }
       </div>
       {/* Contraseña  */}
-      <div className={`mb-1 ${style.formInput}`}>
+      <div className={`mb-1 ${style.formInput} ${style.divPasswordR}`}>
         <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Contraseña</label>
        {/* <div className={style.containerInputContrasena}> */}
          {/* <div> */}
@@ -251,9 +253,9 @@ export default function Register() {
           onChange={(e) => handleChange(e.target.name, e.target.value)}
           onFocus={(e) => handleChange(e.target.name , true)}
           />
-        <button class={`btn btn-primary ${style.contrasena}`} style={{color: 'black', background: 'none', border: 'none', marginTop: '2.3rem' }} type='button' >
-        {visible === 'text' && <IoEyeOff className={style.inputContrasena}  type="button" onClick={mostrarPassword} /> }
-        {visible === 'password' && <IoEye  className={style.inputContrasena} type="button" onClick={mostrarPassword} /> }
+        <button className={` ${style.contrasena}`}  type='button' >
+        {visible === 'text' && <IoEyeOff  type="button" onClick={mostrarPassword} /> }
+        {visible === 'password' && <IoEye   type="button" onClick={mostrarPassword} /> }
         </button>
       
          {/* </div> */}
@@ -266,7 +268,7 @@ export default function Register() {
 
 
       {/* CONFIRMAR CONTRASEÑA */}
-           <div className={`mb-1 ${style.formInput}`}>
+           <div className={`mb-1 ${style.formInput} ${style.divPasswordR}`}>
         <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Confirmar contraseña</label>
         <input type={visible}  className={ style.input} id="exampleInputPassword1" 
         placeholder="Confirmar contraseña" name='contrasenaConfirm' 
@@ -275,9 +277,9 @@ export default function Register() {
         onFocus={(e) => handleChange(e.target.name , true)}
        
         />
-        <button class={`btn btn-primary ${style.contrasena}`} style={{color: 'black', background: 'none', border: 'none', marginTop: '2.3rem' }} type='button' >
-        {visible === 'text' && <IoEyeOff className={style.inputContrasena}  type="button" onClick={mostrarPassword} /> }
-        {visible === 'password' && <IoEye  className={style.inputContrasena} type="button" onClick={mostrarPassword} /> }
+        <button class={` ${style.contrasena}`}  type='button' >
+        { visible === 'text' && <IoEyeOff className={style.inputContrasena}  type="button" onClick={mostrarPassword} /> }
+        { visible === 'password' && <IoEye  className={style.inputContrasena} type="button" onClick={mostrarPassword} /> }
         </button>
         {focus.contrasenaConfirm && error.contrasenaConfirm && <span className={`text-danger ${style.span}`} style={{marginLeft: '1rem'}}>{error.contrasenaConfirm}</span> }
       </div>

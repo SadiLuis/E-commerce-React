@@ -42,7 +42,7 @@ ul {
   border-bottom: solid 2px black;
 } 
 
- .navbar-brand span {
+ /* .navbar-brand span {
   display: flex;
   justify-content: center;
   font-family: monospace;
@@ -77,5 +77,6 @@ ul {
   25% {
     opacity: 0;
   }
-} 
+}  */
+ 
  

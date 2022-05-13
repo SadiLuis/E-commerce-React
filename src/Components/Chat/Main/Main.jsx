@@ -23,14 +23,14 @@ function MainChat() {
   let messages = useSelector((state) => state.chatReducer.messages)
   let conversations = useSelector((state) => state.chatReducer.conversations)
   let allUsers = useSelector((state) => state.chatReducer.allUsers)
-  let [newMessage, setNewMessage] = useState("")
-  let [stateMessages, setStateMessages] = useState("")
-  let [arrivalMessage, setArrivalMessage] = useState(null)
-  let [notification, setNotification] = useState(null)
+  const [newMessage, setNewMessage] = useState("")
+  const [stateMessages, setStateMessages] = useState("")
+  const [arrivalMessage, setArrivalMessage] = useState(null)
+  const [notification, setNotification] = useState(null)
   const [room, setRoom] = useState("")
   const scrollRef = useRef()
-  let [aux, setAux] =useState(0)
-  let [auxConver, setAuxConver] = useState(0)
+  const [aux, setAux] =useState(0)
+  const [auxConver, setAuxConver] = useState(0)
   const dispatch = useDispatch()
 
   //////////////////////////////////////////////////////////EMPIEZA SOCKET
@@ -60,7 +60,7 @@ function MainChat() {
         
         if(data.room !== currentChat?.id || !currentChat ) {
           
-        console.log("Notificacion", data)
+        
         setNotification(data)
         } 
         
@@ -69,12 +69,11 @@ function MainChat() {
   
     useEffect (() => {
         socket.on("newConversation", admin => {
-          console.log("escuche el evento newConversation", admin.id, admin)
           for (let i = 0; i < 5; i++) {
             socket.emit("join_room", i)
 
           }
-          setAuxConver(auxConver + 1)
+          setAuxConver(Math.random())
             
         })  
     }, [socket])
@@ -99,13 +98,13 @@ function MainChat() {
       let admin = allUsers?.find( (elem) => elem.rol === "2")
       let payload = {
         
-          memberAdmin: admin.id,
+          memberAdmin: admin?.id,
           memberBuyer: user?.id
       
       }
       dispatch(postChatConversations(payload))
       socket.emit("newConversation", admin)
-      setAuxConver(auxConver + 1)
+      setAuxConver(Math.random())
     }
   }, [conversations])
 
@@ -135,20 +134,24 @@ const handleSubmit =  (e) => {
         sender: user.id,
         text: newMessage,
         conversationId: currentChat.id,
-
+        senderName: user.nombre
 
     }
 
 
     const receiverId = currentChat.memberAdmin === user.id? currentChat.memberBuyer : currentChat.memberAdmin
     
-    
+    //redux
     dispatch(postChatMessage(message))
+    
     //socket
     sendMessage(message, currentChat.id)
+    socket.emit("notif_newMessage", {message, receiverId})
+    //Hardcode tu dispatch getChatMessages
+    setAux(Math.random())
 
     setNewMessage("")
-    setAux(aux + 1)
+    
 
 } 
 
@@ -161,7 +164,6 @@ const handleSetChat = (conver) => {
   setCurrentChat(conver)
   setNotification("")
   socket.emit("join_room", conver.id)
-  console.log("notification", notification)
 }
 
 
@@ -177,7 +179,7 @@ const handleSetChat = (conver) => {
         <div className='messenger'>
           <div className='chatMenu'>
             <div className='chatMenuWrapper'>
-                <input placeholder='Search for friends' className='chatMenuInput'/>
+                <h5 className='chatMenuInput'>Lista de chats</h5>
                 {
                     conversations?.map((conver) => (
   
@@ -212,8 +214,8 @@ const handleSetChat = (conver) => {
                   
                 </div>
                 <div className='chatBoxBottom'>
-                  <textarea onChange={(e) => handleSetNewMessage(e)} value={newMessage} className='chatMessageInput' placeholder='write something'></textarea>
-                  <button onClick={(e) => handleSubmit(e) } className='chatSubmitButton'>Send</button>
+                  <textarea onChange={(e) => handleSetNewMessage(e)} value={newMessage} className='chatMessageInput' placeholder='Tu Mensaje...'></textarea>
+                  <button onClick={(e) => handleSubmit(e) } className='chatSubmitButton'>Enviar</button>
                 </div>
                   </>
                 : 
