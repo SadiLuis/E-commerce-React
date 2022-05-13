@@ -44,6 +44,7 @@ import './App.css'
 
 
 import Chat from "./Screens/Chat/Chat";
+import ResetPasswordForm from './Components/RestarPassword/ResetPasswordForm'
 
 import DetailProductScreen from "./Components/DetailProductScreen/DetailProductScreen.jsx";
 
@@ -126,8 +127,10 @@ function App() {
          <Route path= "/pago" element ={< CheckoutConfirm socket={socket}/>} /> 
 
          <Route path= "/chat" element ={< Chat />} /> 
+         <Route path="/login/recoverpassword" element={<ResPassword/>} />
          
 
+         <Route path="/resetpassword/:userId" element={<ResetPasswordForm />} />
       </Routes>
 
 

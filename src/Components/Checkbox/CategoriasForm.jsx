@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch , useSelector} from 'react-redux';
 import { filterByCategory } from '../../Actions/products';
 
-function CategoriasForm({setFlag , categorias}) {
+function CategoriasForm({setFlag , categorias , setPage}) {
     const dispatch = useDispatch()
    
      
@@ -13,6 +13,7 @@ function CategoriasForm({setFlag , categorias}) {
         }
         document.getElementById(e.target.id).checked = true;
         setFlag(true)
+        setPage(1)
         dispatch(filterByCategory(e.target.value))
     }
   return (
