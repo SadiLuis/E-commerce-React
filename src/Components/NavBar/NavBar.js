@@ -10,6 +10,7 @@ import styles from "./NavBar.module.css"
 import { connect } from "react-redux";
 import logo from "../../Assets/default.png";
 import Logout from '../Login/Logout';
+import animate from "animate.css"
 
 
 
@@ -309,14 +310,14 @@ function NavBar({ isAuth, user }) {
     <><nav className='navbar navbar-light bg-dark'style={{height:"2.5rem"}}> 
       <div className="container-fluid" >
       
-      <span className="navbar-brand " 
+      <span className="navbar-brand" 
       style={{
         fontSize: "0.5rem",
         fontWeight: "bold",
         color: "white",
         
       }} 
-      >Envíos gratis por órdenes de compra superiores a $7.000.
+      ><h6 className='animate__animated animate__fadeInRight'>Envíos gratis por órdenes de compra superiores a $7.000.</h6>
        
       </span >
       

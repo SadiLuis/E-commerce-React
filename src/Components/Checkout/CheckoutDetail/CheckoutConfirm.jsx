@@ -4,7 +4,8 @@ import {changeStatus , editStatusOrder} from "../../../Actions/orders"
 import { ListGroup, Button, Spinner } from "react-bootstrap";
 import {useSelector, useDispatch} from 'react-redux'
 import style from "./CheckoutItem.module.css";
-import ConfirmaciónMail from "../../Checkbox/ConfirmaciónMail/ConfirmaciónMail";
+// import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
+import Swal from "sweetalert2"
 
 
 const CheckoutConfirm = ({socket}) => {
@@ -38,9 +39,18 @@ const CheckoutConfirm = ({socket}) => {
   function onClick() {
     navigate("/home");
   }
+  const alerta=()=> {
+    Swal.fire({
+    icon: 'info',
+    title: 'Customice su producto',
+    text: 'Un representante de MOBI ATR se contactará con usted para definir los detalles de su producto',
+    
+  })
+}
 
   return (
     <div>
+    {alerta()}
       {!orden ? (
         <div>
           <Spinner
@@ -59,7 +69,7 @@ const CheckoutConfirm = ({socket}) => {
 
             {/*  acá primer mail */}
 
-            <ConfirmaciónMail 
+            {/* <ConfirmaciónMail 
               nombre={ user?.nombre}
              email= { user?.email}
              cantidad={ orden?.productos?.map((c)=>c.cantidad)}
@@ -68,7 +78,7 @@ const CheckoutConfirm = ({socket}) => {
              direccion={user?.direccion}
              ciudad={ user?.ciudad}
              provincia={ user?.provincia }
-            />
+            /> */}
 
 
             <ListGroup.Item>

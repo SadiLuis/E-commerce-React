@@ -96,7 +96,7 @@ const UserDetailAdmin = () => {
                                             : (<button
                                                 onClick={() => changeStatus(userById?.rol, userById.id, userById.usuario)}
                                                 type="button" className="btn btn-danger">
-                                                Desabilitar usuario
+                                                Deshabilitar usuario
                                             </button>)
                                         }
                                         <button type="button" className="btn btn-primary ms-1">Chat</button>
