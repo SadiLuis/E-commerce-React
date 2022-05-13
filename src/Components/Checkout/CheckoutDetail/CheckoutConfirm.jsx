@@ -10,7 +10,7 @@ import { getUserDetail } from "../../../Actions/Auth";
 import Swal from "sweetalert2"
 
 
-const CheckoutConfirm = () => {
+const CheckoutConfirm = ({socket}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const datosPago = location.search.split("&");
@@ -32,8 +32,13 @@ const CheckoutConfirm = () => {
    if(orden){
      dispatch(changeStatus(orden.pedidoId , true))
      dispatch(editStatusOrder(orden.pedidoId , "ENPROCESO"))
+     
+     //socket
+     socket.emit("notif_newOrder", orden)
+
    }
   },[dispatch , orden])
+
   function onClick() {
     navigate("/home");
   }

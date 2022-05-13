@@ -5,7 +5,7 @@ import { filterByCategory } from '../../Actions/products';
 function CategoriasForm({setFlag , categorias , setPage}) {
     const dispatch = useDispatch()
    
-     console.log(categorias)
+     
     function handleCheck(e){
         for (let i = 0; i <= categorias?.length; i++){
             document.getElementById(i).checked = false;

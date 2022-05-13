@@ -36,9 +36,10 @@ export default function Home() {
 
 
   const allProducts = useSelector((state) => state.productsReducer.products)
-  //console.log(allProducts)
+
+  
   const categories = useSelector((state) => state.productsReducer.categories)
-  //console.log(categories)
+  
   const [currentPage, setCurrentPage] = useState(1)
   const [productsOnPage, setProductsOnPage] = useState(12)
   const indexLastProduct = currentPage * productsOnPage
@@ -46,7 +47,7 @@ export default function Home() {
   const productsEnabled =   allProducts.filter(s=>s.statusProduct===true)
   const currentProducts = productsEnabled.slice(indexFirstProduct, indexLastProduct)
 
-  console.log(currentProducts)
+  
   const paginado = (pageNum) => {
     setCurrentPage(pageNum)
   }
