@@ -99,7 +99,7 @@ function App() {
         <Route path="/dashboard/admin/customers" element={<Customers />} />
         <Route path="/dashboard/admin/orders" element={<Orders/>}/>
         <Route path="/dashboard/admin/userDetailAdmin/:id" element={<UserDetailAdmin/>}/>
-        <Route path="/dashboard/admin/orderDetailAdmin/:id/:idUser" element={<OrderDetailAdmin/>}/>
+        <Route path="/dashboard/admin/orderDetailAdmin/:id/:idUser" element={<OrderDetailAdmin socket={socket}/>}/>
 
         <Route path="/register" element={<Register socket={socket}/>} />
 
