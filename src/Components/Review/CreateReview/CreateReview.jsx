@@ -70,7 +70,7 @@ function CreateReview({socket}) {
       
     dispatch(postReview(comment))
     //socket
-    socket.emit("notif_newReview", {user: user?.nombre, producto: product?.title})
+    socket.emit("notif_newReview", {user, producto: product?.title})
     
     Swal.fire({
       position: "center",
