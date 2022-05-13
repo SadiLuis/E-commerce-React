@@ -12,6 +12,7 @@ import Review from "../../Components/Review/ScreenReviews/Reviews.jsx";
 import { getUserDetail} from '../../Actions/Auth';
 import { postFav } from "../../Actions/Favs.js";
 import animate from "animate.css"
+import { Loader } from "../../Components/Loader/Loader.jsx";
 
 
 
@@ -134,6 +135,6 @@ export default function Detail() {
       </> 
      )
   }else {
-    return (<h1>Loading...</h1>)
+    return (<Loader/>)
   }
 }
