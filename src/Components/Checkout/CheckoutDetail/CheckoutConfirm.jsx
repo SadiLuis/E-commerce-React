@@ -64,7 +64,7 @@ const CheckoutConfirm = () => {
              total= { orden?.totalPedido}
              direccion={user?.direccion}
              ciudad={ user?.ciudad}
-             provincia={ user?.provincia }
+             
             />
 
 
