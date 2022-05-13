@@ -7,6 +7,7 @@ import {deleteProductCart,addItemCart} from '../Actions/cart'
 const initialState = {
     detailProduct : [],
     products: [],
+    searchProducts: [],
     allProducts:getProductLocalStorage(),
     productoPorNombre:[],
     filtered:[],
@@ -32,7 +33,8 @@ export default function productsReducer(state = initialState, action) {
                 return{
                     ...state,
                     products: payload,
-                    allProducts: payload
+                    allProducts: payload,
+                    searchProducts: payload
                 }
             case 'CLEAN_UP': 
             return {

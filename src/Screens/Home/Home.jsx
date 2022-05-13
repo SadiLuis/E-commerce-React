@@ -107,7 +107,7 @@ export default function Home() {
         {/* SEARCHBAR */}
         <div className={styles.search}>
           <form >
-            <SearchBar setPage={setCurrentPage} />
+            <SearchBar setPage={setCurrentPage} setOrigin={"user"} />
           </form>
         </div>
 

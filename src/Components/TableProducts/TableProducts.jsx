@@ -80,7 +80,7 @@ const TableProducts = () => {
                     </div>
 
                     <div className='col'>
-                        <SearchBar setPage={setCurrentPage} />
+                        <SearchBar setPage={setCurrentPage} setOrigin={"admin"}/>
                     </div>
 
                 </div>
