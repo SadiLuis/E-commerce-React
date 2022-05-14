@@ -49,7 +49,7 @@ import ResetPasswordForm from './Components/RestarPassword/ResetPasswordForm'
 import DetailProductScreen from "./Components/DetailProductScreen/DetailProductScreen.jsx";
 import AddAdmin from "./Components/AddAdmin/AddAdmin";
 
-
+import MyFavs from "./Screens/MyFavs/MyFavs";
 
 
 
@@ -129,6 +129,7 @@ function App() {
 
 
         <Route path="/resetpassword/:userId" element={<ResetPasswordForm />} />
+        <Route path="/MyFavs" element={<MyFavs/>}/>
       </Routes>
 
 
