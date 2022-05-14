@@ -18,7 +18,7 @@ export default function MyOrders (){
   const myUser = useSelector((state)=> state.loginReducer.userDetail)
   const pedidos = useSelector((state)=> state.pedidosReducer.pedidosById)
  
- 
+ console.log(pedidos)
    React.useEffect(() => {
     
     dispatch(getPedidosById(myUser.id)) 
@@ -45,7 +45,7 @@ export default function MyOrders (){
           {
             pedidos.length && pedidos.map(e => (
                 <div>
-                <HistoryOrders fecha={e.fechaCreacion} productos={e.productos} total={e.totalPedido} status={e.status}/>
+                <HistoryOrders fecha={e.fechaCreacion} productos={e.productos} total={e.totalPedido} status={e.status} pedidoId={e.pedidoId}/>
                 
                 </div>
                

@@ -56,6 +56,7 @@ box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
  border-radius: 10px;
  background-color: white;
  margin-bottom:10px;
+ 
 ${mobile({ flexDirection: "column" })}
 `
 
@@ -70,7 +71,8 @@ export const Image = styled.img`
 width:25%;
 height:150px;
 align-self:center;
-margin-bottom: -5px
+margin-bottom: -5px;
+
 `
 
 export const Details = styled.div`
@@ -189,4 +191,16 @@ margin: auto;
 position: absolute;
 top: 75px;
 left: 27px;
+`
+
+export const ProductDisabled = styled.button`
+display:flex;
+justify-content:space-between;
+height: 200px;
+width:90%;
+box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
+ border-radius: 10px;
+ background-color:#dee2e6 ;
+ margin-bottom:10px;
+ color:#adb5bd;
 `

@@ -53,6 +53,7 @@ export function register({
     provincia,
     direccion,
     telefono,
+    ciudad
     }) {
     return async function (dispatch) {
        try {
@@ -73,6 +74,7 @@ export function register({
              provincia,
              direccion,
              telefono,
+             ciudad
            
           };
           //console.log("body")
