@@ -44,8 +44,8 @@ export default function Home() {
   const [productsOnPage, setProductsOnPage] = useState(12)
   const indexLastProduct = currentPage * productsOnPage
   const indexFirstProduct = indexLastProduct - productsOnPage
-  const productsEnabled =   allProducts.filter(s=>s.statusProduct===true)
-  const currentProducts = productsEnabled.slice(indexFirstProduct, indexLastProduct)
+  const productsEnabled =   allProducts?.filter(s=>s.statusProduct===true && s.cantidad>0)
+  const currentProducts = productsEnabled?.slice(indexFirstProduct, indexLastProduct)
 
   
   const paginado = (pageNum) => {
@@ -73,7 +73,9 @@ export default function Home() {
     }
   }
 
-
+  if(!allProducts){
+    return <Loader/>
+  }else{
   return (
     <div className={styles.container}>
 
@@ -83,7 +85,7 @@ export default function Home() {
         <div className={styles.pagination}>
           <Paging
             productsOnPage={productsOnPage}
-            allProducts={productsEnabled.length}
+            allProducts={productsEnabled?.length}
             paginado={paginado} />
         </div>
 
@@ -109,7 +111,7 @@ export default function Home() {
         {/* SEARCHBAR */}
         <div className={styles.search}>
           <form >
-            <SearchBar setPage={setCurrentPage} />
+            <SearchBar setPage={setCurrentPage} setOrigin={"user"} />
           </form>
         </div>
 
@@ -150,5 +152,6 @@ export default function Home() {
 
 
   )
+ }
 
 }

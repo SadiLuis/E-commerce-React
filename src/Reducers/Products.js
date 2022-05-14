@@ -9,10 +9,11 @@ import { deleteProductCart, addItemCart } from '../Actions/cart'
 const initialState = {
     detailProduct: [],
     products: [],
-    allProducts: getProductLocalStorage(),
-    productoPorNombre: [],
-    filtered: [],
-    categories: [],
+    searchProducts: [],
+    allProducts:getProductLocalStorage(),
+    productoPorNombre:[],
+    filtered:[],
+    categories:[],
     cart: localStorage.token_ecommerce ? getCartLocalStorage() : getCartDb(),
     sameCategory: [],
     idCart: null
@@ -29,6 +30,15 @@ export default function productsReducer(state = initialState, action) {
                 detailProduct: payload
 
             }
+            case "GET_ALL_PRODUCTS":
+                saveProductLocalStorage(payload)
+                return{
+                    ...state,
+                    products: payload,
+                    allProducts: payload,
+                    searchProducts: payload
+                }
+            //case 'CLEAN_UP': 
         case "GET_ALL_PRODUCTS":
             saveProductLocalStorage(payload)
             return {
@@ -120,7 +130,7 @@ export default function productsReducer(state = initialState, action) {
                 categories: payload
             }
         case FILTER_BY_CATEGORY:
-            let categoriesProducts = payload === "all" ? state.allProducts : state.allProducts.filter((elem) => elem.category.includes(payload))
+            let categoriesProducts = payload === "all" ? state.allProducts : state.allProducts?.filter((elem) => elem.category.includes(payload))
             return {
                 ...state,
                 products: categoriesProducts
@@ -148,7 +158,7 @@ export default function productsReducer(state = initialState, action) {
             }
         case ADD_ITEM:
 
-            itemCart = state.cart.products.find(e => e.id === payload);
+            itemCart = state.cart.products?.find(e => e.id === payload);
             if (itemCart) {
                 newProducts = state.cart.products.map(item =>
                     item.id === payload
@@ -159,7 +169,7 @@ export default function productsReducer(state = initialState, action) {
                 newCart = {
                     products: newProducts,
                     precioTotal: newProducts.reduce((prev, e) => {
-                        let prod = state.allProducts.find(el => el.id === e.id);
+                        let prod = state.allProducts?.find(el => el.id === e.id);
 
                         return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
                     }, 0)
@@ -169,7 +179,7 @@ export default function productsReducer(state = initialState, action) {
             } else {
                 newCart = {
                     products: [...state.cart.products, { id: payload, quantity: 1 }],
-                    precioTotal: Math.round((state.cart.precioTotal + state.allProducts.find(e => e.id === payload).price) * 100) / 100
+                    precioTotal: Math.round((state.cart.precioTotal + state.allProducts?.find(e => e.id === payload).price) * 100) / 100
                 };
             }
 
@@ -192,7 +202,7 @@ export default function productsReducer(state = initialState, action) {
                 newCart = {
                     ...newCart,
                     products: newProducts,
-                    precioTotal: Math.round((state.cart.precioTotal - state.allProducts.find(e => e.id === payload).price) * 100) / 100
+                    precioTotal: Math.round((state.cart.precioTotal - state.allProducts?.find(e => e.id === payload).price) * 100) / 100
                 };
                 if (localStorage.token_ecommerce) saveCartDb(newCart)
                 else saveCartLocalStorage(newCart);
@@ -207,7 +217,7 @@ export default function productsReducer(state = initialState, action) {
             itemCart && (newCart = {
                 products: state.cart.products.filter(e => e.id !== payload),
                 precioTotal:
-                    Math.round((state.cart.precioTotal - (itemCart.quantity * state.allProducts.find(e => e.id === payload).price)) * 100) / 100
+                    Math.round((state.cart.precioTotal - (itemCart.quantity * state.allProducts?.find(e => e.id === payload).price)) * 100) / 100
             });
             if (localStorage.token_ecommerce) {
                 deleteProductCart(payload, state.idCart)

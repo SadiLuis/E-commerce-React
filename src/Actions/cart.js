@@ -55,14 +55,14 @@ export const getCartDB = (userId) => async dispatch => {
         
         
            carritoDB.forEach(cartDB => {
-            newProducts = products.map(item =>  
+            newProducts = products?.map(item =>  
                  item.id === cartDB.id
                  ?{quantity: item.quantity + cartDB.quantity }
                  : item )
             })
 
            for(let cart of newProducts){
-            auxCart = carritoDB.filter(cartDB => cartDB.id !== cart.id)
+            auxCart = carritoDB?.filter(cartDB => cartDB.id !== cart.id)
            }
              
              newCart = {
@@ -74,6 +74,7 @@ export const getCartDB = (userId) => async dispatch => {
                  }, 0)
 
              };
+             console.log(newCart)
             
              
        saveCartDb(newCart)
@@ -82,9 +83,9 @@ export const getCartDB = (userId) => async dispatch => {
          newCart = {
             products: products,
             precioTotal: products.length ? products.reduce((prev, e) => {
-                let prod = json.data.find(el => el.id === e.id);
+                let prod = json.data?.find(el => el.id === e.id);
    
-                return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
+                return Math.round((prev + (prod?.price * e.quantity)) * 100) / 100;
             }, 0)
             : 0
          }
@@ -95,7 +96,7 @@ export const getCartDB = (userId) => async dispatch => {
       newCart = {
          products: carritoDB,
          precioTotal: carritoDB.length ? carritoDB.reduce((prev, e) => {
-             let prod = json.data.find(el => el.id === e.id);
+             let prod = json.data?.find(el => el.id === e.id);
 
              return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
          }, 0)

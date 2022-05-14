@@ -146,7 +146,7 @@ const handleSubmit =  (e) => {
     
     //socket
     sendMessage(message, currentChat.id)
-    socket.emit("notif_newMessage", message)
+    socket.emit("notif_newMessage", {message, receiverId})
     //Hardcode tu dispatch getChatMessages
     setAux(Math.random())
 

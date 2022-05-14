@@ -21,9 +21,9 @@ import animate from "animate.css"
 
 
 // logo,  home, contactenos 
-const NavBarAll = () => {
-  // const usuario=useSelector(state =>state.loginReducer.userDetail)
-  // console.log(usuario)
+const NavBarAll = ({isAuth, myUser}) => {
+   const usuario=useSelector(state =>state.loginReducer.userDetail)
+   //console.log(usuario)
 
   return (
     <>
@@ -60,22 +60,30 @@ const NavBarAll = () => {
       >
         Home
       </NavLink>
-      <NavLink
-        to="/chat"
-        style={{
-          border: "none",
-          background: "none",
-          color: "black",
-          fontSize: "1rem",
-          marginLeft: "0.05rem",
-          cursor: "pointer",
-          textDecoration: "none",
-           marginBottom:"15rem"
+       {
+          usuario? 
+           (
+          <NavLink to="/chat"
+          style={{
+            border:"none",
+            background: "none",
+            color: "black",
+            fontSize: "1rem",
+            marginLeft: "0.05rem",
+            cursor: "pointer",
+            textDecoration: "none",
+             marginBottom:"15rem"
 
-        }}
-      >
-        Chat 
-      </NavLink>
+          }}>Chat
+          </NavLink>
+          
+         ):(<></>) 
+        
+
+        
+ } 
+      
+    
       
       <div  style={{
           border: "none",
@@ -225,6 +233,28 @@ const NavBarAdmin = () => {
           >
             Sales
           </NavLink>
+          {
+          admin? 
+           (
+          <NavLink to="/chat"
+          style={{
+            border:"none",
+            background: "none",
+            color: "black",
+            fontSize: "1rem",
+            marginLeft: "0.05rem",
+            cursor: "pointer",
+            textDecoration: "none",
+             marginBottom:"15rem"
+
+          }}>Chat
+          </NavLink>
+          
+         ):(<></>) 
+        
+
+        
+ } 
           <NavLink
             to="/dashboard/offers"
             style={{
@@ -328,6 +358,7 @@ function NavBar({ isAuth, user }) {
         <div className="container-fluid" 
         style={{height:"3rem"}}
         >
+         
           
           {isAuth && user ? (
             <>

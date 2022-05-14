@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { cleanProductDetail, getProductById, putProductStatus } from '../../Actions/products';
+import { cleanProductDetail, getAllProducts, getProductById, putProductStatus } from '../../Actions/products';
 
 const DetailProduct = ({ idProduct }) => {
 
@@ -51,6 +51,7 @@ const DetailProduct = ({ idProduct }) => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     dispatch(putProductStatus(idProduct))
+                    dispatch(getAllProducts())
                     Swal.fire(
                         'Habilitado',
                         'Producto habilitado',

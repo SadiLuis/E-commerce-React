@@ -22,6 +22,7 @@ const Cart = () => {
 
     return completeProducts;
   });
+  console.log(items)
   const subtotal = useSelector((state) => state.productsReducer.cart.precioTotal);
   items = items?.filter((e) => e);
   const isAuth = useSelector((state) => state.loginReducer.isAuth);

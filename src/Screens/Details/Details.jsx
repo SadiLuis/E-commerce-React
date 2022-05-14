@@ -45,7 +45,7 @@ export default function Detail() {
 
 
   const handleAdd =  () => {
-    console.log(idProduct)
+    //console.log(idProduct)
     dispatch(addItem(parseInt(idProduct)));
     
     Swal.fire({
@@ -79,14 +79,14 @@ export default function Detail() {
   if(product.title) {
   return ( 
       <>
-      <h6 className="animate__animated animate__slideInRight animate__animated animate__fadeOutLeft">Una vez confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles de su producto</h6>
+      
       
       {
-        product && console.log('producto: ' ,product)
+        //product && console.log('producto: ' ,product)
       }
             
-            <div class={styles.containerDetail}>
-                <div class={styles.thumb2} ref={myRef}>
+            <div className={styles.containerDetail}>
+                <div className={styles.thumb2} ref={myRef}>
                   {product?.images.map( (img, index) => (
                     <img src={img} alt="product" key={index}
                     onClick={()=> handleTab(index)}
@@ -94,34 +94,42 @@ export default function Detail() {
                   ))}
                 </div>
                 
-              <div class={styles.bigImg}>
+              <div className={styles.bigImg}>
                   <img src={product?.images[index]} alt="product " />
 
               </div>
               
-              <div class={styles.detailBox}>
+              <div className={styles.detailBox}>
                 <h1><b>{product?.title}</b></h1>
                 <h4><b>${product?.price}</b></h4>
                 <br />  
-                <p><b>Description:</b> {product?.description}</p>
-                <span><b>Size:</b> {product?.size}</span> 
-                <div class={styles.btnGroup}>
-                      <div class="btnBerna">
-                        <button class="btn btn-secondary" type='button' onClick={handleAdd}>Agregar al carrito</button>
-                      </div>
-                      <div class="btnBerna">
-                        <button onClick={()=>handleWhatsApp(product.title, product.price)}class="btn btn-success">Preguntar al WhatsApp</button>
+                <p><b>Descripcion:</b> {product?.description}</p>
+                <span><b>Dimensiones:</b> {product?.size}</span> 
+                <div className={styles.btnGroup}>
+                  {product?.statusProduct && product?.cantidad>0 && (
+                    <div className="btnBerna">
+                    <button className="btn btn-secondary me-1" type='button' onClick={handleAdd}>Agregar al carrito</button>
+                  </div>
+                  )}
+                      
+                      <div className="btnBerna">
+                        <button onClick={()=>handleWhatsApp(product.title, product.price)} className="btn btn-success me-1">Preguntar al WhatsApp</button>
                       </div>
                       <div className="btnFav">
-                        <button className={styles.btnFav} onClick={() => handleFav()}>Agregar a favoritos</button>
+                        <button className="btn btn-warning" onClick={() => handleFav()}>Agregar a favoritos</button>
                       </div>
                 </div>
+                {product?.statusProduct && product?.cantidad>0
+                  ?(<h6 className="animate__animated animate__slideInRight animate__animated animate__fadeOutLeft text-primary fw-bold">Una vez confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles de su producto</h6>)
+                  :(<span className="text-danger fw-bold">Producto no disponible</span>)                
+                }
+                
                </div>
-               <div class={styles.recommended}>
+               <div className={styles.recommended}>
                  <Carousel category={product?.category} />
               </div>
 
-              <div class={styles.comentariosProducto}>
+              <div className={styles.comentariosProducto}>
                     <Review
                     idProduct={product?.id}
                     />
@@ -134,6 +142,6 @@ export default function Detail() {
       </> 
      )
   }else {
-    return <Loader />
+    return (<Loader/>)
   }
 }

@@ -80,7 +80,7 @@ const TableProducts = () => {
                     </div>
 
                     <div className='col'>
-                        <SearchBar setPage={setCurrentPage} />
+                        <SearchBar setPage={setCurrentPage} setOrigin={"admin"}/>
                     </div>
 
                 </div>
@@ -100,7 +100,7 @@ const TableProducts = () => {
                         <tbody>
                             {currentProducts?.map((p,id) => (
                                 <tr key={`tr-${id}`}>
-                                    <td key={`delete-${id}`} className='text-center'>
+                                    <td key={`status-${id}`} className='text-center'>
                                     {p.statusProduct === true
                                         ? <i className="fs-4 bi-check-circle text-success" ></i>
                                         : <i className="fs-4 bi-x-circle text-danger"></i>
@@ -117,7 +117,7 @@ const TableProducts = () => {
                                     <td key={`delete-${id}`} className='text-start'>
                                         <Link to={`/dashboard/admin/detailproduct/${p.id}`}>
                                      
-                                            Ver detalle
+                                            Ver detalle/Deshabiltar
                                         
                                         </Link>
                                     </td>
