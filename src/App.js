@@ -49,12 +49,12 @@ import ResetPasswordForm from './Components/RestarPassword/ResetPasswordForm'
 import DetailProductScreen from "./Components/DetailProductScreen/DetailProductScreen.jsx";
 import AddAdmin from "./Components/AddAdmin/AddAdmin";
 
-
+import MyFavs from "./Screens/MyFavs/MyFavs";
 
 
 
 import { BASEURL } from '../src/Assets/URLS';
-
+import DetailPedido from "./Screens/MyOrders/DetailPedido";
 
 
 import io from "socket.io-client"
@@ -128,7 +128,10 @@ function App() {
         <Route path="/login/recoverpassword" element={<ResPassword />} />
 
 
+         
+         <Route path="/buyDetail/:id" element = {<DetailPedido />} />
         <Route path="/resetpassword/:userId" element={<ResetPasswordForm />} />
+        <Route path="/MyFavs" element={<MyFavs/>}/>
       </Routes>
 
 

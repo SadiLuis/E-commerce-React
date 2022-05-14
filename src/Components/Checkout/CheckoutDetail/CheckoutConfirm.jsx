@@ -94,7 +94,7 @@ const CheckoutConfirm = ({socket}) => {
             <ListGroup.Item>ID de compra: {datosPago[2].split('=')[1]} </ListGroup.Item>
             <ListGroup.Item>Método de pago: {datosPago[5].split('=')[1] === "credit_card" ? ' Tarjeta de crédito' : ' Tarjeta de Debito'}</ListGroup.Item>
             <ListGroup.Item>Estado del pago: Aprobada</ListGroup.Item>
-           <ListGroup.Item>Dirección: {user?.direccion }</ListGroup.Item> 
+           <ListGroup.Item>Dirección: {user?.direccion } Ciudad de {" "} {user?.ciudad}</ListGroup.Item> 
             <ListGroup.Item>
               Productos: {orden?.productos?.map((p) => p.producto + ", ")}
             </ListGroup.Item>

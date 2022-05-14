@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 import Items from './Items'
 import {useSelector,useDispatch} from "react-redux";
-import {updateCart} from '../../Actions/cart'
+import {updateCart,deleteAllCartDB ,deleteAllCart} from '../../Actions/cart'
 import {Wrapper, Top ,TopButton ,TopText ,TopTexts ,Button ,Info 
    ,SummaryItem ,Summary ,SummaryItemText ,SummaryButton ,SummaryTitle ,ButtonEmpty , Anuncio} from './Styles'
 import { useNavigate } from 'react-router-dom';
@@ -9,15 +9,14 @@ import { FaCartPlus } from "react-icons/fa";
 import { postOrder } from '../../Actions/orders';
 import Swal from 'sweetalert2'
 const Cart = () => {
+ 
   let items = useSelector((state) => {
-    let completeProducts =  state.productsReducer.cart?.products;
-    let productR = state.productsReducer?.allProducts
-    //console.log(productR)
-    completeProducts = completeProducts.map((e) => {
-      let finded = state.productsReducer.allProducts?.find(
+    let completeProducts =  state.productsReducer.cart.products;
+    completeProducts = completeProducts?.map((e) => {
+      const finded = state.productsReducer.allProducts?.find(
         (el) => el.id === e.id
       );
-      //console.log(state.productsReducer.allProducts)
+     
       return finded ? { ...finded, quantity: e.quantity } : null;
     });
 
@@ -29,14 +28,15 @@ const Cart = () => {
   const isAuth = useSelector((state) => state.loginReducer.isAuth);
   const navigate = useNavigate()
  const dispatch = useDispatch()
-
+ const idUser = useSelector(state=> state.loginReducer.userDetail)
+  console.log(items)
   useEffect(() => {
     dispatch(updateCart());
    
-  }, [dispatch]);
+  }, []);
      
-  let total = subtotal >= 7000 ? subtotal  : subtotal + 150
-
+  let total = subtotal >= 7000 ? subtotal  : subtotal === 0  ? 0 : subtotal + 150
+   
   const handlebtnCompra = () => {
     if (!isAuth) {
       Swal.fire({
@@ -52,14 +52,25 @@ const Cart = () => {
       });
     } else {
       if (items.length > 0) {
+       const productsOk = items.filter(el => el.statusProduct !== false && el.cantidad > 0)
+        console.log(productsOk)
+        if(productsOk.length){
         let pedido = {
-          pedidos: items.map((e) => ({
+          pedidos: productsOk.map((e) => ({
             productoId: e.id,
             cantidad: e.quantity,
           })),
         };
+
         dispatch(postOrder(pedido));
         navigate("/pedido");
+       }else{
+        Swal.fire({
+          text: `No hay productos disponibles para realizar la compra`,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+       }
       } else {
         Swal.fire({
           text: `No hay productos en el carrito`,
@@ -69,7 +80,12 @@ const Cart = () => {
       }
     }
   };
-  console.log(items)
+
+  const deleteCart = () =>{
+    dispatch(deleteAllCart())
+   if(idUser) deleteAllCartDB(idUser.id)
+  }
+
   return (
     <>
     
@@ -79,7 +95,7 @@ const Cart = () => {
     <Wrapper>
        
         <Top>
-        <TopButton type='filled' className='btn btn-outline-dark' onClick={()=> navigate('/home')} >CONTINUAR COMPRANDO</TopButton>
+       { items.length ? (<TopButton type='filled' className='btn btn-outline-danger' onClick={deleteCart} >VACIAR CARRITO</TopButton>) : ''}
         <TopTexts>
 <TopText>Carrito de compras</TopText>
 
@@ -101,6 +117,7 @@ const Cart = () => {
                   quantity={i.quantity}
                   category={i.category}
                   size={i.size}
+                  status={i.statusProduct}
                 />
               ))}
                 
@@ -113,7 +130,7 @@ const Cart = () => {
                 </SummaryItem>
                 <SummaryItem>
                 <SummaryItemText>Costo de envío</SummaryItemText>
-                <SummaryItemText>$ 150</SummaryItemText>
+                <SummaryItemText>$ {subtotal === 0 ? '0' : '150'}</SummaryItemText>
                 </SummaryItem>
                 <SummaryItem>
                 <SummaryItemText> Descuento de envío</SummaryItemText>

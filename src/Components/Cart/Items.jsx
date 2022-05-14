@@ -5,16 +5,17 @@ import {
     deleteItem,
     restItem,
     deleteProductCart,
+    restDisabled
   } from "../../Actions/cart";
   import { Link } from "react-router-dom";
  import{ Product , ProductDetail ,
   ProductName ,ProductId ,ProductSize ,ProductAmountContainer ,ProductAmount ,ProductPrice ,Image ,
-  Details ,PriceDetail , DeleteBtn , InputCart , ProductTotal} from './Styles'
+  Details ,PriceDetail , DeleteBtn , InputCart , ProductTotal , ProductDisabled} from './Styles'
   import { IoRemove, IoAdd } from "react-icons/io5";
   import Swal from "sweetalert2";
 
 
-function Items({ id, title, price, image, stock, quantity ,size ,category}) {
+function Items({ id, title, price, image, stock, quantity ,size ,category , status}) {
     const [input, setInput] = useState(parseInt(quantity));
   const cartDB = useSelector((state) => state.productsReducer.carts);
   let priceTotal = price * quantity;
@@ -51,16 +52,22 @@ function Items({ id, title, price, image, stock, quantity ,size ,category}) {
     dispatch(deleteItem(id));
    
   };
-
+  useEffect(() => {
+    if(!status || stock === 0) dispatch(restDisabled(id,quantity))
+  }, [status ,stock ,dispatch]);
+   
+   
   const fixedPrice = Math.round((priceTotal + Number.EPSILON) * 100) / 100;
+  
   return (
-    <Product>
+      <>
+   { status && (<Product >
       <ProductDetail>
         <Image src={image} />
          <Details>
           <ProductName >
              <b >Producto:</b> 
-            <Link to={'/detail/'+ id}>
+            <Link to={'/detail/'+ id} style={{textDecoration:'none'}}>
             {' '+ title.toUpperCase()}
              </Link>
           </ProductName>
@@ -77,7 +84,7 @@ function Items({ id, title, price, image, stock, quantity ,size ,category}) {
             </Details>
               </ProductDetail>
                  <PriceDetail>
-                 <ProductAmountContainer>
+                { stock > 0 ? (<ProductAmountContainer>
                     <b style={{position:'absolute',  top:'-10px' , left:'25px'}}>Unidades</b> 
                    <ProductAmount>
                      
@@ -97,13 +104,55 @@ function Items({ id, title, price, image, stock, quantity ,size ,category}) {
                  </ProductAmount>
                       <ProductTotal ><b>Subtotal</b></ProductTotal>
                      <ProductPrice>$ {fixedPrice}</ProductPrice>
-                </ProductAmountContainer>
+                </ProductAmountContainer>)
+                :  (<ProductAmountContainer>
+                  <h3>Producto sin stock</h3>
+               
+                 </ProductAmountContainer>
+                 )}
                 </PriceDetail>
+                    
                     <DeleteBtn>
                   <button className='btn btn-outline-danger' onClick={handleDelete}>Quitar</button>
                   </DeleteBtn>
-        </Product>
+        </Product>)}
+         
+        {!status  && (<ProductDisabled >
+          <ProductDetail >
+            <Image src={image} style={{backgroundImage:'#dee2e6'}}/>
+             <Details>
+              <ProductName >
+                 <b >Producto:</b> 
+               
+                {' '+ title.toUpperCase()}
+                
+              </ProductName>
+                <ProductId >
+                  <b>Precio:</b> $ {price}
+                </ProductId>
+                     
+                <ProductSize >
+                 <b>Tamaño:</b> {size}
+                </ProductSize>
+                <ProductSize >
+                 <b>Categoría:</b> {category}
+                </ProductSize>
+                </Details>
+                  </ProductDetail>
+                     <PriceDetail>
+                     <ProductAmountContainer>
+                       <h4>Este producto ya no </h4>
+                       <h4>se encuentra disponible</h4>
+                    </ProductAmountContainer>
+                    </PriceDetail>
+                        <DeleteBtn style={{alignSelf:'center'}}>
+                      <button className='btn btn-outline-danger'  onClick={handleDelete}>Quitar</button>
+                      </DeleteBtn>
+            </ProductDisabled>
+           )}
+            </>
   )
+  
 }
 
 export default Items
