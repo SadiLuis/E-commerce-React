@@ -46,6 +46,7 @@ import './App.css'
 import Chat from "./Screens/Chat/Chat";
 
 import DetailProductScreen from "./Components/DetailProductScreen/DetailProductScreen.jsx";
+import AddAdmin from "./Components/AddAdmin/AddAdmin";
 
 
 
@@ -81,6 +82,7 @@ function App() {
         <Route path="/dashboard/admin/userDetailAdmin/:id" element={<UserDetailAdmin/>}/>
         <Route path="/dashboard/admin/orderDetailAdmin/:id/:idUser" element={<OrderDetailAdmin/>}/>
         <Route path="/dashboard/admin/detailProduct/:id" element={<DetailProductScreen/>}/>
+        <Route path="/dashboard/admin/addAdmin" element={<AddAdmin/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/detail/:idProduct" element={<Detail />} />
         <Route path="/home" element={<Home />} />
