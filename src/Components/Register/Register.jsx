@@ -18,7 +18,7 @@ const formulario = {
   provincia: '',
   direccion: '',
   telefono: '',
-  localidad: '',
+  ciudad: '',
   contrasenaConfirm: '',
  
 }
@@ -103,7 +103,7 @@ export default function Register({socket}) {
   provincia: false,
   direccion: false,
   telefono: false,
-  localidad: false,
+  ciudad: false,
   })
   const [visible , setVisible] = useState('password')
   const navigate = useNavigate()
@@ -312,7 +312,7 @@ export default function Register({socket}) {
         <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Ciudad</label>
         <input type="text"  className={` ${style.input}`} id="exampleInputPassword1"
           onChange={(e) => handleChange(e.target.name, e.target.value)} 
-          value={form.localidad} placeholder="Ciudad" name='localidad'
+          value={form.ciudad} placeholder="Ciudad" name='ciudad'
           onFocus={(e) => handleChange(e.target.name , true)}
           />
           {focus.localidad && error.localidad && <span className={`text-danger ${style.span}`}  /* style={{marginLeft:'100px'}} */>{error.localidad}</span> }

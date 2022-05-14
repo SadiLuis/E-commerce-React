@@ -35,7 +35,7 @@ const Cart = () => {
    
   }, []);
      
-  let total = subtotal >= 7000 ? subtotal  : subtotal + 150
+  let total = subtotal >= 7000 ? subtotal  : subtotal === 0  ? 0 : subtotal + 150
    
   const handlebtnCompra = () => {
     if (!isAuth) {
@@ -54,14 +54,23 @@ const Cart = () => {
       if (items.length > 0) {
        const productsOk = items.filter(el => el.statusProduct !== false && el.cantidad > 0)
         console.log(productsOk)
+        if(productsOk.length){
         let pedido = {
           pedidos: productsOk.map((e) => ({
             productoId: e.id,
             cantidad: e.quantity,
           })),
         };
+
         dispatch(postOrder(pedido));
         navigate("/pedido");
+       }else{
+        Swal.fire({
+          text: `No hay productos disponibles para realizar la compra`,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+       }
       } else {
         Swal.fire({
           text: `No hay productos en el carrito`,
@@ -121,7 +130,7 @@ const Cart = () => {
                 </SummaryItem>
                 <SummaryItem>
                 <SummaryItemText>Costo de envío</SummaryItemText>
-                <SummaryItemText>$ 150</SummaryItemText>
+                <SummaryItemText>$ {subtotal === 0 ? '0' : '150'}</SummaryItemText>
                 </SummaryItem>
                 <SummaryItem>
                 <SummaryItemText> Descuento de envío</SummaryItemText>
