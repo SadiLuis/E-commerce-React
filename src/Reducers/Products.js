@@ -19,7 +19,7 @@ const initialState = {
 }
 
 export default function productsReducer(state = initialState, action) {
-    const { type, payload, idCart } = action;
+    const { type, payload, idCart ,cantidad} = action;
     let newCart = state.cart, newProducts, itemCart;
     switch (type) {
 
@@ -250,7 +250,30 @@ export default function productsReducer(state = initialState, action) {
                 ...state,
                 detailProduct: []
             }
+        case 'REST_ITEM_DISABLED':
+            itemCart = state.cart.products.find(e => e.id === payload);
+            const products = state.allProducts.find(el => el.stock === 0 && el.id === payload)
+            if (itemCart ) {
+                newProducts = state.cart.products.map(item =>
+                    item.id === payload
+                        ? { ...item, quantity: item.quantity - cantidad}
+                        : item)
+            } 
 
+            newCart = {
+                ...newCart,
+                products: newProducts,
+                precioTotal: products ? Math.round((state.cart.precioTotal - state.allProducts.find(e => e.id === payload).price ) * 100) / 100
+                                      : Math.round((state.cart.precioTotal - (state.allProducts.find(e => e.id === payload).price * cantidad)) * 100) / 100
+            };       
+            if (localStorage.token_ecommerce) saveCartDb(newCart)
+            else saveCartLocalStorage(newCart);
+
+        return {
+            ...state,
+            cart: newCart,
+
+        };
         default:
             return {
                 ...state

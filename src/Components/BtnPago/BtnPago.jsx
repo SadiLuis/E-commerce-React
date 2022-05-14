@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { useDispatch , useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {Pago} from '../../Actions/pago'
-import { updateOrderUser } from '../../Actions/users';
+
 import {deleteAllCartDB} from '../../Actions/cart'
-import swal from 'sweetalert2'
+
 const BotonPago = (props) => {
   const idUser = useSelector(state=> state.loginReducer.userDetail.id)
 const dispatch = useDispatch()
@@ -41,14 +41,14 @@ let price = props.price
   
    
    async function handlePago(e, price) {
-     
+    console.log(props.info)
         e.preventDefault()
-        if (!props.order.phone && !props.order.contactName && !props.order.username) {
-         return swal("Por favor, completá los datos personales");
+        if (props.info) {
+          dispatch(Pago(price))
+          deleteAllCartDB(idUser)
+        
        }
-        deleteAllCartDB(idUser)
-        dispatch(updateOrderUser(props.order))
-        dispatch(Pago(price))
+       
    }
         
 //         const respuesta = await axios.post(urlMercadoPago, body, {
@@ -73,7 +73,7 @@ let price = props.price
 // }
         
     return (
-            <button className="btn btn-outline-primary" type="button" onClick={(e)=> handlePago(e, price)}>Pagar con MP</button>
+            <button className="btn btn-outline-dark" type="button" onClick={(e)=> handlePago(e, price) }>Pagar</button>
   )
 }
 

@@ -1,4 +1,4 @@
-import React,  { useState } from 'react'
+import React,  { useState , useCallback } from 'react'
 import { useDispatch,useSelector } from "react-redux";
 import { getAllUsers } from '../../Actions/users';
 import { getUserDetail, logout, updateUserImg} from '../../Actions/Auth';
@@ -9,10 +9,10 @@ import Items from '../../Components/Cart/Items';
 import styles from './Profile.module.css'
 import { getAllFavs } from '../../Actions/Favs';
 import FavCard from '../FavCard/FavCard';
-
-
+import { useDropzone } from "react-dropzone";
+import {saveImages} from '../../Helpers/saveImages'
 export default function Profile() {
-  
+  const [imagen , setImagen] = useState('')
   
   const dispatch = useDispatch()
   
@@ -21,7 +21,7 @@ export default function Profile() {
   React.useEffect(()=> {
     dispatch(getUserDetail())
     dispatch(updateCart())
-  }, [dispatch])
+  }, [dispatch] , imagen)
 
 
   React.useEffect(()=> {
@@ -42,11 +42,11 @@ export default function Profile() {
     })
    }
    
-   let body = {id: myUser?.id, img: input.img}
+   
    
    
    const handleSubmit = () => {
-    dispatch(updateUserImg(body))
+    //dispatch(updateUserImg(body))
     setModalClose(false)
     setInput({img: ""})
    }
@@ -59,7 +59,7 @@ export default function Profile() {
    }
 
   
-    let items = useSelector((state) => {
+   /*  let items = useSelector((state) => {
       let completeProducts = state.productsReducer.cart.products;
       completeProducts = completeProducts.map((e) => {
         const finded = state.productsReducer.allProducts.find(
@@ -71,8 +71,24 @@ export default function Profile() {
       return completeProducts;
     })
   
-  items = items?.filter((e) => e);
+  items = items?.filter((e) => e); */
 
+  const onDrop = useCallback(async(oFile) => {
+    
+    console.log(oFile)
+    const urlImage = await saveImages(oFile[0]);
+     console.log(urlImage)
+      setImagen(urlImage)
+      let body = {id: myUser?.id, img:urlImage}
+      dispatch(updateUserImg(body))
+   
+}, []);
+const { getRootProps, getInputProps} = useDropzone({
+  accept: "image/jpeg",
+  noKeyboard: true,
+  multiple: false,
+  onDrop
+});
 
   return (
      <div className='account'>
@@ -110,7 +126,8 @@ export default function Profile() {
                       <img src={myUser.avatar} id="profile" className={` ${styles.profileImg} `}  alt="avatar" />
                       <br/>
                       
-                       <button className={`btn  btn-sm ${styles.iconCam}`} onClick={()=> handleModel()}><i className={`bi bi-camera-fill`}></i></button>
+                       <button className={`btn  btn-sm ${styles.iconCam}`} {...getRootProps()} ><i className={`bi bi-camera-fill`}></i></button>
+                       <input {...getInputProps()}/>
                       </div>
                        
                       <b><p className='mb-3'>{myUser.nombre}</p></b>

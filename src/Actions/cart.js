@@ -169,3 +169,11 @@ export const deleteAllCart = () => {
       type: DELETE_CART
    }
 }
+
+export const restDisabled = (id , cantidad) => {
+   return {
+      type:'REST_ITEM_DISABLED',
+      payload: id,
+      cantidad
+   }
+}

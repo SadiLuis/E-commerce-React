@@ -55,11 +55,14 @@ import Swal from "sweetalert2"
              <button
              type="submit"
              className='btn btn-primary'
-            onClick={handleSesionGoogle} 
+            onClick={handleSesionGoogle}
+            style={{display:'flex' , justifyContent: 'center'  }}
             >
              
+            <img src='http://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png' style={{width:'25px' , height:'25px' }} alt = 'google' />
+            {"  "}{" "}
             
-           Acceder con Google
+           <span style={{paddingLeft:'15px'}}>Acceder con Google</span>
            </button>
           
          

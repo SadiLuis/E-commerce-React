@@ -53,7 +53,7 @@ import DetailProductScreen from "./Components/DetailProductScreen/DetailProductS
 
 
 import { BASEURL } from '../src/Assets/URLS';
-
+import DetailPedido from "./Screens/MyOrders/DetailPedido";
 
 
 import io from "socket.io-client"
@@ -131,6 +131,7 @@ function App() {
          
 
          <Route path="/resetpassword/:userId" element={<ResetPasswordForm />} />
+         <Route path="/buyDetail/:id" element = {<DetailPedido />} />
       </Routes>
 
 

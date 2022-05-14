@@ -134,11 +134,11 @@ export function searchByName(name) {
       return async function (dispatch) {
         try {
           var json = await axios.put(`${BASEURL}/products/${id}`, body);
-    
-          return dispatch({
-            type: PUT_PRODUCT_BY_ID,
-            payload: json.data,
-          });
+          dispatch({
+             type: PUT_PRODUCT_BY_ID,
+             payload: json.data,
+            });
+         dispatch(getAllProducts())
         } catch (error) {
           console.log(error);
         }
