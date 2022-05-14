@@ -10,6 +10,7 @@ import styles from "./NavBar.module.css"
 import { connect } from "react-redux";
 import logo from "../../Assets/default.png";
 import Logout from '../Login/Logout';
+import animate from "animate.css"
 
 
 
@@ -20,9 +21,9 @@ import Logout from '../Login/Logout';
 
 
 // logo,  home, contactenos 
-const NavBarAll = () => {
-  // const usuario=useSelector(state =>state.loginReducer.userDetail)
-  // console.log(usuario)
+const NavBarAll = ({isAuth, myUser}) => {
+   const usuario=useSelector(state =>state.loginReducer.userDetail)
+   console.log(usuario)
 
   return (
     <>
@@ -59,22 +60,30 @@ const NavBarAll = () => {
       >
         Home
       </NavLink>
-      <NavLink
-        to="/chat"
-        style={{
-          border: "none",
-          background: "none",
-          color: "black",
-          fontSize: "1rem",
-          marginLeft: "0.05rem",
-          cursor: "pointer",
-          textDecoration: "none",
-           marginBottom:"15rem"
+       {
+          usuario? 
+           (
+          <NavLink to="/chat"
+          style={{
+            border:"none",
+            background: "none",
+            color: "black",
+            fontSize: "1rem",
+            marginLeft: "0.05rem",
+            cursor: "pointer",
+            textDecoration: "none",
+             marginBottom:"15rem"
 
-        }}
-      >
-        Chat 
-      </NavLink>
+          }}>Chat
+          </NavLink>
+          
+         ):(<></>) 
+        
+
+        
+ } 
+      
+    
       
       <div  style={{
           border: "none",
@@ -97,7 +106,7 @@ const NavBarLogin = ({isAuth, myUser}) => {
      const dispatch=useDispatch();
      const navigate=useNavigate();
    const user= useSelector((state)=> state.loginReducer.userDetail)
-   console.log(user)
+   
    
    
    
@@ -224,6 +233,28 @@ const NavBarAdmin = () => {
           >
             Sales
           </NavLink>
+          {
+          admin? 
+           (
+          <NavLink to="/chat"
+          style={{
+            border:"none",
+            background: "none",
+            color: "black",
+            fontSize: "1rem",
+            marginLeft: "0.05rem",
+            cursor: "pointer",
+            textDecoration: "none",
+             marginBottom:"15rem"
+
+          }}>Chat
+          </NavLink>
+          
+         ):(<></>) 
+        
+
+        
+ } 
           <NavLink
             to="/dashboard/offers"
             style={{
@@ -259,7 +290,7 @@ const NavBarAdmin = () => {
 // NavBarAll y perfil
 const NavBarAuthenticated = () => {
   const usuario=useSelector(state =>state.loginReducer.userDetail)
-  console.log(usuario)
+  
   return (
     <>
       <NavBarAll />
@@ -309,14 +340,14 @@ function NavBar({ isAuth, user }) {
     <><nav className='navbar navbar-light bg-dark'style={{height:"2.5rem"}}> 
       <div className="container-fluid" >
       
-      <span className="navbar-brand " 
+      <span className="navbar-brand" 
       style={{
         fontSize: "0.5rem",
         fontWeight: "bold",
         color: "white",
         
       }} 
-      >Envíos gratis por órdenes de compra superiores a $7.000.
+      ><h6 className='animate__animated animate__fadeInRight'>Envíos gratis por órdenes de compra superiores a $7.000.</h6>
        
       </span >
       
@@ -327,6 +358,7 @@ function NavBar({ isAuth, user }) {
         <div className="container-fluid" 
         style={{height:"3rem"}}
         >
+         
           
           {isAuth && user ? (
             <>

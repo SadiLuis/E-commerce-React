@@ -9,10 +9,11 @@ import { deleteProductCart, addItemCart } from '../Actions/cart'
 const initialState = {
     detailProduct: [],
     products: [],
-    allProducts: getProductLocalStorage(),
-    productoPorNombre: [],
-    filtered: [],
-    categories: [],
+    searchProducts: [],
+    allProducts:getProductLocalStorage(),
+    productoPorNombre:[],
+    filtered:[],
+    categories:[],
     cart: localStorage.token_ecommerce ? getCartLocalStorage() : getCartDb(),
     sameCategory: [],
     idCart: null
@@ -29,6 +30,15 @@ export default function productsReducer(state = initialState, action) {
                 detailProduct: payload
 
             }
+            case "GET_ALL_PRODUCTS":
+                saveProductLocalStorage(payload)
+                return{
+                    ...state,
+                    products: payload,
+                    allProducts: payload,
+                    searchProducts: payload
+                }
+            case 'CLEAN_UP': 
         case "GET_ALL_PRODUCTS":
             saveProductLocalStorage(payload)
             return {

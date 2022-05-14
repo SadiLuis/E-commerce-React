@@ -23,3 +23,21 @@
     border-width: 1px ;
     border-radius: 5px ;
 }
+
+ .containerLoginPass{
+   position: relative;
+
+ }
+  .containerLoginPass > button {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+
+  .buttonLoginPass {
+    position:absolute;
+    background-color: black;
+    color: white;
+    top: 25px;
+    right: 0px;
+    height:36px;
+  }

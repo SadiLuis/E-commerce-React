@@ -11,13 +11,13 @@ import MailEntregado from '../Mails/MailEntregado';
 import Status from "../Mails/Status"
 
 
-const OrderDetailAdmin = () => {
+const OrderDetailAdmin = ({socket}) => {
     const dispatch = useDispatch();
     const { id, idUser } = useParams();
     const order = useSelector(state => state.ordersReducer.orderDetail);
     const userById = useSelector(state => state.userReducer.userDetail)
     const navigate = useNavigate();
-    console.log(order)
+    
 
     useEffect(() => {
         dispatch(getOrderById(id));
@@ -43,6 +43,8 @@ const OrderDetailAdmin = () => {
                         `Pedido despachado`,
                         'success'
                     )
+                    //socket Notification
+                    socket.emit("notif_newOrderStatus", order)
                     navigate('/dashboard/admin/orders')
                 }
             })
@@ -65,6 +67,9 @@ const OrderDetailAdmin = () => {
                             `Pedido entregado`,
                             'success'
                         )
+                        
+                    //socket Notification
+                    socket.emit("notif_newOrderStatus", order)
                         navigate('/dashboard/admin/orders')
                     }
                 })
