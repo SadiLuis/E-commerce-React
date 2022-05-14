@@ -140,7 +140,7 @@ export default function productsReducer(state = initialState, action) {
         case UPDATE_CART:
             if (localStorage.token_ecommerce) {
                 const localS = getCartDb()
-                console.log()
+                //console.log()
                 state.idCart && localS.products?.forEach((el) => addItemCart(el, state.idCart))
 
                 return {
@@ -178,8 +178,8 @@ export default function productsReducer(state = initialState, action) {
 
             } else {
                 newCart = {
-                    products: [...state.cart.products, { id: payload, quantity: 1 }],
-                    precioTotal: Math.round((state.cart.precioTotal + state.allProducts?.find(e => e.id === payload).price) * 100) / 100
+                    products: [...state.cart?.products, { id: payload, quantity: 1 }],
+                    precioTotal: Math.round((state.cart?.precioTotal + state.allProducts?.find(e => e.id === payload).price) * 100) / 100
                 };
             }
 
@@ -192,9 +192,9 @@ export default function productsReducer(state = initialState, action) {
 
             };
         case REST_ITEM:
-            itemCart = state.cart.products.find(e => e.id === payload);
+            itemCart = state.cart.products?.find(e => e.id === payload);
             if (itemCart) {
-                newProducts = state.cart.products.map(item =>
+                newProducts = state.cart.products?.map(item =>
                     item.id === payload
                         ? { ...item, quantity: item.quantity - 1 }
                         : item)
@@ -213,7 +213,7 @@ export default function productsReducer(state = initialState, action) {
 
             };
         case DELETE_ITEM:
-            itemCart = state.cart.products.find(e => e.id === payload);
+            itemCart = state.cart.products?.find(e => e.id === payload);
             itemCart && (newCart = {
                 products: state.cart.products.filter(e => e.id !== payload),
                 precioTotal:
