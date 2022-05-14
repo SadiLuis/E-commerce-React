@@ -12,7 +12,7 @@ const Cart = () => {
   let items = useSelector((state) => {
     let completeProducts =  state.productsReducer.cart?.products;
     let productR = state.productsReducer?.allProducts
-    console.log(productR)
+    //console.log(productR)
     completeProducts = completeProducts.map((e) => {
       let finded = state.productsReducer.allProducts?.find(
         (el) => el.id === e.id
@@ -23,7 +23,7 @@ const Cart = () => {
 
     return completeProducts;
   });
-  console.log(items)
+  //console.log(items)
   const subtotal = useSelector((state) => state.productsReducer.cart.precioTotal);
   items = items?.filter((e) => e);
   const isAuth = useSelector((state) => state.loginReducer.isAuth);
@@ -69,7 +69,7 @@ const Cart = () => {
       }
     }
   };
-
+  console.log(items)
   return (
     <>
     
