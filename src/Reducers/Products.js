@@ -38,7 +38,7 @@ export default function productsReducer(state = initialState, action) {
                     allProducts: payload,
                     searchProducts: payload
                 }
-            case 'CLEAN_UP': 
+            //case 'CLEAN_UP': 
         case "GET_ALL_PRODUCTS":
             saveProductLocalStorage(payload)
             return {
@@ -158,7 +158,7 @@ export default function productsReducer(state = initialState, action) {
             }
         case ADD_ITEM:
 
-            itemCart = state.cart.products.find(e => e.id === payload);
+            itemCart = state.cart.products?.find(e => e.id === payload);
             if (itemCart) {
                 newProducts = state.cart.products.map(item =>
                     item.id === payload
