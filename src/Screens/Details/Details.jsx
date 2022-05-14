@@ -107,7 +107,7 @@ export default function Detail() {
                 <p><b>Descripcion:</b> {product?.description}</p>
                 <span><b>Dimensiones:</b> {product?.size}</span> 
                 <div className={styles.btnGroup}>
-                  {product?.statusProduct && (
+                  {product?.statusProduct && product?.cantidad>0 && (
                     <div className="btnBerna">
                     <button className="btn btn-secondary me-1" type='button' onClick={handleAdd}>Agregar al carrito</button>
                   </div>
@@ -120,7 +120,7 @@ export default function Detail() {
                         <button className="btn btn-warning" onClick={() => handleFav()}>Agregar a favoritos</button>
                       </div>
                 </div>
-                {product?.statusProduct
+                {product?.statusProduct && product?.cantidad>0
                   ?(<h6 className="animate__animated animate__slideInRight animate__animated animate__fadeOutLeft text-primary fw-bold">Una vez confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles de su producto</h6>)
                   :(<span className="text-danger fw-bold">Producto no disponible</span>)                
                 }
