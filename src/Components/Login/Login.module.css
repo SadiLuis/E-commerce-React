@@ -5,9 +5,12 @@
     margin-top: 20px;
 }
 
-.loginSpan{
-    margin: 15px; 
+.rr  button{
+text-align: center;
+
 }
+
+
 
 .LogRegis{
     margin: 15px;
@@ -26,11 +29,13 @@
 
  .containerLoginPass{
    position: relative;
+   margin-top: 20px;
 
  }
   .containerLoginPass > button {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+   
   }
 
   .buttonLoginPass {
@@ -41,3 +46,7 @@
     right: 0px;
     height:36px;
   }
+  .boton{
+    text-align: center;
+  }
+ 

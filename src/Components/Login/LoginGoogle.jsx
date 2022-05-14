@@ -4,9 +4,11 @@ import {Stack, Container } from "react-bootstrap"
 import {loginGoogle} from "../../Actions/Auth"
 import { auth, provider } from "../../Helpers/firebase";
 import { signInWithPopup } from "firebase/auth";
-import {useDispatch} from "react-redux"
+import {useDispatch} from "react-redux";
+import styles from "./LoginGoogle.module.css"
 
 import Swal from "sweetalert2"
+import logo from "../../Assets/logoGoogle.png"
    
    const LoginGoogle = () => {
     const dispatch = useDispatch();
@@ -52,13 +54,14 @@ import Swal from "sweetalert2"
         return (
      <Container>
       <Stack >
-             <button
+             <button 
              type="submit"
-             className='btn btn-primary'
+             className={styles.botonGoogle}
             onClick={handleSesionGoogle} 
+            
             >
              
-            
+            <img src={logo} className={styles.logoGoogle} />
            Acceder con Google
            </button>
           
