@@ -179,7 +179,7 @@ export default function productsReducer(state = initialState, action) {
             } else {
                 newCart = {
                     products: [...state.cart.products, { id: payload, quantity: 1 }],
-                    precioTotal: Math.round((state.cart.precioTotal + state.allProducts.find(e => e.id === payload).price) * 100) / 100
+                    precioTotal: Math.round((state.cart.precioTotal + state.allProducts?.find(e => e.id === payload).price) * 100) / 100
                 };
             }
 
