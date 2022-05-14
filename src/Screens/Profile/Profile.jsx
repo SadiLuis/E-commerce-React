@@ -154,15 +154,15 @@ const { getRootProps, getInputProps} = useDropzone({
                       
                   </div>
                   <div className='cartProducts' style={{textAlign: 'center', marginBottom: '2rem'}}>
-                    <h4 className={styles.titleCart}>Mis favoritos: </h4>
-                    <div className={styles.Favoritos}>
+                    <Link to={'/MyFavs'}><button className={`btn btn-warning ${styles.btnFav}`}>ir a Mis favoritos</button></Link>
+            {/*         <div className={styles.Favoritos}>
 
                         {
                      favs?.map((e)=> (
                        <FavCard id={e.productoId}/>
                      ))
                     } 
-                    </div>
+                    </div> */}
                    
                   </div>
                    
