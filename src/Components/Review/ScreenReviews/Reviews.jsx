@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useId } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCommentByProductId, getProductRating } from '../../../Actions/Comments'
 import { FaStar } from 'react-icons/fa'
@@ -9,6 +9,7 @@ import styles from "./Reviews.module.css"
 
 export default function Review({idProduct}) {
     const dispatch = useDispatch()
+    const id = useId()
 
     const reviews = useSelector((state) => state.commentReducer.comentariosProducto)
     const rating = useSelector((state) => state.commentReducer.ratingProducto)
@@ -20,11 +21,11 @@ export default function Review({idProduct}) {
 
   return (
       
-    <div class={styles.bigContainer}>
+    <div className={styles.bigContainer}>
         <h1>Lo que otras personas opinan sobre el producto</h1>
          {
              rating.ratingProm !== null ? 
-             <div class={styles.bigNumber}>
+             <div className={styles.bigNumber}>
             <h3>Lo han calificado de {Math.floor(rating.ratingProm) == 5 ? "EXCELENTE" :
              Math.floor(rating.ratingProm) == 4 ? "MUY BUENO" :
              Math.floor(rating.ratingProm) == 3 ? "BUENO" :
@@ -40,7 +41,7 @@ export default function Review({idProduct}) {
                             size={70} 
                             // color={index  + 1 <= (Math.floor(rating.ratingProm)) ? "#ffc107" : "#e4e5e9" }
                             color={index  + 1 <= (Math.floor(rating.ratingProm)) ? "#ffc107" : "#e4e5e9" }  
-
+                            
                             />
 
                         )
@@ -49,7 +50,7 @@ export default function Review({idProduct}) {
             <h6>Entre {rating.cantidadRating} opiniones</h6>
         </div>
         :
-        <div class={styles.bigNumber}>
+        <div className={styles.bigNumber}>
             <h3>Todavia no tiene calificaciones {Math.floor(rating.ratingProm) == 5 ? "EXCELENTE" :
              Math.floor(rating.ratingProm) == 4 ? "MUY BUENO" :
              Math.floor(rating.ratingProm) == 3 ? "BUENO" :
@@ -75,9 +76,9 @@ export default function Review({idProduct}) {
         }   
         
         
-        <div class={styles.reviewCards}>
+        <div className={styles.reviewCards}>
         { reviews?.map((r) => (
-            <div class={styles.eachCard}>
+            <div className={styles.eachCard}>
                 {r.rating == 5 ? <h3><b>EXCELENTE</b></h3> : null}
                 {r.rating == 4 ? <h3><b>MUY BUENO</b></h3> : null}
                 {r.rating == 3 ? <h3><b>BUENO</b></h3> : null}
