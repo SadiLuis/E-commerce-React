@@ -33,14 +33,15 @@
     margin-top: 0;
     margin-right: 2px;
     /* border: 1px solid black; */
-    color: grey;
+    color: black;
     
 }
 
 .btnGroup{
     justify-content: center;
     align-items: center;
-    margin-top: 0;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 

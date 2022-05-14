@@ -23,7 +23,7 @@ import animate from "animate.css"
 // logo,  home, contactenos 
 const NavBarAll = ({isAuth, myUser}) => {
    const usuario=useSelector(state =>state.loginReducer.userDetail)
-   console.log(usuario)
+   //console.log(usuario)
 
   return (
     <>

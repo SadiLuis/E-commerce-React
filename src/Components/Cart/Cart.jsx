@@ -12,7 +12,7 @@ const Cart = () => {
   let items = useSelector((state) => {
     let completeProducts =  state.productsReducer.cart.products;
     completeProducts = completeProducts.map((e) => {
-      const finded = state.productsReducer.allProducts.find(
+      const finded = state.productsReducer.allProducts?.find(
         (el) => el.id === e.id
       );
       return finded ? { ...finded, quantity: e.quantity } : null;
