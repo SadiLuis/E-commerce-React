@@ -10,16 +10,20 @@ import { postOrder } from '../../Actions/orders';
 import Swal from 'sweetalert2'
 const Cart = () => {
   let items = useSelector((state) => {
-    let completeProducts =  state.productsReducer.cart.products;
+    let completeProducts =  state.productsReducer.cart?.products;
+    let productR = state.productsReducer?.allProducts
+    console.log(productR)
     completeProducts = completeProducts.map((e) => {
-      const finded = state.productsReducer.allProducts?.find(
+      let finded = state.productsReducer.allProducts?.find(
         (el) => el.id === e.id
       );
+      //console.log(state.productsReducer.allProducts)
       return finded ? { ...finded, quantity: e.quantity } : null;
     });
 
     return completeProducts;
   });
+  console.log(items)
   const subtotal = useSelector((state) => state.productsReducer.cart.precioTotal);
   items = items?.filter((e) => e);
   const isAuth = useSelector((state) => state.loginReducer.isAuth);
