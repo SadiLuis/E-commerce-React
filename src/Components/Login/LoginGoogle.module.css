@@ -1,0 +1,23 @@
+.botonGoogle{
+    width: 250px;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: black;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    font-weight: bolder;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-color: white;
+}
+.botonGoogle:hover{
+    background-color: black;
+    color:white
+}
+.logoGoogle{
+    width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}

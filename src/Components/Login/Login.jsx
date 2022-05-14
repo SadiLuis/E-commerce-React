@@ -168,8 +168,8 @@ function Login({ login, isAuth, user ,resetRegister }) {
       <div className='conteiner-login'>
       <h2 className={style.tituloLOg}>Login</h2>
         <form onSubmit={handleSubmit} >
-          <div className='mb-3 text-center m-1 p-1'>
-            <label htmlFor='exampleInputEmail1' className='text-center m-1' >Email</label>
+          <div className='mb-3   m-1 p-1'>
+            <label htmlFor='exampleInputEmail1' className='text-center m-1'style={{fontFamily:"sans-serif",fontWeight:"normal"}} >Email</label>
             <input type="email" className="form-control" placeholder="Ingresa tu correo" name='email'
             value={form.email } onChange={handleChange}  />
             
@@ -180,7 +180,7 @@ function Login({ login, isAuth, user ,resetRegister }) {
             
             
             <div className={`form-group ${style.containerLoginPass}`}>
-                <label htmlFor='exampleInputPassword1'>Contraseña</label>
+                <label htmlFor='exampleInputPassword1' className='text-center'style={{fontFamily:"sans-serif", fontWeight:"normal"}}>Contraseña</label>
                 <input type={showPassword ? "text" : "password"} className="form-control inputPass" placeholder="Ingresa tu contraseña" name='contrasena' value={form.contrasena} onChange={handleChange} />
                 <button type='button' className={style.buttonLoginPass} onClick={switchShowPassword}>
                 {" "}
@@ -191,19 +191,31 @@ function Login({ login, isAuth, user ,resetRegister }) {
                 )}
                
             </div>
-                <button type="submit" className='btn btn-outline-dark mt-2 text-center' disabled={!form.email || !form.contrasena} onClick={handleSubmit} >Enviar</button>
+            <div className={style.boton}>
+                <button type="submit" className='btn btn-outline-dark text-center mt-3 ' 
+                disabled={!form.email || !form.contrasena} onClick={handleSubmit}  >Enviar</button>
+                </div>
           </div>
           <br/>
 
-          <div className='text-center'>
-            <span className={style.loginSpan}>¿No tienes cuenta?</span>
-            <Link to='/register' className="btn btn-outline-dark p-0" >Registrate</Link>             
+          <div className={style.rr}>
+          <div 
+          // className='text-center mb-2'
+          >
+            <span className={style.loginSpan} style={{ fontFamily:"sans-serif"}}>¿No tienes cuenta?</span>
+            <Link to='/register' style={{fontFamily:"sans-serif", fontWeight:"bolder", color:"purple", padding:"5px"}}
+              // className="btn btn-outline-dark p-2 mb-2" 
+            >Registrate aquí</Link>             
           </div>
-          <div className="text-center">
-            <span> ¿Olvidaste tu contraseña? </span>
-              <Link to='/login/recoverpassword' className="btn btn-outline-dark p-0" >Recuperar</Link>          
+          <div 
+          //  className="text-center "
+          >
+            <span className={style.loginSpanRecuperar} style={{fontFamily:"sans-serif"}}> ¿Olvidaste tu contraseña? </span>
+              <Link to='/login/recoverpassword' style={{fontFamily:"sans-serif", fontWeight:"bolder", color:"purple", padding:"5px"}}
+              // className="btn btn-outline-dark p-2" 
+              >Recuperar</Link>          
           </div> 
-
+          </div>
         </form>
         
        </div>
