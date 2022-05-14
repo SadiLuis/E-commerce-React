@@ -48,7 +48,7 @@ export const getCartDB = (userId) => async dispatch => {
      })
     
      if(products.length ){
-        console.log('entro')
+        //console.log('entro')
      if(carritoDB.length){
        
        let auxCart=[];
@@ -74,7 +74,7 @@ export const getCartDB = (userId) => async dispatch => {
                  }, 0)
 
              };
-             console.log(newCart)
+             //console.log(newCart)
             
              
        saveCartDb(newCart)

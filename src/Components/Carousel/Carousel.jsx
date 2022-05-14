@@ -55,15 +55,15 @@ function Carousel({category}) {
   if (recommendedProducts.length > 0) {
       return (
           
-            <div class="container">
-                <h2 class="titulo">Mas productos de la categoría <b>{category}</b> que podrían interesarte</h2>
+            <div className="container">
+                <h2 className="titulo">Mas productos de la categoría <b>{category}</b> que podrían interesarte</h2>
                 {/* <!-- Slider --> */}
                 
 
-                <div class="containerCarousel">
-                <button disabled={interval.init > 0  ? false : true}  onClick={()=> handlePrev()} class="btnPrev"><BsArrowLeftCircle size={40}/></button>
+                <div className="containerCarousel">
+                <button disabled={interval.init > 0  ? false : true}  onClick={()=> handlePrev()} className="btnPrev"><BsArrowLeftCircle size={40}/></button>
                      {recommendedProducts?.slice(interval.init, interval.end).map( (product) => (
-                        <div class="carouselCards" key={product.id} >         
+                        <div className="carouselCards" key={product.id} >         
                         <CardCarousel 
                             
                             title={product.title}      
@@ -74,7 +74,7 @@ function Carousel({category}) {
                         />
                         </div>
                      ))}
-                <button disabled={interval.end < recommendedProducts.length  ? false : true} onClick={()=>handleNext()}class="btnNext"><BsArrowRightCircle size={40}/></button>
+                <button disabled={interval.end < recommendedProducts.length  ? false : true} onClick={()=>handleNext()}className="btnNext"><BsArrowRightCircle size={40}/></button>
      
                 </div>        
 

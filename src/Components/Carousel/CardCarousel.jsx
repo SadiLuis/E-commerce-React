@@ -23,18 +23,18 @@ function CardCarousel({title, category, price, img, id}) {
 
     return (
     
-<div class="carouselCard" >
+<div className="carouselCard" >
   <a href={`/detail/${id}`}>  
-  <img src={img} class="card-img-top" alt="..." height={150}/>
+  <img src={img} className="card-img-top" alt="..." height={150}/>
   </a>
   
-  <div class="card-body">
+  <div className="card-body">
     <a href={`/detail/${id}`}> 
-        <h5 class="card-title">${price}</h5>
-        <p class="card-text"><b>{title}</b></p>
+        <h5 className="card-title">${price}</h5>
+        <p className="card-text"><b>{title}</b></p>
     </a>    
-    <div class="carouselBtn">
-    <button onClick={()=> handleCart()} class="btn btn-outline-dark">Agregar al carrito</button>
+    <div className="carouselBtn">
+    <button onClick={()=> handleCart()} className="btn btn-outline-dark">Agregar al carrito</button>
     </div>
   </div>
   
