@@ -21,7 +21,7 @@
 
 .comentario{
     margin-top: 20px;
-    
+    margin-right: 150px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

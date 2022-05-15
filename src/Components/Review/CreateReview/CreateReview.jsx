@@ -12,6 +12,17 @@ import { validationFunction } from "./ValidationFunction";
 import { FaStar } from 'react-icons/fa'
 
 function CreateReview({socket}) {
+
+   /* ANIMACION */
+ const [letterClass, setLetterClass] = useState('text-animate')
+ useEffect(() => {
+   return setTimeout(() => {
+     setLetterClass('text-animate-hover')
+   }, 5000)
+ }, [])
+
+//////////////////////////////////
+
   const { idProduct } = useParams();
   const dispatch = useDispatch()
 
@@ -136,8 +147,8 @@ function CreateReview({socket}) {
           </div>
 
             <div className={styles.subtitle}>
-              <p>Malo</p>
-              <p>Excelente</p>
+              <p className={letterClass} >Malo</p>
+              <p className={letterClass} >Excelente</p>
             </div>
             </div>
               <div className={styles.productImg}>
