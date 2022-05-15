@@ -18,6 +18,7 @@ import {BASEURL} from '../Assets/URLS';
 import Swal from 'sweetalert2'
 import getHeaderToken from '../Helpers/getHeaderToken';
 import {createCartDb } from './cart'
+import { getChatNotifications, getNotifications } from './notifications';
 
 
 export const getUserDetail = () => {
@@ -35,6 +36,8 @@ export const getUserDetail = () => {
          })
          //dispatch(getPedidosByUser(data.id));
          dispatch(createCartDb(data.id))
+         dispatch(getChatNotifications(data.id))
+         dispatch(getNotifications(data.id))
       } catch (error) {
          //console.log(error.response.data);
          dispatch({
