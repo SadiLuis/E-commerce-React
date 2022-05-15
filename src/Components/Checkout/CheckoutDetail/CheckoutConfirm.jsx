@@ -5,7 +5,7 @@ import { ListGroup, Button, Spinner } from "react-bootstrap";
 import {useSelector, useDispatch} from 'react-redux'
 import style from "./CheckoutItem.module.css";
 import { getUserDetail } from "../../../Actions/Auth";
-
+import {Loader} from "../../Loader/Loader"
 // import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
 import Swal from "sweetalert2"
 
@@ -53,15 +53,12 @@ const CheckoutConfirm = ({socket}) => {
 
   return (
     <div>
+    
     {alerta()}
       {!orden ? (
-        <div>
-          <Spinner
-            className={style.spinner}
-            animation="grow"
-            variant="secondary"
-          />
-        </div>
+        
+          <Loader/>
+        
       ) : location.search &&
         location.search.includes("collection_status=approved") ? (
         <div className="container">
