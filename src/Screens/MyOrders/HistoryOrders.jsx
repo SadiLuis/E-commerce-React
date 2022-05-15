@@ -27,6 +27,7 @@ export default function HistoryOrders({ fecha, productos, total, status , pedido
 
     return (
         <div style={{ textAlign: '-webkit-center' }}>
+            
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div className="row px-2">

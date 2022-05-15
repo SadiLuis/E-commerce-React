@@ -35,7 +35,7 @@ export const getUserDetail = () => {
             payload: data
          })
          //dispatch(getPedidosByUser(data.id));
-         dispatch(createCartDb(data.id))
+        
          dispatch(getChatNotifications(data.id))
          dispatch(getNotifications(data.id))
       } catch (error) {
@@ -132,7 +132,7 @@ export function login({ email, contrasena }) {
             payload: data
          });
          //console.log(data)
-         
+         dispatch(createCartDb())
          dispatch(getUserDetail());
       } catch (err) {
          //toast.error(err.response.data);

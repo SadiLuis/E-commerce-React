@@ -4,7 +4,7 @@ import {
 
     , UPDATE_CART, ADD_ITEM, REST_ITEM, DELETE_ITEM, ORDER_ALFABETICAMENTE, GET_CART, DELETE_CART_DB, DELETE_CART, PUT_PRODUCT_BY_ID
 } from "../Actions/Index";
-import { getCartLocalStorage, saveCartLocalStorage, getProductLocalStorage, saveProductLocalStorage, getCartDb, setCartDb, saveCartDb } from "../Helpers/localstorage";
+import { getCartLocalStorage, saveCartLocalStorage, getProductLocalStorage, saveProductLocalStorage, getCartDb, setCartDb, saveCartDb , saveIdCart , getIdCart } from "../Helpers/localstorage";
 import { deleteProductCart, addItemCart } from '../Actions/cart'
 const initialState = {
     detailProduct: [],
@@ -16,7 +16,7 @@ const initialState = {
     categories:[],
     cart: localStorage.token_ecommerce ? getCartLocalStorage() : getCartDb(),
     sameCategory: [],
-    idCart: null
+    idCart: getIdCart()
 }
 
 export default function productsReducer(state = initialState, action) {
@@ -141,7 +141,7 @@ export default function productsReducer(state = initialState, action) {
             if (localStorage.token_ecommerce) {
                 const localS = getCartDb()
                 //console.log()
-                state.idCart && localS.products?.forEach((el) => addItemCart(el, state.idCart))
+                state.idCart && localS.products?.forEach((el) => addItemCart(el, state.idCart.id))
 
                 return {
                     ...state,
@@ -236,7 +236,9 @@ export default function productsReducer(state = initialState, action) {
                 ...state,
                 sameCategory: payload
             }
-        case GET_CART: return {
+        case GET_CART: 
+        saveIdCart(idCart)
+        return {
             ...state,
             cart: payload,
             idCart: idCart
