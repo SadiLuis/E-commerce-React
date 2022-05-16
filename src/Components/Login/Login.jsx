@@ -130,9 +130,9 @@ function Login({ login, isAuth, user ,resetRegister }) {
     };
 
   return (
-    <div class="row g-0 pt-3">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-5">
+    <div className="row g-0 pt-3">
+      <div className="col-lg-1"></div>
+      <div className="col-lg-5">
       <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
         <img
@@ -184,7 +184,7 @@ function Login({ login, isAuth, user ,resetRegister }) {
 
           </h1>
       </div>
-      <div class='inputs px-lg-5r py-lg-4 p-4'>
+      <div className='inputs px-lg-5r py-lg-4 p-4'>
       <div className='conteiner-login'>
       <h2 className={style.tituloLOg}>Login</h2>
         <form onSubmit={handleSubmit} >

@@ -1,16 +1,22 @@
 import React from 'react'
 import './Card.module.css'
 import {Link} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
-import { addItem} from '../../Actions/cart'
+import {useDispatch, useSelector} from 'react-redux'
+import { addItem , addItemCart} from '../../Actions/cart'
 import styles from './Card.module.css'
 import Swal from "sweetalert2";
+
 export default function Card({img, title,category, price, id }){
 const dispatch = useDispatch();
-
+const idCart = useSelector(state => state.productsReducer.idCart )
     const handleAdd =  () => {
         console.log(id)
        dispatch(addItem(id));
+       const cart={
+         id,
+         quantity:1
+       }
+      if(idCart) addItemCart(cart, idCart.id)
         Swal.fire({
           icon: "success",
           title: "Producto agregado al carrito",
