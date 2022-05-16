@@ -11,6 +11,7 @@ import dos from '../../Assets/2.jpg'
 import tres from '../../Assets/3.jpg'
 import style from './Login.module.css'
 import LoginGoogle from "./LoginGoogle";
+import AnimatedLetters from "../../Assets/ANIMACION/Letra/AnimacionLetra";
 import {IoEyeOff ,IoEye} from "react-icons/io5"
 const initialLogin = {
   email: '',
@@ -35,6 +36,19 @@ const validateForm = (form) => {
 };
 
 function Login({ login, isAuth, user ,resetRegister }) {
+
+ /* ANIMACION */
+ const [letterClass, setLetterClass] = useState('text-animate')
+ useEffect(() => {
+   return setTimeout(() => {
+     setLetterClass('text-animate-hover')
+   }, 5000)
+ }, [])
+
+//////////////////////////////////
+
+
+
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [form, setForm] = useState(initialLogin);
@@ -160,9 +174,15 @@ function Login({ login, isAuth, user ,resetRegister }) {
     </Carousel>
       </div>
 
-      <div className="col-lg-5">
-      <div className="title px-lg-5 pt-lg-4 pb-lg-3 p-4">
-          <h1> MOBI</h1>
+      <div class="col-lg-5">
+      <div class="title px-lg-5 pt-lg-4 pb-lg-3 p-4">
+          <h1> 
+          <span className={letterClass}> M</span>
+          <span className={letterClass}> O</span>
+          <span className={letterClass}> B</span>
+          <span className={letterClass}> I</span>
+
+          </h1>
       </div>
       <div className='inputs px-lg-5r py-lg-4 p-4'>
       <div className='conteiner-login'>

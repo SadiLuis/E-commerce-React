@@ -11,6 +11,10 @@
 
 .labelExample{
     margin-top:2rem;
+    font-size: 25px;
+    font-family: "Arial", sans-serif;
+    color: #000000;
+
 }
 
 .tamaño {
@@ -30,14 +34,13 @@
    width:100vh;
    height: 100%;
    object-fit: cover;
-    object-fit: contain;
-    
+   object-fit: contain;    
 }
-
+/* 
 .container{
-    border: 1px solid #000;
+    border: 1px solid rgba(0, 0, 0, 0.534);
     
-}
+} */
 
 .containerReg{
    margin:auto;
@@ -47,14 +50,16 @@
 }
 
 .form {
-    border: 1px solid #000;
-    height: 75.5%;
-    box-shadow: 1px 2px 3px #000000;
-    margin-top:12rem;
-    text-align: center;
+   border: 1px solid #000;
+   height: 75.5%;
+   box-shadow: 1px 2px 3px #000000; 
+   border-radius: 10px;
+   margin-top:12rem;
+   text-align: center;
    padding: 4%;
    height: fit-content;
    margin-bottom: 3rem;
+   margin-left: 15px;
 }
 
 .input{
@@ -74,9 +79,9 @@
     position:absolute;
     background-color: black;
     color: white;
-    top: 68px;
-    right: 13px;
-    height:39px;
+    top: 81px;
+    right: 18px;
+    height:40px;
 }
 
 /* .inputContrasena{
@@ -110,6 +115,7 @@
      margin-top: -25px;
      margin-bottom:30px;
     position: relative;
+    
  } 
 
  .span{
@@ -124,3 +130,19 @@
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
   }
+
+.aviso{
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+.aviso2{
+    margin: 5px;
+    font-size: 15px;
+}
+.aviso2:hover{
+    color: #ff9900;
+    
+}
