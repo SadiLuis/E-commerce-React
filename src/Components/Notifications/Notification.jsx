@@ -28,7 +28,7 @@ const Notifications = ({ socket}) => {
 
   ////////////////////////////////////////////////////////////////////////////////// Notif when new chat messages
   useEffect(() => {
-    socket.on("notif_newMessage", (data) => {
+    socket?.on("notif_newMessage", (data) => {
         if(user && data.receiverId == user?.id) {
             let notif = ({
                 sender : data.message.sender,
@@ -47,7 +47,7 @@ const Notifications = ({ socket}) => {
 
   ////////////////////////////////////////////////////////////////////////////////// Notif when new review  posted
   useEffect(() => {
-        socket.on("notif_newReview", (data) => {
+        socket?.on("notif_newReview", (data) => {
             console.log("llego notif_newReview con data: ", data)
             if(user && user?.rol === "2") {
 
@@ -65,7 +65,7 @@ const Notifications = ({ socket}) => {
 
     ////////////////////////////////////////////////////////////////////////////////// Notif when a new order has made
   useEffect(() => {
-    socket.on("notif_newOrder", (data) => {
+    socket?.on("notif_newOrder", (data) => {
        if (user && user?.rol == 2 && data.text > 0 ) {
             
         let notif3 = {
@@ -81,7 +81,7 @@ const Notifications = ({ socket}) => {
   ////////////////////////////////////////////////////////////////////////////////// Notif when order status has changed
 
 useEffect(() => {
-    socket.on("notif_newOrderStatus", (data) => {
+    socket?.on("notif_newOrderStatus", (data) => {
        if (user && user?.id == data.userId) {
         let notif5 = {
             senderName: "Su orden N° " + data.text,
@@ -105,7 +105,7 @@ useEffect(() => {
   ////////////////////////////////////////////////////////////////////////////////// Notif when new user has registered
 
 useEffect(() => {
-    socket.on("notif_newRegister", (data) => {
+    socket?.on("notif_newRegister", (data) => {
         if(user && user?.rol == 2) {
             
         let notif4 = {
@@ -170,8 +170,8 @@ useEffect(() => {
   
   return (
     <div className="navbarNotifications">
-        <span className="logoNotifications">Tranqui! Esto hay que moverlo a la navBar cuando este terminado!</span>
         <div className="iconsNotifications">
+          
             <div className="iconNotifications" onClick={() => setOpen(!open)}>
                     <img src={notificationIMG} className="iconImgNotifications" alt="" />
                     {
