@@ -13,7 +13,7 @@ import { validationFunction } from "./ValidationFunction";
 import { FaStar } from 'react-icons/fa'
 
 function CreateReview({socket}) {
-
+console.log("socket en review", socket)
    /* ANIMACION */
  const [letterClass, setLetterClass] = useState('text-animate')
  useEffect(() => {

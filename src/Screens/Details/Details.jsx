@@ -1,7 +1,7 @@
 import React, { createRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import {getProductById} from "../../Actions/products.js"
+import {getCategories, getProductById} from "../../Actions/products.js"
 import { addItem } from "../../Actions/cart.js";
 import styles from "./Details.module.css"
 import BotonPago from "../../Components/BtnPago/BtnPago.jsx";
@@ -21,10 +21,17 @@ export default function Detail() {
   const dispatch = useDispatch()
   let myRef = createRef()
   const product = useSelector((state) => state.productsReducer.detailProduct);
+  
+  //para encontrar el idCategory ya que no viene en getProductsByID
+  const categories = useSelector((state) => state.productsReducer.categories);
+  const idCategory = categories?.filter((el) => el.nombre === product?.category)
 
+  console.log("idCat", idCategory)
+  
   let [index, setIndex] = useState(0)
 
   useEffect(() => {
+    dispatch(getCategories())
     dispatch(getProductById(idProduct))
     dispatch(getUserDetail())
   }, [idProduct])
@@ -73,7 +80,6 @@ export default function Detail() {
     });
    }
     
-  
   
   
   if(product.title) {
@@ -125,8 +131,9 @@ export default function Detail() {
                 }
                 
                </div>
+               
                <div className={styles.recommended}>
-                 <Carousel category={product?.category} />
+                  <Carousel idCategory={idCategory[0]?.id} category={idCategory[0]?.nombre}/> 
               </div>
 
               <div className={styles.comentariosProducto}>
