@@ -16,7 +16,7 @@ const idCart = useSelector(state => state.productsReducer.idCart )
          id,
          quantity:1
        }
-      if(idCart) addItemCart(cart, idCart.id)
+       if (localStorage.token_ecommerce) addItemCart(cart, idCart.id)
         Swal.fire({
           icon: "success",
           title: "Producto agregado al carrito",

@@ -38,12 +38,12 @@ const validateForm = (form) => {
 function Login({ login, isAuth, user ,resetRegister }) {
 
  /* ANIMACION */
- const [letterClass, setLetterClass] = useState('text-animate')
+/*  const [letterClass, setLetterClass] = useState('text-animate')
  useEffect(() => {
    return setTimeout(() => {
      setLetterClass('text-animate-hover')
    }, 5000)
- }, [])
+ }, []) */
 
 //////////////////////////////////
 
@@ -96,10 +96,8 @@ function Login({ login, isAuth, user ,resetRegister }) {
       
       const { rol } = user;
       setForm(initialLogin);
-      async function db() {
-        //await postCart();
-      }
-      isAuth && db();
+      
+      
       rol === "2" ? navigate("/dashboard/admin") : navigate("/home")
       
     }
@@ -174,8 +172,8 @@ function Login({ login, isAuth, user ,resetRegister }) {
     </Carousel>
       </div>
 
-      <div class="col-lg-5">
-      <div class="title px-lg-5 pt-lg-4 pb-lg-3 p-4">
+       <div class="col-lg-5">
+      {/* <div class="title px-lg-5 pt-lg-4 pb-lg-3 p-4">
           <h1> 
           <span className={letterClass}> M</span>
           <span className={letterClass}> O</span>
@@ -183,7 +181,7 @@ function Login({ login, isAuth, user ,resetRegister }) {
           <span className={letterClass}> I</span>
 
           </h1>
-      </div>
+      </div>  */}
       <div className='inputs px-lg-5r py-lg-4 p-4'>
       <div className='conteiner-login'>
       <h2 className={style.tituloLOg}>Login</h2>
