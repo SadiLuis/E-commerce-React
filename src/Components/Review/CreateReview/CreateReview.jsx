@@ -13,14 +13,13 @@ import { validationFunction } from "./ValidationFunction";
 import { FaStar } from 'react-icons/fa'
 
 function CreateReview({socket}) {
-console.log("socket en review", socket)
-   /* ANIMACION */
- const [letterClass, setLetterClass] = useState('text-animate')
- useEffect(() => {
-   return setTimeout(() => {
-     setLetterClass('text-animate-hover')
-   }, 5000)
- }, [])
+//    /* ANIMACION */
+//  const [letterClass, setLetterClass] = useState('text-animate')
+//  useEffect(() => {
+//    return setTimeout(() => {
+//      setLetterClass('text-animate-hover')
+//    }, 5000)
+//  }, [])
 
 //////////////////////////////////
 
@@ -155,10 +154,10 @@ console.log("socket en review", socket)
             }
           </div>
 
-            <div className={styles.subtitle}>
+            {/* <div className={styles.subtitle}>
               <p className={letterClass} >Malo</p>
               <p className={letterClass} >Excelente</p>
-            </div>
+            </div> */}
             </div>
               <div className={styles.productImg}>
                 <img src={product?.images[0]} alt="producto" width={130} height={130}/>

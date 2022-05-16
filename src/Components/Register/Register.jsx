@@ -95,12 +95,12 @@ const validateform = function (form) {
 
 export default function Register({socket}) {
   /* ANIMACION */
-  const [letterClass, setLetterClass] = useState('text-animate')
-  useEffect(() => {
-    return setTimeout(() => {
-      setLetterClass('text-animate-hover')
-    }, 5000)
-  }, [])
+  // const [letterClass, setLetterClass] = useState('text-animate')
+  // useEffect(() => {
+  //   return setTimeout(() => {
+  //     setLetterClass('text-animate-hover')
+  //   }, 5000)
+  // }, [])
 
 //////////////////////////////////
 
@@ -357,7 +357,7 @@ export default function Register({socket}) {
       <div className="form-group form-check" /* style={{marginTop:'-25px'}} */>
       </div>
       <button type="submit" class="btn btn-outline-dark w-100" >Registrarse</button>
-      <div div className="form-group form-check p-2 text-center" >
+      {/* <div div className="form-group form-check p-2 text-center" >
         <small className={style.aviso} >
           El equipo de 
           <large className={style.aviso2}> 
@@ -367,7 +367,7 @@ export default function Register({socket}) {
           <span className={letterClass}> I</span>
           </large>
          nunca te pedirá tu correo o contraseña. </small>
-      </div>
+      </div> */}
 
     </form>
 
