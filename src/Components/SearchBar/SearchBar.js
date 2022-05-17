@@ -76,8 +76,8 @@ function SearchBar({setPage, setOrigin}) {
                <span><img className={styles.imagen} src={el.images[0]}/></span>
               <span className={styles.title}>{el.title}</span>
              </Link> 
-             : <Link style={{textDecoration:"none", color: "black", padding:"10px"}} to={`/dashboard/admin/EditProduct/${el.id}`}>
-                <span><img className={styles.imagen} src={el.images[0]}/></span>
+             : <Link style={{textDecoration:"none", color: "black", padding:"10px"}} to={`/dashboard/admin/detailProduct/${el.id}`}>
+                <span><img className={styles.imagen} src={el.images[0]} /></span>
                 <span className={styles.title}>{el.title}</span>
               </Link>
             }
