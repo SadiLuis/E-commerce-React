@@ -163,6 +163,7 @@ function MainChat() {
 
 
 const handleSetChat = (conver) => {
+  console.log("conver en setChat", conver)
   setCurrentChat(conver)
   socket.emit("join_room", conver.id)
 }
@@ -196,8 +197,11 @@ const handleSubmit = async(e) => {
 }
 
 useEffect(() => {
-  scrollRef.current?.scrollIntoView()
-}, messages)
+  scrollRef.current?.scrollIntoView({
+    behavior: "smooth",
+  });
+
+}, messages, currentChat)
 
   if(!user) {
     return <h1>Loading...</h1>
@@ -237,12 +241,12 @@ useEffect(() => {
                       {
                         messages?.map(m => (
                           <div ref={scrollRef}>
-                            {console.log("m", m)}
+                            
                             <Message 
                             message={m} 
                             own={m.sender === user?.id }
                             currentUser = {user}
-                            // friend = { allUsers.filter(elem => elem.id === (conver.memberAdmin === user.id ? conver.memberBuyer : conver.memberAdmin) )}
+                            friend = { allUsers.filter(elem => elem.id === (currentChat.memberAdmin === user.id ? currentChat.memberBuyer : currentChat.memberAdmin) )}
                              />
                           </div>
                         ))
@@ -264,11 +268,6 @@ useEffect(() => {
           </div>
   
           
-          <div className='chatOnline'>
-              <div className='chatOnlineWrapper'>
-                  
-              </div>
-          </div>    
         
         
         </div>
