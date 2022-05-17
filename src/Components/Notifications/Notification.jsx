@@ -140,14 +140,20 @@ useEffect(() => {
     let action;
     if (n.type === 1) {
       action = "le ha enviado nuevos mensajes";
+      return <span className="notificationNotifications">{`📨 ${n.senderName} ${action} ${n.text} `}</span>
+      
     } else if (n.type === 2) {
       action = "puntuó el producto";
+      return <span className="notificationNotifications">{`🔎 ${n.senderName} ${action} ${n.text} `}</span>
     } else if (n.type === 3){
       action = "Nueva compra por un total de $";
+      return <span className="notificationNotifications">{`🛒 ${n.senderName} ${action} ${n.text} `}</span>
+
     } else if (n.type === 4){
         action = "se registró en el sitio";
+        return <span className="notificationNotifications">{`📘 ${n.senderName} ${action} ${n.text} `}</span>
       } else if (n.type === 5) {
-          return <span className="notificationNotifications">Su orden N° {n.text} ha sido {n.status === "ENPROCESO" ? "Enviada" : n.status === "ENVIADO" ?  "Entregada" : ""} </span>
+          return <span className="notificationNotifications">🛍 {n.senderName} ha sido {n.status === "ENPROCESO" ? "Enviada" : n.status === "ENVIADO" ?  "Entregada" : ""} </span>
       }
     return (
       <span className="notificationNotifications">{`${n.senderName} ${action} ${n.text} `}</span>
@@ -168,48 +174,54 @@ useEffect(() => {
   };
 
   
-  return (
-    <div className="navbarNotifications">
-        <div className="iconsNotifications">
+
+  if(user?.id) {
+    return (
+      <div className="navbarNotifications">
+          <div className="iconsNotifications">
+            
+              <div className="iconNotifications" onClick={() => setOpen(!open)}>
+                      <img src={notificationIMG} className="iconImgNotifications" alt="" />
+                      {
+                          uniqueNotifications?.length > 0 && <div className="counterNotifications">{uniqueNotifications?.length}</div>
+                      }
+              </div>
           
-            <div className="iconNotifications" onClick={() => setOpen(!open)}>
-                    <img src={notificationIMG} className="iconImgNotifications" alt="" />
-                    {
-                        uniqueNotifications?.length > 0 && <div className="counterNotifications">{uniqueNotifications?.length}</div>
-                    }
-            </div>
-        
-
-            <div className="iconNotifications" onClick={() => setOpenMessage(!open)}>
-                    <img src={messageIMG} className="iconImgNotifications" alt="" />
-                    {
-                        
-                        uniqueChatNotifications?.length > 0  && <div className="counterNotifications">{uniqueChatNotifications?.length}</div>
-                    }
-            </div>
-        </div>
-        {
-            open && <div className="notificationsNotifications">
-            
-            {  uniqueNotifications?.map(n => (  displayNotification(n) )) }
-              <button className="btn btn-outline-secondary" onClick={() => handleRead(user.id)}>Marcar como leido</button>  
-                
-             
-                </div>
-        }
-
-{
-            openMessage && <div className="notificationsNotifications">
-            
-            {  uniqueChatNotifications?.map(n => (  displayNotification(n) )) }
-              <button className="btn btn-outline-secondary" onClick={() => handleReadChat(user.id)}>Marcar como leido</button>  
-                
-             
-                </div>
-        }
-        
-    </div>
-  );
+  
+              <div className="iconNotifications" onClick={() => setOpenMessage(!open)}>
+                      <img src={messageIMG} className="iconImgNotifications" alt="" />
+                      {
+                          
+                          uniqueChatNotifications?.length > 0  && <div className="counterNotifications">{uniqueChatNotifications?.length}</div>
+                      }
+              </div>
+          </div>
+          {
+              open && <div className="notificationsNotifications">
+              
+              {  uniqueNotifications?.map(n => (  displayNotification(n) )) }
+                <div className="nButtonNotifications">
+                <button className="btn btn-outline-secondary" onClick={() => handleRead(user.id)}>Marcar como leido</button>  
+                </div>  
+               
+                  </div>
+          }
+  
+  {
+              openMessage && <div className="notificationsNotifications">
+              
+              {  uniqueChatNotifications?.map(n => (  displayNotification(n) )) }
+                <div className="nButtonNotifications">  
+                <button className="btn btn-outline-secondary" onClick={() => handleReadChat(user.id)}>Marcar como leido</button>  
+                </div>  
+               
+                  </div>
+          }
+          
+      </div>
+    );
+  }
+  
 };
 
 export default Notifications;

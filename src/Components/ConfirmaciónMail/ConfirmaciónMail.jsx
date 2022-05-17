@@ -1,9 +1,11 @@
 import React from 'react'
 import emailjs from '@emailjs/browser'
+import logo from "../../Assets/default.png"
 
 
 
 function ConfirmaciónMail(props) {
+    // <img src="cid:default.png" alt="Logo"></img>
     let templateParams={
         nombre:props.nombre,
         email:props.email,
@@ -15,15 +17,17 @@ function ConfirmaciónMail(props) {
         provincia:props.provincia,
         
         
+        
 
     }
    
     console.log(templateParams)
     
     
-    let serviceId = "service_c72nnat" ///service_tvv7y5s
-    let templateId = "template_yejxn3e"///template_k8gp9g2
-    let publicId= "nJuhyyhJhkM9n5dSe" ///hNfwKD0TvV8ixub8f
+    let serviceId = "service_gdddw8y"
+    let templateId = "template_72orib2"
+    let publicId= "wkXPva2n7QLGliSM8" 
+    
     
     emailjs.send(serviceId, templateId, templateParams,  publicId)
     
@@ -40,7 +44,7 @@ function ConfirmaciónMail(props) {
     <div className='container'>
          
         
-         {ConfirmaciónMail}
+         {ConfirmaciónMail }
          
         
            

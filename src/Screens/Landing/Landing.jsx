@@ -9,8 +9,9 @@ import { updateCart } from '../../Actions/cart';
 import { useDispatch } from 'react-redux';
 
 
+
 const Landing = () => {
- const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate()
   const [showNewsletter, setShowNewsletter] = useState(false)
   const [stateNewsletter, setStateNewsletter] = useState({
@@ -31,7 +32,7 @@ const Landing = () => {
 
   React.useEffect(() => {
     dispatch(updateCart())
-   
+
   }, [dispatch])
   return (
     <div>
@@ -76,7 +77,7 @@ const Landing = () => {
 
                       <div className="embed-responsive embed-responsive-3by2">
                         <div className="embed-responsive-item">
-                          <img className="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/UMAGE_packshot_5102_5501-1_AConversationPiece_blackoak_petrolblue_highres_1_1_640x@2x.progressive.jpg?v=1638884064" alt="Conversation Piece Lounge Chair" />
+                          <img className="imgLand w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/UMAGE_packshot_5102_5501-1_AConversationPiece_blackoak_petrolblue_highres_1_1_640x@2x.progressive.jpg?v=1638884064" alt="Conversation Piece Lounge Chair" onClick={() => navigate('/detail/6')} />
                         </div>
                       </div>
 
@@ -88,7 +89,7 @@ const Landing = () => {
                 <div className="titleInfo">
                   <h3 className="mb-3 ">
 
-                    <span>
+                    <span onClick={() => navigate('/detail/6')}>
                       Conversation Piece Lounge Chair
                     </span>
 
@@ -112,7 +113,7 @@ const Landing = () => {
 
                       <div className="embed-responsive embed-responsive-3by2">
                         <div className="embed-responsive-item">
-                          <img className="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/BoomerangHM2SoapedOakw.LoopMarine_640x@2x.progressive.jpg?v=1626238627" alt="Boomerang Armchair HM2" />
+                          <img className="imgLand w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/BoomerangHM2SoapedOakw.LoopMarine_640x@2x.progressive.jpg?v=1626238627" alt="Boomerang Armchair HM2" onClick={() => navigate('/detail/8')} />
                         </div>
                       </div>
 
@@ -124,7 +125,7 @@ const Landing = () => {
                 <div className="titleInfo">
                   <h3 className="mb-3">
 
-                    <span>
+                    <span onClick={() => navigate('/detail/8')}>
                       Boomerang Armchair HM2
                     </span>
 
@@ -147,7 +148,7 @@ const Landing = () => {
 
                       <div className="embed-responsive embed-responsive-3by2">
                         <div className="embed-responsive-item">
-                          <img className="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/FAD02NA_FanDiningChairNaturalOak_Main_640x@2x.progressive.jpg?v=1634723597" alt="Fan Dining Chair" />
+                          <img className="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/FAD02NA_FanDiningChairNaturalOak_Main_640x@2x.progressive.jpg?v=1634723597" alt="Fan Dining Chair" onClick={() => navigate('/detail/12')} />
                         </div>
                       </div>
 
@@ -159,7 +160,7 @@ const Landing = () => {
                 <div className="titleInfo">
                   <h3 className="mb-3 ">
 
-                    <span>
+                    <span onClick={() => navigate('/detail/12')} >
                       Fan Dining Chair
                     </span>
 
@@ -177,7 +178,7 @@ const Landing = () => {
 
                       <div className="embed-responsive embed-responsive-3by2">
                         <div className="embed-responsive-item">
-                          <img className="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/100030_S.A.C.diningchair_1_exposed1_640x@2x.progressive.jpg?v=1625484071" alt="S.A.C. Dining Chair" />
+                          <img className="w-100" src="https://cdn.shopify.com/s/files/1/0012/2005/1002/products/100030_S.A.C.diningchair_1_exposed1_640x@2x.progressive.jpg?v=1625484071" alt="S.A.C. Dining Chair" onClick={() => navigate('/detail/14')} />
                         </div>
                       </div>
 
@@ -186,7 +187,7 @@ const Landing = () => {
 
                   </div>
                 </div>
-                <div className="titleInfo">
+                <div className="titleInfo" onClick={() => navigate('/detail/14')}>
                   <h3 className="mb-3 ">
 
                     <span>
@@ -251,10 +252,10 @@ const Landing = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="title">
+                      <div className="titleO">
                         <div className="m-0">
                           <p className="m-0">
-                            <strong>
+                            <strong onClick={() => navigate('/detail/20')}>
                               Rest Sofa 2
                             </strong>
                           </p>
@@ -263,8 +264,12 @@ const Landing = () => {
                       <div className="price">
                         <div className="pb-3 mb-4">
                           <s className="text-danger">
+                            $5,249
+                          </s> &nbsp;
+                          <span >
                             $4,749
-                          </s>
+                          </span>
+
                         </div>
                       </div>
 
@@ -287,10 +292,10 @@ const Landing = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="title">
+                      <div className="titleO">
                         <div className="m-0">
                           <p className="m-0">
-                            <strong>
+                            <strong onClick={() => navigate('/detail/31')}>
                               Juice Rectangular Table
                             </strong>
                           </p>
@@ -299,8 +304,11 @@ const Landing = () => {
                       <div className="price">
                         <div className="pb-3 mb-4">
                           <s className="text-danger">
+                            $9,729
+                          </s> &nbsp;
+                          <span >
                             $8,491
-                          </s>
+                          </span>
                         </div>
                       </div>
 

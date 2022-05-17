@@ -154,6 +154,7 @@ const { getRootProps, getInputProps} = useDropzone({
                       
                   </div>
                   <div className='cartProducts' style={{textAlign: 'center', marginBottom: '2rem'}}>
+                  <Link to={'/profile/editProfile'}><button className={`btn btn-info ${styles.btnFav}`}>Editar perfil</button></Link>
                     <Link to={'/MyFavs'}><button className={`btn btn-warning ${styles.btnFav}`}>ir a Mis favoritos</button></Link>
             {/*         <div className={styles.Favoritos}>
 
