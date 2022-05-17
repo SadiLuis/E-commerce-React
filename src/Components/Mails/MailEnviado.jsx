@@ -8,7 +8,7 @@ function MailEnviado(props) {
         cantidad:props.cantidad,
          producto:props.producto,
           total:props.total,
-        pedidoId:props.pedidoId,
+          pedidoId:props.pedidoId,
         direccion:props.direccion,
         ciudad:props.ciudad,
         provincia:props.provincia

@@ -234,7 +234,7 @@ const NavBarAdmin = () => {
           >
             Dashboard
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/dashboard/sales"
             style={{
               border: "none",
@@ -248,7 +248,7 @@ const NavBarAdmin = () => {
             }}
           >
             Sales
-          </NavLink>
+          </NavLink> */}
           {
           admin? 
            (
