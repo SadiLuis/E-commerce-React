@@ -14,7 +14,7 @@ function CardCarousel({title, category, price, img, id}) {
     
     React.useEffect(()=> {
       dispatch(getUserDetail())
-    })
+    }, [])
   
     const myUser = useSelector((state)=> state.loginReducer.userDetail)
 
