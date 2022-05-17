@@ -86,8 +86,8 @@ const validateform = function (form) {
   // if (form.confirm_contrasena !== form.contrasena) {
   //   errors.confirm_contrasena = "Las contraseñas no coinciden";
   // }
-  if (!form.localidad) {
-    errors.localidad = 'Debe ingresear la localidad donde reside'
+  if (!form.ciudad) {
+    errors.ciudad = 'Debe ingresear la ciudad donde reside'
 }
 
   return errors;
@@ -159,7 +159,7 @@ export default function Register({socket}) {
     e.preventDefault()
     
     if(Object.keys(error).length){
-      
+      console.log(error)
       Swal.fire({
         text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,
         icon: "error",
@@ -327,7 +327,7 @@ export default function Register({socket}) {
           value={form.ciudad} placeholder="Ciudad" name='ciudad'
           onFocus={(e) => handleChange(e.target.name , true)}
           />
-          {focus.localidad && error.localidad && <span className={`text-danger ${style.span}`}  /* style={{marginLeft:'100px'}} */>{error.localidad}</span> }
+          {focus.ciudad && error.ciudad && <span className={`text-danger ${style.span}`}  /* style={{marginLeft:'100px'}} */>{error.ciudad}</span> }
       </div>
       {/* DIRECCIONS */}
       <div className={`mb-1 ${style.formInput}`}>
