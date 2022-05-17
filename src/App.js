@@ -59,6 +59,7 @@ import DetailPedido from "./Screens/MyOrders/DetailPedido";
 
 import io from "socket.io-client"
 import Notifications from "./Components/Notifications/Notification";
+import Model from "./Components/ObjectDetector/Model";
 const socket = io.connect(BASEURL)
 
 
@@ -87,7 +88,7 @@ function App() {
 
     <div className="App">
 
-      <NavBarAll />
+      <NavBarAll socket={socket}/>
       <Notifications socket={socket} />
 
       <Routes>
@@ -132,6 +133,8 @@ function App() {
          <Route path="/buyDetail/:id" element = {<DetailPedido />} />
         <Route path="/resetpassword/:userId" element={<ResetPasswordForm />} />
         <Route path="/MyFavs" element={<MyFavs/>}/>
+
+        <Route path="/ideas" element={<Model/>}/>
       </Routes>
 
 

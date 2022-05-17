@@ -11,7 +11,7 @@ function Conversation({conversation, currentUser, friend, notification}) {
             
         <span className='conversationName'>{friend[0]?.nombre}</span>
         
-        <span className='conversationNotif'>{notification?  "📨Nuevos mensajes" : ""}</span> 
+        {/* <span className='conversationNotif'>{notification?  "📨Nuevos mensajes" : ""}</span>  */}
 
         
         
