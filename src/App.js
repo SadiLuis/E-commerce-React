@@ -13,7 +13,7 @@ import NavBarAll from "./Components/NavBar/NavBar"
 import ContactForm from "./Components/ContactForm/ContactForm";
 import EditProduct from "./Components/AdminProduct/EditProduct"
 import Profile from "./Screens/Profile/Profile"
-
+import EditProfile from "./Screens/Profile/EditProfile"
 import MyOrders from "./Screens/MyOrders/MyOrders";
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -111,6 +111,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/contactform" element={<ContactForm />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/editProfile" element={<EditProfile />} />
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
         <Route path="/about" element={<About />} />
