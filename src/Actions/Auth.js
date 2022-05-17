@@ -18,6 +18,7 @@ import {BASEURL} from '../Assets/URLS';
 import Swal from 'sweetalert2'
 import getHeaderToken from '../Helpers/getHeaderToken';
 import {createCartDb } from './cart'
+import { getChatNotifications, getNotifications } from './notifications';
 
 
 export const getUserDetail = () => {
@@ -34,7 +35,9 @@ export const getUserDetail = () => {
             payload: data
          })
          //dispatch(getPedidosByUser(data.id));
-         dispatch(createCartDb(data.id))
+        
+         dispatch(getChatNotifications(data.id))
+         dispatch(getNotifications(data.id))
       } catch (error) {
          //console.log(error.response.data);
          dispatch({
@@ -53,6 +56,7 @@ export function register({
     provincia,
     direccion,
     telefono,
+    ciudad
     }) {
     return async function (dispatch) {
        try {
@@ -73,6 +77,7 @@ export function register({
              provincia,
              direccion,
              telefono,
+             ciudad
            
           };
           //console.log("body")
@@ -127,7 +132,7 @@ export function login({ email, contrasena }) {
             payload: data
          });
          //console.log(data)
-         
+         dispatch(createCartDb())
          dispatch(getUserDetail());
       } catch (err) {
          //toast.error(err.response.data);

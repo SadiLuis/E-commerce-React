@@ -4,7 +4,7 @@ import {
 
     , UPDATE_CART, ADD_ITEM, REST_ITEM, DELETE_ITEM, ORDER_ALFABETICAMENTE, GET_CART, DELETE_CART_DB, DELETE_CART, PUT_PRODUCT_BY_ID
 } from "../Actions/Index";
-import { getCartLocalStorage, saveCartLocalStorage, getProductLocalStorage, saveProductLocalStorage, getCartDb, setCartDb, saveCartDb } from "../Helpers/localstorage";
+import { getCartLocalStorage, saveCartLocalStorage, getProductLocalStorage, saveProductLocalStorage, getCartDb, setCartDb, saveCartDb , saveIdCart , getIdCart } from "../Helpers/localstorage";
 import { deleteProductCart, addItemCart } from '../Actions/cart'
 const initialState = {
     detailProduct: [],
@@ -16,11 +16,11 @@ const initialState = {
     categories:[],
     cart: localStorage.token_ecommerce ? getCartLocalStorage() : getCartDb(),
     sameCategory: [],
-    idCart: null
+    idCart: getIdCart()
 }
 
 export default function productsReducer(state = initialState, action) {
-    const { type, payload, idCart } = action;
+    const { type, payload, idCart ,cantidad} = action;
     let newCart = state.cart, newProducts, itemCart;
     switch (type) {
 
@@ -38,7 +38,7 @@ export default function productsReducer(state = initialState, action) {
                     allProducts: payload,
                     searchProducts: payload
                 }
-            case 'CLEAN_UP': 
+            //case 'CLEAN_UP': 
         case "GET_ALL_PRODUCTS":
             saveProductLocalStorage(payload)
             return {
@@ -130,7 +130,7 @@ export default function productsReducer(state = initialState, action) {
                 categories: payload
             }
         case FILTER_BY_CATEGORY:
-            let categoriesProducts = payload === "all" ? state.allProducts : state.allProducts.filter((elem) => elem.category.includes(payload))
+            let categoriesProducts = payload === "all" ? state.allProducts : state.allProducts?.filter((elem) => elem.category.includes(payload))
             return {
                 ...state,
                 products: categoriesProducts
@@ -140,8 +140,8 @@ export default function productsReducer(state = initialState, action) {
         case UPDATE_CART:
             if (localStorage.token_ecommerce) {
                 const localS = getCartDb()
-                console.log()
-                state.idCart && localS.products?.forEach((el) => addItemCart(el, state.idCart))
+                //console.log()
+                state.idCart && localS.products?.forEach((el) => addItemCart(el, state.idCart.id))
 
                 return {
                     ...state,
@@ -158,7 +158,7 @@ export default function productsReducer(state = initialState, action) {
             }
         case ADD_ITEM:
 
-            itemCart = state.cart.products.find(e => e.id === payload);
+            itemCart = state.cart.products?.find(e => e.id === payload);
             if (itemCart) {
                 newProducts = state.cart.products.map(item =>
                     item.id === payload
@@ -169,7 +169,7 @@ export default function productsReducer(state = initialState, action) {
                 newCart = {
                     products: newProducts,
                     precioTotal: newProducts.reduce((prev, e) => {
-                        let prod = state.allProducts.find(el => el.id === e.id);
+                        let prod = state.allProducts?.find(el => el.id === e.id);
 
                         return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
                     }, 0)
@@ -178,8 +178,8 @@ export default function productsReducer(state = initialState, action) {
 
             } else {
                 newCart = {
-                    products: [...state.cart.products, { id: payload, quantity: 1 }],
-                    precioTotal: Math.round((state.cart.precioTotal + state.allProducts.find(e => e.id === payload).price) * 100) / 100
+                    products: [...state.cart?.products, { id: payload, quantity: 1 }],
+                    precioTotal: Math.round((state.cart?.precioTotal + state.allProducts?.find(e => e.id === payload).price) * 100) / 100
                 };
             }
 
@@ -192,9 +192,9 @@ export default function productsReducer(state = initialState, action) {
 
             };
         case REST_ITEM:
-            itemCart = state.cart.products.find(e => e.id === payload);
+            itemCart = state.cart.products?.find(e => e.id === payload);
             if (itemCart) {
-                newProducts = state.cart.products.map(item =>
+                newProducts = state.cart.products?.map(item =>
                     item.id === payload
                         ? { ...item, quantity: item.quantity - 1 }
                         : item)
@@ -202,7 +202,7 @@ export default function productsReducer(state = initialState, action) {
                 newCart = {
                     ...newCart,
                     products: newProducts,
-                    precioTotal: Math.round((state.cart.precioTotal - state.allProducts.find(e => e.id === payload).price) * 100) / 100
+                    precioTotal: Math.round((state.cart.precioTotal - state.allProducts?.find(e => e.id === payload).price) * 100) / 100
                 };
                 if (localStorage.token_ecommerce) saveCartDb(newCart)
                 else saveCartLocalStorage(newCart);
@@ -213,11 +213,11 @@ export default function productsReducer(state = initialState, action) {
 
             };
         case DELETE_ITEM:
-            itemCart = state.cart.products.find(e => e.id === payload);
+            itemCart = state.cart.products?.find(e => e.id === payload);
             itemCart && (newCart = {
                 products: state.cart.products.filter(e => e.id !== payload),
                 precioTotal:
-                    Math.round((state.cart.precioTotal - (itemCart.quantity * state.allProducts.find(e => e.id === payload).price)) * 100) / 100
+                    Math.round((state.cart.precioTotal - (itemCart.quantity * state.allProducts?.find(e => e.id === payload).price)) * 100) / 100
             });
             if (localStorage.token_ecommerce) {
                 deleteProductCart(payload, state.idCart)
@@ -236,7 +236,9 @@ export default function productsReducer(state = initialState, action) {
                 ...state,
                 sameCategory: payload
             }
-        case GET_CART: return {
+        case GET_CART: 
+        saveIdCart(idCart)
+        return {
             ...state,
             cart: payload,
             idCart: idCart
@@ -260,7 +262,30 @@ export default function productsReducer(state = initialState, action) {
                 ...state,
                 detailProduct: []
             }
+        case 'REST_ITEM_DISABLED':
+            itemCart = state.cart.products.find(e => e.id === payload);
+            const products = state.allProducts.find(el => el.stock === 0 && el.id === payload)
+            if (itemCart ) {
+                newProducts = state.cart.products.map(item =>
+                    item.id === payload
+                        ? { ...item, quantity: item.quantity - cantidad}
+                        : item)
+            } 
 
+            newCart = {
+                ...newCart,
+                products: newProducts,
+                precioTotal: products ? Math.round((state.cart.precioTotal - state.allProducts.find(e => e.id === payload).price ) * 100) / 100
+                                      : Math.round((state.cart.precioTotal - (state.allProducts.find(e => e.id === payload).price * cantidad)) * 100) / 100
+            };       
+            if (localStorage.token_ecommerce) saveCartDb(newCart)
+            else saveCartLocalStorage(newCart);
+
+        return {
+            ...state,
+            cart: newCart,
+
+        };
         default:
             return {
                 ...state

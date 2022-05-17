@@ -67,3 +67,19 @@ export const savePedido = (pedido) => {
   pedido = JSON.stringify(pedido);
   localStorage.setItem('pedido', pedido);
 };
+
+
+export const getIdCart = () => {
+  try {
+    
+    const idCart = localStorage.getItem('idCartDB');
+    return idCart ? JSON.parse(idCart) : null
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const saveIdCart = (id) => {
+  id = JSON.stringify(id);
+  localStorage.setItem('idCartDB', id);
+};

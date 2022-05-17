@@ -6,7 +6,7 @@ import { getPedidosById } from "../../Actions/Pedidos";
 import { useSelector } from "react-redux";
 import { getUserDetail } from "../../Actions/Auth";
 import styles from './Orders.module.css'
-
+import {Loader} from '../../Components/Loader/Loader'
 import HistoryOrders from "./HistoryOrders";
 
 
@@ -18,10 +18,10 @@ export default function MyOrders (){
   const myUser = useSelector((state)=> state.loginReducer.userDetail)
   const pedidos = useSelector((state)=> state.pedidosReducer.pedidosById)
  
- 
+ console.log(pedidos)
    React.useEffect(() => {
     
-    dispatch(getPedidosById(myUser.id)) 
+    dispatch(getPedidosById(myUser?.id)) 
   }, [myUser])  
 
   React.useEffect(() => {
@@ -41,11 +41,12 @@ export default function MyOrders (){
 
       return (
        <div>
+         {!pedidos.length && <Loader />}
         <h1 className={styles.title}>Historial de pedidos</h1>
           {
             pedidos.length && pedidos.map(e => (
                 <div>
-                <HistoryOrders fecha={e.fechaCreacion} productos={e.productos} total={e.totalPedido} status={e.status}/>
+                <HistoryOrders fecha={e.fechaCreacion} productos={e.productos} total={e.totalPedido} status={e.status} pedidoId={e.pedidoId}/>
                 
                 </div>
                

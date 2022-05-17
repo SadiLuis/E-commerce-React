@@ -44,7 +44,7 @@ export default function Home() {
   const [productsOnPage, setProductsOnPage] = useState(12)
   const indexLastProduct = currentPage * productsOnPage
   const indexFirstProduct = indexLastProduct - productsOnPage
-  const productsEnabled =   allProducts?.filter(s=>s.statusProduct===true)
+  const productsEnabled =   allProducts?.filter(s=>s.statusProduct===true && s.cantidad>0)
   const currentProducts = productsEnabled?.slice(indexFirstProduct, indexLastProduct)
 
   

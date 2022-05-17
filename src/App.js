@@ -49,16 +49,17 @@ import ResetPasswordForm from './Components/RestarPassword/ResetPasswordForm'
 import DetailProductScreen from "./Components/DetailProductScreen/DetailProductScreen.jsx";
 import AddAdmin from "./Components/AddAdmin/AddAdmin";
 
-
+import MyFavs from "./Screens/MyFavs/MyFavs";
 
 
 
 import { BASEURL } from '../src/Assets/URLS';
-
+import DetailPedido from "./Screens/MyOrders/DetailPedido";
 
 
 import io from "socket.io-client"
 import Notifications from "./Components/Notifications/Notification";
+import Model from "./Components/ObjectDetector/Model";
 const socket = io.connect(BASEURL)
 
 
@@ -87,7 +88,7 @@ function App() {
 
     <div className="App">
 
-      <NavBarAll />
+      <NavBarAll socket={socket}/>
       <Notifications socket={socket} />
 
       <Routes>
@@ -128,7 +129,12 @@ function App() {
         <Route path="/login/recoverpassword" element={<ResPassword />} />
 
 
+         
+         <Route path="/buyDetail/:id" element = {<DetailPedido />} />
         <Route path="/resetpassword/:userId" element={<ResetPasswordForm />} />
+        <Route path="/MyFavs" element={<MyFavs/>}/>
+
+        <Route path="/ideas" element={<Model/>}/>
       </Routes>
 
 

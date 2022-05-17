@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {register} from '../../Actions/Auth'
 import { validateEmail,validateTlf } from '../../Helpers/ValidateForm'
+import AnimacionLetra from '../../Assets/ANIMACION/Letra/AnimacionLetra'
 import Swal from 'sweetalert2'
 import uno from '../../Assets/1.jpg'
 import dos from '../../Assets/2.jpg'
@@ -18,7 +19,7 @@ const formulario = {
   provincia: '',
   direccion: '',
   telefono: '',
-  localidad: '',
+  ciudad: '',
   contrasenaConfirm: '',
  
 }
@@ -93,6 +94,17 @@ const validateform = function (form) {
 };
 
 export default function Register({socket}) {
+  /* ANIMACION */
+  // const [letterClass, setLetterClass] = useState('text-animate')
+  // useEffect(() => {
+  //   return setTimeout(() => {
+  //     setLetterClass('text-animate-hover')
+  //   }, 5000)
+  // }, [])
+
+//////////////////////////////////
+
+
   const isRegister = useSelector(state => state.loginReducer.isRegister)
   const [focus , setFocus] = useState({ 
   nombre: false,
@@ -103,7 +115,7 @@ export default function Register({socket}) {
   provincia: false,
   direccion: false,
   telefono: false,
-  localidad: false,
+  ciudad: false,
   })
   const [visible , setVisible] = useState('password')
   const navigate = useNavigate()
@@ -312,7 +324,7 @@ export default function Register({socket}) {
         <label className={style.labelExample} htmlFor="exampleInputPassword1">&nbsp; Ciudad</label>
         <input type="text"  className={` ${style.input}`} id="exampleInputPassword1"
           onChange={(e) => handleChange(e.target.name, e.target.value)} 
-          value={form.localidad} placeholder="Ciudad" name='localidad'
+          value={form.ciudad} placeholder="Ciudad" name='ciudad'
           onFocus={(e) => handleChange(e.target.name , true)}
           />
           {focus.localidad && error.localidad && <span className={`text-danger ${style.span}`}  /* style={{marginLeft:'100px'}} */>{error.localidad}</span> }
@@ -344,10 +356,18 @@ export default function Register({socket}) {
 
       <div className="form-group form-check" /* style={{marginTop:'-25px'}} */>
       </div>
-      <button type="submit" class="btn btn-primary w-100" >Registrarse</button>
-      <div div className="form-group form-check p-2 text-center" style={{marginTop:'5px'}}>
-        <small  >El equipo de mueblesApp nunca te pedirá tu correo o contraseña. </small>
-      </div>
+      <button type="submit" class="btn btn-outline-dark w-100" >Registrarse</button>
+      {/* <div div className="form-group form-check p-2 text-center" >
+        <small className={style.aviso} >
+          El equipo de 
+          <large className={style.aviso2}> 
+          <span className={letterClass}> M</span>
+          <span className={letterClass}> O</span>
+          <span className={letterClass}> B</span>
+          <span className={letterClass}> I</span>
+          </large>
+         nunca te pedirá tu correo o contraseña. </small>
+      </div> */}
 
     </form>
 

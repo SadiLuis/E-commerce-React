@@ -11,6 +11,7 @@ import dos from '../../Assets/2.jpg'
 import tres from '../../Assets/3.jpg'
 import style from './Login.module.css'
 import LoginGoogle from "./LoginGoogle";
+import AnimatedLetters from "../../Assets/ANIMACION/Letra/AnimacionLetra";
 import {IoEyeOff ,IoEye} from "react-icons/io5"
 const initialLogin = {
   email: '',
@@ -35,6 +36,19 @@ const validateForm = (form) => {
 };
 
 function Login({ login, isAuth, user ,resetRegister }) {
+
+ /* ANIMACION */
+/*  const [letterClass, setLetterClass] = useState('text-animate')
+ useEffect(() => {
+   return setTimeout(() => {
+     setLetterClass('text-animate-hover')
+   }, 5000)
+ }, []) */
+
+//////////////////////////////////
+
+
+
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [form, setForm] = useState(initialLogin);
@@ -82,10 +96,8 @@ function Login({ login, isAuth, user ,resetRegister }) {
       
       const { rol } = user;
       setForm(initialLogin);
-      async function db() {
-        //await postCart();
-      }
-      isAuth && db();
+      
+      
       rol === "2" ? navigate("/dashboard/admin") : navigate("/home")
       
     }
@@ -116,9 +128,9 @@ function Login({ login, isAuth, user ,resetRegister }) {
     };
 
   return (
-    <div class="row g-0 pt-3">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-5">
+    <div className="row g-0 pt-3">
+      <div className="col-lg-1"></div>
+      <div className="col-lg-5">
       <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
         <img
@@ -160,16 +172,22 @@ function Login({ login, isAuth, user ,resetRegister }) {
     </Carousel>
       </div>
 
-      <div class="col-lg-5">
-      <div class="title px-lg-5 pt-lg-4 pb-lg-3 p-4">
-          <h1> MOBI</h1>
-      </div>
-      <div class='inputs px-lg-5r py-lg-4 p-4'>
+       <div class="col-lg-5">
+      {/* <div class="title px-lg-5 pt-lg-4 pb-lg-3 p-4">
+          <h1> 
+          <span className={letterClass}> M</span>
+          <span className={letterClass}> O</span>
+          <span className={letterClass}> B</span>
+          <span className={letterClass}> I</span>
+
+          </h1>
+      </div>  */}
+      <div className='inputs px-lg-5r py-lg-4 p-4'>
       <div className='conteiner-login'>
       <h2 className={style.tituloLOg}>Login</h2>
         <form onSubmit={handleSubmit} >
-          <div className='mb-3 text-center m-1 p-1'>
-            <label htmlFor='exampleInputEmail1' className='text-center m-1' >Email</label>
+          <div className='mb-3   m-1 p-1'>
+            <label htmlFor='exampleInputEmail1' className='text-center m-1'style={{fontFamily:"sans-serif",fontWeight:"normal"}} >Email</label>
             <input type="email" className="form-control" placeholder="Ingresa tu correo" name='email'
             value={form.email } onChange={handleChange}  />
             
@@ -180,7 +198,7 @@ function Login({ login, isAuth, user ,resetRegister }) {
             
             
             <div className={`form-group ${style.containerLoginPass}`}>
-                <label htmlFor='exampleInputPassword1'>Contraseña</label>
+                <label htmlFor='exampleInputPassword1' className='text-center'style={{fontFamily:"sans-serif", fontWeight:"normal"}}>Contraseña</label>
                 <input type={showPassword ? "text" : "password"} className="form-control inputPass" placeholder="Ingresa tu contraseña" name='contrasena' value={form.contrasena} onChange={handleChange} />
                 <button type='button' className={style.buttonLoginPass} onClick={switchShowPassword}>
                 {" "}
@@ -191,19 +209,31 @@ function Login({ login, isAuth, user ,resetRegister }) {
                 )}
                
             </div>
-                <button type="submit" className='btn btn-outline-dark mt-2 text-center' disabled={!form.email || !form.contrasena} onClick={handleSubmit} >Enviar</button>
+            <div className={style.boton}>
+                <button type="submit" className='btn btn-outline-dark text-center mt-3 ' 
+                disabled={!form.email || !form.contrasena} onClick={handleSubmit}  >Enviar</button>
+                </div>
           </div>
           <br/>
 
-          <div className='text-center'>
-            <span className={style.loginSpan}>¿No tienes cuenta?</span>
-            <Link to='/register' className="btn btn-outline-dark p-0" >Registrate</Link>             
+          <div className={style.rr}>
+          <div 
+          // className='text-center mb-2'
+          >
+            <span className={style.loginSpan} style={{ fontFamily:"sans-serif"}}>¿No tienes cuenta?</span>
+            <Link to='/register' style={{fontFamily:"sans-serif", fontWeight:"bolder", color:"purple", padding:"5px"}}
+              // className="btn btn-outline-dark p-2 mb-2" 
+            >Registrate aquí</Link>             
           </div>
-          <div className="text-center">
-            <span> ¿Olvidaste tu contraseña? </span>
-              <Link to='/login/recoverpassword' className="btn btn-outline-dark p-0" >Recuperar</Link>          
+          <div 
+          //  className="text-center "
+          >
+            <span className={style.loginSpanRecuperar} style={{fontFamily:"sans-serif"}}> ¿Olvidaste tu contraseña? </span>
+              <Link to='/login/recoverpassword' style={{fontFamily:"sans-serif", fontWeight:"bolder", color:"purple", padding:"5px"}}
+              // className="btn btn-outline-dark p-2" 
+              >Recuperar</Link>          
           </div> 
-
+          </div>
         </form>
         
        </div>

@@ -1,18 +1,19 @@
 import React , {useState}from "react";
 import Details from "./CheckoutDetail/CheckoutDetail";
-import {  useSelector } from "react-redux";
+import {  useSelector , useDispatch } from "react-redux";
 import style from "./Checkout.module.css";
 import { Card, ListGroup, Form } from "react-bootstrap";
 import BotonPago from '../BtnPago/BtnPago'
 import {Loader} from '../Loader/Loader'
-
+import {updateOrderUser} from '../../Actions/users'
+import Swal from 'sweetalert2'
 const Checkout = () => {
   
   const pedidoDetail =useSelector((state) => state.ordersReducer.orderDetail) || {};
   const { totalPedido, usuarioId } = pedidoDetail;
   const detailSend = useSelector((state) => state.loginReducer.userDetail)
- 
-  
+ const [info,setInfo] = useState(false)
+  const dispatch = useDispatch()
 
   const [order, setOrder] = useState({
     username: detailSend?.usuario,
@@ -20,7 +21,7 @@ const Checkout = () => {
     phone: detailSend?.telefono,
     contactName:detailSend?.nombre,
     city: detailSend?.ciudad,
-    id: usuarioId
+    id: detailSend?.id
     
   });
 
@@ -34,6 +35,24 @@ const Checkout = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleCompra = (e) => {
+    console.log('entro')
+    console.log(order)
+    e.preventDefault()
+        if (!order.phone || !order.contactName || !order.username || !order.address || !order.city) {
+          setInfo(false)
+       Swal.fire({
+            icon: 'error',
+            title: 'Datos incompletos',
+            text: 'Por favor complete los campos nuevamente',
+           
+          })
+       }else{
+      dispatch(updateOrderUser(order))
+      setInfo(true)
+       }
+  }
  
   return (
     <div className={style.cnt}>
@@ -123,8 +142,8 @@ const Checkout = () => {
                   </div>
                   <div className={style.labels}>
                     <Form.Group className={style.datosEnvio}>
-                      <Form.Label className={style.labels}>
-                        Domicilio de envío
+                      <Form.Label className={style.labels} style={{marginLeft:'55px'}}>
+                        Domicilio 
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -140,17 +159,22 @@ const Checkout = () => {
                   </div>
                   
               </Card.Body>
+              <div style={{display:'flex' ,justifyContent:'center' , paddingBottom:'15px'}}>
+              <button className="btn btn-outline-dark" onClick={handleCompra} >Confirmar datos</button>
+              </div>
             </div>
             
             
-            <Details />
+           { info && (<>
+           <Details />
             
 
             <p className={style.total}> Total $ {totalPedido} </p>
             <div className={style.buttonConfirmarCompra}>
-            <BotonPago price={totalPedido}  order= {order}/>
+            <BotonPago price={totalPedido} info={info} />
              
             </div>
+            </>)}
           </div>
         ) : (
           

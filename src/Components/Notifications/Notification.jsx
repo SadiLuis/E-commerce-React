@@ -1,49 +1,61 @@
- import "./Notifications.css";
+import "./Notifications.css";
 //import Notification from "../../Assets/notification.svg"
 // import Message from "../../Assets/message.svg";
 // import Settings from "../../Assets/settings.svg";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Product from "../AdminProduct/CreateProduct";
+import { deleteChatNotifications, deleteNotifications } from "../../Actions/notifications";
 
 
 let notificationIMG = "https://cdn-icons-png.flaticon.com/512/61/61073.png?w=360"
-let messageIMG = "http://assets.stickpng.com/images/584856b4e0bb315b0f7675ac.png" 
+let messageIMG = "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/message-icon-design-template-ff734aad72da096f0e49f3d693042135_screen.jpg?ts=1581057128" 
 
 const Notifications = ({ socket}) => {
     
-  const user = useSelector((state) => state.loginReducer.userDetail)  
+  const user = useSelector((state) => state.loginReducer.userDetail)
+  const dbChatNotifications = useSelector((state) => state.notifReducer.chatNotifications)
+  const dbNotifications = useSelector((state) => state.notifReducer.notifications)  
   const [chatNotifications, setChatNotifications] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
   const [openMessage, setOpenMessage] = useState(false);
+  const dispatch = useDispatch()
+
+  //console.log("db Chat", dbChatNotifications)
+  //console.log("db Notif", dbNotifications)
 
 
+  ////////////////////////////////////////////////////////////////////////////////// Notif when new chat messages
   useEffect(() => {
-    socket.on("notif_newMessage", (data) => {
-        if(data.receiverId == user?.id) {
+    socket?.on("notif_newMessage", (data) => {
+        if(user && data.receiverId == user?.id) {
             let notif = ({
                 sender : data.message.sender,
                 senderName: data.message.senderName,
                 receiver: data.receiverId,
                 type: 1,
-                detail: ""
+                text: ""
             })
+              if (!chatNotifications.includes(notif)) {
                 setChatNotifications((prev) => [...prev, notif]);
-            
+              }
+           
         }
     });
   }, [socket, user]);
 
+  ////////////////////////////////////////////////////////////////////////////////// Notif when new review  posted
   useEffect(() => {
-        socket.on("notif_newReview", (data) => {
-            if(user && user?.rol == 2) {
+        socket?.on("notif_newReview", (data) => {
+            console.log("llego notif_newReview con data: ", data)
+            if(user && user?.rol === "2") {
 
 
                 let notif2 = {
-                    senderName : data.user.nombre,
-                    type: 2,
-                    detail: data.producto
+                    senderName : data.senderName,
+                    type: data.type,
+                    text: data.text
                 }
                 setNotifications((prev) => [...prev, notif2])
                 
@@ -51,48 +63,55 @@ const Notifications = ({ socket}) => {
         })       
   }, [socket, user])
 
-  
+    ////////////////////////////////////////////////////////////////////////////////// Notif when a new order has made
   useEffect(() => {
-    socket.on("notif_newOrder", (data) => {
-        //console.log("escuche evento notif_newOrder", data)
-       if (user && user?.rol == 2) {
+    socket?.on("notif_newOrder", (data) => {
+       if (user && user?.rol == 2 && data.text > 0 ) {
             
         let notif3 = {
             senderName: "",
             type: 3,
-            detail: data.totalPedido
+            text: data.text
         }
          setNotifications((prev) => [...prev, notif3])
         }
     })
 }, [socket, user])
 
+  ////////////////////////////////////////////////////////////////////////////////// Notif when order status has changed
 
 useEffect(() => {
-    socket.on("notif_newOrderStatus", (data) => {
-        console.log("escuche evento notif_newOrderStatus", data)
-       if (user && user?.id == data.usuarioId) {
-            console.log("me cambiaron el status")
+    socket?.on("notif_newOrderStatus", (data) => {
+       if (user && user?.id == data.userId) {
         let notif5 = {
-            senderName: "Su orden N° " + data.pedidoId,
+            senderName: "Su orden N° " + data.text,
             type: 5,
-            detail: data.status === "ENPROCESO" ? "Enviado" : data.status === "ENVIADO" ?  "Entregado" : ""
+            text: data.status === "ENPROCESO" ? "Enviada" : data.status === "ENVIADO" ?  "Entregada" : ""
         }
+
+         if (notifications && notifications.length > 0 && notifications.filter(noti => noti.senderName == notif5.senderName)) {
+          
+         }else{
+           
          setNotifications((prev) => [...prev, notif5])
-        }
-    })
+          
+         }
+        
+      }
+  })
 }, [socket, user])
 
 
+  ////////////////////////////////////////////////////////////////////////////////// Notif when new user has registered
 
 useEffect(() => {
-    socket.on("notif_newRegister", (data) => {
+    socket?.on("notif_newRegister", (data) => {
         if(user && user?.rol == 2) {
             
         let notif4 = {
-            senderName: data.nombre,
+            senderName: data.senderName,
             type: 4,
-            detail: ""
+            text: ""
         }
          setNotifications((prev) => [...prev, notif4])
         }
@@ -100,44 +119,63 @@ useEffect(() => {
 }, [socket, user])
 
 
-  const displayNotification = ({ senderName, type, detail }) => {
+
+  ///////////////////////////////////////////////////////////////////////filtramos para que sean Chatnotif unicas!
+  let auxChatNotifications= new Set( chatNotifications.map( JSON.stringify ) )
+  let uniqueChatNotifications = Array.from( auxChatNotifications ).map( JSON.parse );
+
+  uniqueChatNotifications = uniqueChatNotifications.concat(dbChatNotifications)
+
+  
+  ////////////////////////////////////////////////////////////////////////filtramos para que sean notif unicas!
+  let auxNotifications= new Set( notifications.map( JSON.stringify ) )
+  let uniqueNotifications = Array.from( auxNotifications ).map( JSON.parse );
+
+  uniqueNotifications = uniqueNotifications.concat(dbNotifications)
+  
+  
+
+
+  const displayNotification = (n) => {
     let action;
-    if (type === 1) {
+    if (n.type === 1) {
       action = "le ha enviado nuevos mensajes";
-    } else if (type === 2) {
+    } else if (n.type === 2) {
       action = "puntuó el producto";
-    } else if (type === 3){
+    } else if (n.type === 3){
       action = "Nueva compra por un total de $";
-    } else if (type === 4){
+    } else if (n.type === 4){
         action = "se registró en el sitio";
-      } else if (type === 5) {
-          action = " ha sido "
+      } else if (n.type === 5) {
+          return <span className="notificationNotifications">Su orden N° {n.text} ha sido {n.status === "ENPROCESO" ? "Enviada" : n.status === "ENVIADO" ?  "Entregada" : ""} </span>
       }
     return (
-      <span className="notificationNotifications">{`${senderName} ${action} ${detail} `}</span>
+      <span className="notificationNotifications">{`${n.senderName} ${action} ${n.text} `}</span>
     );
   };
 
-  const handleRead = () => {
+  const handleRead = (userId) => {
     setNotifications([]);
+    dispatch(deleteNotifications(userId))
     setOpen(false);
   };
 
   
-  const handleReadChat = () => {
+  const handleReadChat = (userId) => {
     setChatNotifications([]);
+    dispatch(deleteChatNotifications(userId))    
     setOpenMessage(false);
   };
 
   
   return (
     <div className="navbarNotifications">
-        <span className="logoNotifications">Tranqui! Esto hay que moverlo a la navBar cuando este terminado!</span>
         <div className="iconsNotifications">
+          
             <div className="iconNotifications" onClick={() => setOpen(!open)}>
                     <img src={notificationIMG} className="iconImgNotifications" alt="" />
                     {
-                        notifications?.length > 0 && <div className="counterNotifications">{notifications?.length}</div>
+                        uniqueNotifications?.length > 0 && <div className="counterNotifications">{uniqueNotifications?.length}</div>
                     }
             </div>
         
@@ -146,15 +184,15 @@ useEffect(() => {
                     <img src={messageIMG} className="iconImgNotifications" alt="" />
                     {
                         
-                        chatNotifications?.length > 0 && <div className="counterNotifications">{chatNotifications?.length}</div>
+                        uniqueChatNotifications?.length > 0  && <div className="counterNotifications">{uniqueChatNotifications?.length}</div>
                     }
             </div>
         </div>
         {
             open && <div className="notificationsNotifications">
             
-            {  notifications?.map(n => (  displayNotification(n) )) }
-              <button className="btn btn-outline-secondary" onClick={handleRead}>Marcar como leido</button>  
+            {  uniqueNotifications?.map(n => (  displayNotification(n) )) }
+              <button className="btn btn-outline-secondary" onClick={() => handleRead(user.id)}>Marcar como leido</button>  
                 
              
                 </div>
@@ -163,8 +201,8 @@ useEffect(() => {
 {
             openMessage && <div className="notificationsNotifications">
             
-            {  chatNotifications?.map(n => (  displayNotification(n) )) }
-              <button className="btn btn-outline-secondary" onClick={handleReadChat}>Marcar como leido</button>  
+            {  uniqueChatNotifications?.map(n => (  displayNotification(n) )) }
+              <button className="btn btn-outline-secondary" onClick={() => handleReadChat(user.id)}>Marcar como leido</button>  
                 
              
                 </div>

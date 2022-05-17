@@ -5,7 +5,7 @@ import { ListGroup, Button, Spinner } from "react-bootstrap";
 import {useSelector, useDispatch} from 'react-redux'
 import style from "./CheckoutItem.module.css";
 import { getUserDetail } from "../../../Actions/Auth";
-
+import {Loader} from "../../Loader/Loader"
 // import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
 import Swal from "sweetalert2"
 
@@ -53,15 +53,12 @@ const CheckoutConfirm = ({socket}) => {
 
   return (
     <div>
+    
     {alerta()}
       {!orden ? (
-        <div>
-          <Spinner
-            className={style.spinner}
-            animation="grow"
-            variant="secondary"
-          />
-        </div>
+        
+          <Loader/>
+        
       ) : location.search &&
         location.search.includes("collection_status=approved") ? (
         <div className="container">
@@ -94,7 +91,7 @@ const CheckoutConfirm = ({socket}) => {
             <ListGroup.Item>ID de compra: {datosPago[2].split('=')[1]} </ListGroup.Item>
             <ListGroup.Item>Método de pago: {datosPago[5].split('=')[1] === "credit_card" ? ' Tarjeta de crédito' : ' Tarjeta de Debito'}</ListGroup.Item>
             <ListGroup.Item>Estado del pago: Aprobada</ListGroup.Item>
-           <ListGroup.Item>Dirección: {user?.direccion }</ListGroup.Item> 
+           <ListGroup.Item>Dirección: {user?.direccion } Ciudad de {" "} {user?.ciudad}</ListGroup.Item> 
             <ListGroup.Item>
               Productos: {orden?.productos?.map((p) => p.producto + ", ")}
             </ListGroup.Item>

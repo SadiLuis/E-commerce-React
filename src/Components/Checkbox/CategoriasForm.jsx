@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useId } from 'react'
 import { useDispatch , useSelector} from 'react-redux';
 import { filterByCategory } from '../../Actions/products';
 
 function CategoriasForm({setFlag , categorias , setPage}) {
     const dispatch = useDispatch()
-   
-     
+    const idMap = useId()  
     function handleCheck(e){
         for (let i = 0; i <= categorias?.length; i++){
             document.getElementById(i).checked = false;
@@ -19,17 +18,17 @@ function CategoriasForm({setFlag , categorias , setPage}) {
   return (
       <div>
           <h4><b> Categoría</b></h4>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="all" id="0"onClick={(e) => handleCheck(e)}/>
-            <label class="form-check-label" for="flexCheckDefault">
+          <div className="form-check">
+            <input className="form-check-input" type="checkbox" value="all" id="0"onClick={(e) => handleCheck(e)}/>
+            <label className="form-check-label" htmlFor="flexCheckDefault">
                 Todas
             </label>
           </div>
           {
-          categorias?.map(cat => 
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value={cat.nombre} id={cat.id} onClick={(e) => handleCheck(e)}/>
-            <label class="form-check-label" for="flexCheckDefault">
+          categorias?.map((cat,idMap) => 
+          <div key={`div-${idMap}`} className="form-check">
+            <input key={`input-${idMap}`} className="form-check-input" type="checkbox" value={cat.nombre} id={cat.id} onClick={(e) => handleCheck(e)}/>
+            <label key={`label-${idMap}`} className="form-check-label" htmlFor="flexCheckDefault">
                 {cat.nombre}
             </label>
           

@@ -19,7 +19,7 @@ const TableCustomers = () => {
     const [customersOnPage, setCustomersOnPage] = useState(10)
     const indexLastCustomer = currentPage * customersOnPage
     const indexFirstCustomer = indexLastCustomer - customersOnPage;
-    console.log(customers)
+    //console.log(customers)
 
     const allCustomers = customers.filter(c => c.rol !== '2');
     const currentCustomers = allCustomers.slice(indexFirstCustomer, indexLastCustomer);

@@ -40,24 +40,24 @@ export const getCartDB = (userId) => async dispatch => {
 
       const cartLocal = getCartLocalStorage()
       const {products } = cartLocal
-     
+     console.log(products)
       let newCart = {};
       let newProducts= [];
-      let carritoDB = data.CarritoDetalles?.map(el => {
+      let carritoDB = data.CarritoDetalles.map(el => {
          return { id: el.productoId, quantity: el.cantidad }
      })
-    
+     
      if(products.length ){
-        console.log('entro')
+        //console.log('entro')
      if(carritoDB.length){
        
-       let auxCart=[];
+      let auxCart=[];
         
         
            carritoDB.forEach(cartDB => {
             newProducts = products.map(item =>  
                  item.id === cartDB.id
-                 ?{quantity: item.quantity + cartDB.quantity }
+                 ?{id: item.id , quantity: item.quantity + cartDB.quantity }
                  : item )
             })
 
@@ -68,12 +68,14 @@ export const getCartDB = (userId) => async dispatch => {
              newCart = {
                  products: [...newProducts,...auxCart],
                  precioTotal:[...newProducts, ...auxCart].reduce((prev, e) => {
-                     let prod = json.data.find(el => el.id === e.id);
+                     let prod = json.data?.find(el => el.id === e.id);
 
-                     return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
+                     return prod ?  Math.round((prev + (prod.price * e.quantity)) * 100) / 100 : 0
                  }, 0)
 
+
              };
+             console.log(newCart)
             
              
        saveCartDb(newCart)
@@ -82,7 +84,7 @@ export const getCartDB = (userId) => async dispatch => {
          newCart = {
             products: products,
             precioTotal: products.length ? products.reduce((prev, e) => {
-                let prod = json.data.find(el => el.id === e.id);
+                let prod = json.data?.find(el => el.id === e.id);
    
                 return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
             }, 0)
@@ -95,7 +97,7 @@ export const getCartDB = (userId) => async dispatch => {
       newCart = {
          products: carritoDB,
          precioTotal: carritoDB.length ? carritoDB.reduce((prev, e) => {
-             let prod = json.data.find(el => el.id === e.id);
+             let prod = json.data?.find(el => el.id === e.id);
 
              return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
          }, 0)
@@ -104,7 +106,7 @@ export const getCartDB = (userId) => async dispatch => {
      saveCartDb(newCart)
    }
    
-      return dispatch({ type: GET_CART, payload: newCart , idCart: data.id});
+      return dispatch({ type: GET_CART, payload: newCart , idCart: data});
 
    } catch (err) {
      
@@ -112,15 +114,15 @@ export const getCartDB = (userId) => async dispatch => {
    }
 }
 
-export const createCartDb = (id) => async dispatch => {
+export const createCartDb = () => async dispatch => {
 
    try{
-
+ const { data } = await axios.get(`${BASEURL}/user`, getHeaderToken());
    await axios.post(`${BASEURL}/carritos`,
       {},
       getHeaderToken())
 
-      dispatch(getCartDB(id))
+      dispatch(getCartDB(data.id))
  }catch(e){
      console.log(e)
      
@@ -153,19 +155,32 @@ export const deleteProductCart = async (product, id) => {
       }, getHeaderToken())
 }
 
-export const deleteAllCartDB = async id =>  {
+export const deleteAllCartDB = id => async dispatch =>{
    try {
    
       await axios.delete(`${BASEURL}/carritos/${id}`, getHeaderToken())
-     
+
+      await axios.post(`${BASEURL}/carritos`, {},getHeaderToken())
+      
       
    } catch (err) {
       return console.log(err);
+
+   }finally {
+      dispatch(getCartDB(id));
    }
 }
 
 export const deleteAllCart = () => {
    return {
       type: DELETE_CART
+   }
+}
+
+export const restDisabled = (id , cantidad) => {
+   return {
+      type:'REST_ITEM_DISABLED',
+      payload: id,
+      cantidad
    }
 }

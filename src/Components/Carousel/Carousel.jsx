@@ -4,30 +4,42 @@ import { getProductsByCat } from '../../Actions/products'
 import CardCarousel from './CardCarousel'
 import "./Carousel.css"
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
+import axios from 'axios'
+import { BASEURL } from '../../Assets/URLS'
 
 
 
-function Carousel({category}) {
-    // HardCode MAL
+function Carousel({idCategory, category}) {
     
-    let idCategory = 0
-    if (category === "Sillas") idCategory = 1
-    if(category === "Sillones") idCategory = 2
-    if(category === "Mesas") idCategory = 3
-    if(category === "Iluminacion") idCategory = 4
-    if(category === "Exterior") idCategory = 5
     
     const dispatch = useDispatch()
-    let recommendedProducts = useSelector((state) => state.productsReducer.sameCategory)
-
+    const [recommendedProducts, setRecommendedProducts] = useState([])
+    //let recommendedProducts = useSelector((state) => state.productsReducer.sameCategory)
     let [interval, setInterval] = useState({
         init: 0,
-        end: 3
+        end: 4
     })
     
     useEffect(() => {
-        dispatch(getProductsByCat(idCategory))   
+        if(idCategory && idCategory>0) {
+        const getProducts = async() => {
+        try {
+            var res = await axios.get(`${BASEURL}/products/category/${idCategory}`)
+            setRecommendedProducts(res.data)
+            console.log("reco", recommendedProducts)
+        }catch(err){
+            console.log(err)
+        }
+    };
+        
+        getProducts()
+    }    
     }, [idCategory])
+
+    // useEffect(() => {
+    //     var json = await axios.get(`${BASEURL}/products/category/${idCategory}`)
+    //     dispatch(getProductsByCat(idCategory))   
+    // }, [idCategory])
 
     
 
@@ -36,8 +48,8 @@ function Carousel({category}) {
         let auxInit = interval.init
         let auxEnd= interval.end
         setInterval({
-            init: auxInit + 3,
-            end: auxEnd + 3
+            init: auxInit + 4,
+            end: auxEnd + 4
         })
         
     }
@@ -46,8 +58,8 @@ function Carousel({category}) {
         let auxInit = interval.init
         let auxEnd= interval.end
         setInterval({
-            init: auxInit - 3,
-            end: auxEnd - 3
+            init: auxInit - 4,
+            end: auxEnd - 4
         })
     }
 
@@ -55,15 +67,15 @@ function Carousel({category}) {
   if (recommendedProducts.length > 0) {
       return (
           
-            <div class="container">
-                <h2 class="titulo">Mas productos de la categoría <b>{category}</b> que podrían interesarte</h2>
+            <div className="container">
+                <h2 className="titulo">Mas productos de la categoría <b>{category}</b> que podrían interesarte</h2>
                 {/* <!-- Slider --> */}
                 
 
-                <div class="containerCarousel">
-                <button disabled={interval.init > 0  ? false : true}  onClick={()=> handlePrev()} class="btnPrev"><BsArrowLeftCircle size={40}/></button>
+                <div className="containerCarousel">
+                <button disabled={interval.init > 0  ? false : true}  onClick={()=> handlePrev()} className="btnPrev"><BsArrowLeftCircle size={40}/></button>
                      {recommendedProducts?.slice(interval.init, interval.end).map( (product) => (
-                        <div class="carouselCards" key={product.id} >         
+                        <div className="carouselCards" key={product.id} >         
                         <CardCarousel 
                             
                             title={product.title}      
@@ -74,7 +86,7 @@ function Carousel({category}) {
                         />
                         </div>
                      ))}
-                <button disabled={interval.end < recommendedProducts.length  ? false : true} onClick={()=>handleNext()}class="btnNext"><BsArrowRightCircle size={40}/></button>
+                <button disabled={interval.end < recommendedProducts.length  ? false : true} onClick={()=>handleNext()}className="btnNext"><BsArrowRightCircle size={40}/></button>
      
                 </div>        
 
@@ -83,7 +95,7 @@ function Carousel({category}) {
             )
   }else {
     return (
-                <h1>Loading...</h1>
+                <h1>No encontramos productos en la misma categoria </h1>
         )
   }  
  

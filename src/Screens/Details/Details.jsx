@@ -1,7 +1,7 @@
 import React, { createRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import {getProductById} from "../../Actions/products.js"
+import {getCategories, getProductById} from "../../Actions/products.js"
 import { addItem } from "../../Actions/cart.js";
 import styles from "./Details.module.css"
 import BotonPago from "../../Components/BtnPago/BtnPago.jsx";
@@ -12,8 +12,7 @@ import Review from "../../Components/Review/ScreenReviews/Reviews.jsx";
 import { getUserDetail} from '../../Actions/Auth';
 import { postFav } from "../../Actions/Favs.js";
 import animate from "animate.css"
-import { Loader } from "../../Components/Loader/Loader.jsx";
-
+import {Loader} from '../../Components/Loader/Loader'
 
 
 export default function Detail() {
@@ -22,10 +21,17 @@ export default function Detail() {
   const dispatch = useDispatch()
   let myRef = createRef()
   const product = useSelector((state) => state.productsReducer.detailProduct);
+  
+  //para encontrar el idCategory ya que no viene en getProductsByID
+  const categories = useSelector((state) => state.productsReducer.categories);
+  const idCategory = categories?.filter((el) => el.nombre === product?.category)
 
+  console.log("idCat", idCategory)
+  
   let [index, setIndex] = useState(0)
 
   useEffect(() => {
+    dispatch(getCategories())
     dispatch(getProductById(idProduct))
     dispatch(getUserDetail())
   }, [idProduct])
@@ -76,7 +82,6 @@ export default function Detail() {
     
   
   
-  
   if(product.title) {
   return ( 
       <>
@@ -107,7 +112,7 @@ export default function Detail() {
                 <p><b>Descripcion:</b> {product?.description}</p>
                 <span><b>Dimensiones:</b> {product?.size}</span> 
                 <div className={styles.btnGroup}>
-                  {product?.statusProduct && (
+                  {product?.statusProduct && product?.cantidad>0 && (
                     <div className="btnBerna">
                     <button className="btn btn-secondary me-1" type='button' onClick={handleAdd}>Agregar al carrito</button>
                   </div>
@@ -120,14 +125,15 @@ export default function Detail() {
                         <button className="btn btn-warning" onClick={() => handleFav()}>Agregar a favoritos</button>
                       </div>
                 </div>
-                {product?.statusProduct
+                {product?.statusProduct && product?.cantidad>0
                   ?(<h6 className="animate__animated animate__slideInRight animate__animated animate__fadeOutLeft text-primary fw-bold">Una vez confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles de su producto</h6>)
                   :(<span className="text-danger fw-bold">Producto no disponible</span>)                
                 }
                 
                </div>
+               
                <div className={styles.recommended}>
-                 <Carousel category={product?.category} />
+                  <Carousel idCategory={idCategory[0]?.id} category={idCategory[0]?.nombre}/> 
               </div>
 
               <div className={styles.comentariosProducto}>

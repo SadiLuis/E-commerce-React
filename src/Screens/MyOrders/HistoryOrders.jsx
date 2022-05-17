@@ -4,7 +4,7 @@ import { getAllProducts,  getProductById } from '../../Actions/products'
 import styles from './Orders.module.css'
 import { Link } from 'react-router-dom'
 
-export default function HistoryOrders({ fecha, productos, total, status }) {
+export default function HistoryOrders({ fecha, productos, total, status , pedidoId }) {
 
     const dispatch = useDispatch()
     const product = useSelector((state) => state.productsReducer.detailProduct);
@@ -27,6 +27,7 @@ export default function HistoryOrders({ fecha, productos, total, status }) {
 
     return (
         <div style={{ textAlign: '-webkit-center' }}>
+            
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div className="row px-2">
@@ -73,8 +74,9 @@ export default function HistoryOrders({ fecha, productos, total, status }) {
                                         <Link to={`/review/${e.id}`}>
                                             <button style={{ font: '-webkit-small-control', marginBottom: '1rem' }} className='row btn btn-outline-dark fs-6' >
                                                 review
-                                            </button>
+                                            </button >
                                         </Link>
+                                        
                                     </div>
 
 
@@ -91,6 +93,9 @@ export default function HistoryOrders({ fecha, productos, total, status }) {
 
                         ))
                     }
+                    <Link to={`/buyDetail/${pedidoId}`}>
+                    <button style={{ font: '-webkit-small-control', marginBottom: '1rem' }} className='row btn btn-outline-dark fs-6'>Detalle de la compra</button>
+                     </Link>
                 </div>
 
                 <div className="row">

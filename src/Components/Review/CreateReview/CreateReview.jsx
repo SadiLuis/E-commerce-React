@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { getProductById } from '../../../Actions/products';
 import styles from "./Create.module.css"
 import { getCommentByProductId, postReview } from '../../../Actions/Comments';
+import { getAllUsers} from '../../../Actions/Chat';
 import Swal from "sweetalert2";
 import { validationFunction } from "./ValidationFunction";
 
@@ -12,6 +13,16 @@ import { validationFunction } from "./ValidationFunction";
 import { FaStar } from 'react-icons/fa'
 
 function CreateReview({socket}) {
+//    /* ANIMACION */
+//  const [letterClass, setLetterClass] = useState('text-animate')
+//  useEffect(() => {
+//    return setTimeout(() => {
+//      setLetterClass('text-animate-hover')
+//    }, 5000)
+//  }, [])
+
+//////////////////////////////////
+
   const { idProduct } = useParams();
   const dispatch = useDispatch()
 
@@ -25,16 +36,24 @@ function CreateReview({socket}) {
   const product = useSelector((state) => state.productsReducer.detailProduct);
   const reviews = useSelector((state) => state.commentReducer.comentariosProducto)
   const user = useSelector((state) => state.loginReducer.userDetail)
+  
+  //para encontrar el usario administrador
+  const allUsers = useSelector((state) => state.chatReducer.allUsers)
+  let admin = allUsers?.find( (elem) => elem.rol === "2")
+
+
 
   
   let comentoAntes = reviews?.filter(elem => elem.usuarioId == user?.id).length > 0 ? true : false 
-  console.log("comentoAntes", comentoAntes)
   
   useEffect(() => {
     dispatch(getProductById(idProduct))
     dispatch(getCommentByProductId(idProduct))
+    dispatch(getAllUsers())
 
   }, [idProduct])
+
+  
 
 
 
@@ -70,7 +89,7 @@ function CreateReview({socket}) {
       
     dispatch(postReview(comment))
     //socket
-    socket.emit("notif_newReview", {user, producto: product?.title})
+    socket.emit("notif_newReview", {user, admin, producto: product?.title})
     
     Swal.fire({
       position: "center",
@@ -135,10 +154,10 @@ function CreateReview({socket}) {
             }
           </div>
 
-            <div className={styles.subtitle}>
-              <p>Malo</p>
-              <p>Excelente</p>
-            </div>
+            {/* <div className={styles.subtitle}>
+              <p className={letterClass} >Malo</p>
+              <p className={letterClass} >Excelente</p>
+            </div> */}
             </div>
               <div className={styles.productImg}>
                 <img src={product?.images[0]} alt="producto" width={130} height={130}/>
