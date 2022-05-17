@@ -271,8 +271,8 @@ const NavBarAdmin = () => {
 
         
  } 
-          <NavLink
-            to="/dashboard/offers"
+          {/* <NavLink
+            to="/dashboard/newscreator"
             style={{
               border: "none",
           background: "none",
@@ -284,8 +284,8 @@ const NavBarAdmin = () => {
          marginBottom:"15rem"
             }}
           >
-            Ofertas
-          </NavLink>
+            Newsletters
+          </NavLink> */}
         </>
       ) : (
         <NavBarAuthenticated />
