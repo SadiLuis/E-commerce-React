@@ -32,10 +32,10 @@ const favs = useSelector((state) => state.favReducer.myFavs)
         <h1 className={styles.title}>Mis favoritos</h1>
             <div className={styles.container}>
 
-                        {
-                     favs?.map((e)=> (
+                  { 
+                     favs.length ? favs.map((e)=> (
                        <FavCard id={e.productoId}/>
-                     ))
+                     )) : <div>Cargando...</div>
                     } 
                     </div>
         </div>
