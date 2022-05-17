@@ -61,7 +61,7 @@ const CheckoutConfirm = ({socket}) => {
             </ListGroup.Item>
 
             {/*  acá primer mail */}
-           {statusPago==="approved" && statusPago==="approved" ?(
+           {/* {statusPago==="approved" && statusPago==="approved" ?(
            <ConfirmaciónMail 
               nombre={ user?.nombre}
              email= { user?.email}
@@ -72,7 +72,7 @@ const CheckoutConfirm = ({socket}) => {
              ciudad={ user?.ciudad}
             /> ):(<></>)
 
-           }
+           } */}
 
 
             <ListGroup.Item>
