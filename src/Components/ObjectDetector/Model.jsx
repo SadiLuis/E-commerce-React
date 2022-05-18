@@ -9,6 +9,8 @@ import Carousel from '../Carousel/Carousel';
 import { getCategories } from '../../Actions/products';
 import { useDispatch, useSelector } from 'react-redux';
 //import "@tensorflow/tfjs-backend-webgl";
+import spinner from "../../Assets/Loader.gif"
+
 
 
 
@@ -21,9 +23,13 @@ function Model() {
     const [recommendedProducts, setRecommendedProducts] = useState([])
     const fileInputRef = useRef()
     const dispatch = useDispatch()
-
+    const [stateModel, setStateModel] = useState(null)
+    const[auxState, setAuxState] = useState(true)
     let categorias = useSelector((state) => state.productsReducer.categories)
     const categoriasDet = new Set()
+
+     const scrollToDiv = (ref) => window.scrollTo(0, ref.current.offsetTop);
+      const recoRef = useRef();
     
     //HardCode porque las categorias del modelo salen en ingles
     useEffect(() => {
@@ -104,7 +110,8 @@ function Model() {
     
 
     const detectObjects =  async(imageElement, imgSize) => {
-      alert("Esto puede demorar unos segundos...")
+      setStateModel("Loading")
+      setAuxState(false)
 
       //const model = await mobilenet.load()
       const model = await cocoSsd.load({});
@@ -113,63 +120,99 @@ function Model() {
       
        
       setResults(normalizePredictions(predictions, imgSize))
+      setStateModel(null)
       console.log("resultados del modelo", predictions)
     }
 
     
-
     
     
 
-    
-  return (
-    <div className="ObjectDetectorContainer">
-      <h1 className='header'>Sin ideas?</h1>
-      <h4 className='header'>Subi una foto de un ambiente o producto y dejá que nosotros te recomendemos</h4> 
-      <div className='SelectButtonTS'>
-            <button onClick={uploadImage}className='btn btn-outline-secondary'>Subi tu imagen</button>
-
-      </div>
-      <div className='DetectorContainer'>
-        {imageData && <img className='TargetImg' src={imageData} alt="product" ref={imageRef}/>}
+  
+    return (
+      <div className="ObjectDetectorContainer">
+        {
+          auxState && 
+          <>
+            <h1 className='headerTS'><b>Sin ideas?</b></h1>
+              <h4 className='subheaderTS'><b>Subi una foto de un ambiente o producto y dejá que MOBI te recomiende</b></h4> 
+              <div className='SelectButtonTS'>
+                    <button onClick={uploadImage}className='btn btn-outline-secondary'>Subi tu imagen</button>
+              </div>
+          </>
+        }
         
-        {results && results?.map(el => (
+        { stateModel && 
           
+          <div className='TSspinner'>
+            <h2 className='subheaderTS'><b>Buscando recomendaciones...</b></h2> 
+              
+          <img src={spinner} alt="spinner gif" className='IMGspinner' />
+                {/* <h1 className='spinnerTxt'>Loading...</h1> */}
+          </div>
+        }
 
-                  <div style={{
-                    position: "absolute",
-                    left: el.bbox[0] + "px",
-                    top: el.bbox[1] + "px",
-                    width: el.bbox[2] + "px",
-                    height: el.bbox[3] + "px",
 
-                    border: "4px solid #1ac71a",
-                    backgroundcolor: "transparent",
-                    zindex: "20",
-                  }}>
-                                        <p className='pbox'>
-                                          {el.class +"   " + el.score}
-                                        </p>
-                  </div>
-                
-          ))}
-      </div>    
-      <input type="file" className='HiddenFileInput' ref={fileInputRef} onChange={onSelectImage}/>
 
-      <div className="odRecommendedProducts">
-      {
-          recommendedProducts && recommendedProducts?.map((elem) => (
-            <div>
-                  <Carousel idCategory={elem.id} category={elem.nombre}  />
+        {
+          results &&   
+          <div className="TSscrollBtn">
 
-            </div>
-          ))
-      }    
-      </div>            
-
-      
-    </div>
-  );
+              <div><button className='SelectButtonTS' onClick={uploadImage}className='btn btn-secondary'>Subi otra imagen</button></div>
+              <div> <button className='SelectButtonTS' onClick={() => scrollToDiv(recoRef)} type="button" class="btn btn-secondary">Ver Recomendaciones</button></div>
+              
+    
+          </div>
+        }  
+        
+        
+        {/* {results && <button onClick={}>Ver las recomendaciones</button>} */}
+        <div className='DetectorContainer'>
+          {imageData && <img className='TargetImg' src={imageData} alt="product" ref={imageRef}/>}
+          
+          {results && results?.map(el => (
+            
+  
+                    <div style={{
+                      position: "absolute",
+                      left: el.bbox[0] + "px",
+                      top: el.bbox[1] + "px",
+                      width: el.bbox[2] + "px",
+                      height: el.bbox[3] + "px",
+  
+                      border: "4px solid #1ac71a",
+                      backgroundcolor: "transparent",
+                      zindex: "20",
+                    }}>
+                                          <p className='pbox'>
+                                            {el.class === "couch" ? "Sillon" : "" }
+                                            {el.class === "chair" ? "Silla" : "" }
+                                            {el.class === "potted plant" ? "Planta + Maceta" : "" }
+                                            {el.class === "vase" ? "Jarron" : "" }
+                                            {el.class === "table" ? "Mesa" : "" }
+                                            {/* {el.class +"   " + el.score} */}
+                                          </p>
+                    </div>
+                  
+            ))}
+        </div>    
+        <input type="file" className='HiddenFileInput' ref={fileInputRef} onChange={onSelectImage}/>
+  
+        <div ref={recoRef} className="odRecommendedProducts">
+        {
+            recommendedProducts && recommendedProducts?.map((elem) => (
+              <div>
+                    <Carousel idCategory={elem.id} category={elem.nombre}  />
+  
+              </div>
+            ))
+        }    
+        </div>            
+  
+        
+      </div>
+    );
+          
 }
 
 export default Model;
