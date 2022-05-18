@@ -13,7 +13,7 @@ import NavBarAll from "./Components/NavBar/NavBar"
 import ContactForm from "./Components/ContactForm/ContactForm";
 import EditProduct from "./Components/AdminProduct/EditProduct"
 import Profile from "./Screens/Profile/Profile"
-
+import EditProfile from "./Screens/Profile/EditProfile"
 import MyOrders from "./Screens/MyOrders/MyOrders";
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -59,6 +59,7 @@ import DetailPedido from "./Screens/MyOrders/DetailPedido";
 
 import io from "socket.io-client"
 import Notifications from "./Components/Notifications/Notification";
+import Model from "./Components/ObjectDetector/Model";
 const socket = io.connect(BASEURL)
 
 
@@ -87,7 +88,7 @@ function App() {
 
     <div className="App">
 
-      <NavBarAll />
+      <NavBarAll socket={socket}/>
       <Notifications socket={socket} />
 
       <Routes>
@@ -111,6 +112,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/contactform" element={<ContactForm />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/editProfile" element={<EditProfile />} />
         <Route path='/cart' element={<Cart />} />
         <Route exact path="/" element={<Landing />} />
         <Route path="/about" element={<About />} />
@@ -132,6 +134,8 @@ function App() {
          <Route path="/buyDetail/:id" element = {<DetailPedido />} />
         <Route path="/resetpassword/:userId" element={<ResetPasswordForm />} />
         <Route path="/MyFavs" element={<MyFavs/>}/>
+
+        <Route path="/ideas" element={<Model/>}/>
       </Routes>
 
 

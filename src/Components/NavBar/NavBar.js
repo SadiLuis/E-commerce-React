@@ -97,6 +97,22 @@ const NavBarAll = ({isAuth, myUser}) => {
         }}>
       <ShoppingBtn />
         </div >
+
+        <NavLink to="/ideas"
+          style={{
+            border:"none",
+            background: "none",
+            color: "black",
+            fontSize: "1rem",
+            marginLeft: "0.05rem",
+            cursor: "pointer",
+            textDecoration: "none",
+             marginBottom:"15rem"
+
+          }}>Ideas
+          </NavLink>
+
+        
     </>
   );
 };
@@ -218,7 +234,7 @@ const NavBarAdmin = () => {
           >
             Dashboard
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/dashboard/sales"
             style={{
               border: "none",
@@ -232,7 +248,7 @@ const NavBarAdmin = () => {
             }}
           >
             Sales
-          </NavLink>
+          </NavLink> */}
           {
           admin? 
            (
@@ -255,8 +271,8 @@ const NavBarAdmin = () => {
 
         
  } 
-          <NavLink
-            to="/dashboard/offers"
+          {/* <NavLink
+            to="/dashboard/newscreator"
             style={{
               border: "none",
           background: "none",
@@ -268,8 +284,8 @@ const NavBarAdmin = () => {
          marginBottom:"15rem"
             }}
           >
-            Ofertas
-          </NavLink>
+            Newsletters
+          </NavLink> */}
         </>
       ) : (
         <NavBarAuthenticated />

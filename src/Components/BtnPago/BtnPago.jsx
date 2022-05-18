@@ -45,7 +45,7 @@ let price = props.price
         e.preventDefault()
         if (props.info) {
           dispatch(Pago(price))
-          deleteAllCartDB(idUser)
+         dispatch(deleteAllCartDB(idUser))
         
        }
        

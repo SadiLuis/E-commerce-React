@@ -53,9 +53,9 @@ function ContactForm() {
       <div className={styles.topForm}>
      <h3>Contactanos</h3> 
     </div> 
-       <><div className="container mt-5">
-
-        </div><div className="container mt-5">
+       <>
+       
+        <div className="container mt-5" >
             {status && renderAlert()}
             <form className="row g-3" onSubmit={handleSubmit}>
               <div className="col-md-6">
@@ -132,7 +132,8 @@ function ContactForm() {
                 </button>
               </div>
             </form>
-          </div></>
+          </div>
+          </>
  
     </>
   );

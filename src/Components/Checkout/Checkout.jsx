@@ -21,7 +21,7 @@ const Checkout = () => {
     phone: detailSend?.telefono,
     contactName:detailSend?.nombre,
     city: detailSend?.ciudad,
-    id: usuarioId
+    id: detailSend?.id
     
   });
 

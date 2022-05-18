@@ -12,9 +12,9 @@ function MailEntregado(props) {
     }
     console.log(templateParams)
 
-    let serviceId = "service_c72nnat"
-    let templateId = "template_7145t9f"
-    let publicId=  "nJuhyyhJhkM9n5dSe"
+    let serviceId = "service_dg758cg"
+    let templateId = "template_ist69pb"
+    let publicId= "E-vdb5C3uANmhaNFl"
     emailjs.send(serviceId, templateId, templateParams, publicId)
     .then(function(response){
         

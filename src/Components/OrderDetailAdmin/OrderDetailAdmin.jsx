@@ -11,12 +11,15 @@ import MailEntregado from '../Mails/MailEntregado';
 import Status from "../Mails/Status"
 
 
+
 const OrderDetailAdmin = ({socket}) => {
     const dispatch = useDispatch();
     const { id, idUser } = useParams();
     const order = useSelector(state => state.ordersReducer.orderDetail);
     const userById = useSelector(state => state.userReducer.userDetail)
     const navigate = useNavigate();
+    console.log(order)
+    console.log(userById)
     
 
     useEffect(() => {
@@ -193,34 +196,39 @@ const OrderDetailAdmin = ({socket}) => {
                     </div>
 
                     {/* Mails */}
-                    {/* <div>
-                        {order.status==="ENVIADO" && order.status==="ENVIADO"( 
+                    <div>
+                    
+
+
+
+                         {order?.status==="ENVIADO" && order?.status==="ENVIADO"?( 
                                      <MailEnviado 
-                                     nombre={userById.nombre}
-                                      email={userById.email}
+                                     nombre={userById?.nombre}
+                                      email={userById?.email}
                                       cantidad={order?.productos?.map((c)=>c.cantidad)}
                                       producto={order?.productos?.map((p)=>p.producto)}
                                       total={order?.total?.map((t)=>t.total)}
-                                      pedidoId={order?.pedidoId?.map((pI)=>pI.pedidoId)}
-                                     direccion={userById.direccion}
-                                     ciudad={userById.ciudad}
-                                      provincia={userById.provincia}
-                                     /> ) 
-                                        } */}
+                                      pedidoId={order?.pedidoId}
+                                     direccion={userById?.direccion}
+                                     ciudad={userById?.ciudad}
+                                      provincia={userById?.provincia}
+                                     /> ) :(<></>)
+                                        }  
 
                                            
-                                             {/* {order.status==="ENTREGADO" ?
+                                              {order?.status==="ENTREGADO" && order?.status==="ENTREGADO"?(
                                             <MailEntregado 
-                                        nombre={userById.nombre}
-                                        email={userById.email}
-                                        pedidoId={order?.pedidoId?.map((pI)=>pI.pedidoId)}
-                                        direccion={userById.direccion}
-                                    ciudad={userById.ciudad}
-                                    provincia={userById.provincia} 
-                                         /> : <h5>Pedido entregado</h5>
-                                            }  */}
+                                        nombre={userById?.nombre}
+                                        email={userById?.email}
+                                        pedidoId={order?.pedidoId}
+                                        direccion={userById?.direccion}
+                                        ciudad={userById?.ciudad}
+                                        provincia={userById?.provincia} 
+                                         /> 
+                                         ):(<></>)
+                                            }   
 
-                    {/* </div> */}
+                     </div> 
                        
 
 

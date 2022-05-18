@@ -1,14 +1,23 @@
 
 import React from 'react'
 import "./Carousel.css"
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { addItem} from '../../Actions/cart'
 import Swal from "sweetalert2";
-
+import { getUserDetail} from '../../Actions/Auth';
+import { postFav } from "../../Actions/Favs.js";
 function CardCarousel({title, category, price, img, id}) {
   
     const dispatch = useDispatch()
+
+  
     
+    React.useEffect(()=> {
+      dispatch(getUserDetail())
+    }, [])
+  
+    const myUser = useSelector((state)=> state.loginReducer.userDetail)
+
     const handleCart =  () => {
         
        dispatch(addItem(id));
@@ -19,6 +28,25 @@ function CardCarousel({title, category, price, img, id}) {
           timer: 1000,
         });
       };
+      const handleFav = () => {
+  
+        let body = {
+         usuarioId: myUser?.id,
+         productoId: id
+        }
+       dispatch(postFav(body))  
+        Swal.fire({
+         
+         icon: "success",
+         title: "Producto agregado a favoritos",
+         showConfirmButton: false,
+         timer: 1500,
+       });
+      }
+
+    
+
+
 
 
     return (
@@ -35,6 +63,7 @@ function CardCarousel({title, category, price, img, id}) {
     </a>    
     <div className="carouselBtn">
     <button onClick={()=> handleCart()} className="btn btn-outline-dark">Agregar al carrito</button>
+    <button className="btn btn-warning" style={{marginTop:'1rem'}} onClick={() => handleFav()}>Agregar a favoritos</button>
     </div>
   </div>
   

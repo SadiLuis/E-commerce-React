@@ -1,4 +1,3 @@
-
 .carousel {
     margin-top: 17px;
     position: relative;
@@ -8,6 +7,14 @@
 .box2 img {
     vertical-align: middle;
     border-style: none
+}
+
+.imgLand {
+    cursor: pointer;
+}
+
+.imgLand :hover {
+    filter: brightness(30%);
 }
 
 .col1 {
@@ -30,6 +37,11 @@
 .titleInfo {
     font-family: Graphik Web, sans-serif;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.titleInfo:hover {
+    filter: brightness(30%);
 }
 
 .footer {
@@ -80,4 +92,9 @@
     font-family: Graphik Web, sans-serif;
     color: rgb(37, 37, 37);
     font-size: 20px;
+}
+
+.titleO:hover {
+    filter: brightness(30%);
+    cursor: pointer;
 }

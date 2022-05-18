@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {register} from '../../Actions/Auth'
 import { validateEmail,validateTlf } from '../../Helpers/ValidateForm'
+import AnimacionLetra from '../../Assets/ANIMACION/Letra/AnimacionLetra'
 import Swal from 'sweetalert2'
 import uno from '../../Assets/1.jpg'
 import dos from '../../Assets/2.jpg'
@@ -85,14 +86,25 @@ const validateform = function (form) {
   // if (form.confirm_contrasena !== form.contrasena) {
   //   errors.confirm_contrasena = "Las contraseñas no coinciden";
   // }
-  if (!form.localidad) {
-    errors.localidad = 'Debe ingresear la localidad donde reside'
+  if (!form.ciudad) {
+    errors.ciudad = 'Debe ingresear la ciudad donde reside'
 }
 
   return errors;
 };
 
 export default function Register({socket}) {
+  /* ANIMACION */
+  // const [letterClass, setLetterClass] = useState('text-animate')
+  // useEffect(() => {
+  //   return setTimeout(() => {
+  //     setLetterClass('text-animate-hover')
+  //   }, 5000)
+  // }, [])
+
+//////////////////////////////////
+
+
   const isRegister = useSelector(state => state.loginReducer.isRegister)
   const [focus , setFocus] = useState({ 
   nombre: false,
@@ -147,7 +159,7 @@ export default function Register({socket}) {
     e.preventDefault()
     
     if(Object.keys(error).length){
-      
+      console.log(error)
       Swal.fire({
         text: `Datos incorrectos , por favor verifique que los datos ingresados sean correctos`,
         icon: "error",
@@ -315,7 +327,7 @@ export default function Register({socket}) {
           value={form.ciudad} placeholder="Ciudad" name='ciudad'
           onFocus={(e) => handleChange(e.target.name , true)}
           />
-          {focus.localidad && error.localidad && <span className={`text-danger ${style.span}`}  /* style={{marginLeft:'100px'}} */>{error.localidad}</span> }
+          {focus.ciudad && error.ciudad && <span className={`text-danger ${style.span}`}  /* style={{marginLeft:'100px'}} */>{error.ciudad}</span> }
       </div>
       {/* DIRECCIONS */}
       <div className={`mb-1 ${style.formInput}`}>
@@ -344,10 +356,18 @@ export default function Register({socket}) {
 
       <div className="form-group form-check" /* style={{marginTop:'-25px'}} */>
       </div>
-      <button type="submit" class="btn btn-primary w-100" >Registrarse</button>
-      <div div className="form-group form-check p-2 text-center" style={{marginTop:'5px'}}>
-        <small  >El equipo de mueblesApp nunca te pedirá tu correo o contraseña. </small>
-      </div>
+      <button type="submit" class="btn btn-outline-dark w-100" >Registrarse</button>
+      {/* <div div className="form-group form-check p-2 text-center" >
+        <small className={style.aviso} >
+          El equipo de 
+          <large className={style.aviso2}> 
+          <span className={letterClass}> M</span>
+          <span className={letterClass}> O</span>
+          <span className={letterClass}> B</span>
+          <span className={letterClass}> I</span>
+          </large>
+         nunca te pedirá tu correo o contraseña. </small>
+      </div> */}
 
     </form>
 

@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import './Pushbar.css';
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 
 const PushBar = ({ show, handleClose, setState, state }) => {
@@ -38,7 +39,14 @@ const PushBar = ({ show, handleClose, setState, state }) => {
                 email: state.email
             }
             axios.post('http://localhost:5000/newsletter', body, config)
+            Swal.fire({
+                text: "¡Gracias por unirte al Newsletter!",
+                icon: "success",
+                confirmButtonText: "Continuar",
+                timer: 5000,
+            });
             handleClose()
+
         }
         else alert('Favor de llenar todos los datos solicitados')
     }

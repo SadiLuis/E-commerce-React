@@ -1,13 +1,15 @@
 import {useEffect} from 'react'
 import Items from './Items'
 import {useSelector,useDispatch} from "react-redux";
-import {updateCart,deleteAllCartDB ,deleteAllCart} from '../../Actions/cart'
+import {updateCart,deleteAllCartDB ,deleteAllCart } from '../../Actions/cart'
 import {Wrapper, Top ,TopButton ,TopText ,TopTexts ,Button ,Info 
    ,SummaryItem ,Summary ,SummaryItemText ,SummaryButton ,SummaryTitle ,ButtonEmpty , Anuncio} from './Styles'
 import { useNavigate } from 'react-router-dom';
 import { FaCartPlus } from "react-icons/fa";
 import { postOrder } from '../../Actions/orders';
 import Swal from 'sweetalert2'
+import{getUserDetail} from '../../Actions/Auth';
+
 const Cart = () => {
  
   let items = useSelector((state) => {
@@ -32,8 +34,8 @@ const Cart = () => {
   console.log(items)
   useEffect(() => {
     dispatch(updateCart());
-   
-  }, []);
+    if(localStorage.token_ecommerce) dispatch(getUserDetail())
+  }, [dispatch]);
      
   let total = subtotal >= 7000 ? subtotal  : subtotal === 0  ? 0 : subtotal + 150
    
@@ -82,9 +84,11 @@ const Cart = () => {
   };
 
   const deleteCart = () =>{
+
     dispatch(deleteAllCart())
-   if(idUser) deleteAllCartDB(idUser.id)
-  }
+   if(idUser) dispatch(deleteAllCartDB(idUser.id))
+      
+   }
 
   return (
     <>

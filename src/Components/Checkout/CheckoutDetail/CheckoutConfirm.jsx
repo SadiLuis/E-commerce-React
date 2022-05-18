@@ -5,9 +5,9 @@ import { ListGroup, Button, Spinner } from "react-bootstrap";
 import {useSelector, useDispatch} from 'react-redux'
 import style from "./CheckoutItem.module.css";
 import { getUserDetail } from "../../../Actions/Auth";
-
-// import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
-import Swal from "sweetalert2"
+import {Loader} from "../../Loader/Loader";
+ import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
+import animate from "animate.css"
 
 
 const CheckoutConfirm = ({socket}) => {
@@ -42,26 +42,16 @@ const CheckoutConfirm = ({socket}) => {
   function onClick() {
     navigate("/home");
   }
-  const alerta=()=> {
-    Swal.fire({
-    icon: 'info',
-    title: 'Customice su producto',
-    text: 'Un representante de MOBI ATR se contactará con usted para definir los detalles de su producto',
-    
-  })
-}
+  
 
   return (
     <div>
-    {alerta()}
+    
+    <h6 className='animate__animated animate__fadeInRight' style={{fontWeight:"bolder", marginLeft:"35px"}}>Confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles del producto.</h6>
       {!orden ? (
-        <div>
-          <Spinner
-            className={style.spinner}
-            animation="grow"
-            variant="secondary"
-          />
-        </div>
+        
+          <Loader/>
+        
       ) : location.search &&
         location.search.includes("collection_status=approved") ? (
         <div className="container">
@@ -71,8 +61,8 @@ const CheckoutConfirm = ({socket}) => {
             </ListGroup.Item>
 
             {/*  acá primer mail */}
-
-            {/* <ConfirmaciónMail 
+           {/* {statusPago==="approved" && statusPago==="approved" ?(
+           <ConfirmaciónMail 
               nombre={ user?.nombre}
              email= { user?.email}
              cantidad={ orden?.productos?.map((c)=>c.cantidad)}
@@ -80,7 +70,9 @@ const CheckoutConfirm = ({socket}) => {
              total= { orden?.totalPedido}
              direccion={user?.direccion}
              ciudad={ user?.ciudad}
-            /> */}
+            /> ):(<></>)
+
+           } */}
 
 
             <ListGroup.Item>

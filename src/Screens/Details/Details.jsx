@@ -1,7 +1,7 @@
 import React, { createRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import {getProductById} from "../../Actions/products.js"
+import {getCategories, getProductById} from "../../Actions/products.js"
 import { addItem } from "../../Actions/cart.js";
 import styles from "./Details.module.css"
 import BotonPago from "../../Components/BtnPago/BtnPago.jsx";
@@ -13,6 +13,9 @@ import { getUserDetail} from '../../Actions/Auth';
 import { postFav } from "../../Actions/Favs.js";
 import animate from "animate.css"
 import {Loader} from '../../Components/Loader/Loader'
+import {IoLogoWhatsapp} from "react-icons/io";
+import {MdAddShoppingCart} from "react-icons/md"
+import {MdFavorite} from "react-icons/md"
 
 
 export default function Detail() {
@@ -21,10 +24,17 @@ export default function Detail() {
   const dispatch = useDispatch()
   let myRef = createRef()
   const product = useSelector((state) => state.productsReducer.detailProduct);
+  
+  //para encontrar el idCategory ya que no viene en getProductsByID
+  const categories = useSelector((state) => state.productsReducer.categories);
+  const idCategory = categories?.filter((el) => el.nombre === product?.category)
 
+  console.log("idCat", idCategory)
+  
   let [index, setIndex] = useState(0)
 
   useEffect(() => {
+    dispatch(getCategories())
     dispatch(getProductById(idProduct))
     dispatch(getUserDetail())
   }, [idProduct])
@@ -75,7 +85,6 @@ export default function Detail() {
     
   
   
-  
   if(product.title) {
   return ( 
       <>
@@ -108,15 +117,15 @@ export default function Detail() {
                 <div className={styles.btnGroup}>
                   {product?.statusProduct && product?.cantidad>0 && (
                     <div className="btnBerna">
-                    <button className="btn btn-secondary me-1" type='button' onClick={handleAdd}>Agregar al carrito</button>
+                    <button className="btn btn-secondary me-1" type='button' onClick={handleAdd} style={{width:"12rem", height:"3rem", fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}><MdAddShoppingCart></MdAddShoppingCart></button>
                   </div>
                   )}
                       
                       <div className="btnBerna">
-                        <button onClick={()=>handleWhatsApp(product.title, product.price)} className="btn btn-success me-1">Preguntar al WhatsApp</button>
+                        <button onClick={()=>handleWhatsApp(product.title, product.price)} className="btn btn-success me-1" style={{width:"12rem", height:"3rem",fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}><IoLogoWhatsapp></IoLogoWhatsapp></button>
                       </div>
                       <div className="btnFav">
-                        <button className="btn btn-warning" onClick={() => handleFav()}>Agregar a favoritos</button>
+                        <button className="btn btn-warning" onClick={() => handleFav()} style={{width:"12rem", height:"3rem", itemSize: "1rem",fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}> <MdFavorite></MdFavorite></button>
                       </div>
                 </div>
                 {product?.statusProduct && product?.cantidad>0
@@ -125,8 +134,9 @@ export default function Detail() {
                 }
                 
                </div>
+               
                <div className={styles.recommended}>
-                 <Carousel category={product?.category} />
+                  <Carousel idCategory={idCategory[0]?.id} category={idCategory[0]?.nombre}/> 
               </div>
 
               <div className={styles.comentariosProducto}>
