@@ -8,7 +8,7 @@ import { getUserDetail } from "../../../Actions/Auth";
 import {Loader} from "../../Loader/Loader";
  import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
 import animate from "animate.css"
-
+import { deleteAllCartDB } from "../../../Actions/cart";
 
 const CheckoutConfirm = ({socket}) => {
   const location = useLocation();
@@ -42,7 +42,9 @@ const CheckoutConfirm = ({socket}) => {
   function onClick() {
     navigate("/home");
   }
-  
+  useEffect(()=>{
+  if(user) dispatch(deleteAllCartDB(user?.id))
+  },[dispatch,user])
 
   return (
     <div>

@@ -325,7 +325,7 @@ const NavBarAuthenticated = () => {
         }}
       >
         {usuario.nombre}
-        {<img src={usuario.img ? usuario.img : usuario.avatar} style={{ marginBottom: "25px", height: "3.5rem", width: "3.5rem", border: "solid", borderColor: "black", borderRadius: "9999px" }}></img>}
+        <img src={ usuario.avatar} style={{ marginBottom: "25px", height: "3.5rem", width: "3.5rem", border: "solid", borderColor: "black", borderRadius: "9999px" }} alt='imagen perfil' />
         
       </NavLink>
     </>
