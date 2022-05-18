@@ -77,7 +77,7 @@ function CreateReview({socket}) {
       Swal.fire({
         position: "center",
         icon: "warning",
-        title: "Perdone pero solo puede calificar 1 vez el producto!",
+        title: "Disculpe, pero solo puede calificar una vez el producto!",
         showConfirmButton: true,
         timer: 15000,
       }).then(function() {
