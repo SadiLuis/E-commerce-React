@@ -103,7 +103,6 @@ const UserDetailAdmin = () => {
                                                     Deshabilitar usuario
                                                 </button>)
                                             }
-                                            <button type="button" className="btn btn-primary ms-1">Chat</button>
                                         </div>
                                     </div>
                                 </div>

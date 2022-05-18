@@ -53,7 +53,7 @@ const DetailPedido = () => {
             <ListGroup.Item><b>Telefono:{" "}</b> {user?.telefono}</ListGroup.Item>
             <ListGroup.Item>
               <b>Fecha:{" "}</b>
-              {orden?.fechaCreacion.slice(0, 10)}
+              {orden.fechaCreacion?.slice(0, 10)}
             </ListGroup.Item>
             <ListGroup.Item><b>ID del pedido:</b> {id} </ListGroup.Item>
            <ListGroup.Item><b>Estado del pago:</b>{orden.status === 'PENDIENTE' ? '  Pendiente' : '  Aprobada' }</ListGroup.Item>
