@@ -113,7 +113,7 @@ export default function Detail() {
                 <h1><b>{product?.title}</b></h1>
                 <h4><b>${product?.price}</b></h4>
                 <br />  
-                <p><b>Descripcion:</b> {product?.description}</p>
+                <p><b>Descripción:</b> {product?.description}</p>
                 <span><b>Dimensiones:</b> {product?.size}</span> 
                 <div className={styles.btnGroup}>
                   {product?.statusProduct && product?.cantidad>0 && (

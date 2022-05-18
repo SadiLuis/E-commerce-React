@@ -20,6 +20,7 @@ import animate from "animate.css"
 
 
 
+
 // logo,  home, contactenos 
 const NavBarAll = ({isAuth, myUser}) => {
    const usuario=useSelector(state =>state.loginReducer.userDetail)
@@ -82,7 +83,29 @@ const NavBarAll = ({isAuth, myUser}) => {
 
         
  } 
-      
+      {/* "/MyFavs */}
+      {
+          usuario? 
+           (
+          <NavLink to="/MyFavs"
+          style={{
+            border:"none",
+            background: "none",
+            color: "black",
+            fontSize: "1rem",
+            marginLeft: "0.05rem",
+            cursor: "pointer",
+            textDecoration: "none",
+             marginBottom:"15rem"
+
+          }}>Favoritos
+          </NavLink>
+          
+         ):(<></>) 
+        
+
+        
+ } 
     
       
       <div  style={{
@@ -271,7 +294,7 @@ const NavBarAdmin = () => {
 
         
  } 
-          {/* <NavLink
+          <NavLink
             to="/dashboard/newscreator"
             style={{
               border: "none",
@@ -285,7 +308,7 @@ const NavBarAdmin = () => {
             }}
           >
             Newsletters
-          </NavLink> */}
+          </NavLink>
         </>
       ) : (
         <NavBarAuthenticated />

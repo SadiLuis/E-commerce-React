@@ -49,7 +49,7 @@ const CheckoutConfirm = ({socket}) => {
   return (
     <div>
     
-    <h6 className='animate__animated animate__fadeInRight' style={{fontWeight:"bolder", marginLeft:"35px"}}>Confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles del producto.</h6>
+    <h6 className='animate__animated animate__fadeInRight' style={{fontWeight:"bolder", textAlign:"center"}}>Confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles del producto.</h6>
       {!orden ? (
         
           <Loader/>
