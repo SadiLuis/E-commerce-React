@@ -91,9 +91,9 @@ const { getRootProps, getInputProps} = useDropzone({
 });
 
   return (
-     <div className='account'>
-      <div className={styles.container}> 
-      <div className='container'>
+    //  <div className={styles.contenedorPerfil}>
+      <div className={ `shadow p-3 mb-5 bg-body rounded ${styles.container}`}> 
+      {/* <div className='container'> */}
 
 {/*     <div className={`row `}>
         <div className={` ${styles.buttons}`}>
@@ -118,44 +118,49 @@ const { getRootProps, getInputProps} = useDropzone({
 
 
             
-                <div className={`col col-lg-6 ${styles.profile}`}>
+                <div className={styles.profile}>
                 
                     <div className='text-center'>
 
-                      <div className={` text-center ${styles.profilePicDiv}`}>
-                      <img src={myUser.avatar} id="profile" className={` ${styles.profileImg} `}  alt="avatar" />
+                      <div className={styles.profilePicDiv}>
+                      <img src={myUser.avatar} id="profile" 
+                      // className={` ${styles.profileImg} `} 
+                      className={styles.profileImg}
+                       alt="avatar" />
                       <br/>
                       
                        <button className={`btn  btn-sm ${styles.iconCam}`} {...getRootProps()} ><i className={`bi bi-camera-fill`}></i></button>
                        <input {...getInputProps()}/>
                       </div>
                        
-                      <b><p className='mb-3'>{myUser.nombre}</p></b>
-                      <p className='mb-3'>Nombre de usuario: <b>{myUser.usuario}</b></p>
-                      <p className='mb-3'> email: <b>{myUser.email} </b></p>
-                        <Link to={'/orders'}><button className='btn btn-outline-dark'>Historial de pedidos</button></Link>
-                       
-                      </div>
+                      <b><p  style={{fontSize:"2rem"}}>{myUser.nombre}</p></b>
+                      <p style={{fontSize:"1rem"}}>Nombre de usuario: <b>{myUser.usuario}</b></p>
+                      <p  style={{fontSize:"1rem"}}> email: <b>{myUser.email} </b></p>
+                        
+                       </div>
                   
                   
                  
                   
                   <div className='rule'>
                     <div className='text-center'>
-                      <hr  />
+                     
                     </div>
                   </div>
-                  <div className='address'>
+                  <div className={styles.address}>
                     <div className=' text-center mb-5'>
                       <p  className={styles.profileP}>Pais: {myUser.pais}</p>
                   <p className={styles.profileP}>Teléfono: {myUser.telefono}</p>
                     </div>
                     
-                      
                   </div>
-                  <div className='cartProducts' style={{textAlign: 'center', marginBottom: '2rem'}}>
-                  <Link to={'/profile/editProfile'}><button className={`btn btn-info ${styles.btnFav}`}>Editar perfil</button></Link>
-                    <Link to={'/MyFavs'}><button className={`btn btn-warning ${styles.btnFav}`}>ir a Mis favoritos</button></Link>
+                   <hr  />
+                  <div className={styles.linkHistorial}>
+                    <Link to={'/orders'} style={{textDecoration:"none", color:"darksalmon", textAlign:"center", fontWeight:"bold"}}>Historial de pedidos</Link>
+                    </div>
+                  <div className={styles.cartProducts} style={{textAlign: 'center', marginBottom: '2rem'}}>
+                  <Link to={'/profile/editProfile'}><button className={`btn btn-outline-danger ${styles.btnFav}`}>Editar perfil</button></Link>
+                    <Link to={'/MyFavs'}><button className={`btn btn-outline-success ${styles.btnFav}`}>ir a Mis favoritos</button></Link>
             {/*         <div className={styles.Favoritos}>
 
                         {
@@ -186,8 +191,8 @@ const { getRootProps, getInputProps} = useDropzone({
               
             
           }
-      </div>
+      {/* </div> */}
        </div>
-    </div> 
+    // </div> 
   )
 }

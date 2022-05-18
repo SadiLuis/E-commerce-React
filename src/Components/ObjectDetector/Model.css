@@ -1,5 +1,6 @@
 .ObjectDetectorContainer {
   
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,7 +11,7 @@
     
     min-width: 200px;
     height: 600px;
-    border: 3px solid gray;
+    /* border: 3px solid gray; */
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -31,7 +32,8 @@
   
   .SelectButtonTS {
     padding: 7px 10px;
-
+    margin-right: 10px;
+    
     margin-bottom: 2em;
     
   }
@@ -47,3 +49,50 @@
       background-color: #fff;
     }
   
+
+    .headerTS{
+    color: #c8935b;
+    margin-top: 2rem;
+    text-align: center;
+    }
+
+    .subheaderTS{
+      color: #c8935b;
+    text-align: center;
+    }
+
+
+    .TSspinner{
+      max-height: 200px;
+      display: table;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+  }
+
+  .IMGspinner {
+    max-height: 200px;
+    align-items: center;
+    
+  }
+
+  .TSscrollBtn {
+    margin-top: 3rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+
+  
+  /* .spinnerTxt{
+      justify-content: center;
+      align-items: center;
+      display: table;
+      margin: 0 auto;
+  } */
+  /* .imgSpinner{
+      max-width: 30px;
+  }  */

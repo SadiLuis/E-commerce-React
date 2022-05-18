@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useId } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllProducts, orderAlfabeticamente, orderByPrice } from '../../Actions/products';
+import { getAllProducts, getProductsByCat, getProductsByCategoryAdmin, orderAlfabeticamente, orderByPrice } from '../../Actions/products';
 import Paging from '../Paging/Paging';
 import { Link } from 'react-router-dom';
 import InputAutoComplete from '../InputAutoComplete/InputAutoComplete';
 import SearchBar from '../SearchBar/SearchBar';
+import { Loader } from '../Loader/Loader';
+import { getAllCategories } from '../../Actions/Category';
 
 
 const TableProducts = () => {
@@ -13,8 +15,10 @@ const TableProducts = () => {
 
     useEffect(() => {
         dispatch(getAllProducts())
+        dispatch(getAllCategories())
     }, [dispatch])
 
+    const categories = useSelector(state => state.categoriesReducer.categories)
     const allProducts = useSelector((state) => state.productsReducer.products)
     const [currentPage, setCurrentPage] = useState(1)
     const [productsOnPage, setProductsOnPage] = useState(10)
@@ -29,14 +33,24 @@ const TableProducts = () => {
     const id = useId();
 
     function handleSelect(e) {
+
         e.preventDefault();
-        if(e.target.value==="A-Z"||e.target.value==="Z-A"){
-            dispatch(orderAlfabeticamente(e.target.value));
+        if(e.target.value==="cero"){
+            dispatch(getAllProducts())
         }else{
-            if (e.target.value==="asc"||e.target.value==="desc") {
-                dispatch(orderByPrice(e.target.value));
+            if(e.target.value==="A-Z"||e.target.value==="Z-A"){
+                dispatch(orderAlfabeticamente(e.target.value));
+            }else{
+                if (e.target.value==="asc"||e.target.value==="desc") {
+                    dispatch(orderByPrice(e.target.value));
+                }
             }
         }
+        
+    }
+
+    const handleCategories = (e) => {
+        dispatch(getProductsByCategoryAdmin(e.target.value))
     }
 
     // function handleOrderByPrice(e) {
@@ -49,7 +63,7 @@ const TableProducts = () => {
     // }
 
     if(!currentProducts) {
-        return <h1>Loading...</h1>
+        return <Loader/>
     }else{
 
     
@@ -71,17 +85,25 @@ const TableProducts = () => {
 
                     <div className='col'>
                         <select className='form-select' onChange={handleSelect}>
-                            <option value="cero">Ordenar productos</option>
+                            <option value="cero">Todos los productos</option>
                             <option value="asc">Menor precio</option>
                             <option value="desc">Mayor precio</option>
                             <option value="A-Z">A-Z</option>
                             <option value="Z-A">Z-A</option>
                         </select>
                     </div>
-
+                    <div className="col">
+                        <select name="" id="" className='form-select' onChange={handleCategories}>
+                            <option value="All">Todas las categorias</option>
+                            {categories?.map((c,i)=>(
+                                <option value={c.id}>{c.nombre}</option>
+                            ))}
+                        </select>
+                    </div>
                     <div className='col'>
                         <SearchBar setPage={setCurrentPage} setOrigin={"admin"}/>
                     </div>
+                    
 
                 </div>
 

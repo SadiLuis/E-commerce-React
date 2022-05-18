@@ -254,17 +254,24 @@ export function loginGoogle({ email, nombre ,avatar ,usuario }) {
          });
    
          dispatch(getUserDetail());
-         
+         dispatch(createCartDb())
          
         
       } catch (err) {
          //toast.error(err.response.data);
-         console.log(err);
-         Swal.fire({
-            title: "Se produjo un error",
-            text: "ocurrió un problema con la sesíon de Google",
-            icon: "error",
-          });
+         err.response.data==="Usuario bloqueado"
+            ?Swal.fire({
+               icon: 'error',
+               title: 'Usuario dado de baja',
+               text: 'Usted ha sido de baja, por cualquier consulta contactenos',
+              
+             })
+            :Swal.fire({
+               icon: 'error',
+               title: 'Datos incorrectos',
+               text: 'Algo salió mal , intentelo de nuevo ingresando los datos nuevamente!',
+              
+             })
          // Si ocurrió un error durante el logen, envio el login_fail
          return dispatch({
             

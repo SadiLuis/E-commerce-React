@@ -7,10 +7,8 @@ import { getCommentByProductId, postReview } from '../../../Actions/Comments';
 import { getAllUsers} from '../../../Actions/Chat';
 import Swal from "sweetalert2";
 import { validationFunction } from "./ValidationFunction";
-
-
-
 import { FaStar } from 'react-icons/fa'
+
 
 function CreateReview({socket}) {
 //    /* ANIMACION */
@@ -79,7 +77,7 @@ function CreateReview({socket}) {
       Swal.fire({
         position: "center",
         icon: "warning",
-        title: "Perdone pero solo puede calificar 1 vez el producto!",
+        title: "Disculpe, pero solo puede calificar una vez el producto!",
         showConfirmButton: true,
         timer: 15000,
       }).then(function() {
@@ -104,7 +102,7 @@ function CreateReview({socket}) {
       Swal.fire({
         position: "center",
         icon: "warning",
-        title: "El foromulario contiene errores, reviselo por favor!",
+        title: "El formulario contiene errores, revíselo por favor!",
         showConfirmButton: true,
         timer: 5000,
       })
@@ -116,70 +114,69 @@ function CreateReview({socket}) {
   if (!product.title) return <h1>Loading</h1>
   else {
     return (
+      <><div className={styles.título}><h1><b>Qué te pareció tu producto?</b></h1></div>
+     
       <div className={styles.container}>
+        <div classname={styles.top}></div>
         <div className={styles.containerRating}>
-            <div className={styles.detail}>
-                  <h1><b>Que te pareció tu producto?</b></h1>
-                  <h3>{product?.title}</h3>
-                  <div className={styles.starContainer}>
+          <div className={styles.detail}>
+            {/* <h1><b>Qué te pareció tu producto?</b></h1> */}
+            <h3 >{product?.title}</h3>
+            <div className={styles.starContainer}>
 
-            {
-              // Star Component
-              [...Array(5)].map((star, index) => {
+              {
+                // Star Component
+                [...Array(5)].map((star, index) => {
 
-                const ratingValue = index + 1; //para que el rating comience en 1 y no en index 0
-                
-                return  (
-                   <label>
-                     <input 
-                     className={styles.radioInput} 
-                     type="radio" name="rating" 
-                     value={ratingValue} 
-                     onClick={() => setRating(ratingValue)} 
-                     
-                     />
-                     <FaStar className={styles.star} 
-                     size={70} 
-                      color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9" }  
+                  const ratingValue = index + 1; //para que el rating comience en 1 y no en index 0
 
-                     //color={ratingValue <= (hover || rating) ? "black" : "#e4e5e9" }  
-                     onMouseEnter={() => setHover(ratingValue)}
-                     onMouseLeave={() => setHover(null)}
-                      />
-                   </label> 
+                  return (
+                    <label>
+                      <input
+                        className={styles.radioInput}
+                        type="radio" name="rating"
+                        value={ratingValue}
+                        onClick={() => setRating(ratingValue)} />
+                      <FaStar className={styles.star}
+                        size={70}
+                        color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
 
-                ) 
+                        //color={ratingValue <= (hover || rating) ? "black" : "#e4e5e9" }  
+                        onMouseEnter={() => setHover(ratingValue)}
+                        onMouseLeave={() => setHover(null)} />
+                    </label>
 
-              })
-            }
-          </div>
+                  );
+
+                })}
+            </div>
 
             {/* <div className={styles.subtitle}>
-              <p className={letterClass} >Malo</p>
-              <p className={letterClass} >Excelente</p>
-            </div> */}
-            </div>
-              <div className={styles.productImg}>
-                <img src={product?.images[0]} alt="producto" width={130} height={130}/>
-              </div>
+      <p className={letterClass} >Malo</p>
+      <p className={letterClass} >Excelente</p>
+    </div> */}
+          </div>
+          <div className={styles.productImg}>
+            <img src={product?.images[0]} alt="producto" width={130} height={130} />
+          </div>
         </div>
-        
+
         <div className={styles.comentario}>
           <div className={styles.insideComentario}>
-            <h1><b>Contale a otras personas que te pareció el producto</b></h1>
-            <textarea onChange={(e) => handleReviewChange(e)} name="" id="" cols="80" rows="3" placeholder='Mi producto me parecio...' />
+            <h4><b>Contale a otras personas que te pareció el producto</b></h4>
+            <textarea onChange={(e) => handleReviewChange(e)} name="" id="" cols="80" rows="3" placeholder='Mi producto me pareció...' />
             <div className={styles.underTextArea}>
-                <p>El comentario requiere un minimo de 30 caracteres</p>
-                <p>{largoReview} / 1500</p>
+              <p>El comentario requiere un mínimo de 30 caracteres</p>
+              <p>{largoReview} / 1500</p>
             </div>
             <div className={styles.submitBtn}>
-            <button className='btn btn-outline-secondary' onClick={(e) => handleSubmit(e)}>Enviar</button>  
+              <button className='btn btn-outline-secondary' onClick={(e) => handleSubmit(e)}>Enviar</button>
 
             </div>
           </div>
-        </div>   
+        </div>
 
-      </div>
+      </div></>
     )
   }
   

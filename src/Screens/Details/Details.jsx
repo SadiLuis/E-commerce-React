@@ -13,6 +13,9 @@ import { getUserDetail} from '../../Actions/Auth';
 import { postFav } from "../../Actions/Favs.js";
 import animate from "animate.css"
 import {Loader} from '../../Components/Loader/Loader'
+import {IoLogoWhatsapp} from "react-icons/io";
+import {MdAddShoppingCart} from "react-icons/md"
+import {MdFavorite} from "react-icons/md"
 
 
 export default function Detail() {
@@ -33,9 +36,10 @@ export default function Detail() {
   useEffect(() => {
     dispatch(getCategories())
     dispatch(getProductById(idProduct))
-    dispatch(getUserDetail())
+    
   }, [idProduct])
   const myUser = useSelector((state)=> state.loginReducer.userDetail)
+
 
   const handleTab = (index) => {
     setIndex(index)
@@ -109,20 +113,20 @@ export default function Detail() {
                 <h1><b>{product?.title}</b></h1>
                 <h4><b>${product?.price}</b></h4>
                 <br />  
-                <p><b>Descripcion:</b> {product?.description}</p>
+                <p><b>Descripción:</b> {product?.description}</p>
                 <span><b>Dimensiones:</b> {product?.size}</span> 
                 <div className={styles.btnGroup}>
                   {product?.statusProduct && product?.cantidad>0 && (
                     <div className="btnBerna">
-                    <button className="btn btn-secondary me-1" type='button' onClick={handleAdd}>Agregar al carrito</button>
+                    <button className="btn btn-secondary me-1" type='button' onClick={handleAdd} style={{width:"12rem", height:"3rem", fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}><MdAddShoppingCart></MdAddShoppingCart></button>
                   </div>
                   )}
                       
                       <div className="btnBerna">
-                        <button onClick={()=>handleWhatsApp(product.title, product.price)} className="btn btn-success me-1">Preguntar al WhatsApp</button>
+                        <button onClick={()=>handleWhatsApp(product.title, product.price)} className="btn btn-success me-1" style={{width:"12rem", height:"3rem",fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}><IoLogoWhatsapp></IoLogoWhatsapp></button>
                       </div>
                       <div className="btnFav">
-                        <button className="btn btn-warning" onClick={() => handleFav()}>Agregar a favoritos</button>
+                        <button className="btn btn-warning" onClick={() => handleFav()} style={{width:"12rem", height:"3rem", itemSize: "1rem",fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}> <MdFavorite></MdFavorite></button>
                       </div>
                 </div>
                 {product?.statusProduct && product?.cantidad>0

@@ -82,6 +82,7 @@ const Notifications = ({ socket}) => {
 
 useEffect(() => {
     socket?.on("notif_newOrderStatus", (data) => {
+      console.log("Esto es lo que llega a notif newOrderStatus", data)
        if (user && user?.id == data.userId) {
         let notif5 = {
             senderName: "Su orden N° " + data.text,
@@ -103,7 +104,7 @@ useEffect(() => {
 
 
   ////////////////////////////////////////////////////////////////////////////////// Notif when new user has registered
-
+console.log("notif", notifications)
 useEffect(() => {
     socket?.on("notif_newRegister", (data) => {
         if(user && user?.rol == 2) {
@@ -152,8 +153,9 @@ useEffect(() => {
     } else if (n.type === 4){
         action = "se registró en el sitio";
         return <span className="notificationNotifications">{`📘 ${n.senderName} ${action} ${n.text} `}</span>
+
       } else if (n.type === 5) {
-          return <span className="notificationNotifications">🛍 {n.senderName} ha sido {n.status === "ENPROCESO" ? "Enviada" : n.status === "ENVIADO" ?  "Entregada" : ""} </span>
+          return <span className="notificationNotifications">📦 {n.senderName} ha sido {n.text} </span>
       }
     return (
       <span className="notificationNotifications">{`${n.senderName} ${action} ${n.text} `}</span>

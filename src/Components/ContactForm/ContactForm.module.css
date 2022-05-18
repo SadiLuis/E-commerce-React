@@ -1,22 +1,26 @@
 .topForm {
-    /* background-color:  #646464;
-    border: solid 1.5px;
+    /* background-color:  #646464; */
+    /* border: solid 1.5px;
     border-radius: 2px;
-    height: 70px; */
-    margin-top: 8rem;
+    height: 70px;
+    width: 50%; */
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
 } 
 
 .topForm h3{
-    color: black;
+    color: #c8935b;
     font-family: "Montserrat", sans-serif;
     font-size: 2.5rem;
-    position: relative;
-    bottom: 10px;
-    top: 15px;
-    display: flex;
-    align-items: center;
-    left: 8px;
-    margin-left: 4rem;
+    text-align:center;
+    
+    
+    
+    
+    
+    
+    
 } 
  
 
@@ -46,7 +50,7 @@
   
     font-size: 1.2rem;
     transition: .3s all;
-    color: green;
+    color: #c8935b;
     background-color: #fff;
     border-radius: 2px;
     font-weight: bolder;
