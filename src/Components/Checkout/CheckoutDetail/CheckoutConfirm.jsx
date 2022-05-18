@@ -28,7 +28,7 @@ const CheckoutConfirm = ({socket}) => {
   const idOrder = order[1];
    console.log(datosPago)
   useEffect(() => {
-   dispatch(getUserDetail());
+   //dispatch(getUserDetail());
    if(orden){
      dispatch(changeStatus(orden.pedidoId , true))
      dispatch(editStatusOrder(orden.pedidoId , "ENPROCESO"))

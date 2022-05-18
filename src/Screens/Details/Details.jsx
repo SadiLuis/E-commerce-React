@@ -36,9 +36,10 @@ export default function Detail() {
   useEffect(() => {
     dispatch(getCategories())
     dispatch(getProductById(idProduct))
-    dispatch(getUserDetail())
+    
   }, [idProduct])
   const myUser = useSelector((state)=> state.loginReducer.userDetail)
+
 
   const handleTab = (index) => {
     setIndex(index)
