@@ -215,9 +215,9 @@ export default function Product() {
               <select className="form-select" aria-label="Default select example" name='categoria'
                 onFocus={(e) => handleChange(e.target.name, true)}
                 onChange={(e) => handleSelectCategory(e)}>
-                <option hidden selected>Modificar categoría</option>
-                {categories?.map((category) => (
-                  <option value={category.id}>{category.nombre}</option>
+                <option hidden defaultValue>Modificar categoría</option>
+                {categories?.map((category,index) => (
+                  <option value={category.id} key={index}>{category.nombre}</option>
                 ))}
               </select>
               {focus.categoriaId && error.categoriaId && <span>{error.categoriaId}</span>}
@@ -277,10 +277,10 @@ export default function Product() {
             </div>
             <div className="thumb" ref={myRef}>
               {input.images?.flat().map((img, index) => (
-                <div>
+                <div key={`div-${index}`}>
                 
                 
-                <img src={img} alt="product" key={index}
+                <img src={img} alt="product" key={`img-${index}`}
                   onClick={() => handleTab(index)}
                 />
 
@@ -288,7 +288,9 @@ export default function Product() {
 
                           name={img}
                           onClick={(img) => handleDeleteImage(img)}
-                          style={{position:'absolute', right:'0'} }className='btnX'
+                          style={{position:'absolute', right:'0'} }
+                          className='btnX'
+                          key={`button-${index}`}
                         >
                           X
                         </button>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { getAllCategories, getCategories, postCategories } from '../../Actions/Category';
+import { Loader } from '../Loader/Loader';
 import SidebarAdmin from '../SidebarAdmin/SidebarAdmin'
 
 const AddCategory = () => {
@@ -25,7 +26,7 @@ const AddCategory = () => {
     const CategoriasAll = useSelector(
         (state) => state.categoriesReducer.categories
     );
-    
+
     const id = useId();
     useEffect(() => {
         dispatch(getAllCategories());
@@ -75,28 +76,31 @@ const AddCategory = () => {
             history("/dashboard/admin");
         }
     };
-    return (
-        <div className="container-fluid">
-            <div className='row min-vh-100'>
-                <div className="col-auto col-md-2 col-xl-2 px-0 ">
-                    <SidebarAdmin />
-                </div>
-                <div className='col'>
-                    <h4 className='h4'>Agregar categoria</h4>
-                    <div className='row mb-4'>
-                        <div className='col-4'>
-                        <select className="form-select" aria-label="">
-                            <option defaultValue>Ver categorias existentes</option>
-                            {CategoriasAll?.map((el,id) => (
-                                <option key={`category-${id}`} value={el.nombre}>
-                                    {el.nombre}
-                                </option>
-                            ))}
-                        </select>
-                        </div>
-                        
+    if (!CategoriasAll) {
+        return <Loader/>
+    } else {
+        return (
+            <div className="container-fluid">
+                <div className='row min-vh-100'>
+                    <div className="col-auto col-md-2 col-xl-2 px-0 ">
+                        <SidebarAdmin />
                     </div>
-                    
+                    <div className='col'>
+                        <h4 className='h4'>Agregar categoria</h4>
+                        <div className='row mb-4'>
+                            <div className='col-4'>
+                                <select className="form-select" aria-label="">
+                                    <option defaultValue>Ver categorias existentes</option>
+                                    {CategoriasAll?.map((el, id) => (
+                                        <option key={`category-${id}`} value={el.nombre}>
+                                            {el.nombre}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                        </div>
+
                         <div className='row'>
                             <form onSubmit={handleSubmit}>
                                 <input
@@ -119,12 +123,14 @@ const AddCategory = () => {
                                 </div>
                             </form>
                         </div>
-                    
-                    
+
+
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+
 }
 
 export default AddCategory
