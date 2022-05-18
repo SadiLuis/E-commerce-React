@@ -280,7 +280,7 @@ const NavBarAdmin = () => {
 
         
  } 
-          <NavLink
+          {/* <NavLink
             to="/dashboard/newscreator"
             style={{
               border: "none",
@@ -294,7 +294,7 @@ const NavBarAdmin = () => {
             }}
           >
             Newsletters
-          </NavLink>
+          </NavLink> */}
         </>
       ) : (
         <NavBarAuthenticated />
