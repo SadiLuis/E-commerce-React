@@ -257,21 +257,7 @@ const NavBarAdmin = () => {
           >
             Dashboard
           </NavLink>
-          {/* <NavLink
-            to="/dashboard/sales"
-            style={{
-              border: "none",
-          background: "none",
-          color: "black",
-          fontSize: "1rem",
-          marginLeft: "0.05rem",
-          cursor: "pointer",
-          textDecoration: "none",
-           marginBottom:"15rem"
-            }}
-          >
-            Sales
-          </NavLink> */}
+         
           {
           admin? 
            (
