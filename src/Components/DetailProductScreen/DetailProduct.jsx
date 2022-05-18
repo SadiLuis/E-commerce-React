@@ -107,7 +107,7 @@ console.log(product)
                         )}
                             </div>
                             <div className="col-10">
-                             <img src={product?.images.length && product.images[0]} alt='Product' className='img-thumbnail' key={`img-${idImg}`}/> 
+                             <img src={product.images?.length && product.images[0]} alt='Product' className='img-thumbnail' key={`img-${idImg}`}/> 
                             </div>
                         </div>
                         
