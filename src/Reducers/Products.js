@@ -220,7 +220,7 @@ export default function productsReducer(state = initialState, action) {
                     Math.round((state.cart.precioTotal - (itemCart.quantity * state.allProducts?.find(e => e.id === payload).price)) * 100) / 100
             });
             if (localStorage.token_ecommerce) {
-                deleteProductCart(payload, state.idCart)
+                deleteProductCart(payload, state.idCart.id)
                 saveCartDb(newCart)
             }
 
