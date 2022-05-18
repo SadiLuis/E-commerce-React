@@ -236,6 +236,11 @@ export default function productsReducer(state = initialState, action) {
                 ...state,
                 sameCategory: payload
             }
+        case 'GET_PRODUCT_BY_CATEGORY':
+            return{
+                ...state,
+                products: payload
+            }
         case GET_CART: return {
             ...state,
             cart: payload,

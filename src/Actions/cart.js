@@ -68,9 +68,9 @@ export const getCartDB = (userId) => async dispatch => {
              newCart = {
                  products: [...newProducts,...auxCart],
                  precioTotal:[...newProducts, ...auxCart].reduce((prev, e) => {
-                     let prod = json.data.find(el => el.id === e.id);
+                     let prod = json.data?.find(el => el.id === e.id);
 
-                     return Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
+                     return prod && Math.round((prev + (prod.price * e.quantity)) * 100) / 100;
                  }, 0)
 
              };

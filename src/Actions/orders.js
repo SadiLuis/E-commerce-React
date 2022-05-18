@@ -69,6 +69,39 @@ export const getOrdersByUser = (userId) => async dispatch => {
     }
 }
 
+export const getOrdersByUserAdmin = (userId) => async dispatch => {
+    try {
+        let config = getHeaderToken();
+        const { data } = await axios.get(
+            `${BASEURL}/pedidos/user/${userId}`,
+            config
+        );
+        return dispatch({ type: 'GET_ORDER_BY_USER_ADMIN', payload: data });
+    } catch (err) {
+        //toast.error("No se han podido cargar los pedidos");
+        return console.log(err.response.data);
+    }
+}
+
+export const getOrdersByStatus = (value) => 
+
+    async dispatch =>{
+        const status = {value}
+        try {
+            //console.log(status)
+            let config = getHeaderToken();
+            const { data } = await axios.post(
+                `${BASEURL}/pedidos/status`,
+                status
+            );
+            return dispatch({ type: 'GET_ORDER_BY_STATUS', payload: data });
+        } catch (err) {
+            //toast.error("No se han podido cargar los pedidos");
+            return console.log(err.response.data);
+        }
+    
+} 
+
 export function editStatusOrder(orderId, newStatus) {
 
     return async function (dispatch) {
@@ -103,6 +136,24 @@ export function getOrderById(orderId) {
     }
 }
 
+export function getOrderByNum(pedidoId) {
+    //console.log(pedidoId)
+    return async function (dispatch) {
+        const numOrder = {
+            numPedido : parseInt(pedidoId)
+        }
+        console.log(numOrder)
+        try {
+            const response = await axios.post(`${BASEURL}/pedidos/pedidoById`, numOrder);
+            return dispatch({
+                type: 'GET_ORDER_BY_NUM',
+                payload: response.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
 export function cleanOrderDetail() {
     return {
         type: 'CLEAN_ORDER_DETAIL'
@@ -130,3 +181,18 @@ export function changeStatus(id, newStatus) {
         }
     }
 }
+
+export function sortOrders(key,value){
+    return {
+        type: 'SORT_ORDER',
+        payload: {
+            key,
+            value
+        }
+       
+    }
+}
+
+export function searchOrderByUser(value){
+
+} 

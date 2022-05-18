@@ -92,7 +92,7 @@ export default function Review({idProduct}) {
                             size={25} 
                             // color={index  + 1 <= (r.rating) ? "#ffc107" : "#e4e5e9" }
                             color={index  + 1 <= (r.rating) ? "#ffc107" : "#e4e5e9" }  
-
+                            key={index}
                             />
 
                         )

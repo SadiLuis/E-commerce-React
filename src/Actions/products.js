@@ -122,6 +122,20 @@ export function searchByName(name) {
          }
       }
    }
+
+   export function getProductsByCategoryAdmin(idCategory) {
+      return async function (dispatch) {
+         try {
+            var json = await axios.get(`${BASEURL}/products/category/${idCategory}`);
+            return dispatch({
+               type: "GET_PRODUCT_BY_CATEGORY",
+               payload: json.data
+            })
+         } catch (err) {
+            console.log(err)
+         }
+      }
+   }
   
    export function postProduct(product) {
       return async function () {
