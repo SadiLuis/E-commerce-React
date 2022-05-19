@@ -1,4 +1,4 @@
-export const BASEURL = "http://localhost:5000"
+export const BASEURL = "https://mobibackend.onrender.com"
 
 //"https://mobibackend.onrender.com"
 
