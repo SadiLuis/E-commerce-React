@@ -74,13 +74,7 @@ export default function Detail() {
       productoId: product?.id
      }
     dispatch(postFav(body))  
-     Swal.fire({
-      
-      icon: "success",
-      title: "Producto agregado a favoritos",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    
    }
     
   
@@ -128,7 +122,7 @@ export default function Detail() {
                         <button onClick={()=>handleWhatsApp(product.title, product.price)} className="btn btn-success me-1" style={{width:"12rem", height:"3rem",fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}><IoLogoWhatsapp></IoLogoWhatsapp></button>
                       </div>
                       <div className="btnFav">
-                        <button className="btn btn-danger" onClick={() => handleFav()} style={{width:"12rem", height:"3rem", itemSize: "1rem",fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}> <MdFavorite></MdFavorite></button>
+                      { myUser && (<button className="btn btn-warning" onClick={() => handleFav()} style={{width:"12rem", height:"3rem", itemSize: "1rem",fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}> <MdFavorite></MdFavorite></button>) }
                       </div>
                 </div>
                 {product?.statusProduct && product?.cantidad>0

@@ -38,7 +38,9 @@ console.log(product)
                         'Producto deshabilitado',
                         'success'
                     )
+                    //dispatch(getAllProducts())
                     navigate('/dashboard/admin')
+                    
                 }
             })
             : Swal.fire({
@@ -53,13 +55,14 @@ console.log(product)
             }).then((result) => {
                 if (result.isConfirmed) {
                     dispatch(putProductStatus(idProduct))
-                    dispatch(getAllProducts())
                     Swal.fire(
                         'Habilitado',
                         'Producto habilitado',
                         'success'
-                    )
+                        )
+                    // dispatch(getAllProducts())
                     navigate('/dashboard/admin')
+                   
                 }
             })
 

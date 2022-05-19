@@ -13,8 +13,12 @@ export default function favReducer (state= initialState, action){
             ...state,
             detailFavs: action.payload
         }
-        case 'DELETE_FAV': return{
-            ...state
+        case 'DELETE_FAV':
+        const filterFav = state.myFavs.filter(el => el.id !== action.payload)
+        return{
+            ...state,
+            myFavs: filterFav
+
         }
         default: return{...state}
     }

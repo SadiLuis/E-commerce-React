@@ -15,7 +15,7 @@ const DetailPedido = () => {
   const dispatch = useDispatch()
  console.log(orden)
   useEffect(() => {
-   dispatch(getUserDetail());
+   //dispatch(getUserDetail());
    dispatch(getOrderById(id))
   },[dispatch ])
 

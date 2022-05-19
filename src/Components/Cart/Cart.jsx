@@ -34,7 +34,7 @@ const Cart = () => {
   console.log(items)
   useEffect(() => {
     dispatch(updateCart());
-    if(localStorage.token_ecommerce) dispatch(getUserDetail())
+    //if(localStorage.token_ecommerce) dispatch(getUserDetail())
   }, [dispatch]);
      
   let total = subtotal >= 7000 ? subtotal  : subtotal === 0  ? 0 : subtotal + 150

@@ -24,9 +24,9 @@ export default function MyOrders (){
     dispatch(getPedidosById(myUser?.id)) 
   }, [myUser])  
 
-  React.useEffect(() => {
+ /*  React.useEffect(() => {
     dispatch(getUserDetail())
-  }, [])
+  }, []) */
 
  
   

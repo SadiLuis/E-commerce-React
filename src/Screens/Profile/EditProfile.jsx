@@ -14,10 +14,10 @@ export default function Editprofile(){
   const dispatch = useDispatch();
   const navigate = useNavigate();
    
-  React.useEffect(()=> {
+  /* React.useEffect(()=> {
     dispatch(getUserDetail())
     
-  }, [dispatch])
+  }, [dispatch]) */
   
    console.log("user", theuser)
    

@@ -63,7 +63,7 @@ function CardCarousel({title, category, price, img, id}) {
     <div className="carouselBtn">
       
     <span><button onClick={()=> handleCart()} className="btn btn-outline-dark"><MdAddShoppingCart></MdAddShoppingCart></button></span> 
-    <span><button className="btn btn-outline-danger" onClick={() => handleFav()}><MdFavorite></MdFavorite></button></span>
+   {myUser && <span><button className="btn btn-outline-danger" onClick={() => handleFav()}><MdFavorite></MdFavorite></button></span>}
       
     </div>
   </div>

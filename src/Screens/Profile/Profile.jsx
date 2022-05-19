@@ -19,7 +19,7 @@ export default function Profile() {
   const myUser = useSelector((state)=> state.loginReducer.userDetail)
   
   React.useEffect(()=> {
-    dispatch(getUserDetail())
+   // dispatch(getUserDetail())
     dispatch(updateCart())
   }, [dispatch] , imagen)
 
