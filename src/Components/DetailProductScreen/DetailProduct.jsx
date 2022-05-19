@@ -100,14 +100,14 @@ const DetailProduct = ({ idProduct }) => {
                         <div className="row">
                             <div className="col-2">
                             {product.images?.map((i,idImg) =>
-                            <div className="row">
+                            <div key={`rw-${idImg}`} className="row">
                                  <img src={i} alt='Product' className='img-thumbnail' key={`img-${idImg}`}/>
                             </div>
                            
                         )}
                             </div>
                             <div className="col-10">
-                            <img src={product.images[0]} alt='Product' className='img-thumbnail' key={`img-${idImg}`}/>
+                            {/* <img src={product.images[0]} alt='Product' className='img-thumbnail'/> */}
                             </div>
                         </div>
                         

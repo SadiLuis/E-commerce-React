@@ -39,7 +39,6 @@ const NavBarAll = ({isAuth, myUser}) => {
           cursor: "pointer",
           textDecoration: "none",
            marginBottom:"15rem"
-
         }}
       >
         <img src={logo} style={{width:"5rem", }}></img>
@@ -370,7 +369,7 @@ function NavBar({ isAuth, user }) {
       </div>
 
     </nav>
-    <nav className="navbar navbar-light bg-light" >
+    <nav className="navbar navbar-light bg-light px-5" >
         <div className="container-fluid" 
         style={{height:"3rem"}}
         >
