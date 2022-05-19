@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch,useSelector } from "react-redux";
-import { getUserDetail} from '../../Actions/Auth';
+//import { getUserDetail} from '../../Actions/Auth';
 import { getAllFavs } from '../../Actions/Favs';
 import FavCard from '../FavCard/FavCard';
 import styles from './MyFavs.module.css'
@@ -13,10 +13,10 @@ export default function MyFavs () {
 const dispatch = useDispatch()
   
 
-React.useEffect(()=> {
+/* React.useEffect(()=> {
         dispatch(getUserDetail())
 
-      }, [dispatch])
+      }, [dispatch]) */
    
    
 const myUser = useSelector((state)=> state.loginReducer.userDetail)
@@ -35,7 +35,7 @@ const favs = useSelector((state) => state.favReducer.myFavs)
                   { 
                      favs.length ? favs.map((e)=> (
                        <FavCard id={e.productoId}/>
-                     )) : <div>Cargando...</div>
+                     )) : <div>No tiene favoritos </div>
                     } 
                     </div>
         </div>

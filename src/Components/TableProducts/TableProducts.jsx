@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useId } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllProducts, getProductsByCat, getProductsByCategoryAdmin, orderAlfabeticamente, orderByPrice } from '../../Actions/products';
+import { getAllProducts, getProductsByCategoryAdmin, orderAlfabeticamente, orderByPrice } from '../../Actions/products';
 import Paging from '../Paging/Paging';
 import { Link } from 'react-router-dom';
-import InputAutoComplete from '../InputAutoComplete/InputAutoComplete';
 import SearchBar from '../SearchBar/SearchBar';
 import { Loader } from '../Loader/Loader';
 import { getAllCategories } from '../../Actions/Category';
@@ -18,8 +17,8 @@ const TableProducts = () => {
         dispatch(getAllCategories())
     }, [dispatch])
 
-    const categories = useSelector(state => state.categoriesReducer.categories)
     const allProducts = useSelector((state) => state.productsReducer.products)
+    const categories = useSelector(state => state.categoriesReducer.categories)
     const [currentPage, setCurrentPage] = useState(1)
     const [productsOnPage, setProductsOnPage] = useState(10)
     const indexLastProduct = currentPage * productsOnPage
@@ -30,7 +29,6 @@ const TableProducts = () => {
         setCurrentPage(pageNum)
     }
 
-    const id = useId();
 
     function handleSelect(e) {
 
@@ -50,7 +48,11 @@ const TableProducts = () => {
     }
 
     const handleCategories = (e) => {
-        dispatch(getProductsByCategoryAdmin(e.target.value))
+        if(e.target.value==="All"){
+            dispatch(getAllProducts())
+        }else{
+            dispatch(getProductsByCategoryAdmin(e.target.value))
+        }
     }
 
     // function handleOrderByPrice(e) {
@@ -96,7 +98,7 @@ const TableProducts = () => {
                         <select name="" id="" className='form-select' onChange={handleCategories}>
                             <option value="All">Todas las categorias</option>
                             {categories?.map((c,i)=>(
-                                <option value={c.id}>{c.nombre}</option>
+                                <option value={c.id} key={i}>{c.nombre}</option>
                             ))}
                         </select>
                     </div>

@@ -1,10 +1,12 @@
+import { validateTlf } from '../../Helpers/ValidateForm'
+
 export function validation(input){
     let errors ={};
 
     if(!input.title.trim()){
         errors.title ="ingrese el nombre por favor"
     }
-    if(!input.price.trim()){
+    if(input.price === ""){
         errors.price ="ingrese el precio por favor"
     }else if(input.price < 0){
         errors.price ="el valor no puede ser negativo"
@@ -15,15 +17,17 @@ export function validation(input){
     if(!input.images){
         errors.images ="ingrese imagen/es por favor"
     }
-    if(!input.cantidad.trim()){
+    if(input.cantidad === ""){
         errors.cantidad ="ingrese el stock por favor"
     }else if(input.cantidad < 0){
         errors.price ="el stock no puede ser negativo"
     }
-    if(!input.categoriaId.trim()){
+    if(input.categoriaId === ""){
         errors.categoriaId ="seleccione categoría por favor"
     }
-   
+    if(input.height === "" ){
+        errors.height ="ingrese altura por favor"
+    }
     return errors;
 
     

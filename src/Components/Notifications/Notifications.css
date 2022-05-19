@@ -1,12 +1,13 @@
 .navbarNotifications {
-    height: 50px;
-    margin-right: 100px;    
+    height: 50px;    
     background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     color: black;
     position: relative;
+    border-bottom: solid 1px black;
+    padding-right: 5rem;
   }
   
   .logoNotifications {

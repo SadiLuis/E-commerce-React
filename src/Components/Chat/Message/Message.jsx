@@ -7,7 +7,7 @@ function Message({message, own, currentUser, friend}) {
 
         return (
     <div className={own ? "message own" :'message'}>
-        <p className='messageBottom'><b>{own ? "" : friend[0]?.nombre + " dice" }</b>  </p> 
+        {/* <p className='messageBottom'><b>{own ? "" : friend[0]?.nombre + " dice" }</b>  </p>  */}
         <div className='messageTop'>
             <img className='messageImg'
             src={own? currentUser?.avatar : friend[0]?.avatar }

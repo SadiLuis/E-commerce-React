@@ -40,7 +40,6 @@ const NavBarAll = ({isAuth, myUser}) => {
           cursor: "pointer",
           textDecoration: "none",
            marginBottom:"15rem"
-
         }}
       >
         <img src={logo} style={{width:"5rem", }}></img>
@@ -132,7 +131,7 @@ const NavBarAll = ({isAuth, myUser}) => {
             textDecoration: "none",
              marginBottom:"15rem"
 
-          }}>Ideas
+          }}>Sin ideas?
           </NavLink>
 
         
@@ -221,6 +220,7 @@ const NavBarLogin = ({isAuth, myUser}) => {
 
 // dashboard y sales
 const NavBarAdmin = () => {
+  
   const [admin, setAdmin] = useState(true);
   const navigate = useNavigate();
 
@@ -280,7 +280,7 @@ const NavBarAdmin = () => {
 
         
  } 
-          <NavLink
+          {/* <NavLink
             to="/dashboard/newscreator"
             style={{
               border: "none",
@@ -294,7 +294,7 @@ const NavBarAdmin = () => {
             }}
           >
             Newsletters
-          </NavLink>
+          </NavLink> */}
         </>
       ) : (
         <NavBarAuthenticated />
@@ -379,7 +379,7 @@ function NavBar({ isAuth, user }) {
       </div>
 
     </nav>
-    <nav className="navbar navbar-light bg-light" >
+    <nav className="navbar navbar-light bg-light px-5" >
         <div className="container-fluid" 
         style={{height:"3rem"}}
         >

@@ -9,7 +9,7 @@ const BotonPago = (props) => {
   const idUser = useSelector(state=> state.loginReducer.userDetail.id)
 const dispatch = useDispatch()
 let price = props.price
-const CORS_URL = 'http://localhost:3000'
+const CORS_URL = 'https://mobi-app.netlify.app'
  const urlMercadoPago = "https://api.mercadopago.com/checkout/preferences";
 
 const bodyPago = {

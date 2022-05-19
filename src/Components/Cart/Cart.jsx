@@ -3,7 +3,7 @@ import Items from './Items'
 import {useSelector,useDispatch} from "react-redux";
 import {updateCart,deleteAllCartDB ,deleteAllCart } from '../../Actions/cart'
 import {Wrapper, Top ,TopButton ,TopText ,TopTexts ,Button ,Info 
-   ,SummaryItem ,Summary ,SummaryItemText ,SummaryButton ,SummaryTitle ,ButtonEmpty , Anuncio} from './Styles'
+   ,SummaryItem ,Summary ,SummaryItemText ,SummaryButton ,SummaryTitle ,ButtonEmpty , Anuncio , Container} from './Styles'
 import { useNavigate } from 'react-router-dom';
 import { FaCartPlus } from "react-icons/fa";
 import { postOrder } from '../../Actions/orders';
@@ -34,7 +34,7 @@ const Cart = () => {
   console.log(items)
   useEffect(() => {
     dispatch(updateCart());
-    if(localStorage.token_ecommerce) dispatch(getUserDetail())
+    //if(localStorage.token_ecommerce) dispatch(getUserDetail())
   }, [dispatch]);
      
   let total = subtotal >= 7000 ? subtotal  : subtotal === 0  ? 0 : subtotal + 150
@@ -42,14 +42,14 @@ const Cart = () => {
   const handlebtnCompra = () => {
     if (!isAuth) {
       Swal.fire({
-        title: "Necesita estar registrado para realizar la compra",
+        title: "Necesita iniciar sesión para realizar la compra",
         showDenyButton: false,
         showCancelButton: true,
-        confirmButtonText: "Registrarse",
+        confirmButtonText: "Iniciar Sesión",
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          navigate("/register");
+          navigate("/login");
         }
       });
     } else {
@@ -91,11 +91,11 @@ const Cart = () => {
    }
 
   return (
-    <>
+    <Container>
     
-   <Anuncio >
+  {/*  <Anuncio >
     Aprovechá la oferta !! Comprando por más de $7000 el envío es gratis
-   </Anuncio>
+   </Anuncio> */}
     <Wrapper>
        
         <Top>
@@ -174,7 +174,7 @@ const Cart = () => {
           )}
         </Wrapper>)
         
-     </> )
+     </Container> )
     }
 
 export default Cart

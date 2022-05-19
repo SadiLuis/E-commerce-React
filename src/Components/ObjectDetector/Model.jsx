@@ -156,13 +156,16 @@ function Model() {
 
         {
           results &&   
+          <>
+          <h2 className='subheaderTS'><b>Que deseas hacer?</b></h2> 
           <div className="TSscrollBtn">
-
-              <div><button className='SelectButtonTS' onClick={uploadImage}className='btn btn-secondary'>Subi otra imagen</button></div>
-              <div> <button className='SelectButtonTS' onClick={() => scrollToDiv(recoRef)} type="button" class="btn btn-secondary">Ver Recomendaciones</button></div>
+              <span className="TSberna" ><button  onClick={uploadImage} className='btn btn-outline-secondary'>Subi otra imagen</button></span>
+              
+              <span className="TSberna"> <button  onClick={() => scrollToDiv(recoRef)} type="button" className="btn btn-outline-secondary">Ver Recomendaciones</button></span>
               
     
           </div>
+          </>
         }  
         
         
