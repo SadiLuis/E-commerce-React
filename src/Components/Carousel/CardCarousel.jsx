@@ -34,13 +34,7 @@ function CardCarousel({title, category, price, img, id}) {
          productoId: id
         }
        dispatch(postFav(body))  
-        Swal.fire({
-         
-         icon: "success",
-         title: "Producto agregado a favoritos",
-         showConfirmButton: false,
-         timer: 1500,
-       });
+       
       }
 
     

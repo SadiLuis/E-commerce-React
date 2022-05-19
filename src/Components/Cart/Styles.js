@@ -204,3 +204,7 @@ box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
  margin-bottom:10px;
  color:#adb5bd;
 `
+
+export const Container = styled.div`
+  padding:10px;
+`
