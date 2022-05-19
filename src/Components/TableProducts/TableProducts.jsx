@@ -17,8 +17,8 @@ const TableProducts = () => {
         dispatch(getAllCategories())
     }, [dispatch])
 
-    const categories = useSelector(state => state.categoriesReducer.categories)
     const allProducts = useSelector((state) => state.productsReducer.products)
+    const categories = useSelector(state => state.categoriesReducer.categories)
     const [currentPage, setCurrentPage] = useState(1)
     const [productsOnPage, setProductsOnPage] = useState(10)
     const indexLastProduct = currentPage * productsOnPage

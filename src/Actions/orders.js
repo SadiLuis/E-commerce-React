@@ -171,7 +171,7 @@ export function changeStatus(id, newStatus) {
             //const config = getHeaderToken()
             const response = await axios.post(`${BASEURL}/pedidos/update`, body)
             dispatch(deleteAllCart())
-
+             
             return dispatch({
                 type: 'EDIT_STATUS',
                 payload: response.data

@@ -66,10 +66,11 @@ const Checkout = () => {
                     1 - Datos Personales
                   </Card.Header>
                 </div>
+                <span>LOS CAMPOS SON OBLIGATORIOS <b style={{fontSize:'20px' , margin:'auto'}}>*</b></span>
                 <ListGroup className={style.listgroup}>
                   <ListGroup.Item className={style.listgroup}>
                     <div className={style.labels}>
-                      <label> Nombre </label>{" "}
+                      <label>Nombre*</label>{" "}
                       <Form.Control
                         name="contactName"
                         onChange={(e) => {
@@ -84,7 +85,7 @@ const Checkout = () => {
                   </ListGroup.Item>
                   <ListGroup.Item className={style.listgroup}>
                     <div className={style.labels}>
-                      <label> Usuario </label>
+                      <label>Usuario*</label>
                       <Form.Control
                         className={style.input}
                         onChange={(e) => {
@@ -99,7 +100,7 @@ const Checkout = () => {
                   </ListGroup.Item>
                   <ListGroup.Item className={style.listgroup}>
                     <div className={style.labels}>
-                      <label> Teléfono </label>{" "}
+                      <label>Teléfono*</label>{" "}
                       <Form.Control
                         className={style.input}
                         type="text"
@@ -126,7 +127,7 @@ const Checkout = () => {
                    <div className={style.labels}>
                     <Form.Group className={style.datosEnvio}>
                       <Form.Label className={style.labels}>
-                        Ciudad
+                       Ciudad*
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -143,7 +144,7 @@ const Checkout = () => {
                   <div className={style.labels}>
                     <Form.Group className={style.datosEnvio}>
                       <Form.Label className={style.labels} style={{marginLeft:'55px'}}>
-                        Domicilio 
+                      Domicilio*
                       </Form.Label>
                       <Form.Control
                         type="text"

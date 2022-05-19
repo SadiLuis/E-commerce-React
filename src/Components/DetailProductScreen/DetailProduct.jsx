@@ -11,7 +11,7 @@ const DetailProduct = ({ idProduct }) => {
     const product = useSelector(state => state.productsReducer.detailProduct)
     const navigate = useNavigate();
     const idImg = useId();
-
+console.log(product)
     useEffect(() => {
         dispatch(getProductById(idProduct))
         return () => {
@@ -38,7 +38,9 @@ const DetailProduct = ({ idProduct }) => {
                         'Producto deshabilitado',
                         'success'
                     )
+                    //dispatch(getAllProducts())
                     navigate('/dashboard/admin')
+                    
                 }
             })
             : Swal.fire({
@@ -53,13 +55,14 @@ const DetailProduct = ({ idProduct }) => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     dispatch(putProductStatus(idProduct))
-                    dispatch(getAllProducts())
                     Swal.fire(
                         'Habilitado',
                         'Producto habilitado',
                         'success'
-                    )
+                        )
+                    // dispatch(getAllProducts())
                     navigate('/dashboard/admin')
+                   
                 }
             })
 
@@ -107,7 +110,7 @@ const DetailProduct = ({ idProduct }) => {
                         )}
                             </div>
                             <div className="col-10">
-                            {/* <img src={product.images[0]} alt='Product' className='img-thumbnail'/> */}
+                             <img src={product.images?.length && product.images[0]} alt='Product' className='img-thumbnail' key={`img-${idImg}`}/> 
                             </div>
                         </div>
                         

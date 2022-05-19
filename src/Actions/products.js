@@ -127,10 +127,11 @@ export function searchByName(name) {
       return async function (dispatch) {
          try {
             var json = await axios.get(`${BASEURL}/products/category/${idCategory}`);
-            return dispatch({
+             dispatch({
                type: "GET_PRODUCT_BY_CATEGORY",
                payload: json.data
             })
+            
          } catch (err) {
             console.log(err)
          }
@@ -162,13 +163,15 @@ export function searchByName(name) {
     export function putProductStatus(idProduct){
       return async function (dispatch) {
          try {
-            const productDisabled = axios.put(`${BASEURL}/products/changeStatus/${idProduct}`);
+            const productDisabled = await axios.put(`${BASEURL}/products/changeStatus/${idProduct}`);
             return dispatch({
                type: 'STATUS_PRODUCT',
                payload: productDisabled.data
             })
          } catch (error) {
             console.log(error)
+         }finally{
+            dispatch(getAllProducts())
          }
       }
     }

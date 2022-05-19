@@ -8,7 +8,7 @@ import { getUserDetail } from "../../../Actions/Auth";
 import {Loader} from "../../Loader/Loader";
  import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
 import animate from "animate.css"
-
+import { deleteAllCartDB } from "../../../Actions/cart";
 
 const CheckoutConfirm = ({socket}) => {
   const location = useLocation();
@@ -28,7 +28,7 @@ const CheckoutConfirm = ({socket}) => {
   const idOrder = order[1];
    console.log(datosPago)
   useEffect(() => {
-   dispatch(getUserDetail());
+   //dispatch(getUserDetail());
    if(orden){
      dispatch(changeStatus(orden.pedidoId , true))
      dispatch(editStatusOrder(orden.pedidoId , "ENPROCESO"))
@@ -42,12 +42,14 @@ const CheckoutConfirm = ({socket}) => {
   function onClick() {
     navigate("/home");
   }
-  
+  useEffect(()=>{
+  if(user) dispatch(deleteAllCartDB(user?.id))
+  },[dispatch,user])
 
   return (
     <div>
     
-    <h6 className='animate__animated animate__fadeInRight' style={{fontWeight:"bolder", marginLeft:"35px"}}>Confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles del producto.</h6>
+    <h6 className='animate__animated animate__fadeInRight' style={{fontWeight:"bolder", textAlign:"center"}}>Confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles del producto.</h6>
       {!orden ? (
         
           <Loader/>
@@ -61,7 +63,7 @@ const CheckoutConfirm = ({socket}) => {
             </ListGroup.Item>
 
             {/*  acá primer mail */}
-           {/* {statusPago==="approved" && statusPago==="approved" ?(
+           {statusPago==="approved" && statusPago==="approved" ?(
            <ConfirmaciónMail 
               nombre={ user?.nombre}
              email= { user?.email}
@@ -72,30 +74,30 @@ const CheckoutConfirm = ({socket}) => {
              ciudad={ user?.ciudad}
             /> ):(<></>)
 
-           } */}
+           }
 
 
             <ListGroup.Item>
-              Cliente: {user?.nombre}
+              <b>Cliente:</b> {user?.nombre}
             </ListGroup.Item>
-            <ListGroup.Item>Tel: {user?.telefono}</ListGroup.Item>
+            <ListGroup.Item><b>Tel:</b> {user?.telefono}</ListGroup.Item>
             <ListGroup.Item>
-              Fecha:{" "}
+              <b>Fecha:{" "}</b>
               {orden?.fechaCreacion.slice(0, 10)}
             </ListGroup.Item>
-            <ListGroup.Item>ID de compra: {datosPago[2].split('=')[1]} </ListGroup.Item>
-            <ListGroup.Item>Método de pago: {datosPago[5].split('=')[1] === "credit_card" ? ' Tarjeta de crédito' : ' Tarjeta de Debito'}</ListGroup.Item>
-            <ListGroup.Item>Estado del pago: Aprobada</ListGroup.Item>
-           <ListGroup.Item>Dirección: {user?.direccion } Ciudad de {" "} {user?.ciudad}</ListGroup.Item> 
+            <ListGroup.Item><b>ID de compra:</b> {datosPago[2].split('=')[1]} </ListGroup.Item>
+            <ListGroup.Item><b>Método de pago:</b> {datosPago[5].split('=')[1] === "credit_card" ? ' Tarjeta de crédito' : ' Tarjeta de Debito'}</ListGroup.Item>
+            <ListGroup.Item><b>Estado del pago:</b> Aprobada</ListGroup.Item>
+           <ListGroup.Item><b>Dirección:</b> {user?.direccion } Ciudad de {" "} {user?.ciudad}</ListGroup.Item> 
             <ListGroup.Item>
-              Productos: {orden?.productos?.map((p) => p.producto + ", ")}
+              <b>Productos:</b> {orden?.productos?.map((p) => p.producto + ", ")}
             </ListGroup.Item>
-            <ListGroup.Item>Costo de envío:{orden?.totalPedido >= 7000 ? ' $ 0' : ' $ 150'}</ListGroup.Item>
+            <ListGroup.Item><b>Costo de envío:</b>{orden?.totalPedido >= 7000 ? ' $ 0' : ' $ 150'}</ListGroup.Item>
             <ListGroup.Item>
               {" "}
-           Estado del pedido: Estamos preparando tu pedido
+           <b>Estado del pedido:</b> Estamos preparando tu pedido
             </ListGroup.Item>
-            <ListGroup.Item>Total: ${orden?.totalPedido}</ListGroup.Item>
+            <ListGroup.Item><b>Total:</b> ${orden?.totalPedido}</ListGroup.Item>
           </ListGroup>
           <Button className="container" variant="dark" onClick={onClick}>
             Volver

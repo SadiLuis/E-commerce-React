@@ -34,7 +34,7 @@ const Cart = () => {
   console.log(items)
   useEffect(() => {
     dispatch(updateCart());
-    if(localStorage.token_ecommerce) dispatch(getUserDetail())
+    //if(localStorage.token_ecommerce) dispatch(getUserDetail())
   }, [dispatch]);
      
   let total = subtotal >= 7000 ? subtotal  : subtotal === 0  ? 0 : subtotal + 150
@@ -42,14 +42,14 @@ const Cart = () => {
   const handlebtnCompra = () => {
     if (!isAuth) {
       Swal.fire({
-        title: "Necesita estar registrado para realizar la compra",
+        title: "Necesita iniciar sesión para realizar la compra",
         showDenyButton: false,
         showCancelButton: true,
-        confirmButtonText: "Registrarse",
+        confirmButtonText: "Iniciar Sesión",
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          navigate("/register");
+          navigate("/login");
         }
       });
     } else {

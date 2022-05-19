@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, getProductById } from "../../Actions/products";
 import styles from './FavCard.module.css'
@@ -18,8 +18,9 @@ const array = products.filter(e=> e.id === id)
 
 const handleDelete = (id) => {
     dispatch(deleteFav(id))
-    window.location.reload()
-}
+  
+    }
+
 const handleAdd =  () => {
    dispatch(addItem(id));
     Swal.fire({
