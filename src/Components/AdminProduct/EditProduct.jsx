@@ -43,13 +43,13 @@ export default function Product() {
   }, [product]);
 
   const [input, setInput] = useState({
-    title: product.title,
-    price: product.price,
-    description: product.description,
-    categoriaId: product.category,
-    images: product.images,
-    size: product.size,
-    cantidad: product.cantidad,
+    title: product?.title,
+    price: product?.price,
+    description: product?.description,
+    categoriaId: product?.category,
+    images: product?.images,
+    size: product?.size,
+    cantidad: product?.cantidad,
   });
 
   const [focus, setFocus] = useState({
@@ -101,9 +101,10 @@ export default function Product() {
     }
     else {
       setInput(input)
+      console.log("cambios", input)
       dispatch(putProductByID(idProduct, input))
       Swal.fire({
-        text: `Producto atualizado con éxito!`,
+        text: `Producto actualizado con éxito!`,
         icon: "success",
         confirmButtonText: "Ok",
       });
@@ -113,7 +114,7 @@ export default function Product() {
   }
 
 
-  //console.log("input", input.price)
+  console.log("input", input)
   const handleTab = (index) => {
     setIndex(index)
     const images = myRef.current.children
@@ -128,15 +129,16 @@ export default function Product() {
     const newform = { ...input, [name]: value };
     if (typeof value === 'string' || typeof value === 'array') {
       setInput(newform);
-      //const errors = validation(newform);
-      //console.log("error", errors)
-      //setError(errors);
+      const errors = validation(newform);
+      console.log("error", errors)
+      setError(errors);
     }
     else {
       setFocus({ ...focus, [name]: value })
     }
     return newform;
   }
+  console.log("error", error)
   function handleSelectCategory(e) {
     //console.log(input)
 
@@ -145,16 +147,16 @@ export default function Product() {
       category: e.target.value,
     });
   }
-  function addImage(e) {
+  /*function addImage(e) {
 
     setInput({
       ...input,
       images: [...input.images, { url: inputImages, alt: "" }],
     });
     setInputImages("");
-  }
+  }*/
   //console.log("imagen", input.images)
-  let arr = [];
+  let img = "";
   const uploadImage = (files) => {
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
@@ -168,10 +170,10 @@ export default function Product() {
           formData
         )
         .then((res) => {
-          arr.push(res.data.secure_url);
+          img = res.data.secure_url;
           setInput({
             ...input,
-            images: [...input.images, arr[0]],
+            images: [...input.images, img],
           });
         });
     }
@@ -207,7 +209,7 @@ export default function Product() {
                 value={input.title}
                 onChange={(e) => handleChange(e.target.name, e.target.value)}>
               </input>
-              {focus.title && error.title && <span>{error.title}</span>}
+              {focus.title && error.title && <strong style={{color: "red", margin:"10px"}}>{error.title}</strong>}
             </div>
             <div className="input-group mb-3">
               <span className="input-group-text" id="basic-addon1">Categoría</span>
@@ -220,7 +222,7 @@ export default function Product() {
                   <option value={category.id}>{category.nombre}</option>
                 ))}
               </select>
-              {focus.categoriaId && error.categoriaId && <span>{error.categoriaId}</span>}
+              {focus.categoriaId && error.categoriaId && <strong style={{color: "red", margin:"10px"}}>{error.categoriaId}</strong>}
             </div>
             <div className="input-group">
               <span className="input-group-text">Descripción</span>
@@ -231,7 +233,7 @@ export default function Product() {
                 value={input.description}
                 onChange={(e) => handleChange(e.target.name, e.target.value)}
               ></textarea>
-              {focus.description && error.description && <span>{error.description}</span>}
+              {focus.description && error.description && <strong style={{color: "red", margin:"10px"}}>{error.description}</strong>}
             </div>
             <div className="input-group mb-3">
               <span className="input-group-text" id="basic-addon1">Medidas</span>
@@ -308,7 +310,7 @@ export default function Product() {
             </div>
             <div>
               <label>Imagenes</label>
-              <div>
+              {/*<div>
                 <input
                   type="text"
                   placeholder="URL..."
@@ -321,7 +323,7 @@ export default function Product() {
 
                   alt=""
                 />
-              </div>
+            </div>*/}
               <div>
                 <input
                   type="file"
@@ -351,7 +353,7 @@ export default function Product() {
             <div className="input-group mb-3">
               <span className="input-group-text" id="basic-addon1">Precio</span>
               <input onFocus={(e) => handleChange(e.target.name, true)}
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="$ 0.00"
                 name='price'
@@ -360,13 +362,13 @@ export default function Product() {
                 aria-describedby="basic-addon1"
                 onChange={(e) => handleChange(e.target.name, e.target.value)}>
               </input>
-              {focus.price && error.price && <span>{error.price}</span>}
+              {focus.price && error.price && <strong style={{color: "red", margin:"10px"}}>{error.price}</strong>}
             </div>
 
             <div className="input-group mb-3">
               <span className="input-group-text" id="basic-addon1">Stock</span>
               <input onFocus={(e) => handleChange(e.target.name, true)}
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="ingrese stock"
                 name='cantidad'
@@ -375,7 +377,7 @@ export default function Product() {
                 aria-describedby="basic-addon1"
                 onChange={(e) => handleChange(e.target.name, e.target.value)}>
               </input>
-              {focus.cantidad && error.cantidad && <span>{error.cantidad}</span>}
+              {focus.cantidad && error.cantidad && <strong style={{color: "red", margin:"10px"}}>{error.cantidad}</strong>}
             </div>
             <div>
               <button

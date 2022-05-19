@@ -95,7 +95,6 @@ export default function Editprofile(){
     if (typeof value === 'string' || typeof value === 'array') {
       setInput(newform);
       const errors = validation(newform);
-      //console.log("error", errors)
       setError(errors);
     }
     else {
@@ -103,6 +102,7 @@ export default function Editprofile(){
     }
     return newform;
   }
+  console.log("error", error)
   let img = "";
   const uploadImage = (files) => {
     const formData = new FormData();

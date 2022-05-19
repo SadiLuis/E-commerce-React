@@ -106,17 +106,18 @@ export default function Product() {
     }
     return newform;
   }
-  function handleSelectCategory(e) {
+  /*function handleSelectCategory(e) {
     setInput({
       ...input,
       categoriaId: e.target.value,
     });
-  }
+  }*/
   function addImage(e) {
     setInput({
       ...input,
       images: [...input.images, { url: inputImages, alt: "" }],
     });
+    
     setInputImages("");
   }
   //console.log("imagen", input.images)
@@ -172,20 +173,21 @@ export default function Product() {
                 value={input.title}
                 onChange={(e) => handleChange(e.target.name, e.target.value)}>
               </input>
-              {focus.title && error.title && <span className='errorSpan'>{error.title}</span>}
+              {focus.title && error.title && <strong style={{color: "red", margin:"10px"}}>{error.title}</strong>}
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">Categoría</span>
               <span class="form-control">{input.categoriaId}</span>
               <select class="form-select" aria-label="Default select example" name='categoriaId'
                 onFocus={(e) => handleChange(e.target.name, true)}
-                onChange={(e) => handleSelectCategory(e)}>
+                onChange={(e) => handleChange(e.target.name, e.target.value)}>
+               {/*} onChange={(e) => handleSelectCategory(e)}>*/}
                 <option hidden selected>Seleccionar categoría</option>
                 {categories?.map((category) => (
                   <option value={category.id}>{category.nombre}</option>
                 ))}
               </select>
-              {focus.categoriaId && error.categoriaId && <span className='errorSpan'>{error.categoriaId}</span>}
+              {focus.categoriaId && error.categoriaId && <strong style={{color: "red", margin:"10px"}}>{error.categoriaId}</strong>}
             </div>
             <div class="input-group">
               <span class="input-group-text">Descripción</span>
@@ -196,7 +198,7 @@ export default function Product() {
                 value={input.description}
                 onChange={(e) => handleChange(e.target.name, e.target.value)}
               ></textarea>
-              {focus.description && error.description && <span className='errorSpan'>{error.description}</span>}
+              {focus.description && error.description && <strong style={{color: "red", margin:"10px"}}>{error.description}</strong>}
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">Medidas</span>
@@ -279,12 +281,13 @@ export default function Product() {
                 
                </div>  */}
             </div>
-              <div>
+              {/*<div>
                 <input
                   type="text"
                   placeholder="URL..."
                   value={inputImages}
                   onChange={(e) => setInputImages(e.target.value)}
+                  
                   />
                 <img
                   className="cursor-pointer"
@@ -292,7 +295,7 @@ export default function Product() {
                   
                   alt=""
                   />
-              </div>
+              </div>*/}
               <div>
                 <input
                   type="file"
@@ -316,7 +319,7 @@ export default function Product() {
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">Precio</span>
               <input onFocus={(e) => handleChange(e.target.name, true)}
-                type="text"
+                type="number"
                 class="form-control"
                 placeholder="$ 0.00"
                 name='price'
@@ -325,13 +328,13 @@ export default function Product() {
                 aria-describedby="basic-addon1"
                 onChange={(e) => handleChange(e.target.name, e.target.value)}>
               </input>
-              {focus.price && error.price && <span  className='errorSpan'>{error.price}</span>}
+              {focus.price && error.price && <strong style={{color: "red", margin:"10px"}}>{error.price}</strong>}
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">Stock</span>
               <input onFocus={(e) => handleChange(e.target.name, true)}
-                type="text"
+                type="number"
                 class="form-control"
                 placeholder="ingrese stock"
                 name='cantidad'
@@ -340,7 +343,7 @@ export default function Product() {
                 aria-describedby="basic-addon1"
                 onChange={(e) => handleChange(e.target.name, e.target.value)}>
               </input>
-              {focus.cantidad && error.cantidad && <span  className='errorSpan'>{error.cantidad}</span>}
+              {focus.cantidad && error.cantidad && <strong style={{color: "red", margin:"10px"}}>{error.cantidad}</strong>}
             </div>
             <div>
               <button
