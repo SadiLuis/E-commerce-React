@@ -30,6 +30,7 @@ const Notifications = ({ socket}) => {
   useEffect(() => {
     socket?.on("notif_newMessage", (data) => {
         if(user && data.receiverId == user?.id) {
+          if(user?.rol === "2" && user?.email !== "admin@gmail.com") return console.log("es admin pero EL ADMIN original")
             let notif = ({
                 sender : data.message.sender,
                 senderName: data.message.senderName,

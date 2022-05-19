@@ -29,7 +29,6 @@ export default function Detail() {
   const categories = useSelector((state) => state.productsReducer.categories);
   const idCategory = categories?.filter((el) => el.nombre === product?.category)
 
-  console.log("idCat", idCategory)
   
   let [index, setIndex] = useState(0)
 
@@ -113,8 +112,11 @@ export default function Detail() {
                 <h1><b>{product?.title}</b></h1>
                 <h4><b>${product?.price}</b></h4>
                 <br />  
-                <p><b>Descripción:</b> {product?.description}</p>
+                <span><b>Descripción:</b> {product?.description}</span>
+                <br />
                 <span><b>Dimensiones:</b> {product?.size}</span> 
+                <br />
+                <br />
                 <div className={styles.btnGroup}>
                   {product?.statusProduct && product?.cantidad>0 && (
                     <div className="btnBerna">
@@ -126,7 +128,7 @@ export default function Detail() {
                         <button onClick={()=>handleWhatsApp(product.title, product.price)} className="btn btn-success me-1" style={{width:"12rem", height:"3rem",fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}><IoLogoWhatsapp></IoLogoWhatsapp></button>
                       </div>
                       <div className="btnFav">
-                        <button className="btn btn-warning" onClick={() => handleFav()} style={{width:"12rem", height:"3rem", itemSize: "1rem",fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}> <MdFavorite></MdFavorite></button>
+                        <button className="btn btn-danger" onClick={() => handleFav()} style={{width:"12rem", height:"3rem", itemSize: "1rem",fontSize:"1.5rem", textAlign:"center", justifyItems:"center"}}> <MdFavorite></MdFavorite></button>
                       </div>
                 </div>
                 {product?.statusProduct && product?.cantidad>0

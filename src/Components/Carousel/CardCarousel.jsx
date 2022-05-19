@@ -6,6 +6,7 @@ import { addItem} from '../../Actions/cart'
 import Swal from "sweetalert2";
 import { getUserDetail} from '../../Actions/Auth';
 import { postFav } from "../../Actions/Favs.js";
+import { MdAddShoppingCart, MdFavorite } from 'react-icons/md';
 function CardCarousel({title, category, price, img, id}) {
   
     const dispatch = useDispatch()
@@ -60,8 +61,10 @@ function CardCarousel({title, category, price, img, id}) {
         <p className="card-text"><b>{title}</b></p>
     </a>    
     <div className="carouselBtn">
-    <button onClick={()=> handleCart()} className="btn btn-outline-dark">Agregar al carrito</button>
-    <button className="btn btn-warning" style={{marginTop:'1rem'}} onClick={() => handleFav()}>Agregar a favoritos</button>
+      
+    <span><button onClick={()=> handleCart()} className="btn btn-outline-dark"><MdAddShoppingCart></MdAddShoppingCart></button></span> 
+    <span><button className="btn btn-outline-danger" onClick={() => handleFav()}><MdFavorite></MdFavorite></button></span>
+      
     </div>
   </div>
   

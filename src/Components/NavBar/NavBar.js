@@ -132,7 +132,7 @@ const NavBarAll = ({isAuth, myUser}) => {
             textDecoration: "none",
              marginBottom:"15rem"
 
-          }}>Ideas
+          }}>Sin ideas?
           </NavLink>
 
         
@@ -221,6 +221,7 @@ const NavBarLogin = ({isAuth, myUser}) => {
 
 // dashboard y sales
 const NavBarAdmin = () => {
+  
   const [admin, setAdmin] = useState(true);
   const navigate = useNavigate();
 

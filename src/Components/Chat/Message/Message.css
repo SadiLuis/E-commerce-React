@@ -25,6 +25,7 @@
 .messageBottom{
         font-size: 12px;
         margin-top: 10px;
+        align-items: flex-start;
 }
 
 .message.own{
