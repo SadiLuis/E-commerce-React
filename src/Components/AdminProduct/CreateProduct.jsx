@@ -55,7 +55,7 @@ export default function Product() {
   input.size = (inputsize.height + "x").concat((inputsize.width) + "x").concat(inputsize.depth) + "cm"
   useEffect(() => {
     dispatch(getAllCategories())
-  }, [])
+  }, [dispatch])
 
 
   const handleSubmit = (e) => {
@@ -82,7 +82,7 @@ export default function Product() {
   }
 
 
-  console.log("input", input)
+  //console.log("input", input)
   const handleTab = (index) => {
     setIndex(index)
     const images = myRef.current.children
@@ -162,11 +162,11 @@ export default function Product() {
             onSubmit={handleSubmit}
           >
             <h2 className="titulo">Crear Producto</h2>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">Nombre</span>
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">Nombre</span>
               <input onFocus={(e) => handleChange(e.target.name, true)}
                 type="text"
-                class="form-control"
+                className="form-control"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 name='title'
@@ -175,10 +175,10 @@ export default function Product() {
               </input>
               {focus.title && error.title && <strong style={{color: "red", margin:"10px"}}>{error.title}</strong>}
             </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">Categoría</span>
-              <span class="form-control">{input.categoriaId}</span>
-              <select class="form-select" aria-label="Default select example" name='categoriaId'
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">Categoría</span>
+              <span className="form-control">{input.categoriaId}</span>
+              <select className="form-select" aria-label="Default select example" name='categoriaId'
                 onFocus={(e) => handleChange(e.target.name, true)}
                 onChange={(e) => handleChange(e.target.name, e.target.value)}>
                {/*} onChange={(e) => handleSelectCategory(e)}>*/}
@@ -189,10 +189,10 @@ export default function Product() {
               </select>
               {focus.categoriaId && error.categoriaId && <strong style={{color: "red", margin:"10px"}}>{error.categoriaId}</strong>}
             </div>
-            <div class="input-group">
-              <span class="input-group-text">Descripción</span>
+            <div className="input-group">
+              <span className="input-group-text">Descripción</span>
               <textarea onFocus={(e) => handleChange(e.target.name, true)}
-                class="form-control"
+                className="form-control"
                 aria-label="With textarea"
                 name='description'
                 value={input.description}
@@ -200,11 +200,11 @@ export default function Product() {
               ></textarea>
               {focus.description && error.description && <strong style={{color: "red", margin:"10px"}}>{error.description}</strong>}
             </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">Medidas</span>
-              <span class="input-group-text" id="basic-addon1">Alto</span>
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">Medidas</span>
+              <span className="input-group-text" id="basic-addon1">Alto</span>
               <input type="number"
-                class="form-control"
+                className="form-control"
                 placeholder="cm"
                 name='height'
                 value={inputsize.height}
@@ -212,9 +212,9 @@ export default function Product() {
                 aria-describedby="basic-addon1"
                 onChange={(e) => handleChangeSize(e)}>
               </input>
-              <span class="input-group-text" id="basic-addon1">Ancho</span>
+              <span className="input-group-text" id="basic-addon1">Ancho</span>
               <input type="number"
-                class="form-control"
+                className="form-control"
                 placeholder="cm"
                 name='width'
                 value={inputsize.width}
@@ -222,9 +222,9 @@ export default function Product() {
                 aria-describedby="basic-addon1"
                 onChange={(e) => handleChangeSize(e)}>
               </input>
-              <span class="input-group-text" id="basic-addon1">Profundidad</span>
+              <span className="input-group-text" id="basic-addon1">Profundidad</span>
               <input type="number"
-                class="form-control"
+                className="form-control"
                 placeholder="cm"
                 name='depth'
                 value={inputsize.depth}
@@ -316,8 +316,8 @@ export default function Product() {
 
 
 
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">Precio</span>
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">Precio</span>
               <input onFocus={(e) => handleChange(e.target.name, true)}
                 type="number"
                 class="form-control"
@@ -331,11 +331,11 @@ export default function Product() {
               {focus.price && error.price && <strong style={{color: "red", margin:"10px"}}>{error.price}</strong>}
             </div>
 
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">Stock</span>
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">Stock</span>
               <input onFocus={(e) => handleChange(e.target.name, true)}
                 type="number"
-                class="form-control"
+                className="form-control"
                 placeholder="ingrese stock"
                 name='cantidad'
                 value={input.cantidad}

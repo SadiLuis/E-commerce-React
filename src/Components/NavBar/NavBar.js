@@ -20,6 +20,7 @@ import animate from "animate.css"
 
 
 
+
 // logo,  home, contactenos 
 const NavBarAll = ({isAuth, myUser}) => {
    const usuario=useSelector(state =>state.loginReducer.userDetail)
@@ -82,7 +83,29 @@ const NavBarAll = ({isAuth, myUser}) => {
 
         
  } 
-      
+      {/* "/MyFavs */}
+      {
+          usuario? 
+           (
+          <NavLink to="/MyFavs"
+          style={{
+            border:"none",
+            background: "none",
+            color: "black",
+            fontSize: "1rem",
+            marginLeft: "0.05rem",
+            cursor: "pointer",
+            textDecoration: "none",
+             marginBottom:"15rem"
+
+          }}>Favoritos
+          </NavLink>
+          
+         ):(<></>) 
+        
+
+        
+ } 
     
       
       <div  style={{
@@ -109,7 +132,7 @@ const NavBarAll = ({isAuth, myUser}) => {
             textDecoration: "none",
              marginBottom:"15rem"
 
-          }}>Ideas
+          }}>Sin ideas?
           </NavLink>
 
         
@@ -198,6 +221,7 @@ const NavBarLogin = ({isAuth, myUser}) => {
 
 // dashboard y sales
 const NavBarAdmin = () => {
+  
   const [admin, setAdmin] = useState(true);
   const navigate = useNavigate();
 
@@ -234,21 +258,7 @@ const NavBarAdmin = () => {
           >
             Dashboard
           </NavLink>
-          {/* <NavLink
-            to="/dashboard/sales"
-            style={{
-              border: "none",
-          background: "none",
-          color: "black",
-          fontSize: "1rem",
-          marginLeft: "0.05rem",
-          cursor: "pointer",
-          textDecoration: "none",
-           marginBottom:"15rem"
-            }}
-          >
-            Sales
-          </NavLink> */}
+         
           {
           admin? 
            (
@@ -325,7 +335,7 @@ const NavBarAuthenticated = () => {
         }}
       >
         {usuario.nombre}
-        {<img src={usuario.img ? usuario.img : usuario.avatar} style={{ marginBottom: "25px", height: "3.5rem", width: "3.5rem", border: "solid", borderColor: "black", borderRadius: "9999px" }}></img>}
+        <img src={ usuario.avatar} style={{ marginBottom: "25px", height: "3.5rem", width: "3.5rem", border: "solid", borderColor: "black", borderRadius: "9999px" }} alt='imagen perfil' />
         
       </NavLink>
     </>

@@ -33,8 +33,6 @@
     "@tensorflow/tfjs-core": "^3.17.0",
     "@tensorflow/tfjs-backend-cpu": "^3.17.0",
     "@tensorflow/tfjs-backend-webgl": "^3.17.0"
-    
-    
   },
   "scripts": {
     "start": "react-scripts start",

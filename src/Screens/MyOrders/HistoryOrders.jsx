@@ -35,7 +35,7 @@ export default function HistoryOrders({ fecha, productos, total, status , pedido
                             Fecha: {fecha.slice(0, 10)}
                         </div>
                         <div className="col">
-                            {
+                            {  
                                 status === 'ENPROCESO'
                                     ? <span>Estado: Pagado</span>
                                     : status === 'ENVIADO'
@@ -96,6 +96,7 @@ export default function HistoryOrders({ fecha, productos, total, status , pedido
                     <Link to={`/buyDetail/${pedidoId}`}>
                     <button style={{ font: '-webkit-small-control', marginBottom: '1rem' }} className='row btn btn-outline-dark fs-6'>Detalle de la compra</button>
                      </Link>
+                    
                 </div>
 
                 <div className="row">

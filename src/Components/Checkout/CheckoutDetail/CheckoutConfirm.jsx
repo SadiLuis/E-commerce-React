@@ -8,7 +8,7 @@ import { getUserDetail } from "../../../Actions/Auth";
 import {Loader} from "../../Loader/Loader";
  import ConfirmaciónMail from "../../ConfirmaciónMail/ConfirmaciónMail";
 import animate from "animate.css"
-
+import { deleteAllCartDB } from "../../../Actions/cart";
 
 const CheckoutConfirm = ({socket}) => {
   const location = useLocation();
@@ -28,7 +28,7 @@ const CheckoutConfirm = ({socket}) => {
   const idOrder = order[1];
    console.log(datosPago)
   useEffect(() => {
-   dispatch(getUserDetail());
+   //dispatch(getUserDetail());
    if(orden){
      dispatch(changeStatus(orden.pedidoId , true))
      dispatch(editStatusOrder(orden.pedidoId , "ENPROCESO"))
@@ -42,12 +42,14 @@ const CheckoutConfirm = ({socket}) => {
   function onClick() {
     navigate("/home");
   }
-  
+  useEffect(()=>{
+  if(user) dispatch(deleteAllCartDB(user?.id))
+  },[dispatch,user])
 
   return (
     <div>
     
-    <h6 className='animate__animated animate__fadeInRight' style={{fontWeight:"bolder", marginLeft:"35px"}}>Confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles del producto.</h6>
+    <h6 className='animate__animated animate__fadeInRight' style={{fontWeight:"bolder", textAlign:"center"}}>Confirmada la compra, un representante de MOBI se contactará con usted para definir los detalles del producto.</h6>
       {!orden ? (
         
           <Loader/>
@@ -61,7 +63,7 @@ const CheckoutConfirm = ({socket}) => {
             </ListGroup.Item>
 
             {/*  acá primer mail */}
-           {/* {statusPago==="approved" && statusPago==="approved" ?(
+           {statusPago==="approved" && statusPago==="approved" ?(
            <ConfirmaciónMail 
               nombre={ user?.nombre}
              email= { user?.email}
@@ -72,7 +74,7 @@ const CheckoutConfirm = ({socket}) => {
              ciudad={ user?.ciudad}
             /> ):(<></>)
 
-           } */}
+           }
 
 
             <ListGroup.Item>
