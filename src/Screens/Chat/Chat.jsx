@@ -5,11 +5,11 @@ import MainChat from '../../Components/Chat/Main/Main'
 function Chat() {
 
   return (
-    <div>
+    
 
         
         <MainChat />
-     </div> 
+      
   )
 }
 

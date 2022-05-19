@@ -117,7 +117,7 @@ const TableOrders = () => {
                 </div>
                 <div className="row">
                     <div className='table-responsive'>
-                    {currentOrders.length!==0?
+                    {Object.keys(currentOrders).length!==0 && currentOrders[0]!==''?
                         (<table className="table table-sm table-hover table-striped table-bordered border-dark">
                             <thead className='table-dark'>
                                 <tr>
@@ -136,11 +136,11 @@ const TableOrders = () => {
                                     {currentOrders?.map((o, id) => (
                                     <tr key={`tr-${id}`}>
                                         <td key={`num-${id}`}>{o?.pedidoId}</td>
-                                        <td key={`usuario-${id}`}>{o?.usuario.usuario}</td>
-                                        <td key={`name-${id}`}>{o?.usuario.nombre}</td>
+                                        <td key={`usuario-${id}`}>{o.usuario?.usuario}</td>
+                                        <td key={`name-${id}`}>{o.usuario?.nombre}</td>
                                         <td key={`detail-${id}`}>
 
-                                            <Link to={`/dashboard/admin/OrderDetailAdmin/${o?.pedidoId}/${o.usuario.id}`}>
+                                            <Link to={`/dashboard/admin/OrderDetailAdmin/${o?.pedidoId}/${o.usuario?.id}`}>
                                                 Ver Detalle
                                             </Link>
 
@@ -167,6 +167,7 @@ const TableOrders = () => {
                             No existen pedidos
                         </p>}
                     </div>
+                    {Object.keys(currentOrders).length!==0 && currentOrders[0]!==''&&(
                     <div className='col'>
                         <Paging
                             productsOnPage={ordersOnPage}
@@ -174,7 +175,7 @@ const TableOrders = () => {
                             paginado={paginado}
 
                         />
-                    </div>
+                    </div>)}
                 </div>
 
             </>

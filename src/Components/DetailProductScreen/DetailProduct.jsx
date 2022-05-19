@@ -103,7 +103,7 @@ console.log(product)
                         <div className="row">
                             <div className="col-2">
                             {product.images?.map((i,idImg) =>
-                            <div className="row">
+                            <div key={`rw-${idImg}`} className="row">
                                  <img src={i} alt='Product' className='img-thumbnail' key={`img-${idImg}`}/>
                             </div>
                            
