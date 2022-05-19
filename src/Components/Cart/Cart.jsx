@@ -42,14 +42,14 @@ const Cart = () => {
   const handlebtnCompra = () => {
     if (!isAuth) {
       Swal.fire({
-        title: "Necesita estar registrado para realizar la compra",
+        title: "Necesita iniciar sesión para realizar la compra",
         showDenyButton: false,
         showCancelButton: true,
-        confirmButtonText: "Registrarse",
+        confirmButtonText: "Iniciar Sesión",
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          navigate("/register");
+          navigate("/login");
         }
       });
     } else {
