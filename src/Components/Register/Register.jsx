@@ -289,10 +289,7 @@ export default function Register({socket}) {
         onFocus={(e) => handleChange(e.target.name , true)}
        
         />
-        <button class={` ${style.contrasena}`}  type='button' >
-        { visible === 'text' && <IoEyeOff className={style.inputContrasena}  type="button" onClick={mostrarPassword} /> }
-        { visible === 'password' && <IoEye  className={style.inputContrasena} type="button" onClick={mostrarPassword} /> }
-        </button>
+       
         {focus.contrasenaConfirm && error.contrasenaConfirm && <span className={`text-danger ${style.span}`} style={{marginLeft: '1rem'}}>{error.contrasenaConfirm}</span> }
       </div>
      

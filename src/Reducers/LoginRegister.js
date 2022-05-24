@@ -16,7 +16,7 @@ const initialState = {
     isAuth: null,
     userDetail: null,
     isRegister:null,
-    recoveryPass:[],
+    recoveryPass:'',
 }
 
 export default function loginRegistroReducer(state = initialState, action) {
@@ -53,7 +53,7 @@ export default function loginRegistroReducer(state = initialState, action) {
             case RECOVERY_PASSWORD:
                 return {
                     ...state,
-                    recoveryPass:action.payload
+                    recoveryPass:action.payload.token
                 }
             case REGISTER_SUCCESS: return {
                 ...state ,

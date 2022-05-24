@@ -207,6 +207,7 @@ export function recoveryPassword  (email) {
         
       const body = {email}
       const res = await axios.post(`${BASEURL}/password`, body)
+      console.log(res.data)
       dispatch({
          type: RECOVERY_PASSWORD,
          payload: res.data

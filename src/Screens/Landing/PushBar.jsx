@@ -38,7 +38,7 @@ const PushBar = ({ show, handleClose, setState, state }) => {
                 nombre: state.nombre,
                 email: state.email
             }
-            axios.post('http://localhost:5000/newsletter', body, config)
+            axios.post('https://mobibackend.onrender.com/newsletter', body, config)
             Swal.fire({
                 text: "¡Gracias por unirte al Newsletter!",
                 icon: "success",
