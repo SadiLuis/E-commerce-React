@@ -11,7 +11,7 @@
 
 .labelExample{
     margin-top:2rem;
-    font-size: 25px;
+    
     font-family: "Arial", sans-serif;
     color: #000000;
 
@@ -79,8 +79,8 @@
     position:absolute;
     background-color: black;
     color: white;
-    top: 81px;
-    right: 18px;
+    top: 67px;
+    right: 11px;
     height:40px;
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { login, register ,resetRegister  } from "../../Actions/Auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { validateEmail } from "../../Helpers/ValidateForm";
@@ -46,7 +46,6 @@ function Login({ login, isAuth, user ,resetRegister }) {
  }, []) */
 
 //////////////////////////////////
-
 
 
   const [showPassword, setShowPassword] = useState(false);
